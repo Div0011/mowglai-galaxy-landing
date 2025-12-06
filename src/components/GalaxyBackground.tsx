@@ -8,7 +8,11 @@ interface Ripple {
   id: number;
 }
 
-const GalaxyBackground = () => {
+interface GalaxyBackgroundProps {
+  isDark?: boolean;
+}
+
+const GalaxyBackground = ({ isDark = true }: GalaxyBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -17,7 +21,7 @@ const GalaxyBackground = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
-      
+
       // Add ripple every 100ms during movement
       const now = Date.now();
       if (now - lastRippleRef.current > 100) {
@@ -36,7 +40,7 @@ const GalaxyBackground = () => {
   // Animate ripples
   useEffect(() => {
     const interval = setInterval(() => {
-      setRipples(prev => 
+      setRipples(prev =>
         prev
           .map(r => ({ ...r, radius: r.radius + 3, opacity: r.opacity - 0.01 }))
           .filter(r => r.opacity > 0)
@@ -76,8 +80,8 @@ const GalaxyBackground = () => {
     let time = 0;
 
     const animate = () => {
-      // Dark black background
-      ctx.fillStyle = "rgb(5, 3, 8)";
+      // Background color based on theme
+      ctx.fillStyle = isDark ? "rgb(5, 3, 8)" : "rgb(255, 255, 255)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw purple dots
@@ -90,7 +94,7 @@ const GalaxyBackground = () => {
         gradient.addColorStop(0, `rgba(147, 51, 234, ${dot.opacity * pulse})`);
         gradient.addColorStop(0.5, `rgba(168, 85, 247, ${dot.opacity * pulse * 0.5})`);
         gradient.addColorStop(1, "transparent");
-        
+
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dot.size * 2, 0, Math.PI * 2);
@@ -107,14 +111,14 @@ const GalaxyBackground = () => {
       window.removeEventListener("resize", resizeCanvas);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <>
       <canvas
         ref={canvasRef}
         className="fixed inset-0 -z-10"
-        style={{ background: "rgb(5, 3, 8)" }}
+        style={{ background: isDark ? "rgb(5, 3, 8)" : "rgb(255, 255, 255)" }}
       />
       {/* Water ripples */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">

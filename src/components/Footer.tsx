@@ -1,19 +1,22 @@
-import MowglaiLogo from "./MowglaiLogo";
+import LionLogo from "./LionLogo";
 import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="py-16 border-t border-glass-border/20">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Logo and brand */}
-          <div className="flex items-center gap-4">
-            <MowglaiLogo size="sm" />
-            <div>
-              <h3 className="font-display font-bold text-xl text-foreground">MOWGLAI</h3>
-              <p className="text-sm text-muted-foreground">Crafting Digital Excellence</p>
-            </div>
+        {/* Logo centered with hologram rotation */}
+        <div className="flex flex-col items-center justify-center mb-8">
+          <div className="hologram-rotate">
+            <LionLogo size="md" />
           </div>
+          <div className="mt-4 text-center">
+            <h3 className="font-display font-bold text-xl text-foreground">MOWGLAI</h3>
+            <p className="text-sm text-muted-foreground">Crafting Digital Excellence</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
 
           {/* Social links */}
           <div className="flex items-center gap-4">

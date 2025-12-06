@@ -29,19 +29,19 @@ const Index = () => {
     <div className="min-h-screen relative">
       {/* Custom cursor */}
       <CustomCursor />
-      
+
       {/* Galaxy background with purple dots and water ripples */}
-      <GalaxyBackground />
-      
+      <GalaxyBackground isDark={isDark} />
+
       {/* Glassmorphic cylindrical sidebar */}
       <Sidebar isDark={isDark} onToggleTheme={handleToggleTheme} />
-      
+
       {/* Main content with left padding for sidebar */}
       <main className="pl-20">
         <HeroSection />
         <AboutSection />
         <PricingSection />
-        <TestimonialsSection />
+        <TestimonialsSection isDark={isDark} />
         <ContactSection />
         <Footer />
       </main>

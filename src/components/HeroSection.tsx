@@ -1,6 +1,5 @@
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import MowglaiLogo from "./MowglaiLogo";
+import { cn } from "@/lib/utils";
+import LionLogo from "./LionLogo";
 
 const HeroSection = () => {
   return (
@@ -21,63 +20,68 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        {/* Floating logo */}
-        <div className="flex justify-center mb-8 animate-float">
-          <MowglaiLogo size="xl" />
-        </div>
 
-        {/* Brand name */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent glow-text">
-            MOWGLAI
-          </span>
+      <div className="container mx-auto px-6 text-center relative z-10 flex flex-col items-center justify-center min-h-screen py-20">
+        {/* Brand name with vanishing fog effect - ABOVE lion */}
+        {/* Brand name with vanishing fog effect - ABOVE lion */}
+        <h1
+          className="text-6xl md:text-8xl lg:text-9xl font-display font-black mb-12 opacity-0 animate-fade-in cursor-default relative inline-block z-20"
+          style={{ animationDelay: "0.1s" }}
+        >
+          {"MOWGLAI".split("").map((char, index) => (
+            <span
+              key={index}
+              className="relative inline-block group mx-[0.02em]"
+            >
+              <span
+                className={cn(
+                  "inline-block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent glow-text transition-all duration-500",
+                  "group-hover:opacity-0 group-hover:scale-150 group-hover:blur-md"
+                )}
+              >
+                {char}
+              </span>
+              <span
+                className="absolute inset-0 rounded-full bg-purple-600/60 blur-xl opacity-0 scale-0 transition-all duration-500 group-hover:opacity-100 group-hover:scale-150 pointer-events-none"
+              />
+            </span>
+          ))}
         </h1>
 
-        {/* Tagline */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-          Crafting Digital Experiences That <span className="text-primary">Transcend</span> Expectations
+        {/* Lion Logo - centered with face in center of viewport */}
+        <div className="flex justify-center mb-12 animate-pulse-scale">
+          <LionLogo size="xl" />
+        </div>
+
+        {/* Tagline - BELOW lion */}
+        <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-4 max-w-3xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+          Crafting Digital Experiences That <span className="text-primary font-semibold">Transcend</span> Expectations
         </p>
 
-        {/* Sub description */}
-        <p className="text-base md:text-lg text-muted-foreground/70 mb-12 max-w-xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+        {/* Motto - BELOW tagline */}
+        <p className="text-base md:text-lg text-muted-foreground/80 mb-20 max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "0.6s" }}>
           We build stunning, high-performance websites and web applications that propel your business into the future.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in" style={{ animationDelay: "0.8s" }}>
-          <Button size="lg" className="group relative overflow-hidden bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300">
-            <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-            Get Started
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          
-          <Button variant="outline" size="lg" className="border-primary/50 text-primary hover:bg-primary/10 hover:border-primary px-8 py-6 text-lg rounded-xl backdrop-blur-sm transition-all duration-300">
-            View Our Work
-          </Button>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: "1s" }}>
-          {[
-            { value: "150+", label: "Projects Delivered" },
-            { value: "50+", label: "Happy Clients" },
-            { value: "5+", label: "Years Experience" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-primary glow-text">{stat.value}</div>
-              <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: "1.2s" }}>
-        <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex justify-center p-2">
-          <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
-        </div>
-      </div>
+      {/* Shooting stars */}
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute pointer-events-none"
+          style={{
+            left: `${20 + i * 15}%`,
+            top: `${10 + (i % 3) * 30}%`,
+            width: '2px',
+            height: '100px',
+            background: 'linear-gradient(to bottom, transparent, hsl(270 80% 60% / 0.8), transparent)',
+            transform: `rotate(${-45 + i * 10}deg)`,
+            animation: `shooting-star ${3 + i * 0.5}s ease-in-out infinite`,
+            animationDelay: `${i * 0.8}s`,
+          }}
+        />
+      ))}
     </section>
   );
 };
