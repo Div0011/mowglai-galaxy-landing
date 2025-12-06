@@ -6,22 +6,22 @@
 
 @layer base {
   :root {
-    --background: 270 50% 3%;
+    --background: 0 0% 2%;
     --foreground: 270 20% 95%;
 
-    --card: 270 40% 8%;
+    --card: 0 0% 5%;
     --card-foreground: 270 20% 95%;
 
-    --popover: 270 40% 8%;
+    --popover: 0 0% 5%;
     --popover-foreground: 270 20% 95%;
 
     --primary: 270 80% 60%;
     --primary-foreground: 270 20% 98%;
 
-    --secondary: 270 30% 15%;
+    --secondary: 270 30% 12%;
     --secondary-foreground: 270 20% 95%;
 
-    --muted: 270 25% 12%;
+    --muted: 0 0% 8%;
     --muted-foreground: 270 15% 60%;
 
     --accent: 280 100% 70%;
@@ -39,10 +39,10 @@
     /* Custom tokens */
     --glow-primary: 270 80% 60%;
     --glow-accent: 280 100% 70%;
-    --glass-bg: 270 40% 8%;
+    --glass-bg: 0 0% 5%;
     --glass-border: 270 40% 25%;
 
-    --sidebar-background: 270 40% 6%;
+    --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 270 20% 95%;
     --sidebar-primary: 270 80% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -52,32 +52,53 @@
     --sidebar-ring: 270 80% 60%;
   }
 
-  .dark {
-    --background: 270 50% 3%;
-    --foreground: 270 20% 95%;
-    --card: 270 40% 8%;
-    --card-foreground: 270 20% 95%;
-    --popover: 270 40% 8%;
-    --popover-foreground: 270 20% 95%;
-    --primary: 270 80% 60%;
-    --primary-foreground: 270 20% 98%;
-    --secondary: 270 30% 15%;
-    --secondary-foreground: 270 20% 95%;
-    --muted: 270 25% 12%;
-    --muted-foreground: 270 15% 60%;
-    --accent: 280 100% 70%;
-    --accent-foreground: 270 20% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 270 30% 20%;
-    --input: 270 30% 20%;
-    --ring: 270 80% 60%;
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 270 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 270 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 20% 10%;
+
+    --primary: 270 80% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 20% 92%;
+    --secondary-foreground: 270 20% 10%;
+
+    --muted: 270 10% 94%;
+    --muted-foreground: 270 15% 40%;
+
+    --accent: 280 100% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 20% 85%;
+    --input: 270 20% 85%;
+    --ring: 270 80% 55%;
+
+    --glass-bg: 0 0% 100%;
+    --glass-border: 270 30% 80%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 270 20% 10%;
+    --sidebar-primary: 270 80% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 270 20% 92%;
+    --sidebar-accent-foreground: 270 20% 10%;
+    --sidebar-border: 270 20% 85%;
+    --sidebar-ring: 270 80% 55%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    cursor: none;
   }
 
   body {
@@ -87,6 +108,10 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
   }
+
+  a, button, [role="button"], input, textarea, select {
+    cursor: none;
+  }
 }
 
 @layer components {
@@ -95,7 +120,34 @@
   }
 
   .glass-sidebar {
-    @apply bg-sidebar/60 backdrop-blur-2xl border-r border-glass-border/20;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--sidebar-background) / 0.9) 0%,
+      hsl(var(--sidebar-background) / 0.7) 50%,
+      hsl(var(--sidebar-background) / 0.9) 100%
+    );
+    box-shadow: 
+      inset -20px 0 40px -20px hsl(var(--primary) / 0.1),
+      inset 20px 0 40px -20px hsl(var(--primary) / 0.1),
+      0 0 60px -20px hsl(var(--primary) / 0.3);
+    @apply backdrop-blur-2xl border-r border-glass-border/30;
+  }
+
+  .glass-sidebar-cylindrical {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--sidebar-background) / 0.4) 0%,
+      hsl(var(--sidebar-background) / 0.95) 20%,
+      hsl(var(--sidebar-background) / 0.95) 80%,
+      hsl(var(--sidebar-background) / 0.4) 100%
+    );
+    box-shadow: 
+      inset -30px 0 50px -30px hsl(var(--primary) / 0.15),
+      inset 30px 0 50px -30px hsl(var(--primary) / 0.15),
+      inset 0 0 80px -20px hsl(var(--primary) / 0.08),
+      4px 0 30px -10px hsl(var(--primary) / 0.2),
+      -4px 0 30px -10px hsl(0 0% 0% / 0.5);
+    @apply backdrop-blur-2xl border-x border-glass-border/20;
   }
 
   .glow-text {
@@ -129,7 +181,8 @@
   .nav-icon {
     @apply relative p-3 rounded-xl transition-all duration-300 ease-out
            hover:bg-primary/20 hover:scale-110 hover:shadow-lg
-           active:scale-95 cursor-pointer;
+           active:scale-95;
+    cursor: none;
   }
 
   .nav-icon::before {
@@ -167,6 +220,10 @@
 
   .animate-orbit {
     animation: orbit 20s linear infinite;
+  }
+
+  .animate-water-ripple {
+    animation: water-ripple 2s ease-out forwards;
   }
 }
 
@@ -218,6 +275,17 @@
   }
   to {
     transform: rotate(360deg) translateX(150px) rotate(-360deg);
+  }
+}
+
+@keyframes water-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
   }
 }
 

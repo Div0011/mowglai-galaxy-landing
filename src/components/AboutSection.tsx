@@ -1,4 +1,6 @@
 import { Code2, Palette, Rocket, Shield } from "lucide-react";
+import { useState } from "react";
+import MowglaiLogo from "./MowglaiLogo";
 
 const features = [
   {
@@ -24,6 +26,8 @@ const features = [
 ];
 
 const AboutSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <section id="about" className="py-32 relative">
       <div className="container mx-auto px-6">
@@ -39,25 +43,64 @@ const AboutSection = () => {
           </p>
         </div>
 
-        {/* Features grid */}
+        {/* Features grid with hover animation */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, i) => {
             const Icon = feature.icon;
+            const isHovered = hoveredIndex === i;
+            
             return (
               <div
                 key={i}
-                className="glass-card rounded-2xl p-8 hover:scale-105 transition-all duration-500 group ripple-effect"
+                className="glass-card rounded-2xl p-8 relative overflow-hidden group"
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="w-7 h-7 text-primary" />
+                {/* Logo sliding from left on hover */}
+                <div 
+                  className="absolute left-0 top-1/2 -translate-y-1/2 transition-all duration-500 ease-out"
+                  style={{
+                    transform: isHovered 
+                      ? 'translateX(0) translateY(-50%)' 
+                      : 'translateX(-100%) translateY(-50%)',
+                    opacity: isHovered ? 0.15 : 0,
+                  }}
+                >
+                  <MowglaiLogo size="lg" />
                 </div>
-                <h3 className="text-xl font-display font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
+
+                {/* Content sliding from right on hover */}
+                <div 
+                  className="relative z-10 transition-all duration-500 ease-out"
+                  style={{
+                    transform: isHovered ? 'translateX(20px)' : 'translateX(0)',
+                  }}
+                >
+                  <div 
+                    className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-6 transition-all duration-500"
+                    style={{
+                      transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
+                    }}
+                  >
+                    <Icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 
+                    className="text-xl font-display font-semibold mb-3 transition-colors duration-300"
+                    style={{ color: isHovered ? 'hsl(var(--primary))' : 'hsl(var(--foreground))' }}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+
+                {/* Glow effect on hover */}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 transition-opacity duration-500"
+                  style={{ opacity: isHovered ? 1 : 0 }}
+                />
               </div>
             );
           })}

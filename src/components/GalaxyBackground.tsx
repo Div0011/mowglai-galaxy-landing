@@ -1,7 +1,49 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+interface Ripple {
+  x: number;
+  y: number;
+  radius: number;
+  opacity: number;
+  id: number;
+}
 
 const GalaxyBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [ripples, setRipples] = useState<Ripple[]>([]);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const lastRippleRef = useRef(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+      
+      // Add ripple every 100ms during movement
+      const now = Date.now();
+      if (now - lastRippleRef.current > 100) {
+        lastRippleRef.current = now;
+        setRipples(prev => [
+          ...prev.slice(-8), // Keep only last 8 ripples
+          { x: e.clientX, y: e.clientY, radius: 0, opacity: 0.5, id: now }
+        ]);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Animate ripples
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRipples(prev => 
+        prev
+          .map(r => ({ ...r, radius: r.radius + 3, opacity: r.opacity - 0.01 }))
+          .filter(r => r.opacity > 0)
+      );
+    }, 16);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -18,34 +60,15 @@ const GalaxyBackground = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Stars
-    const stars: { x: number; y: number; size: number; speed: number; opacity: number }[] = [];
-    for (let i = 0; i < 200; i++) {
-      stars.push({
+    // Purple dots
+    const dots: { x: number; y: number; size: number; opacity: number; pulseSpeed: number }[] = [];
+    for (let i = 0; i < 300; i++) {
+      dots.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speed: Math.random() * 0.5 + 0.1,
-        opacity: Math.random(),
-      });
-    }
-
-    // Nebula particles
-    const nebulae: { x: number; y: number; radius: number; color: string; opacity: number }[] = [];
-    const colors = [
-      "rgba(147, 51, 234, 0.1)",
-      "rgba(168, 85, 247, 0.08)",
-      "rgba(192, 132, 252, 0.06)",
-      "rgba(139, 92, 246, 0.1)",
-    ];
-
-    for (let i = 0; i < 8; i++) {
-      nebulae.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 300 + 150,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        opacity: Math.random() * 0.5 + 0.2,
+        size: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.6 + 0.2,
+        pulseSpeed: Math.random() * 0.02 + 0.01,
       });
     }
 
@@ -53,51 +76,30 @@ const GalaxyBackground = () => {
     let time = 0;
 
     const animate = () => {
-      ctx.fillStyle = "rgba(10, 5, 20, 0.1)";
+      // Dark black background
+      ctx.fillStyle = "rgb(5, 3, 8)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw nebulae
-      nebulae.forEach((nebula, i) => {
+      // Draw purple dots
+      dots.forEach((dot) => {
+        const pulse = Math.sin(time * dot.pulseSpeed) * 0.3 + 0.7;
         const gradient = ctx.createRadialGradient(
-          nebula.x + Math.sin(time * 0.001 + i) * 20,
-          nebula.y + Math.cos(time * 0.001 + i) * 20,
-          0,
-          nebula.x,
-          nebula.y,
-          nebula.radius
+          dot.x, dot.y, 0,
+          dot.x, dot.y, dot.size * 2
         );
-        gradient.addColorStop(0, nebula.color);
+        gradient.addColorStop(0, `rgba(147, 51, 234, ${dot.opacity * pulse})`);
+        gradient.addColorStop(0.5, `rgba(168, 85, 247, ${dot.opacity * pulse * 0.5})`);
         gradient.addColorStop(1, "transparent");
-
+        
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(nebula.x, nebula.y, nebula.radius, 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, dot.size * 2, 0, Math.PI * 2);
         ctx.fill();
-      });
-
-      // Draw stars
-      stars.forEach((star) => {
-        const twinkle = Math.sin(time * 0.01 + star.x) * 0.3 + 0.7;
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * twinkle})`;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Move stars slowly
-        star.y += star.speed;
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
       });
 
       time++;
       animationId = requestAnimationFrame(animate);
     };
-
-    // Initial fill
-    ctx.fillStyle = "rgb(10, 5, 20)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     animate();
 
@@ -112,13 +114,24 @@ const GalaxyBackground = () => {
       <canvas
         ref={canvasRef}
         className="fixed inset-0 -z-10"
-        style={{ background: "linear-gradient(180deg, hsl(270 50% 3%) 0%, hsl(270 60% 8%) 50%, hsl(270 50% 3%) 100%)" }}
+        style={{ background: "rgb(5, 3, 8)" }}
       />
-      {/* Additional glow orbs */}
+      {/* Water ripples */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-glow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/15 rounded-full blur-[150px] animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[180px] animate-pulse-glow" style={{ animationDelay: "0.75s" }} />
+        {ripples.map((ripple) => (
+          <div
+            key={ripple.id}
+            className="absolute rounded-full border-2 border-primary/30"
+            style={{
+              left: ripple.x - ripple.radius,
+              top: ripple.y - ripple.radius,
+              width: ripple.radius * 2,
+              height: ripple.radius * 2,
+              opacity: ripple.opacity,
+              boxShadow: `0 0 20px hsl(270 80% 60% / ${ripple.opacity}), inset 0 0 20px hsl(270 80% 60% / ${ripple.opacity * 0.3})`,
+            }}
+          />
+        ))}
       </div>
     </>
   );

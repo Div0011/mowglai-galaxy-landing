@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const testimonials = [
   {
@@ -22,11 +23,45 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+  const [sectionTop, setSectionTop] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    const updateSectionTop = () => {
+      if (sectionRef.current) {
+        setSectionTop(sectionRef.current.offsetTop);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", updateSectionTop);
+    updateSectionTop();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateSectionTop);
+    };
+  }, []);
+
+  const getParallaxOffset = (index: number) => {
+    const relativeScroll = scrollY - sectionTop + window.innerHeight;
+    const speed = (index + 1) * 0.05;
+    return relativeScroll * speed;
+  };
+
   return (
-    <section id="testimonials" className="py-32 relative">
+    <section ref={sectionRef} id="testimonials" className="py-32 relative overflow-hidden">
       <div className="container mx-auto px-6">
-        {/* Section header */}
-        <div className="text-center mb-20">
+        {/* Section header with parallax */}
+        <div 
+          className="text-center mb-20"
+          style={{ transform: `translateY(${getParallaxOffset(-1) * 0.3}px)` }}
+        >
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Client Testimonials
@@ -37,12 +72,16 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Testimonials grid */}
+        {/* Testimonials grid with parallax */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, i) => (
             <div
               key={i}
               className="glass-card rounded-3xl p-8 relative group hover:scale-105 transition-all duration-500"
+              style={{ 
+                transform: `translateY(${-getParallaxOffset(i)}px)`,
+                transitionProperty: 'transform, scale',
+              }}
             >
               {/* Quote icon */}
               <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center opacity-80">
