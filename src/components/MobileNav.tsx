@@ -1,10 +1,16 @@
-import { Home, Users, Mail, DollarSign, MessageSquare } from "lucide-react";
+import { Home, Users, Mail, DollarSign, MessageSquare, Target } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 const navItems = [
     { icon: Home, label: "Home", href: "#home" },
     { icon: Users, label: "About", href: "#about" },
+    { icon: Target, label: "Mission", href: "#mission" },
     { icon: DollarSign, label: "Pricing", href: "#pricing" },
     { icon: MessageSquare, label: "Reviews", href: "#testimonials" },
     { icon: Mail, label: "Contact", href: "#contact" },
@@ -34,13 +40,16 @@ const MobileNav = () => {
                 const element = document.getElementById(sectionId);
                 if (element) {
                     const rect = element.getBoundingClientRect();
-                    // Check if section is in viewport (with some offset)
-                    if (rect.top <= 150 && rect.bottom >= 150) {
+                    const opacity = parseFloat(window.getComputedStyle(element).opacity);
+                    const isVisible = opacity > 0.5;
+
+                    // Check if section is in viewport (with some offset) and visible
+                    if (rect.top <= 150 && rect.bottom >= 150 && isVisible) {
                         const activeNav = navItems.find(item => item.href === `#${sectionId}`);
                         if (activeNav) {
                             setActiveItem(activeNav.label);
                         }
-                        break;
+                        // Removed break to allow overlapping sections
                     }
                 }
             }
@@ -52,6 +61,38 @@ const MobileNav = () => {
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
+
+    const handleClick = (e: React.MouseEvent, label: string, href: string) => {
+        e.preventDefault();
+        setActiveItem(label);
+
+        if (href === "#home") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else if (href === "#about") {
+            const st = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "hero-about-wrapper");
+            if (st) {
+                gsap.to(window, { duration: 1, scrollTo: st.end });
+            } else {
+                gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
+            }
+        } else if (href === "#mission") {
+            const st = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "mission-pricing-wrapper");
+            if (st) {
+                gsap.to(window, { duration: 1, scrollTo: st.start });
+            } else {
+                gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
+            }
+        } else if (href === "#pricing") {
+            const st = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "mission-pricing-wrapper");
+            if (st) {
+                gsap.to(window, { duration: 1, scrollTo: st.end });
+            } else {
+                gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
+            }
+        } else {
+            gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
+        }
+    };
 
     return (
         <div
@@ -77,7 +118,7 @@ const MobileNav = () => {
                         <a
                             key={item.label}
                             href={item.href}
-                            onClick={() => setActiveItem(item.label)}
+                            onClick={(e) => handleClick(e, item.label, item.href)}
                             className={cn(
                                 "flex flex-col items-center justify-center w-full py-2 rounded-xl transition-all duration-300 relative overflow-hidden",
                                 isActive ? "text-primary" : "text-muted-foreground"

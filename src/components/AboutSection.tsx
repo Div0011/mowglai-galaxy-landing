@@ -74,11 +74,11 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="py-16 relative">
+    <section id="about" className="py-8 md:py-12 relative">
       <div className="container mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               About Us
             </span>
@@ -89,7 +89,7 @@ const AboutSection = () => {
         </div>
 
         {/* Layout: Large Lion logo on left, cards on right */}
-        <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 items-center lg:items-start">
           {/* Lion Logo - larger, shifted more to the right */}
           {/* Lion Logo slot on the left – hero lion will move here */}
           <div className="w-full lg:w-1/2 lg:flex-shrink-0">
@@ -107,7 +107,7 @@ const AboutSection = () => {
 
           {/* Cards layout */}
           <div className="w-full lg:w-1/2 about-right-content">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Slot 0 - Top Right (Wide) */}
               <div className="col-span-1 sm:col-span-2">
                 {(() => {
