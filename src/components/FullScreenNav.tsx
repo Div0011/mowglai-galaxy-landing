@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import { Home, Users, Mail, DollarSign, MessageSquare, Menu, X } from "lucide-react";
-import LionLogo from "./LionLogo";
+import { Home, Users, Mail, DollarSign, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavItem {
     icon: React.ElementType;
@@ -15,11 +11,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { icon: Home, label: "HOME", href: "#home" },
-    { icon: Users, label: "ABOUT", href: "#about" },
-    { icon: MessageSquare, label: "TESTIMONIALS", href: "#testimonials" },
-    { icon: DollarSign, label: "PRICE", href: "#pricing" },
-    { icon: Mail, label: "CONTACT", href: "#contact" },
+    { icon: Home, label: "HOME", href: "/" },
+    { icon: Users, label: "ABOUT", href: "/about" },
+    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
+    { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
 interface FullScreenNavProps {
@@ -30,6 +25,8 @@ interface FullScreenNavProps {
 const FullScreenNav = ({ isDark, onToggleTheme }: FullScreenNavProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -38,14 +35,7 @@ const FullScreenNav = ({ isDark, onToggleTheme }: FullScreenNavProps) => {
     const handleClick = (e: React.MouseEvent, label: string, href: string) => {
         e.preventDefault();
         setIsOpen(false);
-
-        // Handle Home specifically if needed, or ensure IDs match
-        const targetId = href.replace('#', '');
-        const target = document.getElementById(targetId);
-
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+        navigate(href);
     };
 
     return (

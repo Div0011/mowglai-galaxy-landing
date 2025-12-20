@@ -12,99 +12,49 @@
 
 @layer base {
   :root {
-    /* Deep Green Forest (Primary/Background) */
+    /* Dark Mode - Forest & Gold */
     --background: 150 60% 15%;
-    --foreground: 21 85% 88%;
+    --foreground: 50 100% 95%;
 
-    /* Soft Peach (Secondary/Accent) */
-    --primary: 21 85% 88%;
-    --primary-foreground: 150 60% 15%;
+    --primary: 43 100% 70%;
+    /* Light Gold */
+    --primary-foreground: 150 60% 5%;
 
     --secondary: 150 60% 20%;
-    --secondary-foreground: 21 85% 88%;
+    --secondary-foreground: 43 100% 90%;
 
-    --card: 150 60% 13%;
-    --card-foreground: 21 85% 88%;
+    --card: 150 60% 12%;
+    --card-foreground: 50 100% 95%;
 
-    --popover: 150 60% 13%;
-    --popover-foreground: 21 85% 88%;
+    --accent: 79 45% 45%;
+    /* Palm Leaf Green Accent */
+    --accent-foreground: 43 100% 90%;
 
-    --muted: 150 40% 25%;
-    --muted-foreground: 21 85% 70%;
-
-    --accent: 21 85% 88%;
-    --accent-foreground: 150 60% 15%;
-
-    --destructive: 0 84.2% 60.2%;
-    /* Keeping destructive red for error states functionality, can be overridden if needed but usually better to keep for semantic meaning */
-    --destructive-foreground: 21 85% 88%;
-
-    --border: 21 85% 88%;
-    --input: 150 40% 25%;
-    --ring: 21 85% 88%;
-
-    --radius: 0.75rem;
-
-    /* Custom tokens - Remapped to new scheme */
-    --glow-primary: 21 85% 88%;
-    --glow-accent: 21 60% 80%;
-    --glass-bg: 150 60% 15%;
-    --glass-border: 21 85% 88%;
-
-    --sidebar-background: 150 60% 12%;
-    --sidebar-foreground: 21 85% 88%;
-    --sidebar-primary: 21 85% 88%;
-    --sidebar-primary-foreground: 150 60% 15%;
-    --sidebar-accent: 150 50% 20%;
-    --sidebar-accent-foreground: 21 85% 88%;
-    --sidebar-border: 21 85% 88%;
-    --sidebar-ring: 21 85% 88%;
+    --border: 43 100% 70% / 0.2;
+    --ring: 43 100% 70%;
   }
 
-  /* Force light mode to be inverse of dark (Peach BG, Green Text) */
   .light {
-    --background: 21 85% 88%;
-    /* Soft Peach */
+    /* Light Mode - Peach to Gold */
+    --background: 34 100% 98%;
+    /* Off-white Peach */
     --foreground: 150 60% 15%;
-    /* Deep Green */
 
-    --card: 21 85% 92%;
+    --primary: 43 100% 45%;
+    /* Golden Primary for Light Mode */
+    --primary-foreground: 34 100% 98%;
+
+    --secondary: 34 100% 92%;
+    --secondary-foreground: 150 60% 15%;
+
+    --card: 34 100% 96%;
     --card-foreground: 150 60% 15%;
 
-    --popover: 21 85% 92%;
-    --popover-foreground: 150 60% 15%;
+    --accent: 43 100% 45%;
+    --accent-foreground: 34 100% 98%;
 
-    --primary: 150 60% 15%;
-    /* Deep Green as Primary in Light Mode */
-    --primary-foreground: 21 85% 88%;
-
-    --secondary: 150 60% 20%;
-    --secondary-foreground: 21 85% 88%;
-
-    --muted: 21 85% 80%;
-    --muted-foreground: 150 60% 25%;
-
-    --accent: 150 60% 15%;
-    --accent-foreground: 21 85% 88%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 21 85% 88%;
-
-    --border: 150 60% 15%;
-    --input: 21 85% 80%;
-    --ring: 150 60% 15%;
-
-    --glass-bg: 21 85% 88%;
-    --glass-border: 150 60% 15%;
-
-    --sidebar-background: 21 85% 85%;
-    --sidebar-foreground: 150 60% 15%;
-    --sidebar-primary: 150 60% 15%;
-    --sidebar-primary-foreground: 21 85% 88%;
-    --sidebar-accent: 21 85% 80%;
-    --sidebar-accent-foreground: 150 60% 15%;
-    --sidebar-border: 150 60% 15%;
-    --sidebar-ring: 150 60% 15%;
+    --border: 43 100% 45% / 0.2;
+    --ring: 43 100% 45%;
   }
 }
 

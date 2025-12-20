@@ -1,5 +1,4 @@
-import LionLogo from "./LionLogo";
-import { ArrowDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
     return (
@@ -32,21 +31,21 @@ const HeroSection = () => {
 
                 {/* CTA Buttons */}
                 <div
-                    className="mt-12 flex flex-col md:flex-row gap-6 opacity-0 animate-fade-in"
+                    className="mt-12 flex flex-wrap justify-center gap-4 md:gap-6 opacity-0 animate-fade-in px-4"
                     style={{ animationDelay: "1s", animationFillMode: "forwards" }}
                 >
-                    <a
-                        href="#contact"
-                        className="px-10 py-4 bg-primary text-background text-lg font-bold uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors duration-300 rounded-full"
+                    <Link
+                        to="/contact"
+                        className="w-full sm:w-auto px-10 py-4 bg-primary text-background text-lg font-bold uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors duration-300 rounded-full text-center"
                     >
                         Start a Project
-                    </a>
-                    <a
-                        href="#pricing"
-                        className="px-10 py-4 border border-foreground/30 text-foreground text-lg font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-colors duration-300 rounded-full"
+                    </Link>
+                    <Link
+                        to="/investment"
+                        className="w-full sm:w-auto px-10 py-4 border border-foreground/30 text-foreground text-lg font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-colors duration-300 rounded-full text-center"
                     >
                         Learn More
-                    </a>
+                    </Link>
                 </div>
 
             </div>

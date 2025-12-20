@@ -1,38 +1,37 @@
 import { Palette, Rocket, Shield, Globe, BarChart, Headphones } from "lucide-react";
 import LionLogo from "./LionLogo";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const features = [
-  { icon: Palette, title: "Stunning Design", description: "Intuitive interfaces that elevate your brand." },
-  { icon: Shield, title: "Security Built-In", description: "Enterprise-grade security protocols." },
-  { icon: Rocket, title: "Performance", description: "Lightning-fast load times and interactions." },
-  { icon: Globe, title: "Global Reach", description: "Infrastructure designed for worldwide scale." },
-  { icon: BarChart, title: "Data Driven", description: "Actionable insights with integrated analytics." },
-  { icon: Headphones, title: "24/7 Support", description: "Dedicated team ready to assist anytime." },
+  { id: 1, icon: Palette, title: "Stunning Design", description: "Architectural precision for a magnetic, memorable digital experience." },
+  { id: 2, icon: Shield, title: "Secure Protocols", description: "Enterprise-grade encryption protecting your assets against evolving threats." },
+  { id: 3, icon: Rocket, title: "Peak Speed", description: "Optimized codebases for sub-second loads and silky-smooth interaction." },
+  { id: 4, icon: Globe, title: "Global Scale", description: "Auto-scaling infrastructure to handle millions of simultaneous visitors." },
+  { id: 5, icon: BarChart, title: "Data Clarity", description: "Deep analytics transforming raw behavior into meaningful business growth." },
+  { id: 6, icon: Headphones, title: "Elite Support", description: "24/7 dedicated engineering support available across every timezone." },
 ];
 
 const AboutSection = () => {
-  // We will control the 3D scroll via Index.tsx GSAP context or internal useEffect if self-contained
-  // For the prompt's request "when user scrolls ... cards scroll vertically nd in 3D manner"
-  // We'll set up the structure here.
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   return (
-    <section id="about" className="relative w-full py-24 z-20">
+    <section id="about" className="relative w-full py-16 z-20 overflow-hidden">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
         {/* Left Column: Huge Title & Logo */}
         <div className="space-y-12" data-aos="fade-right">
-          {/* Diagonal Layout for Heading */}
-          <h2 className="text-[11vw] font-display font-black tracking-tighter text-foreground relative z-10 drop-shadow-sm flex flex-col space-y-2">
-            <span className="leading-none opacity-50">WHO</span>
-            <span className="text-primary opacity-90 leading-none self-end pr-[10vw]">WE</span>
-            <span className="text-primary opacity-50 leading-none self-end pr-[10vw]">ARE</span>
+          {/* Two-line heading with one word faded - Jungle Theme */}
+          <h2 className="text-[11vw] font-display font-black tracking-tighter text-foreground relative z-10 drop-shadow-sm flex flex-col">
+            <span className="leading-[0.8] opacity-10 uppercase">Wild</span>
+            <span className="text-primary leading-[0.8] uppercase">Architects</span>
           </h2>
 
-          {/* Integrated Logo Element - Magnetic & Full Fill */}
+          {/* Integrated Logo Element - Magnetic & Foggy */}
           <div
-            className="relative w-[300px] h-[300px] flex items-center justify-center -ml-10 md:justify-start md:pl-20 cursor-pointer"
+            className="relative w-full aspect-square max-w-[280px] sm:max-w-[320px] md:max-w-[400px] mx-auto md:ml-0 flex items-center justify-center cursor-pointer group/logo-container"
             onMouseMove={(e) => {
               const el = e.currentTarget;
               const rect = el.getBoundingClientRect();
@@ -46,71 +45,80 @@ const AboutSection = () => {
               if (logo) gsap.to(logo, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
             }}
           >
-            {/* Decorative Glow */}
-            <div className="absolute w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+            {/* Background Atmosphere */}
+            <div className="absolute w-[80%] h-[80%] bg-primary/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none animate-pulse" />
 
-            <div className="magnetic-logo relative w-64 h-64 md:w-80 md:h-80 rounded-full border border-primary/20 bg-background/5 overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-[0_0_80px_hsl(var(--primary))]">
-              {/* Logo 1: For Dark Mode (Green BG) - Default */}
-              <img
-                src="/mowglai-galaxy-landing/logo1.png"
-                alt="Mowglai Logo"
-                className="w-full h-full object-cover hidden dark:block transition-all duration-700 hover:scale-110 hover:opacity-80"
-              />
+            <div className="magnetic-logo relative w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-80 md:h-80 rounded-full border border-primary/20 bg-background/5 overflow-hidden shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] transition-all duration-700 group hover:shadow-[0_0_100px_hsl(var(--primary))] ring-1 ring-primary/10 ring-offset-8 ring-offset-transparent">
+              {/* Fog Layer - Disappears on hover */}
+              <div className="absolute inset-0 z-20 bg-gradient-to-tr from-background/40 via-primary/5 to-transparent backdrop-blur-md opacity-100 group-hover:opacity-0 transition-opacity duration-1000 pointer-events-none" />
+              <div className="absolute inset-0 z-10 bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
 
-              {/* Logo 2: For Light Mode (Peach BG) */}
-              <img
-                src="/mowglai-galaxy-landing/logo2.png"
-                alt="Mowglai Logo"
-                className="w-full h-full object-cover block dark:hidden transition-all duration-700 hover:scale-110 hover:opacity-80"
-              />
+              <img src="/mowglai-galaxy-landing/logo1.png" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 hidden dark:block" alt="Logo" />
+              <img src="/mowglai-galaxy-landing/logo2.png" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 block dark:hidden" alt="Logo" />
             </div>
           </div>
 
           <div className="max-w-md ml-auto md:ml-12">
-            <p className="text-2xl font-light text-foreground/80 leading-relaxed">
-              Architects of the digital future. We blend art and engineering to create immersive web experiences.
+            <p className="text-2xl font-light text-foreground/80 leading-relaxed italic border-l-4 border-primary/30 pl-6 text-center md:text-left">
+              "We don't just build websites; we design digital habitats where brands thrive in the wild."
             </p>
           </div>
         </div>
 
-        {/* Right Column: Double Column Scroll Cards */}
+        {/* Right Column: Circular to Square Cards */}
         <div
           id="about-cards-container"
-          className="relative w-full h-[800px] overflow-hidden -mt-10 masking-gradient"
+          className="relative w-full h-[750px] overflow-hidden group"
+          style={{
+            maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'
+          }}
         >
-          {/* Gradient Masks */}
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background via-background/80 to-transparent z-20 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-20 pointer-events-none" />
-
-          {/* Double Column Grid Stage */}
-          <div
-            id="about-cards-stage"
-            className="grid grid-cols-2 gap-6 animate-marquee-vertical hover:[animation-play-state:paused] py-10"
-          >
-            {[...features, ...features, ...features, ...features].map((feature, i) => {
+          {/* Added hover:pause to the marquee stage */}
+          <div id="about-cards-stage" className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-marquee-vertical hover:[animation-play-state:paused] py-10 transition-transform duration-500">
+            {[...features, ...features].map((feature, i) => {
               const Icon = feature.icon;
+              const isSelected = selectedId === feature.id;
               return (
-                <div
-                  key={i}
-                  className="group/card about-card relative w-full aspect-square bg-primary/5 border border-primary/20 hover:bg-card hover:border-primary transition-all duration-500 ease-out rounded-[2rem] flex flex-col items-center justify-center hover:justify-start p-6 cursor-pointer overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(252,220,177,0.15)]"
+                <motion.div
+                  layout
+                  key={`${feature.id}-${i}`}
+                  onMouseEnter={() => setSelectedId(feature.id)}
+                  onMouseLeave={() => setSelectedId(null)}
+                  className={cn(
+                    "group/card relative w-full aspect-square bg-primary/5 border border-primary/20 hover:bg-background/90 hover:border-primary rounded-full hover:rounded-[2.5rem] flex flex-col items-center justify-center p-8 cursor-pointer overflow-hidden transition-colors duration-500",
+                    isSelected ? "z-40 shadow-[0_0_40px_rgba(var(--primary-rgb),0.2)]" : "z-10"
+                  )}
+                  animate={{
+                    scale: isSelected ? 1.02 : 1,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 25
+                  }}
                 >
-                  {/* Icon & Title Container */}
-                  <div className="flex flex-col items-center gap-4 group-hover/card:flex-row group-hover/card:w-full transition-all duration-500">
-                    <div className="p-4 rounded-full bg-primary/10 text-primary group-hover/card:bg-primary group-hover/card:text-background transition-colors duration-300 shrink-0">
-                      <Icon size={32} strokeWidth={1.5} className="group-hover/card:scale-90 transition-transform" />
-                    </div>
-                    <h3 className="text-lg font-display font-bold text-foreground text-center group-hover/card:text-left transition-all duration-300">
-                      {feature.title}
-                    </h3>
-                  </div>
+                  {/* Golden Backdrop Glow on Hover */}
+                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover/card:opacity-100 blur-[40px] transition-opacity duration-700 pointer-events-none" />
 
-                  {/* Description - Hidden by default */}
-                  <div className="h-0 opacity-0 group-hover/card:h-auto group-hover/card:opacity-100 transition-all duration-500 delay-100 overflow-hidden text-center group-hover/card:text-left mt-0 group-hover/card:mt-4">
-                    <p className="text-sm text-muted-foreground font-body leading-relaxed">
-                      {feature.description}
-                    </p>
+                  <div className="relative z-10 flex flex-col items-center justify-center w-full h-full text-center transition-all duration-500">
+                    <div className="flex flex-col items-center gap-4 group-hover/card:-translate-y-4 transition-transform duration-500">
+                      <div className="p-5 rounded-full bg-primary/10 text-primary group-hover/card:bg-primary group-hover/card:text-primary-foreground transition-all duration-500 shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)]">
+                        <Icon size={36} strokeWidth={1.5} />
+                      </div>
+                      <h3 className="text-xl font-display font-bold text-foreground group-hover/card:text-primary transition-colors">
+                        {feature.title}
+                      </h3>
+                    </div>
+
+                    {/* Shortened Description - Centered and fitting */}
+                    <div className="opacity-0 group-hover/card:opacity-100 transition-all duration-500 delay-100 mt-4 max-w-[90%]">
+                      <p className="text-sm text-foreground/70 font-body leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

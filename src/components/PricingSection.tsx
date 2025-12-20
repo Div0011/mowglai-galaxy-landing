@@ -48,59 +48,69 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="relative w-full py-32 z-20">
+    <section id="pricing" className="relative w-full py-16 z-20">
       <div className="container mx-auto px-6">
 
-        {/* Header */}
-        <div className="mb-24">
-          <h2 className="text-[15vw] leading-[0.8] font-display font-black tracking-tighter text-foreground opacity-20 select-none absolute left-0 -top-20 z-0 whitespace-nowrap">
-            PRICING
+        {/* Header - Two-line style with faded word */}
+        <div className="mb-24 text-center">
+          <h2 className="text-[10vw] leading-[0.8] font-display font-black tracking-tighter text-foreground mb-8 relative z-10 flex flex-col items-center">
+            <span className="opacity-10">THE</span>
+            <span className="text-primary -mt-4">INVESTMENT</span>
           </h2>
-          <div className="relative z-10 pt-20">
-            <h2 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-4">
-              INVESTMENT
-            </h2>
-            <p className="text-2xl text-primary font-body tracking-wider uppercase">
-              Select your path
-            </p>
-          </div>
+          <p className="text-xl text-primary font-body tracking-[0.3em] uppercase opacity-60">
+            Value Beyond Measurement
+          </p>
         </div>
 
-        {/* Plans List - More typographic, less 'card' */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Plans List - Fixed height cards with hover effect */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
           {plans.map((plan, i) => (
             <div
               key={i}
               data-aos="fade-up"
               data-aos-delay={i * 200}
               className={cn(
-                "relative p-8 md:p-12 border-t border-primary/20 transition-all duration-500 hover:bg-primary/5 group",
-                plan.popular && "lg:-mt-12 bg-primary/5 border-primary/50"
+                "relative p-10 md:p-12 glass-card border border-primary/20 transition-all duration-700 hover:-translate-y-4 hover:border-primary group flex flex-col h-full",
+                plan.popular ? "bg-primary/5 border-primary/40 shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)]" : "bg-background/40"
               )}
             >
-              <div className="mb-8">
-                <h3 className="text-3xl md:text-4xl font-display font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+              {/* Hover Golden Glow */}
+              <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 blur-[80px] transition-opacity duration-700 rounded-full -z-10" />
+
+              <div className="mb-8 shrink-0">
+                {plan.popular && (
+                  <span className="inline-block px-4 py-1 rounded-full bg-primary text-background text-[10px] font-bold tracking-widest uppercase mb-6">Most Popular</span>
+                )}
+                <h3 className="text-3xl md:text-4xl font-display font-bold mb-4 text-foreground group-hover:text-primary transition-colors">
                   {plan.name}
                 </h3>
                 <div className="text-5xl md:text-6xl font-display font-black text-foreground mb-4">
                   {plan.price}
+                  {plan.price !== "Custom" && <span className="text-lg font-normal text-muted-foreground ml-2">/ project</span>}
                 </div>
-                <p className="text-muted-foreground">{plan.description}</p>
+                <p className="text-muted-foreground text-sm font-body leading-relaxed">{plan.description}</p>
               </div>
 
-              <ul className="space-y-4 mb-12">
+              <div className="h-px w-full bg-primary/10 mb-8" />
+
+              <ul className="space-y-4 mb-12 flex-grow">
                 {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-3 text-lg text-foreground/80">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {feature}
+                  <li key={j} className="flex items-start gap-4 text-base text-foreground/80 leading-tight">
+                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                    <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Button
-                className="w-full py-8 text-xl font-display font-bold uppercase tracking-widest bg-transparent border border-foreground hover:bg-foreground hover:text-background transition-all"
+                className={cn(
+                  "w-full py-8 text-xl font-display font-black uppercase tracking-widest rounded-full transition-all duration-500 shadow-lg",
+                  plan.popular
+                    ? "bg-primary text-primary-foreground hover:bg-foreground hover:text-background"
+                    : "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-background"
+                )}
               >
-                Choose Plan
+                START {plan.name === "Enterprise" ? "DIALOGUE" : "ASCENT"}
               </Button>
             </div>
           ))}
