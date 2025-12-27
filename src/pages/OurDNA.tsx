@@ -44,40 +44,74 @@ const OurDNA = () => {
 
     const capabilities = [
         {
-            category: "E-Commerce Platforms",
-            description: "Full-featured online stores with payment integration, inventory management, and customer analytics.",
-            technologies: ["Shopify", "WooCommerce", "Custom Solutions"],
+            category: "Web Design",
+            hero: "“Websites that roar with creativity — designed to impress and built to perform.”",
+            description: "Your website is the first impression customers have of your brand. We design visually stunning, responsive websites that combine aesthetics with functionality. Every design is tailored to your business goals, ensuring your site not only looks great but also drives conversions.",
+            highlights: [
+                "Mobile-first layouts that adapt seamlessly across devices",
+                "SEO-friendly structure to boost search visibility",
+                "Fast-loading pages optimized for performance",
+                "Custom themes aligned with your brand identity",
+                "Integration with analytics tools to track visitor behavior"
+            ],
+            cta: "Start your digital journey today — let us design your perfect website.",
             color: "from-amber-500/20 to-orange-500/20"
         },
         {
-            category: "Corporate Websites",
-            description: "Professional, conversion-focused websites that establish authority and drive business growth.",
-            technologies: ["Next.js", "React", "Tailwind CSS"],
+            category: "Website Redesign",
+            hero: "“Breathe new life into your digital jungle.”",
+            description: "An outdated website can hold back your business. Our redesign service transforms your existing site into a modern, high-performing platform. We focus on improving usability, refreshing visuals, and enhancing speed and security, so your digital presence feels fresh and competitive.",
+            highlights: [
+                "Complete visual overhaul with modern design trends",
+                "Improved navigation and user flow for better engagement",
+                "Enhanced speed and performance optimization",
+                "Stronger security with SSL and updated frameworks",
+                "Content restructuring for clarity and impact"
+            ],
+            cta: "Upgrade your online presence — transform your old site into a powerful new experience.",
             color: "from-blue-500/20 to-cyan-500/20"
         },
         {
-            category: "SaaS Applications",
-            description: "Scalable web applications with user authentication, subscription management, and real-time features.",
-            technologies: ["React", "Node.js", "PostgreSQL"],
+            category: "Web Development",
+            hero: "“Strong foundations for your online growth.”",
+            description: "We build robust, scalable websites that go beyond design. Our development team ensures your site is technically sound, secure, and capable of handling growth. Whether you need a simple business site or a complex e-commerce platform, we deliver solutions that last.",
+            highlights: [
+                "Custom-coded solutions tailored to your business",
+                "CMS integration (WordPress, Shopify, or custom builds)",
+                "Secure hosting and regular maintenance",
+                "API integrations for advanced functionality",
+                "Scalable architecture to support future expansion"
+            ],
+            cta: "Build a future-ready website that scales with your business.",
             color: "from-purple-500/20 to-pink-500/20"
         },
         {
-            category: "Mobile-First Experiences",
-            description: "Progressive web apps that deliver app-like experiences across all devices.",
-            technologies: ["PWA", "React Native", "Flutter"],
+            category: "UI/UX Design",
+            hero: "“Designs that guide, delight, and convert.”",
+            description: "User experience is at the heart of digital success. We design interfaces that are intuitive, engaging, and conversion-focused. Our UI/UX process ensures every click feels natural, every page flows smoothly, and every visitor enjoys interacting with your brand.",
+            highlights: [
+                "User journey mapping to understand customer behavior",
+                "Interactive prototypes for testing and feedback",
+                "Clean, engaging interfaces with modern design principles",
+                "Accessibility-focused design for inclusivity",
+                "Conversion-driven layouts that maximize ROI"
+            ],
+            cta: "Deliver seamless experiences — let us craft intuitive designs for your users.",
             color: "from-green-500/20 to-emerald-500/20"
         },
         {
-            category: "Content Platforms",
-            description: "Blogs, portfolios, and content-rich sites with powerful CMS integration.",
-            technologies: ["WordPress", "Contentful", "Strapi"],
+            category: "MySQL Database Solutions",
+            hero: "“Data handled with precision and security.”",
+            description: "Behind every great website is a strong database. We design and manage MySQL databases that keep your business data organized, secure, and accessible. From setup to optimization, we ensure your data infrastructure supports smooth operations and future growth.",
+            highlights: [
+                "Database design tailored to your application needs",
+                "Secure data storage with encryption protocols",
+                "Optimization for speed and efficiency",
+                "Integration with web applications and CMS platforms",
+                "Regular backups and monitoring for reliability"
+            ],
+            cta: "Organize your business data — get reliable MySQL solutions today.",
             color: "from-red-500/20 to-rose-500/20"
-        },
-        {
-            category: "Custom Solutions",
-            description: "Unique digital products tailored to your specific business needs and challenges.",
-            technologies: ["Custom Stack", "Consulting", "Innovation"],
-            color: "from-indigo-500/20 to-violet-500/20"
         }
     ];
 
@@ -163,26 +197,37 @@ const OurDNA = () => {
                                 key={index}
                                 data-aos="fade-up"
                                 data-aos-delay={index * 100}
-                                className={`group relative glassmorphism p-8 rounded-[2rem] border border-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden bg-gradient-to-br ${capability.color}`}
+                                className={`group relative glassmorphism p-8 rounded-[2rem] border border-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden bg-gradient-to-br ${capability.color} flex flex-col h-full`}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                <div className="relative z-10">
-                                    <h3 className="text-2xl font-display font-bold text-primary mb-3 uppercase">
+                                <div className="relative z-10 flex flex-col h-full">
+                                    <h3 className="text-2xl font-display font-bold text-primary mb-2 uppercase">
                                         {capability.category}
                                     </h3>
-                                    <p className="text-muted-foreground mb-6 leading-relaxed">
+
+                                    <p className="text-sm font-display italic text-foreground/80 mb-4 opacity-80 min-h-[3em]">
+                                        {capability.hero}
+                                    </p>
+
+                                    <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
                                         {capability.description}
                                     </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {capability.technologies.map((tech, techIndex) => (
-                                            <span
-                                                key={techIndex}
-                                                className="px-3 py-1 text-xs font-display uppercase bg-primary/10 text-primary rounded-full border border-primary/20"
-                                            >
-                                                {tech}
-                                            </span>
+
+                                    <div className="space-y-3 mb-8 flex-grow">
+                                        {capability.highlights.map((highlight, hIndex) => (
+                                            <div key={hIndex} className="flex items-start gap-2 text-sm text-foreground/80">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                                                <span>{highlight}</span>
+                                            </div>
                                         ))}
+                                    </div>
+
+                                    <div className="mt-auto pt-4 border-t border-primary/10">
+                                        <p className="text-sm font-bold text-primary flex items-start gap-2">
+                                            <span className="text-lg">👉</span>
+                                            {capability.cta}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

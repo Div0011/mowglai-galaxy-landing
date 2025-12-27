@@ -1,15 +1,23 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 
+interface Ripple {
+  x: number;
+  y: number;
+  id: number;
+}
+
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isInverted, setIsInverted] = useState(false); // New state for color inversion
+  const [ripples, setRipples] = useState<Ripple[]>([]);
 
   // Refs for direct DOM manipulation (better performance than state for cursor position)
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+  const lastRipplePos = useRef({ x: 0, y: 0 }); // Track last ripple position
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -56,6 +64,17 @@ const CustomCursor = () => {
 
       setIsPointer(isClickable);
 
+      // Spawn ripple on move (throttled by distance)
+      const dist = Math.hypot(e.clientX - lastRipplePos.current.x, e.clientY - lastRipplePos.current.y);
+      if (dist > 50) {
+        lastRipplePos.current = { x: e.clientX, y: e.clientY };
+        const id = Date.now();
+        setRipples((prev) => [...prev, { x: e.clientX, y: e.clientY, id }]);
+        setTimeout(() => {
+          setRipples((prev) => prev.filter((r) => r.id !== id));
+        }, 1500); // Match animation duration
+      }
+
       // Theme/Color Check
       // Look for data-theme="gold" in the ancestry
       const themeElement = target.closest('[data-theme="gold"]');
@@ -76,6 +95,25 @@ const CustomCursor = () => {
     };
   }, [isMobile]);
 
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      // Allow ripples on mobile? The custom cursor logic returns null effectively hiding everything.
+      // If we want ripples only when cursor is enabled strings attached, keep isMobile check.
+      if (isMobile) return;
+
+      const id = Date.now();
+      setRipples((prev) => [...prev, { x: e.clientX, y: e.clientY, id }]);
+
+      // Cleanup after animation
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== id));
+      }, 600);
+    };
+
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, [isMobile]);
+
   if (isMobile) return null;
 
   return (
@@ -85,6 +123,20 @@ const CustomCursor = () => {
         Default (Green Bg): Golden Cursor
         Inverted (Gold Bg): Green Cursor (#1B3022)
       */}
+
+      {/* Ripples */}
+      {ripples.map((ripple) => (
+        <div
+          key={ripple.id}
+          className="fixed pointer-events-none z-[9997] w-12 h-12 rounded-full border animate-ripple"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            borderColor: isInverted ? 'rgba(27, 48, 34, 0.3)' : 'rgba(197, 160, 89, 0.3)', // Lower opacity for the trail
+            borderWidth: '1px',
+          }}
+        />
+      ))}
 
       {/* Follower (Large Circle) */}
       <div
