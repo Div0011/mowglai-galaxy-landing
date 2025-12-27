@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages and Hostinger
 
 on:
   push:
@@ -37,6 +37,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+
+      # NEW STEP: This sends the same 'dist' folder to your Hostinger server
+      - name: 📂 Sync files to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 82.25.120.199
+          username: u707591712.mowglai.in
+          password: ${{ secrets.MOWGLAI_SECRET }}
+          port: 21
+          local-dir: ./dist/
+          server-dir: ./public_html/
+          security: loose  # <--- Add this line!
 
   deploy:
     environment:
