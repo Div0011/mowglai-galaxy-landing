@@ -43,11 +43,11 @@ const Home = () => {
               <div className="grid grid-cols-2 gap-8">
                 <div>
                   <h4 className="text-primary font-display font-bold text-lg mb-2 uppercase tracking-widest">Adaptation</h4>
-                  <p className="text-sm text-foreground/70">Evolving with every pixel we place in the wild.</p>
+                  <p className="text-lg text-foreground/70">Evolving with every pixel we place in the wild.</p>
                 </div>
                 <div>
                   <h4 className="text-primary font-display font-bold text-lg mb-2 uppercase tracking-widest">Survival</h4>
-                  <p className="text-sm text-foreground/70">Resilient codebases that thrive in any environment.</p>
+                  <p className="text-lg text-foreground/70">Resilient codebases that thrive in any environment.</p>
                 </div>
               </div>
             </div>

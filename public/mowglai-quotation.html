@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mowglai Project Quotation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #050806;
+            --secondary: #0d1a12;
+            --accent: #C5A059;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-dim);
+        }
+
+        .section-box {
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        .services-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .services-list li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 2px solid var(--accent);
+        }
+
+        .services-list strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: #08100b;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        th {
+            color: var(--accent);
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            width: 30%;
+        }
+
+        .price-highlight {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .timeline-step {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-step strong {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .legal-block {
+            background-color: #08100b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .legal-header {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="logo1.png" alt="Mowglai Logo" class="logo">
+            <h1>Project Quotation</h1>
+            <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Digital Excellence Evolved</p>
+        </div>
+
+        <!-- 1. About Us -->
+        <div class="section-box">
+            <h2>About Us</h2>
+            <p>We are a professional digital solutions agency specializing in Web Design & Development, Website
+                Redesign, Database Management, and SEO. Our mission is to help businesses establish a strong online
+                presence while ensuring their digital infrastructure is modern, secure, and optimized for growth.</p>
+
+            <ul class="services-list">
+                <li>
+                    <strong>Web Design & Development</strong>
+                    Responsive, user-friendly websites that reflect your brand identity and engage customers
+                    effectively.
+                </li>
+                <li>
+                    <strong>Website Redesign</strong>
+                    Revamping outdated websites with modern layouts, improved usability, and enhanced performance.
+                </li>
+                <li>
+                    <strong>Database Management</strong>
+                    Designing, optimizing, and restructuring databases to improve speed, security, and scalability.
+                </li>
+                <li>
+                    <strong>SEO (Search Engine Optimization)</strong>
+                    Implementing strategies to boost search visibility and reach the right audience.
+                </li>
+            </ul>
+        </div>
+
+        <!-- 2. Quotation -->
+        <!-- 2. Workflow Process -->
+        <div class="section-box">
+            <h2>Workflow Process</h2>
+
+            <div class="timeline-step">
+                <strong>Phase 1: Discovery & Strategy (Week 1)</strong>
+                We begin by understanding your business goals, target audience, and brand vision. This phase includes
+                requirement gathering, domain setup, and initial design concepts.
+            </div>
+
+            <div class="timeline-step">
+                <strong>Phase 2: Design & Development (Weeks 2–3)</strong>
+                Our team crafts the visual identity and builds the core structure of your site. This includes mockup
+                approval, responsive coding, database integration, and SEO implementation.
+            </div>
+
+            <div class="timeline-step">
+                <strong>Phase 3: Testing & Launch (Week 4)</strong>
+                We conduct rigorous testing across devices and browsers to ensure optimal performance. Final steps
+                include hosting setup, SSL activation, and the official project launch.
+            </div>
+
+            <div class="timeline-step">
+                <strong>Phase 4: Growth & Support</strong>
+                Post-launch, we provide necessary training and support to help you manage your digital assets, ensuring
+                your platform continues to perform and scale.
+            </div>
+        </div>
+
+        <!-- 3. Terms & Conditions -->
+        <div class="section-box">
+            <h2>Terms & Conditions</h2>
+
+            <h3 style="color: var(--accent); font-size: 1.1rem; border-bottom: none; margin-bottom: 10px;">1. Project
+                Acceptance</h3>
+            <p style="font-size: 0.9rem;">
+                The project commences upon receipt of the initial deposit and signed agreement. The scope of work is
+                defined in the initial proposal, and any additional features may incur extra charges.
+            </p>
+
+            <h3 style="color: var(--accent); font-size: 1.1rem; border-bottom: none; margin-bottom: 10px;">2. Payment
+                Terms</h3>
+            <p style="font-size: 0.9rem;">
+                A non-refundable 50% deposit is required to start the project. The remaining 50% balance is due upon
+                project completion and before the final handover or deployment of files.
+            </p>
+
+            <h3 style="color: var(--accent); font-size: 1.1rem; border-bottom: none; margin-bottom: 10px;">3.
+                Intellectual Property</h3>
+            <p style="font-size: 0.9rem;">
+                Upon full payment, all intellectual property rights to the final designs and code developed for the
+                project will be transferred to the client. Mowglai Digital Solutions retains the right to use the
+                project in our portfolio and marketing materials.
+            </p>
+
+            <h3 style="color: var(--accent); font-size: 1.1rem; border-bottom: none; margin-bottom: 10px;">4. Revisions
+                & Support</h3>
+            <p style="font-size: 0.9rem;">
+                We offer a set number of revisions during the design phase as specified in your package. Post-launch
+                support covers bug fixes for 30 days. ongoing maintenance is available under separate agreements.
+            </p>
+        </div>
+
+
+
+        <!-- Footer / Legal -->
+        <div class="footer">
+            <img src="logo1.png" alt="Mowglai Icon" style="width: 40px; opacity: 0.5; margin-bottom: 15px;">
+            <p>&copy; 2025 Mowglai Digital Solutions. Built for the modern frontier.</p>
+
+            <div class="legal-block">
+                <span class="legal-header">Privacy Policy</span>
+                <p style="margin-bottom: 10px;">
+                    Mowglai Digital Solutions respects your privacy. We collect and process personal data solely for the
+                    purpose of providing our digital services. We implement strict security measures to protect your
+                    information and do not share it with third parties without consent, except as required by law.
+                </p>
+                <p style="margin-bottom: 0;">
+                    For more details on how we handle your data, please request our full Privacy Policy document.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

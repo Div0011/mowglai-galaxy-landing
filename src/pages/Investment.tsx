@@ -69,8 +69,17 @@ const Investment = () => {
 
                             <Download className="w-12 h-12 text-primary mb-6 animate-bounce" />
                             <h3 className="text-2xl sm:text-3xl font-display font-bold mb-4 text-primary">OUR BROCHURE</h3>
-                            <p className="text-foreground/70 mb-8 max-w-xs text-sm sm:text-base leading-relaxed lowercase">Get a detailed breakdown of our wild strategies and success stories.</p>
-                            <BrochurePDF variant="outline" className="w-full py-6 rounded-full border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500" />
+                            <p className="text-foreground/70 mb-8 max-w-xs text-lg sm:text-xl leading-relaxed lowercase">Get a detailed breakdown of our wild strategies and success stories.</p>
+
+                            <a
+                                href="/mowglai-brochure.html"
+                                download
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full py-6 rounded-full border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 text-lg sm:text-xl font-display font-bold uppercase flex items-center justify-center cursor-pointer"
+                            >
+                                Open Brochure
+                            </a>
                         </div>
 
                         <div className="relative group p-8 sm:p-12 rounded-[2.5rem] flex flex-col items-center text-center border border-primary/30 transition-all duration-700 bg-[linear-gradient(135deg,rgba(252,211,77,0.08),rgba(146,64,14,0.05))] hover:shadow-[0_0_40px_rgba(252,211,77,0.1)] overflow-hidden">
@@ -78,10 +87,16 @@ const Investment = () => {
 
                             <FileText className="w-12 h-12 text-primary mb-6" />
                             <h3 className="text-2xl sm:text-3xl font-display font-bold mb-4 text-primary">CUSTOM QUOTATION</h3>
-                            <p className="text-foreground/70 mb-8 max-w-xs text-sm sm:text-base leading-relaxed lowercase">Tell us your goal and we'll generate a personalized strategy for your market habitat.</p>
-                            <Button asChild variant="outline" className="w-full py-6 rounded-full border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500">
-                                <a href="mailto:hello@mowglai.in">REQUEST CUSTOM QUOTATION</a>
-                            </Button>
+                            <p className="text-foreground/70 mb-8 max-w-xs text-lg sm:text-xl leading-relaxed lowercase">Tell us your goal and we'll generate a personalized strategy for your market habitat.</p>
+                            <a
+                                href="/mowglai-proposal-epic.html"
+                                download
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full py-6 rounded-full border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 text-lg sm:text-xl font-display font-bold uppercase flex items-center justify-center"
+                            >
+                                Sample Quotation
+                            </a>
                         </div>
                     </div>
                 </div>

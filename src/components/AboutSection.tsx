@@ -113,7 +113,7 @@ const AboutSection = () => {
 
                     {/* Shortened Description - Centered and fitting */}
                     <div className="opacity-0 group-hover/card:opacity-100 transition-all duration-500 delay-100 mt-4 max-w-[90%]">
-                      <p className="text-sm text-foreground/70 font-body leading-relaxed">
+                      <p className="text-lg text-foreground/70 font-body leading-relaxed">
                         {feature.description}
                       </p>
                     </div>

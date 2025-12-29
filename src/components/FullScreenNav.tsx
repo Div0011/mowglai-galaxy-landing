@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Home, Users, Mail, DollarSign, Menu, X, Instagram, Facebook, Twitter, Linkedin, Layers } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Menu, X, Instagram, Facebook, Twitter, Linkedin, Layers, Bot, MessageSquareText } from "lucide-react";
+import ChatbotModal from "@/components/ChatbotModal";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -26,6 +27,7 @@ interface FullScreenNavProps {
 
 const FullScreenNav = ({ isDark, onToggleTheme }: FullScreenNavProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isChatOpen, setIsChatOpen] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -158,17 +160,27 @@ const FullScreenNav = ({ isDark, onToggleTheme }: FullScreenNavProps) => {
                             {[
                                 { icon: Instagram, href: "#", label: "Instagram" },
                                 { icon: Twitter, href: "#", label: "X (Twitter)" },
-                                { icon: Facebook, href: "#", label: "Facebook" },
-                                { icon: Linkedin, href: "#", label: "LinkedIn" }
-                            ].map((social, i) => (
+                                { icon: Linkedin, href: "#", label: "LinkedIn" }, // Replaced Facebook
+                                { icon: Bot, isChat: true, label: "AI Assistant" } // Replaced LinkedIn
+                            ].map((item, i) => (
                                 <Magnetic key={i} amount={0.5}>
-                                    <a
-                                        href={social.href}
-                                        className="relative group w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center transition-all duration-300 hover:border-primary hover:bg-primary/10"
-                                        aria-label={social.label}
-                                    >
-                                        <social.icon className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
-                                    </a>
+                                    {item.isChat ? (
+                                        <button
+                                            onClick={() => setIsChatOpen(true)}
+                                            className="relative group w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center transition-all duration-300 hover:border-primary hover:bg-primary/10"
+                                            aria-label={item.label}
+                                        >
+                                            <item.icon className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
+                                        </button>
+                                    ) : (
+                                        <a
+                                            href={item.href}
+                                            className="relative group w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center transition-all duration-300 hover:border-primary hover:bg-primary/10"
+                                            aria-label={item.label}
+                                        >
+                                            <item.icon className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
+                                        </a>
+                                    )}
                                 </Magnetic>
                             ))}
                         </div>
@@ -176,6 +188,8 @@ const FullScreenNav = ({ isDark, onToggleTheme }: FullScreenNavProps) => {
 
                 </div>
             </div>
+
+            <ChatbotModal isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         </>
     );
 };

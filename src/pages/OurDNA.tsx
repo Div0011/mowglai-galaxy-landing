@@ -151,7 +151,7 @@ const OurDNA = () => {
                                                 {step.details.map((detail, detailIndex) => (
                                                     <div key={detailIndex} className="flex items-center gap-2">
                                                         <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                                                        <span className="text-sm text-foreground">{detail}</span>
+                                                        <span className="text-lg text-foreground">{detail}</span>
                                                     </div>
                                                 ))}
                                             </div>
@@ -190,7 +190,7 @@ const OurDNA = () => {
                                     <h3 className="text-xl font-display font-bold text-primary mb-2 uppercase">
                                         {principle.title}
                                     </h3>
-                                    <p className="text-muted-foreground text-sm">
+                                    <p className="text-muted-foreground text-lg">
                                         {principle.description}
                                     </p>
                                 </div>

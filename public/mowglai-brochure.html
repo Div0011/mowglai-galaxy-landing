@@ -4,239 +4,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mowglai Digital Brochure</title>
+    <title>Mowglai Brochure 2025</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --primary: #1B3022;
-            /* Deep Forest Green */
-            --secondary: #F4F1EA;
-            /* Cream */
+            --primary: #050806;
+            --secondary: #0d1a12;
             --accent: #C5A059;
-            /* Copper/Gold */
-            --white: #ffffff;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
         }
 
-        body,
-        html {
+        body {
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            scroll-behavior: smooth;
             background-color: var(--primary);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
 
-        .page {
+        /* --- Typography --- */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* --- Global Elements --- */
+        .circle-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: #000;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .circle-logo img {
+            width: 70%;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        /* --- Sections --- */
+        .page-section {
             min-height: 100vh;
+            padding: 80px 20px;
+            box-sizing: border-box;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px 20px;
-            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* Page 1: Immersion (Hero) */
+        #page1 {
+            background:
+                radial-gradient(circle at 50% 50%, rgba(13, 26, 18, 0.8), #050806),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23C5A059' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #fff, #C5A059);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 40px 0;
             position: relative;
+            z-index: 2;
         }
 
-        /* Page 1: Home & About */
-        #home {
-            background-color: var(--primary);
-            color: var(--secondary);
-            text-align: center;
-        }
-
-        .logo-mark {
-            border: 2px solid var(--accent);
-            padding: 20px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 5px;
-            margin: 10px 0;
-            color: var(--accent);
-        }
-
-        .tagline {
+        .hero-sub {
             font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-dim);
             letter-spacing: 2px;
-            opacity: 0.8;
+            line-height: 1.6;
         }
 
-        .content-box {
-            max-width: 800px;
-            margin-top: 40px;
-            line-height: 1.8;
-            font-size: 1.1rem;
+        /* Page 2: Services / Capabilities */
+        #page2 {
+            background-color: #080c09;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
         }
 
-        /* Page 2: Services & Pricing */
-        #pricing {
-            background-color: var(--secondary);
-            color: var(--primary);
-        }
-
-        .services-grid {
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            width: 100%;
             max-width: 1000px;
-            margin-top: 30px;
+            width: 100%;
+            margin-top: 50px;
         }
 
-        .price-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            border-top: 5px solid var(--accent);
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 15px 0;
-            color: var(--primary);
-        }
-
-        /* Page 3: Why Us & Legal */
-        #why-us {
-            background-color: var(--primary);
-            color: var(--secondary);
-        }
-
-        .benefits {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .benefit-item {
-            width: 250px;
-            text-align: center;
-        }
-
-        .benefit-item h3 {
-            color: var(--accent);
-        }
-
-        footer {
-            margin-top: auto;
-            font-size: 0.8rem;
-            opacity: 0.6;
-            text-align: center;
-            border-top: 1px solid var(--accent);
-            padding-top: 20px;
-            width: 80%;
-        }
-
-        .cta-button {
-            background-color: var(--accent);
-            color: var(--primary);
-            padding: 15px 40px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            padding: 40px;
+            border-radius: 4px;
+            text-align: left;
             transition: transform 0.3s;
-            display: inline-block;
-            margin-top: 20px;
         }
 
-        .cta-button:hover {
-            transform: scale(1.05);
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Page 3: The Advantage & CTA */
+        #page3 {
+            background: linear-gradient(135deg, #050806 0%, #0d1a12 100%);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat h4 {
+            font-size: 3.5rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .stat p {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 5px 0 0 0;
         }
     </style>
 </head>
 
 <body>
 
-    <section id="home" class="page">
-        <div class="logo-mark">
-            <span style="font-size: 40px; font-weight: bold; color: var(--accent);">M</span>
-        </div>
-        <h1>MOWGLAI</h1>
-        <p class="tagline">CRAFTING DIGITAL EXCELLENCE SINCE 2025</p>
-
-        <div class="content-box">
-            <p>Based in the heart of <strong>Noida, India</strong>, Mowglai is a premier digital solutions agency. We
-                bridge the gap between complex engineering and elegant design for a global clientele spanning
-                <strong>London, Singapore, and India</strong>.</p>
-        </div>
-        <a href="#pricing" class="cta-button">VIEW OUR SOLUTIONS</a>
+    <!-- Page 1: Hero -->
+    <section id="page1" class="page-section">
+        <img src="logo1.png" alt="Mowglai Logo" width="120"
+            style="display: block; margin: 0 auto 20px auto; border-radius: 50%;">
+        <h1 class="hero-title">DOMINATE<br>THE WILD</h1>
+        <p class="hero-sub">
+            We engineer high-performance digital ecosystems. From Noida to London using the bleeding-edge tech of 2025.
+        </p>
+        <span style="margin-top: 50px; opacity: 0.5; font-size: 0.8rem; letter-spacing: 4px;">SCROLL TO EXPLORE</span>
     </section>
 
-    <section id="pricing" class="page">
-        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Plans & Services</h2>
-        <p>Expertly built for performance and scalability.</p>
+    <!-- Page 2: Capabilities -->
+    <section id="page2" class="page-section">
+        <h2 style="font-size: 3rem; color: var(--text-light);">Our Capabilities</h2>
+        <div style="width: 50px; height: 3px; background: var(--accent); margin: 20px auto;"></div>
 
-        <div class="services-grid">
-            <div class="price-card">
-                <h3>Basic</h3>
-                <p>Essential Presence</p>
-                <div class="price">$499</div>
-                <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>Single Page Design</li>
-                    <li>Mobile Responsive</li>
-                    <li>SEO Optimized</li>
-                </ul>
+        <div class="grid-cards">
+            <div class="card">
+                <h3>01. Web Craft</h3>
+                <p>Bespoke React & Next.js architectures. We don't use templates; we build performance engines tailored
+                    to your specific business DNA.</p>
             </div>
-
-            <div class="price-card" style="background-color: var(--primary); color: var(--secondary);">
-                <h3 style="color: var(--accent);">Professional</h3>
-                <p>Growth Ready</p>
-                <div class="price" style="color: var(--accent);">$999</div>
-                <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>Multi-page Website</li>
-                    <li>Custom UI Architecture</li>
-                    <li>CMS Integration</li>
-                </ul>
+            <div class="card">
+                <h3>02. Brand Identity</h3>
+                <p>Visual systems that command attention. Logos, typography, and color theories designed to make your
+                    brand unforgettable in a crowded market.</p>
             </div>
-
-            <div class="price-card">
-                <h3>Enterprise</h3>
-                <p>Full-Scale Global</p>
-                <div class="price">Custom</div>
-                <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>E-commerce Solutions</li>
-                    <li>Advanced Security</li>
-                    <li>24/7 Priority Support</li>
-                </ul>
+            <div class="card">
+                <h3>03. Growth SEO</h3>
+                <p>Data-driven visibility. We optimize every line of code to ensure search engines love your site as
+                    much as your users do.</p>
+            </div>
+            <div class="card">
+                <h3>04. Secure Scale</h3>
+                <p>Enterprise-grade security protocols and scalable database management (Supabase/PostgreSQL) to handle
+                    your growth.</p>
             </div>
         </div>
-        <a href="#why-us" class="cta-button"
-            style="background-color: var(--primary); color: var(--secondary); margin-top: 40px;">WHY CHOOSE US?</a>
     </section>
 
-    <section id="why-us" class="page">
-        <h2 style="color: var(--accent); font-size: 2.5rem;">The Mowglai Advantage</h2>
-
-        <div class="benefits">
-            <div class="benefit-item">
-                <h3>Global Vision</h3>
-                <p>Strategies tested in London and Singapore markets, brought to your business.</p>
+    <!-- Page 3: Impact -->
+    <section id="page3" class="page-section">
+        <div class="stat-row">
+            <div class="stat">
+                <h4>100+</h4>
+                <p>Projects Launched</p>
             </div>
-            <div class="benefit-item">
-                <h3>2025 Tech Stack</h3>
-                <p>We use the latest secure frameworks to ensure your site is future-proof.</p>
+            <div class="stat">
+                <h4>99%</h4>
+                <p>Client Retention</p>
             </div>
-            <div class="benefit-item">
-                <h3>Noida Hub</h3>
-                <p>Local support with international standards of delivery.</p>
+            <div class="stat">
+                <h4>24/7</h4>
+                <p>Support System</p>
             </div>
         </div>
 
-        <a href="https://mowglai.in" class="cta-button">EXPLORE MOWGLAI.IN</a>
-
-        <footer>
-            <p><strong>Privacy & Terms:</strong> All projects are protected by international NDA standards. We value
-                your data as much as your design. &copy; 2025 Mowglai Digital Solutions.</p>
-            <p>London | Singapore | Noida</p>
-        </footer>
+        <div
+            style="max-width: 700px; margin: 0 auto; background: rgba(13, 26, 18, 0.9); padding: 50px; border: 1px solid var(--accent);">
+            <h2 style="color: var(--accent); margin-bottom: 20px;">Ready to Evolve?</h2>
+            <p style="margin-bottom: 30px;">
+                Your digital presence is your most valuable asset. Don't settle for average. Partner with Mowglai and
+                build for the future.
+            </p>
+            <a href="https://mowglai.in/contact" class="btn">Start Your Project</a>
+            <br><br>
+            <div
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.7rem; color: var(--text-dim);">
+                &copy; 2025 Mowglai Digital Solutions. All Rights Reserved. <br>
+                London • Singapore • India
+            </div>
+        </div>
     </section>
 
 </body>

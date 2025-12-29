@@ -166,7 +166,7 @@ const ServicePanel = ({ service, index }: { service: any, index: number }) => {
                         className="flex-1 space-y-6"
                     >
                         <div className="space-y-2">
-                            <div className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-xs font-bold text-primary uppercase tracking-wider mb-2">
+                            <div className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-base font-bold text-primary uppercase tracking-wider mb-2">
                                 {service.category}
                             </div>
                             <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground leading-[1.1]">
@@ -180,7 +180,7 @@ const ServicePanel = ({ service, index }: { service: any, index: number }) => {
 
                         <div className="pt-6 border-t border-foreground/5 flex flex-wrap gap-3">
                             {service.details.map((tag: string, i: number) => (
-                                <span key={i} className="text-sm font-medium text-foreground/70 flex items-center gap-2">
+                                <span key={i} className="text-lg font-medium text-foreground/70 flex items-center gap-2">
                                     <div className={cn("w-1.5 h-1.5 rounded-full", service.text.replace('text-', 'bg-'))} />
                                     {tag}
                                 </span>

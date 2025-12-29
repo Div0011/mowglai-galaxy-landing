@@ -2,7 +2,6 @@ import { Check, Sparkles, ArrowRight, Download } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { generateQuotationPDF } from "@/utils/generateQuotation";
 
 const plans = [
   {
@@ -17,6 +16,7 @@ const plans = [
       "1 month support",
     ],
     popular: false,
+    proposalFile: "/mowglai-proposal-basic.html",
   },
   {
     name: "ADVANCED",
@@ -31,6 +31,7 @@ const plans = [
       "3 months support",
     ],
     popular: true,
+    proposalFile: "/mowglai-proposal-advanced.html",
   },
   {
     name: "EPIC",
@@ -45,6 +46,7 @@ const plans = [
       "Dedicated team",
     ],
     popular: false,
+    proposalFile: "/mowglai-proposal-epic.html",
   },
 ];
 
@@ -107,7 +109,7 @@ const PricingSection = () => {
 
               <ul className="space-y-4 mb-12 flex-grow">
                 {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-start gap-4 text-base text-foreground/80 leading-tight">
+                  <li key={j} className="flex items-start gap-4 text-xl text-foreground/80 leading-tight">
                     <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
@@ -128,18 +130,17 @@ const PricingSection = () => {
                   START {plan.price === "Custom" ? "DIALOGUE" : "ASCENT"}
                 </Button>
 
-                {plan.price !== "Custom" && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      generateQuotationPDF(plan);
-                    }}
-                    className="flex justify-center items-center gap-2 py-2 text-xs font-bold tracking-widest uppercase text-primary/60 hover:text-primary transition-colors"
-                  >
-                    <Download className="w-4 h-4" />
-                    Download Proposal
-                  </button>
-                )}
+                <a
+                  href={plan.proposalFile}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center gap-2 py-2 text-xs font-bold tracking-widest uppercase text-primary/60 hover:text-primary transition-colors cursor-pointer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Download className="w-4 h-4" />
+                  Download Proposal
+                </a>
               </div>
             </div>
           ))}

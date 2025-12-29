@@ -114,7 +114,7 @@ const MissionSection = () => {
                         <p className="text-3xl md:text-4xl font-light leading-tight text-foreground/90 italic border-l-2 border-primary/20 pl-8 transition-all hover:border-primary duration-500">
                             "Bringing world-class quality to clients worldwide. We create modest, stylish, and professional websites for any industry."
                         </p>
-                        <p className="text-xl text-muted-foreground leading-relaxed max-w-xl">
+                        <p className="text-2xl text-muted-foreground leading-relaxed max-w-xl">
                             We are built for flexibility. Operating <strong>Monday to Saturday</strong> across multiple time zones, we align perfectly with your schedule. Whether you are a startup or an enterprise, our global team delivers modern digital craftsmanship that speaks a universal language.
                         </p>
 
