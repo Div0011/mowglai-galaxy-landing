@@ -47,7 +47,7 @@ const plans = [
       "Dedicated team",
     ],
     popular: false,
-    proposalFile: "mowglai-quotation.html",
+    proposalFile: "mowglai-proposal-epic.html",
   },
 ];
 
