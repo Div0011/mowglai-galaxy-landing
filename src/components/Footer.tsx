@@ -9,43 +9,18 @@ const Footer = () => {
     {
       title: "EXPLORE",
       links: [
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> refactor/nav-and-content-updates
         { label: "START", href: "/" },
         { label: "CRAFT", href: "/services" },
         { label: "VALUE", href: "/investment" },
         { label: "BLUEPRINT", href: "/explore" },
-<<<<<<< HEAD
-=======
-=======
-        { label: "HOME", href: "/" },
-        { label: "EXPERTISE", href: "/services" },
-        { label: "INVESTMENT", href: "/investment" },
-        { label: "WORK", href: "/explore" },
->>>>>>> main
->>>>>>> refactor/nav-and-content-updates
       ],
     },
     {
       title: "AGENCY",
       links: [
-<<<<<<< HEAD
         { label: "STORY", href: "/about" },
         { label: "OUR DNA", href: "/our-dna" },
         { label: "HELLO", href: "/contact" },
-=======
-<<<<<<< HEAD
-        { label: "STORY", href: "/about" },
-        { label: "OUR DNA", href: "/our-dna" },
-        { label: "HELLO", href: "/contact" },
-=======
-        { label: "STUDIO", href: "/about" },
-        { label: "OUR DNA", href: "/our-dna" },
-        { label: "CONNECT", href: "/contact" },
->>>>>>> main
->>>>>>> refactor/nav-and-content-updates
       ],
     },
   ];
