@@ -13,12 +13,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { icon: Home, label: "BEGIN", href: "/" },
-    { icon: Users, label: "ORIGIN", href: "/about" },
-    { icon: Layers, label: "CRAFT", href: "/services" },
-    { icon: LayoutTemplate, label: "ARTIFACTS", href: "/explore" },
-    { icon: DollarSign, label: "ACQUIRE", href: "/investment" },
-    { icon: Mail, label: "DIALOGUE", href: "/contact" },
+    { icon: Home, label: "HOME", href: "/" },
+    { icon: Users, label: "STUDIO", href: "/about" },
+    { icon: Layers, label: "EXPERTISE", href: "/services" },
+    { icon: LayoutTemplate, label: "WORK", href: "/explore" },
+    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
+    { icon: Mail, label: "CONNECT", href: "/contact" },
 ];
 
 interface FullScreenNavProps {

@@ -7,20 +7,20 @@ const Footer = () => {
 
   const footerLinks = [
     {
-      title: "DISCOVER",
+      title: "EXPLORE",
       links: [
-        { label: "BEGIN", href: "/" },
-        { label: "CRAFT", href: "/services" },
-        { label: "ACQUIRE", href: "/investment" },
-        { label: "ARTIFACTS", href: "/explore" },
+        { label: "HOME", href: "/" },
+        { label: "EXPERTISE", href: "/services" },
+        { label: "INVESTMENT", href: "/investment" },
+        { label: "WORK", href: "/explore" },
       ],
     },
     {
       title: "AGENCY",
       links: [
-        { label: "ORIGIN", href: "/about" },
+        { label: "STUDIO", href: "/about" },
         { label: "OUR DNA", href: "/our-dna" },
-        { label: "DIALOGUE", href: "/contact" },
+        { label: "CONNECT", href: "/contact" },
       ],
     },
   ];

@@ -7,12 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 
 const navItems = [
-    { icon: Home, label: "Begin", href: "/" },
-    { icon: Users, label: "Origin", href: "/about" },
-    { icon: Layers, label: "Craft", href: "/services" },
-    { icon: LayoutTemplate, label: "Artifacts", href: "/explore" },
-    { icon: DollarSign, label: "Acquire", href: "/investment" },
-    { icon: Mail, label: "Dialogue", href: "/contact" },
+    { icon: Home, label: "Home", href: "/" },
+    { icon: Users, label: "Studio", href: "/about" },
+    { icon: Layers, label: "Expertise", href: "/services" },
+    { icon: LayoutTemplate, label: "Work", href: "/explore" },
+    { icon: DollarSign, label: "Investment", href: "/investment" },
+    { icon: Mail, label: "Connect", href: "/contact" },
 ];
 
 const socialItems = [
@@ -115,45 +115,49 @@ const MobileNav = () => {
                         </div>
 
                         {/* Navigation Links */}
-                        <div className="relative z-10 flex flex-col items-center gap-8 w-full px-6">
-                            {navItems.map((item, i) => {
-                                const isActive = activeItem === item.label;
-                                return (
-                                    <motion.a
-                                        key={item.label}
-                                        href={item.href}
-                                        onClick={(e) => handleClick(e, item.label, item.href)}
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 20 }}
-                                        transition={{ delay: 0.1 + (i * 0.05), duration: 0.5, ease: "easeOut" }}
-                                        className={cn(
-                                            "flex items-center gap-4 group w-full max-w-xs",
-                                            isActive ? "text-primary" : "text-foreground/60"
-                                        )}
-                                    >
-                                        <div className={cn(
-                                            "p-3 rounded-full transition-all duration-300",
-                                            isActive ? "bg-primary text-primary-foreground" : "bg-primary/5 text-primary/40 group-hover:bg-primary/10 group-hover:text-primary"
-                                        )}>
-                                            <item.icon className="w-6 h-6" />
-                                        </div>
-                                        <span className={cn(
-                                            "text-3xl font-display font-bold uppercase transition-all duration-300 leading-relaxed py-1",
-                                            isActive ? "translate-x-2" : "group-hover:translate-x-2 group-hover:text-primary"
-                                        )}>
-                                            {item.label}
-                                        </span>
-                                    </motion.a>
-                                );
-                            })}
-                            {/* Social Links - Aligned with Nav Items */}
+                        <div className="relative z-10 flex flex-col items-center w-full px-6">
+                            {/* Navigation Links - Centered Block with Left Aligned Items */}
+                            <div className="flex flex-col items-start gap-8 w-fit mx-auto">
+                                {navItems.map((item, i) => {
+                                    const isActive = activeItem === item.label;
+                                    return (
+                                        <motion.a
+                                            key={item.label}
+                                            href={item.href}
+                                            onClick={(e) => handleClick(e, item.label, item.href)}
+                                            initial={{ opacity: 0, y: 30 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 20 }}
+                                            transition={{ delay: 0.1 + (i * 0.05), duration: 0.5, ease: "easeOut" }}
+                                            className={cn(
+                                                "flex items-center gap-4 group",
+                                                isActive ? "text-primary" : "text-foreground/60"
+                                            )}
+                                        >
+                                            <div className={cn(
+                                                "p-3 rounded-full transition-all duration-300",
+                                                isActive ? "bg-primary text-primary-foreground" : "bg-primary/5 text-primary/40 group-hover:bg-primary/10 group-hover:text-primary"
+                                            )}>
+                                                <item.icon className="w-6 h-6" />
+                                            </div>
+                                            <span className={cn(
+                                                "text-3xl font-display font-bold uppercase transition-all duration-300 leading-relaxed py-1",
+                                                isActive ? "translate-x-2" : "group-hover:translate-x-2 group-hover:text-primary"
+                                            )}>
+                                                {item.label}
+                                            </span>
+                                        </motion.a>
+                                    );
+                                })}
+                            </div>
+
+                            {/* Social Links - Separated & Centered */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 20 }}
                                 transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                                className="flex items-center justify-center gap-6 w-full max-w-xs"
+                                className="flex items-center justify-center gap-6 w-full max-w-xs mt-12"
                             >
                                 {socialItems.map((item, i) => (
                                     <a

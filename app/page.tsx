@@ -100,7 +100,7 @@ export default function Home() {
 
                 {/* Full Width Button */}
                 <div className="w-full" data-aos="fade-up" data-aos-delay="200">
-                    <NextPageButton label="DISCOVER ARTIFACTS" href="/explore" />
+                    <NextPageButton label="VIEW SELECTED WORK" href="/explore" />
                 </div>
             </section>
 
@@ -124,7 +124,7 @@ export default function Home() {
 
             <div className="w-full">
                 <NextPageButton
-                    label="MOWGLAI ORIGIN"
+                    label="THE STUDIO STORY"
                     href="/about"
                     tagline="Still not sure? Know more"
                 />

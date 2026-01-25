@@ -76,7 +76,7 @@ export default function About() {
             <MissionSection />
             {/* <TeamSection /> */}
             <TestimonialsSection />
-            <NextPageButton label="MOWGLAI CRAFT" href="/services" />
+            <NextPageButton label="OUR EXPERTISE" href="/services" />
         </PageLayout>
     );
 }
