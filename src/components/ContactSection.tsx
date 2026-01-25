@@ -11,6 +11,10 @@ import { sendEmail } from "@/utils/emailSender";
 
 
 const CONTACT_EMAIL = "info@mowglai.in"; // REPLACE THIS WITH YOUR PERSONAL EMAIL FOR TESTING
+const COUNTRY_CODE = "91";
+const LOCAL_PHONE_NUMBER = "9528545302";
+const FULL_PHONE_NUMBER = `${COUNTRY_CODE}${LOCAL_PHONE_NUMBER}`;
+
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -63,7 +67,7 @@ ${formData.message}
         <div className="mb-24 relative">
           <h2 className="text-[13vw] sm:text-[12vw] md:text-[10vw] font-display font-black text-foreground select-none relative z-10 py-4 leading-[0.85]">
             <TextReveal text="GET IN" />
-            <span className="text-primary ml-0 md:ml-[38vw] block -mt-[1vw] md:-mt-[2vw]"><TextReveal text="TOUCH" delay={2} /></span>
+            <span className="text-primary ml-0 -mr-12 md:ml-[38vw] block -mt-[1vw] md:-mt-[2vw]"><TextReveal text="TOUCH" delay={2} /></span>
           </h2>
         </div>
 
@@ -83,11 +87,19 @@ ${formData.message}
               <div className="group flex flex-col gap-2">
                 <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">Phone & WhatsApp</p>
                 <div className="flex flex-wrap gap-4 items-center">
-                  <a href="tel:+919528545302" className="flex items-center gap-2 text-xl sm:text-2xl font-display font-bold text-foreground hover:text-primary transition-colors">
+                  <a
+                    href={`tel:+${FULL_PHONE_NUMBER}`}
+                    className="flex items-center gap-2 text-xl sm:text-2xl font-display font-bold text-foreground hover:text-primary transition-colors"
+                  >
                     <Phone className="w-5 h-5 md:w-6 md:h-6" />
-                    <span>+91 9528545302</span>
+                    <span>{`+${COUNTRY_CODE} ${LOCAL_PHONE_NUMBER}`}</span>
                   </a>
-                  <a href="https://wa.me/919528545302" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all">
+                  <a
+                    href={`https://wa.me/${FULL_PHONE_NUMBER}?text=${encodeURIComponent("Hi, I’m interested in Mowglai’s web & digital experience services. I’d like a quote and next steps.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all"
+                  >
                     <MessageCircle className="w-5 h-5" />
                     <span className="text-sm font-bold">WhatsApp</span>
                   </a>
