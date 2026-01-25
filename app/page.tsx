@@ -126,7 +126,15 @@ export default function Home() {
 
                 {/* Full Width Button */}
                 <div className="w-full" data-aos="fade-up" data-aos-delay="200">
+<<<<<<< HEAD
                     <NextPageButton label="VIEW TEMPLATES" href="/explore" />
+=======
+<<<<<<< HEAD
+                    <NextPageButton label="VIEW TEMPLATES" href="/explore" />
+=======
+                    <NextPageButton label="VIEW SELECTED WORK" href="/explore" />
+>>>>>>> main
+>>>>>>> refactor/nav-and-content-updates
                 </div>
             </section>
 

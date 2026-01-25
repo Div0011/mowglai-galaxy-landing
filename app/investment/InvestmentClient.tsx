@@ -112,7 +112,15 @@ export default function InvestmentClient() {
                 </div>
             </section>
 
+<<<<<<< HEAD
             <NextPageButton label="SAY HELLO" href="/contact" />
+=======
+<<<<<<< HEAD
+            <NextPageButton label="SAY HELLO" href="/contact" />
+=======
+            <NextPageButton label="START A DIALOGUE" href="/contact" />
+>>>>>>> main
+>>>>>>> refactor/nav-and-content-updates
         </PageLayout>
     );
 }
