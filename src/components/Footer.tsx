@@ -9,18 +9,18 @@ const Footer = () => {
     {
       title: "EXPLORE",
       links: [
-        { label: "HOME", href: "/" },
-        { label: "EXPERTISE", href: "/services" },
-        { label: "INVESTMENT", href: "/investment" },
-        { label: "WORK", href: "/explore" },
+        { label: "START", href: "/" },
+        { label: "CRAFT", href: "/services" },
+        { label: "VALUE", href: "/investment" },
+        { label: "BLUEPRINT", href: "/explore" },
       ],
     },
     {
       title: "AGENCY",
       links: [
-        { label: "STUDIO", href: "/about" },
+        { label: "STORY", href: "/about" },
         { label: "OUR DNA", href: "/our-dna" },
-        { label: "CONNECT", href: "/contact" },
+        { label: "HELLO", href: "/contact" },
       ],
     },
   ];

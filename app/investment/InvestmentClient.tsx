@@ -112,7 +112,7 @@ export default function InvestmentClient() {
                 </div>
             </section>
 
-            <NextPageButton label="START A DIALOGUE" href="/contact" />
+            <NextPageButton label="SAY HELLO" href="/contact" />
         </PageLayout>
     );
 }

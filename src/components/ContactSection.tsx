@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Send, Mail, MapPin, Phone } from "lucide-react";
+import { Send, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import TextReveal from "./TextReveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,6 +78,20 @@ ${formData.message}
               <div className="group cursor-pointer">
                 <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">Email</p>
                 <p className="text-2xl sm:text-3xl font-display font-bold text-foreground group-hover:text-primary transition-colors">{CONTACT_EMAIL}</p>
+              </div>
+
+              <div className="group flex flex-col gap-2">
+                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">Phone & WhatsApp</p>
+                <div className="flex flex-wrap gap-4 items-center">
+                  <a href="tel:+919528545302" className="flex items-center gap-2 text-xl sm:text-2xl font-display font-bold text-foreground hover:text-primary transition-colors">
+                    <Phone className="w-5 h-5 md:w-6 md:h-6" />
+                    <span>+91 9528545302</span>
+                  </a>
+                  <a href="https://wa.me/919528545302" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all">
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="text-sm font-bold">WhatsApp</span>
+                  </a>
+                </div>
               </div>
 
               <div className="group cursor-pointer">

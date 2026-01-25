@@ -76,7 +76,7 @@ export default function About() {
             <MissionSection />
             {/* <TeamSection /> */}
             <TestimonialsSection />
-            <NextPageButton label="OUR EXPERTISE" href="/services" />
+            <NextPageButton label="THE CRAFT" href="/services" />
         </PageLayout>
     );
 }

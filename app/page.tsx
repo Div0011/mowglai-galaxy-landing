@@ -5,6 +5,7 @@ import { AestheticShowcase } from "@/components/AestheticShowcase";
 import SelectedWork from "@/components/SelectedWork";
 import Magnetic from "@/components/Magnetic";
 import Link from "next/link";
+import { ArrowRight, Fingerprint } from "lucide-react";
 
 export const metadata = {
     title: "Premium Digital Agency - Web Development & Design",
@@ -67,9 +68,34 @@ export default function Home() {
                             <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-8 leading-tight">
                                 WE CREATE <span className="opacity-10">THE</span> <span className="text-primary italic">EXTRAORDINARY</span>
                             </h2>
-                            <p className="text-xl text-muted-foreground font-body leading-relaxed mb-12">
+                            <p className="text-lg text-muted-foreground mb-8 leading-relaxed md:text-xl">
                                 In a digital landscape crowded with the mundane, Mowglai Wild stands as a beacon of growth. We don't just build websites; we architect digital ecosystems that breathe life into your brand's vision.
                             </p>
+
+                            <div className="mb-12 w-full">
+                                <Magnetic>
+                                    <Link
+                                        href="/our-dna"
+                                        className="group relative w-full flex items-center justify-center sm:justify-between px-8 py-5 bg-background/5 border border-primary/20 hover:bg-primary/10 hover:border-primary text-primary transition-all duration-500 rounded-full backdrop-blur-sm overflow-hidden"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                                                <Fingerprint className="w-6 h-6" />
+                                            </div>
+                                            <span className="text-lg font-display font-bold uppercase tracking-widest text-foreground group-hover:text-primary transition-colors duration-300">
+                                                Explore Our DNA
+                                            </span>
+                                        </div>
+
+                                        <div className="hidden sm:block relative w-8 h-8 flex items-center justify-center">
+                                            <span className="absolute transition-all duration-300 group-hover:opacity-0 group-hover:translate-x-4 font-light text-2xl text-primary leading-none pb-1">
+                                                -
+                                            </span>
+                                            <ArrowRight className="absolute w-6 h-6 text-primary transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0" />
+                                        </div>
+                                    </Link>
+                                </Magnetic>
+                            </div>
 
 
                         </div>
@@ -100,7 +126,7 @@ export default function Home() {
 
                 {/* Full Width Button */}
                 <div className="w-full" data-aos="fade-up" data-aos-delay="200">
-                    <NextPageButton label="VIEW SELECTED WORK" href="/explore" />
+                    <NextPageButton label="VIEW TEMPLATES" href="/explore" />
                 </div>
             </section>
 

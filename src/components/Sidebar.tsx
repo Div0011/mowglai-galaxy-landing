@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import { Home, Users, Mail, DollarSign, MessageSquare, ChevronRight, Sun, Moon } from "lucide-react";
-
+import { Home, Users, Mail, DollarSign, ChevronRight, Sun, Moon, Palette, LayoutGrid } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 interface NavItem {
     icon: React.ElementType;
@@ -15,11 +11,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { icon: Home, label: "Home", href: "#home" },
-    { icon: Users, label: "About Us", href: "#about" },
-    { icon: DollarSign, label: "Pricing", href: "#pricing" },
-    { icon: MessageSquare, label: "Testimonials", href: "#testimonials" },
-    { icon: Mail, label: "Contact", href: "#contact" },
+    { icon: Home, label: "Home", href: "/" },
+    { icon: Users, label: "Story", href: "/about" },
+    { icon: Palette, label: "Craft", href: "/services" },
+    { icon: LayoutGrid, label: "Blueprint", href: "/explore" },
+    { icon: DollarSign, label: "Value", href: "/investment" },
+    { icon: Mail, label: "Hello", href: "/contact" },
 ];
 
 interface SidebarProps {
@@ -28,7 +25,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
-    const [activeItem, setActiveItem] = useState("Home");
+    const pathname = usePathname();
     const [isExpanded, setIsExpanded] = useState(false);
     const [trailPosition, setTrailPosition] = useState(0);
 
@@ -39,105 +36,11 @@ const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
         return () => clearInterval(interval);
     }, []);
 
-    // Scroll spy to update active item
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            const viewportHeight = window.innerHeight;
-
-            // 1. Check pinned wrapper navigation first
-            const mpWrapper = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "mission-pricing-wrapper");
-            if (mpWrapper) {
-                const start = mpWrapper.start;
-                const end = mpWrapper.end;
-
-                if (scrollY >= start && scrollY <= end) {
-                    const progress = (scrollY - start) / (end - start);
-                    if (progress < 0.5) {
-                        setActiveItem("Pricing");
-                    } else {
-                        setActiveItem("Testimonials");
-                    }
-                    return; // Exit if matched pinned section
-                }
-            }
-
-            // 2. Standard sections fallback
-            const standardSections = [
-                { id: 'home', label: 'Home' },
-                { id: 'contact', label: 'Contact' }
-            ];
-
-            // Explicit check for Hero/About if not in main pin
-            const heroAboutWrapper = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "hero-about-wrapper");
-            if (heroAboutWrapper) {
-                if (scrollY >= heroAboutWrapper.start && scrollY <= heroAboutWrapper.end) {
-                    // Inside Hero/About pin
-                    const progress = (scrollY - heroAboutWrapper.start) / (heroAboutWrapper.end - heroAboutWrapper.start);
-                    if (progress > 0.5) setActiveItem("About Us");
-                    else setActiveItem("Home");
-                    return;
-                }
-            }
-
-            // Fallback for contact or if outside pins
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                const rect = contactSection.getBoundingClientRect();
-                if (rect.top < viewportHeight * 0.5) {
-                    setActiveItem("Contact");
-                    return;
-                }
-            }
-
-            // Default to Home if at top
-            if (scrollY < 100) setActiveItem("Home");
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        handleScroll();
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const handleClick = (e: React.MouseEvent, label: string, href: string) => {
-        e.preventDefault();
-        setActiveItem(label);
-
-        if (href === "#home") {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        } else if (href === "#about") {
-            const st = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "hero-about-wrapper");
-            if (st) {
-                // About is at end of the hero-about pin
-                gsap.to(window, { duration: 1, scrollTo: st.end });
-            } else {
-                gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
-            }
-        } else if (href === "#pricing") {
-            const st = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "mission-pricing-wrapper");
-            if (st) {
-                // Scroll to start of the pinned section for Pricing
-                gsap.to(window, { duration: 1, scrollTo: st.start });
-            } else {
-                gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
-            }
-        } else if (href === "#testimonials") {
-            const st = ScrollTrigger.getAll().find(st => (st.trigger as HTMLElement)?.id === "mission-pricing-wrapper");
-            if (st) {
-                // Scroll to middle-end of pin for Testimonials
-                const testimonialPoint = st.start + (st.end - st.start) * 0.6;
-                gsap.to(window, { duration: 1, scrollTo: testimonialPoint });
-            } else {
-                gsap.to(window, { duration: 1, scrollTo: { y: href, offsetY: 0, autoKill: false } });
-            }
-        } else {
-            // Contact etc
-            const target = document.querySelector(href);
-            if (target) {
-                gsap.to(window, { duration: 1, scrollTo: target });
-            }
-        }
+    // Check if the link is active (exact match for home, partial for others if needed, but these are top level)
+    const isActive = (href: string) => {
+        if (href === "/" && pathname === "/") return true;
+        if (href !== "/" && pathname.startsWith(href)) return true;
+        return false;
     };
 
     return (
@@ -170,8 +73,6 @@ const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
                 }}
             />
 
-
-
             {/* Toggle button */}
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
@@ -194,24 +95,23 @@ const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
             <nav className="flex-1 flex flex-col gap-2 w-full px-3 relative z-20">
                 {navItems.map((item) => {
                     const Icon = item.icon;
-                    const isActive = activeItem === item.label;
+                    const active = isActive(item.href);
 
                     return (
-                        <a
+                        <Link
                             key={item.label}
                             href={item.href}
-                            onClick={(e) => handleClick(e, item.label, item.href)}
                             className={cn(
                                 "relative overflow-hidden flex items-center transition-all duration-300 group",
                                 isExpanded ? "w-full h-12 rounded-xl justify-start px-4 gap-3" : "w-12 h-12 rounded-full justify-center",
-                                isActive && "active"
+                                active && "active"
                             )}
                             style={{
-                                background: isActive
+                                background: active
                                     ? `linear-gradient(to right, hsl(270 80% 60% / 0.5) 0%, hsl(270 80% 60% / 0.3) 20%, hsl(270 80% 60% / 0.1) 40%, ${isDark ? 'hsl(0 0% 0%)' : 'hsl(0 0% 100%)'} 70%, ${isDark ? 'hsl(0 0% 0%)' : 'hsl(0 0% 100%)'} 100%)`
                                     : `linear-gradient(to right, hsl(270 80% 60% / 0.25) 0%, hsl(270 80% 60% / 0.1) 25%, ${isDark ? 'hsl(0 0% 0%)' : 'hsl(0 0% 100%)'} 60%, ${isDark ? 'hsl(0 0% 0%)' : 'hsl(0 0% 100%)'} 100%)`,
                                 border: '1px solid transparent',
-                                boxShadow: isActive
+                                boxShadow: active
                                     ? 'inset -4px 0 12px hsl(270 80% 60% / 0.4), 0 0 15px hsl(270 80% 60% / 0.2), 0 0 0 1px rgba(0, 0, 0, 0.5)'
                                     : 'inset -3px 0 8px hsl(270 80% 60% / 0.15), 0 0 0 1px rgba(0, 0, 0, 0.3)',
                             }}
@@ -219,7 +119,7 @@ const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
                             <Icon
                                 className={cn(
                                     "w-5 h-5 transition-all duration-300 flex-shrink-0 relative z-10",
-                                    isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                                    active ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
                                 )}
                             />
 
@@ -227,7 +127,7 @@ const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
                             <span
                                 className={cn(
                                     "font-medium text-sm transition-all duration-300 whitespace-nowrap overflow-hidden relative z-10",
-                                    isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
+                                    active ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
                                     isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0"
                                 )}
                             >
@@ -249,7 +149,7 @@ const Sidebar = ({ isDark, onToggleTheme }: SidebarProps) => {
                                     {item.label}
                                 </span>
                             )}
-                        </a>
+                        </Link>
                     );
                 })}
             </nav>

@@ -139,13 +139,13 @@ export default function OurDNA() {
 
                         <div className="mt-12 flex flex-wrap justify-center gap-4">
                             <div className="glassmorphism px-6 py-3 rounded-full border border-primary/20">
-                                <p className="font-display text-primary font-bold">100+ Projects Delivered</p>
+                                <p className="font-display text-primary font-bold">Immersive Design</p>
                             </div>
                             <div className="glassmorphism px-6 py-3 rounded-full border border-primary/20">
-                                <p className="font-display text-primary font-bold">15+ Countries Served</p>
+                                <p className="font-display text-primary font-bold">Technical Precision</p>
                             </div>
                             <div className="glassmorphism px-6 py-3 rounded-full border border-primary/20">
-                                <p className="font-display text-primary font-bold">98% Client Satisfaction</p>
+                                <p className="font-display text-primary font-bold">Strategic Growth</p>
                             </div>
                         </div>
                     </div>
@@ -239,7 +239,7 @@ export default function OurDNA() {
                     </div>
                 </div>
             </section>
-            <NextPageButton label="Investment Plans" href="/investment" />
+            <NextPageButton label="OUR EXPERTISE" href="/services" />
         </PageLayout>
     );
 }
