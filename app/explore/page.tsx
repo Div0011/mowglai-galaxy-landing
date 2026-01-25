@@ -83,7 +83,7 @@ export default function ExplorePage() {
 
     // --- Filtering Logic ---
     const filteredTemplates = useMemo(() => {
-        let result = allTemplatesFlat.filter(template => {
+        const result = allTemplatesFlat.filter(template => {
             if (selectedSector !== 'all') {
                 const sectorKey = Object.keys(allTemplates).find(key => allTemplates[key].some(t => t.id === template.id))
                 if (sectorKey !== selectedSector) return false

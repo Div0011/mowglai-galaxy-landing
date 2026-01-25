@@ -28,7 +28,7 @@ export const SnowParticles = ({ parentRef, targetSelector, freezeOnCollision = t
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let particles: Particle[] = [];
+        const particles: Particle[] = [];
         let animationFrameId: number;
         let targets: DOMRect[] = [];
 

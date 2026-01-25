@@ -84,7 +84,7 @@ export const generateQuotationPDF = async (plan: Plan) => {
     const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
     const refStr = `MW-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
 
-    const rows = breakdown.slice(0, -1).map((item: any) => `
+    const rows = (breakdown.slice(0, -1) as { service: string; allocation: string; price: string }[]).map((item) => `
     <tr>
         <td>${item.service}</td>
         <td>${item.allocation}</td>
@@ -228,7 +228,7 @@ export const generateQuotationPDF = async (plan: Plan) => {
                 ${rows}
                 <tr class="total-row">
                     <td colspan="2">TOTAL INVESTMENT</td>
-                    <td style="color: #1B3022;">${(totalRow as any).total}</td>
+                    <td style="color: #1B3022;">${(totalRow as { total: string }).total}</td>
                 </tr>
             </table>
         </div>

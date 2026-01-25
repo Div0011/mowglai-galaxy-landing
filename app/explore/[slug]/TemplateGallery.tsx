@@ -8,6 +8,7 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
+    type CarouselApi,
 } from "@/components/ui/carousel";
 
 interface TemplateGalleryProps {
@@ -16,7 +17,7 @@ interface TemplateGalleryProps {
 }
 
 export default function TemplateGallery({ images, title }: TemplateGalleryProps) {
-    const [api, setApi] = useState<any>()
+    const [api, setApi] = useState<CarouselApi>()
     const [current, setCurrent] = useState(0)
     const [count, setCount] = useState(0)
 

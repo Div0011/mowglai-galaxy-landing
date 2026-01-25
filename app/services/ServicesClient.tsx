@@ -118,7 +118,20 @@ export default function ServicesClient() {
     );
 }
 
-const ServicePanel = ({ service, index }: { service: any, index: number }) => {
+interface Service {
+    id: string;
+    category: string;
+    title: string;
+    description: string;
+    details: string[];
+    icon: React.ElementType; // Changed from any to React.ElementType
+    color: string;
+    border: string;
+    text: string;
+    glow: string;
+}
+
+const ServicePanel = ({ service, index }: { service: Service, index: number }) => {
     const isEven = index % 2 === 0;
 
     return (

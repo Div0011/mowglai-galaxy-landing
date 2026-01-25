@@ -1,4 +1,5 @@
 import { Stethoscope, Flower, GraduationCap, Dumbbell, Component } from 'lucide-react'
+import React from 'react'
 
 export type Template = {
     id: string
@@ -18,7 +19,7 @@ export type Template = {
 export type Sector = {
     id: string
     label: string
-    icon: any
+    icon: React.ElementType
     description: string
     color: string
 }

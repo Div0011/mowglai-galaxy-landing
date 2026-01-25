@@ -32,7 +32,7 @@ export default function NotFound() {
                             left: `${Math.random() * 100}%`,
                             animationDelay: `${Math.random() * 5}s`,
                             opacity: Math.random() * 0.5 + 0.2
-                        } as any}
+                        } as React.CSSProperties}
                     />
                 ))}
             </div>

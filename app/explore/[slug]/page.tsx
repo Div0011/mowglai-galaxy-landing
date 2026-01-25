@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Check, ArrowRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
-import { getTemplateById, allTemplates } from "@/data/templates";
+import { getTemplateById, allTemplates, type Template } from "@/data/templates";
 import TemplateActions from "./TemplateActions";
 import TemplateGallery from "./TemplateGallery";
 import PremiumTemplateCard from "@/components/PremiumTemplateCard";
@@ -32,7 +32,7 @@ export default async function TemplateDetailsPage({
     }
 
     // Find related templates (same sector, excluding current)
-    let relatedTemplates: any[] = []
+    let relatedTemplates: Template[] = []
     for (const sector in allTemplates) {
         if (allTemplates[sector].some(t => t.id === template.id)) {
             relatedTemplates = allTemplates[sector]
