@@ -26,6 +26,7 @@ dist-ssr
 # Next.js
 .next/
 out/
+dist/
 build/
 *.tsbuildinfo
 next-env.d.ts
