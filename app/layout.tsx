@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         template: "%s | Mowglai"
     },
     description: "Mowglai is a premium digital agency specializing in high-performance web development, 3D experiences, and digital transformation.",
-    keywords: ["web development", "web design", "digital agency", "3D websites", "React developer", "Next.js", "SEO services", "Mowglai"],
+    keywords: ["web development", "web design", "digital agency", "3D websites", "React developer", "Next.js", "SEO services", "premium website templates", "creative agency", "Mowglai"],
     authors: [{ name: "Mowglai" }],
     creator: "Mowglai",
     publisher: "Mowglai",

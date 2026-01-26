@@ -19,6 +19,37 @@ export function generateStaticParams() {
     return params;
 }
 
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const template = getTemplateById(slug);
+
+    if (!template) {
+        return {
+            title: "Template Not Found | Mowglai",
+            description: "The requested website template could not be found.",
+        };
+    }
+
+    return {
+        title: `${template.title} - ${template.type} Website Template | Mowglai`,
+        description: template.description,
+        openGraph: {
+            title: `${template.title} - Premium ${template.type} Template | Mowglai`,
+            description: template.description,
+            images: [
+                {
+                    url: template.image,
+                    width: 1200,
+                    height: 630,
+                    alt: template.title,
+                },
+            ],
+            type: "website",
+        },
+    };
+}
+
 export default async function TemplateDetailsPage({
     params,
 }: {
@@ -30,6 +61,25 @@ export default async function TemplateDetailsPage({
     if (!template) {
         notFound();
     }
+
+    const jsonLd = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": template.title,
+        "image": [template.image],
+        "description": template.description,
+        "brand": {
+            "@type": "Brand",
+            "name": "Mowglai"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": `https://mowglai.in/explore/${template.id}`,
+            "priceCurrency": "USD", // Assuming USD for now based on standard
+            "price": template.price === "Free" ? "0" : template.price.replace(/[^0-9.]/g, ''),
+            "availability": "https://schema.org/InStock"
+        }
+    };
 
     // Find related templates (same sector, excluding current)
     let relatedTemplates: Template[] = []
@@ -44,6 +94,10 @@ export default async function TemplateDetailsPage({
 
     return (
         <PageLayout>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="min-h-screen bg-background relative overflow-x-hidden">
                 {/* Visual Background layer */}
                 <div className="fixed top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none -z-20" />

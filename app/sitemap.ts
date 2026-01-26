@@ -1,9 +1,21 @@
+
 import { MetadataRoute } from 'next'
+import { allTemplates } from '@/data/templates'
 
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://mowglai.in'
+
+    const templateRoutes: MetadataRoute.Sitemap = []
+    Object.values(allTemplates).flat().forEach(template => {
+        templateRoutes.push({
+            url: `${baseUrl}/explore/${template.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        })
+    })
 
     return [
         {
@@ -11,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 1,
+        },
+        {
+            url: `${baseUrl}/explore`,
+            lastModified: new Date(),
+            changeFrequency: 'daily',
+            priority: 0.9,
         },
         {
             url: `${baseUrl}/about`,
@@ -54,5 +72,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.8,
         },
+        ...templateRoutes
     ]
 }
