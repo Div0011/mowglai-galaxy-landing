@@ -7,11 +7,14 @@ import TextReveal from "./TextReveal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const MissionSection = () => {
     const textRef = useRef<HTMLDivElement>(null);
     const missionRef = useRef<HTMLDivElement>(null);
+    const { t } = useLanguage();
 
     useEffect(() => {
         const text = textRef.current;
@@ -57,8 +60,8 @@ const MissionSection = () => {
                 {/* 1. Huge Heading - Balanced Styling */}
                 <div ref={textRef} className="mb-16 relative" data-aos="fade-up">
                     <h2 className="text-5xl sm:text-8xl md:text-[15vw] font-display font-black tracking-tighter text-foreground flex flex-col items-center">
-                        <span className="leading-[0.8] opacity-10">GLOBAL</span>
-                        <span className="text-primary leading-[0.8] -mt-2 md:-mt-0">VISION</span>
+                        <span className="leading-[0.8] opacity-10">{t.About.mission.global}</span>
+                        <span className="text-primary leading-[0.8] -mt-2 md:-mt-0">{t.About.mission.vision}</span>
                     </h2>
 
                     {/* Decorative Background Text */}
@@ -71,9 +74,9 @@ const MissionSection = () => {
                 <div ref={missionRef} className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start relative z-10">
                     <div className="space-y-10" data-aos="fade-right">
                         <div>
-                            <p className="text-primary font-display tracking-[0.4em] uppercase text-sm mb-4">International Standard</p>
+                            <p className="text-primary font-display tracking-[0.4em] uppercase text-sm mb-4">{t.About.mission.internationalStandard}</p>
                             <h3 className="text-5xl md:text-7xl font-display font-bold text-foreground leading-tight">
-                                <TextReveal text="BUILT FOR" /> <span className="text-primary/50"><TextReveal text="THE WORLD" delay={2} /></span>
+                                <TextReveal text={t.About.mission.builtFor} /> <span className="text-primary/50"><TextReveal text={t.About.mission.theWorld} delay={2} /></span>
                             </h3>
                         </div>
                         <div className="h-0.5 w-32 bg-primary" />
@@ -103,10 +106,10 @@ const MissionSection = () => {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="font-display font-bold text-primary tracking-[0.2em] uppercase text-sm group-hover:text-foreground transition-colors">
-                                        Discover
+                                        {t.About.mission.discover}
                                     </span>
                                     <span className="text-[10px] text-muted-foreground tracking-widest uppercase group-hover:text-primary transition-colors">
-                                        Our DNA
+                                        {t.About.mission.ourDna}
                                     </span>
                                 </div>
                             </Link>
@@ -115,10 +118,10 @@ const MissionSection = () => {
 
                     <div className="space-y-12" data-aos="fade-left" data-aos-delay="200">
                         <p className="text-3xl md:text-4xl font-light leading-tight text-foreground/90 italic border-l-2 border-primary/20 pl-8 transition-all hover:border-primary duration-500">
-                            "Bringing world-class quality to clients worldwide. We create modest, stylish, and professional websites for any industry."
+                            {t.About.mission.quote}
                         </p>
                         <p className="text-2xl text-muted-foreground leading-relaxed max-w-xl">
-                            We are built for flexibility. Operating <strong>Monday to Saturday</strong> across multiple time zones, we align perfectly with your schedule. Whether you are a startup or an enterprise, our global team delivers modern digital craftsmanship that speaks a universal language.
+                            {t.About.mission.description}
                         </p>
 
                         {/* Interactive Stats Button */}

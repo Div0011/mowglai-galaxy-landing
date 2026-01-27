@@ -8,13 +8,12 @@ import TextReveal from "@/components/TextReveal";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const services = [
+import { useLanguage } from "@/context/LanguageContext";
+
+const servicesConfig = [
     {
         id: "01",
-        category: "Web Design",
-        title: "Aesthetic Excellence",
-        description: "Your website is the digital face of your brand. We craft visually stunning, responsive interfaces that merge artistic expression with functional precision.",
-        details: ["UI/UX Design", "Motion Graphics", "Brand Identity", "Responsive Layouts", "Mobile First"],
+        key: "webDesign",
         icon: Palette,
         color: "from-amber-500/5 to-orange-500/5",
         border: "border-amber-500/20",
@@ -23,10 +22,7 @@ const services = [
     },
     {
         id: "02",
-        category: "Development",
-        title: "Robust Engineering",
-        description: "Beneath the beauty lies a beast. Our development team builds scalable, secure, and lightning-fast architectures that drive your business forward.",
-        details: ["Full-Stack Dev", "E-Commerce", "CMS Solutions", "API Integration"],
+        key: "development",
         icon: Rocket,
         color: "from-blue-500/5 to-cyan-500/5",
         border: "border-blue-500/20",
@@ -35,10 +31,7 @@ const services = [
     },
     {
         id: "03",
-        category: "Redesign",
-        title: "Digital Evolution",
-        description: "Outdated shouldn't mean obsolete. We breathe new life into legacy platforms. Enhance usability, improve speed, and secure your digital future.",
-        details: ["Visual Overhaul", "Performance Optimization", "Security Patching", "UX Strategy"],
+        key: "redesign",
         icon: Shield,
         color: "from-purple-500/5 to-pink-500/5",
         border: "border-purple-500/20",
@@ -47,10 +40,7 @@ const services = [
     },
     {
         id: "04",
-        category: "Database",
-        title: "Data Intelligence",
-        description: "We design sophisticated database solutions that ensure your information is organized, accessible, and impenetrable. We handle the backbone of your application.",
-        details: ["Database Architecture", "Cloud Migration", "Data Security", "Performance Tuning"],
+        key: "database",
         icon: BarChart,
         color: "from-red-500/5 to-rose-500/5",
         border: "border-red-500/20",
@@ -59,10 +49,7 @@ const services = [
     },
     {
         id: "05",
-        category: "Strategy",
-        title: "Global Reach",
-        description: "Our strategies are designed to position your brand on the global map, ensuring you resonate with audiences across cultures and borders.",
-        details: ["Market Analysis", "SEO Strategy", "Content Curation", "Growth Hacking"],
+        key: "strategy",
         icon: Globe,
         color: "from-emerald-500/5 to-green-500/5",
         border: "border-emerald-500/20",
@@ -71,19 +58,27 @@ const services = [
     },
     {
         id: "06",
-        category: "Artificial Intelligence",
-        title: "Intelligent Systems",
-        description: "Empower your platform with next-gen AI. From smart chatbots to predictive analytics, we integrate intelligence into your digital ecosystem.",
-        details: ["AI Chatbots", "Machine Learning", "Automation", "Integrations"],
+        key: "ai",
         icon: Bot,
         color: "from-indigo-500/5 to-violet-500/5",
         border: "border-indigo-500/20",
         text: "text-indigo-500",
         glow: "shadow-[0_0_50px_-20px_rgba(99,102,241,0.3)]"
     }
-];
+] as const;
 
 export default function ServicesClient() {
+    const { t } = useLanguage();
+
+    const services = servicesConfig.map(config => {
+        // @ts-ignore - The keys match but typescript might need more strict typing
+        const content = t.Services.cards[config.key];
+        return {
+            ...config,
+            ...content
+        };
+    });
+
     return (
         <PageLayout>
             {/* Hero Section */}
@@ -94,12 +89,12 @@ export default function ServicesClient() {
 
                 <div className="container mx-auto px-6 relative z-10 text-center">
                     <h1 className="text-5xl sm:text-7xl md:text-[10vw] font-display font-black text-foreground mb-6 leading-[0.85] uppercase">
-                        <span className="block opacity-10"><TextReveal text="Our" /></span>
-                        <span className="block text-primary -mt-4 uppercase"><TextReveal text="Services" delay={2} /></span>
+                        <span className="block opacity-10"><TextReveal text={t.Services.hero.subtitle} /></span>
+                        <span className="block text-primary -mt-4 uppercase"><TextReveal text={t.Services.hero.title} delay={2} /></span>
                     </h1>
 
                     <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
-                        Capabilities woven into digital reality.
+                        {t.Services.hero.description}
                     </p>
                 </div>
             </section>
