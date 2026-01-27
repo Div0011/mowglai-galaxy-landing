@@ -3,26 +3,28 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Globe, Zap, Layers, Smartphone, Shield, RefreshCw } from "lucide-react";
-
-const cards = [
-    { icon: Sparkles, title: "Aesthetic", text: "Stunning Visuals" },
-    { icon: Globe, title: "Global", text: "Borderless Experiences" },
-    { icon: Zap, title: "Fast", text: "Blazing Performance" },
-    { icon: Layers, title: "Deep", text: "Simplified Complexity" },
-    { icon: Smartphone, title: "Mobile", text: "Flawless Everywhere" },
-    { icon: RefreshCw, title: "Adaptation", text: "Constant Evolution" },
-    { icon: Shield, title: "Survival", text: "Resilient Code" }
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export function AestheticShowcase() {
+    const { t } = useLanguage();
     const [activeCard, setActiveCard] = useState(0);
+
+    const cards = [
+        { icon: Sparkles, title: t.AestheticShowcase.aesthetic.title, text: t.AestheticShowcase.aesthetic.text },
+        { icon: Globe, title: t.AestheticShowcase.global.title, text: t.AestheticShowcase.global.text },
+        { icon: Zap, title: t.AestheticShowcase.fast.title, text: t.AestheticShowcase.fast.text },
+        { icon: Layers, title: t.AestheticShowcase.deep.title, text: t.AestheticShowcase.deep.text },
+        { icon: Smartphone, title: t.AestheticShowcase.mobile.title, text: t.AestheticShowcase.mobile.text },
+        { icon: RefreshCw, title: t.AestheticShowcase.adaptation.title, text: t.AestheticShowcase.adaptation.text },
+        { icon: Shield, title: t.AestheticShowcase.survival.title, text: t.AestheticShowcase.survival.text }
+    ];
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setActiveCard((prev) => (prev + 1) % 5);
+            setActiveCard((prev) => (prev + 1) % cards.length);
         }, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [cards.length]); // Added dependence on cards.length though it's constant per render
 
     return (
         <div className="relative h-[400px] flex items-center justify-center">
