@@ -34,6 +34,7 @@ interface Translations {
         consultFree: string;
         studioStory: string;
         knowMore: string;
+        status: string;
     };
     SelectedWork: {
         selected: string;
@@ -84,7 +85,8 @@ const translations: Record<Language, Translations> = {
             readyToBegin: "Ready to Begin the Journey?",
             consultFree: "Consult for Free",
             studioStory: "THE STUDIO STORY",
-            knowMore: "Still not sure? Know more"
+            knowMore: "Still not sure? Know more",
+            status: "Creative Studio"
         },
         SelectedWork: {
             selected: "Selected",
@@ -133,7 +135,8 @@ const translations: Record<Language, Translations> = {
             readyToBegin: "यात्रा शुरू करने के लिए तैयार?",
             consultFree: "निःशुल्क परामर्श",
             studioStory: "स्टूडियो की कहानी",
-            knowMore: "अभी भी अनिश्चित हैं? और जानें"
+            knowMore: "अभी भी अनिश्चित हैं? और जानें",
+            status: "रचनात्मक स्टूडियो"
         },
         SelectedWork: {
             selected: "चुनिंदा",
@@ -182,7 +185,8 @@ const translations: Record<Language, Translations> = {
             readyToBegin: "¿Listo para comenzar el viaje?",
             consultFree: "Consulta Gratis",
             studioStory: "LA HISTORIA DEL ESTUDIO",
-            knowMore: "¿Aún no estás seguro? Saber más"
+            knowMore: "¿Aún no estás seguro? Saber más",
+            status: "Estudio Creativo"
         },
         SelectedWork: {
             selected: "Trabajos",
@@ -231,7 +235,8 @@ const translations: Record<Language, Translations> = {
             readyToBegin: "Prêt à commencer le voyage ?",
             consultFree: "Consultation Gratuite",
             studioStory: "L'HISTOIRE DU STUDIO",
-            knowMore: "Pas encore sûr ? En savoir plus"
+            knowMore: "Pas encore sûr ? En savoir plus",
+            status: "Studio Créatif"
         },
         SelectedWork: {
             selected: "Travaux",

@@ -1,9 +1,4 @@
-import PageLayout from "@/components/PageLayout";
-import AboutSection from "@/components/AboutSection";
-import TeamSection from "@/components/TeamSection";
-import MissionSection from "@/components/MissionSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import NextPageButton from "@/components/NextPageButton";
+import AboutClient from "./AboutClient";
 
 export const metadata = {
     title: "About Us: Our Mission & Team",
@@ -69,14 +64,10 @@ const jsonLdAbout = {
 
 export default function About() {
     return (
-        <PageLayout>
+        <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdAbout) }} />
-            <AboutSection />
-            <MissionSection />
-            {/* <TeamSection /> */}
-            <TestimonialsSection />
-            <NextPageButton label="THE CRAFT" href="/services" />
-        </PageLayout>
+            <AboutClient />
+        </>
     );
 }

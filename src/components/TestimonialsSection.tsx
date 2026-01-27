@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star, Quote, MoveRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 interface Testimonial {
     id: number;
@@ -84,7 +85,9 @@ interface TestimonialsSectionProps {
     isDark?: boolean;
 }
 
-export default function TestimonialsSection({ isDark = true }: TestimonialsSectionProps) {
+export default function TestimonialsSection({ isDark: isDarkProp }: TestimonialsSectionProps) {
+    const { resolvedTheme } = useTheme();
+    const isDark = isDarkProp ?? resolvedTheme === "dark";
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
@@ -173,17 +176,39 @@ export default function TestimonialsSection({ isDark = true }: TestimonialsSecti
                                 data-aos-delay={i * 100}
                                 className="flex-shrink-0 w-[85vw] md:w-[450px] snap-center"
                             >
-                                <div className="h-full relative glass-card p-10 rounded-[2.5rem] border border-primary/20 bg-background/40 hover:bg-background/60 transition-all duration-500 hover:-translate-y-2 hover:border-primary/50 group flex flex-col items-center text-center shadow-lg">
+                                <div className={cn(
+                                    "h-full relative glass-card p-10 rounded-[2.5rem] border transition-all duration-500 hover:-translate-y-2 group flex flex-col items-center text-center shadow-lg overflow-hidden",
+                                    t.accent === "gold"
+                                        ? "border-primary/30 hover:border-primary shadow-primary/10"
+                                        : "border-emerald-500/30 hover:border-emerald-500 shadow-emerald-500/10",
+                                    isDark
+                                        ? "bg-[#253218]/95"
+                                        : "bg-background/40"
+                                )}>
+                                    {/* Accent Glow */}
+                                    <div className={cn(
+                                        "absolute -bottom-20 -right-20 w-64 h-64 blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity rounded-full",
+                                        t.accent === "gold" ? "bg-primary" : "bg-emerald-500"
+                                    )} />
 
-                                    <div className="absolute top-8 right-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                                        <Quote size={80} className="fill-primary text-primary" />
+                                    <div className="absolute top-8 right-8 opacity-10 group-hover:opacity-30 transition-opacity">
+                                        <Quote size={80} className={cn(
+                                            "fill-current",
+                                            t.accent === "gold" ? "text-primary" : "text-emerald-500"
+                                        )} />
                                     </div>
 
                                     <div className="mb-6 relative">
-                                        <div className="w-24 h-24 rounded-full p-1 border-2 border-primary/30 group-hover:border-primary transition-colors duration-500">
+                                        <div className={cn(
+                                            "w-24 h-24 rounded-full p-1 border-2 transition-colors duration-500",
+                                            t.accent === "gold" ? "border-primary/30 group-hover:border-primary" : "border-emerald-500/30 group-hover:border-emerald-500"
+                                        )}>
                                             <Avatar className="w-full h-full">
                                                 <AvatarImage src={t.avatar} />
-                                                <AvatarFallback className="bg-primary/10 text-primary font-bold text-2xl">
+                                                <AvatarFallback className={cn(
+                                                    "font-bold text-2xl",
+                                                    t.accent === "gold" ? "bg-primary/10 text-primary" : "bg-emerald-500/10 text-emerald-500"
+                                                )}>
                                                     {t.name.charAt(0)}
                                                 </AvatarFallback>
                                             </Avatar>
@@ -192,7 +217,10 @@ export default function TestimonialsSection({ isDark = true }: TestimonialsSecti
 
                                     <div className="flex gap-1 mb-6">
                                         {[...Array(t.rating)].map((_, j) => (
-                                            <Star key={j} size={16} className="fill-primary text-primary" />
+                                            <Star key={j} size={16} className={cn(
+                                                "fill-current",
+                                                t.accent === "gold" ? "text-primary" : "text-emerald-500"
+                                            )} />
                                         ))}
                                     </div>
 
@@ -202,7 +230,10 @@ export default function TestimonialsSection({ isDark = true }: TestimonialsSecti
 
                                     <div className="mt-auto border-t border-primary/10 pt-6 w-full">
                                         <h4 className="font-display font-bold text-foreground text-lg uppercase tracking-wide">{t.name}</h4>
-                                        <p className="text-xs text-primary font-medium tracking-widest uppercase mt-1">{t.role} @ {t.company}</p>
+                                        <p className={cn(
+                                            "text-xs font-medium tracking-widest uppercase mt-1",
+                                            t.accent === "gold" ? "text-primary" : "text-emerald-500"
+                                        )}>{t.role} @ {t.company}</p>
                                     </div>
                                 </div>
                             </div>

@@ -6,11 +6,11 @@ import Lenis from "@studio-freight/lenis";
 const SmoothScroll = () => {
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.0, // Slightly faster for less "floaty" feel
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
-            // orientation: "vertical", 
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
-            touchMultiplier: 1.5, // Reduced from 2 for more natural touch feel
+            touchMultiplier: 2,
+            infinite: false,
         });
 
         function raf(time: number) {

@@ -131,7 +131,7 @@ export default function RootLayout({
                             </p>
                         </div>
                     </noscript>
-                    <div id="main-content" style={{ display: 'none' }}>
+                    <div id="main-content" style={{ display: 'none' }} suppressHydrationWarning>
                         <Providers>
                             <AOSInit />
                             {children}

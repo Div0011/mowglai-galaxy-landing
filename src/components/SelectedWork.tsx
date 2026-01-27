@@ -244,14 +244,14 @@ export default function SelectedWork() {
                     {/* Navigation Buttons - Sides (Now Visible on Mobile) */}
                     <button
                         onClick={() => { prevSlide(); resetAutoplay(); }}
-                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 p-2 md:p-4 text-white/70 hover:text-primary hover:scale-110 transition-all rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm"
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 p-2 md:p-4 text-foreground/70 hover:text-primary hover:scale-110 transition-all rounded-full bg-foreground/5 hover:bg-foreground/10 backdrop-blur-sm"
                         aria-label="Previous Slide"
                     >
                         <ArrowLeft className="w-6 h-6 md:w-8 md:h-8" />
                     </button>
                     <button
                         onClick={() => { nextSlide(); resetAutoplay(); }}
-                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 p-2 md:p-4 text-white/70 hover:text-primary hover:scale-110 transition-all rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm"
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 p-2 md:p-4 text-foreground/70 hover:text-primary hover:scale-110 transition-all rounded-full bg-foreground/5 hover:bg-foreground/10 backdrop-blur-sm"
                         aria-label="Next Slide"
                     >
                         <ArrowRight className="w-6 h-6 md:w-8 md:h-8" />
