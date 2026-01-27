@@ -60,10 +60,7 @@ const jsonLdAbout = {
     "description": "Discover Mowglai's mission to transform the digital landscape through innovation, creativity, and technical excellence. Meet our expert team of developers and designers crafting world-class digital experiences.",
     "url": "https://mowglai.in/about",
     "mainEntity": {
-        "@type": "Organization",
-        "name": "Mowglai",
-        "foundingDate": "2024",
-        "description": "Premium digital agency creating stunning, high-performance websites and web applications"
+        "@id": "https://mowglai.in/#organization"
     }
 };
 
