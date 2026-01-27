@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import TextReveal from "./TextReveal";
 import Magnetic from "./Magnetic";
+import { useLanguage } from "../context/LanguageContext";
 
 const HeroSection = () => {
+    const { t } = useLanguage();
+
     return (
         <section id="home" className="relative w-full h-screen z-10 overflow-hidden flex flex-col items-center justify-center">
 
@@ -14,7 +19,7 @@ const HeroSection = () => {
 
                 {/* Pre-title */}
                 <div className="text-primary font-display tracking-[0.5em] text-sm md:text-lg uppercase mb-6">
-                    <TextReveal text="Est. 2025" />
+                    <TextReveal text={`${t.Common.est} 2025`} />
                 </div>
 
                 {/* Massive Title Block */}
@@ -31,7 +36,7 @@ const HeroSection = () => {
                 {/* Subtitle / Value Prop */}
                 <div className="mt-8 md:mt-12 max-w-3xl" data-aos="fade-up" data-aos-delay="300">
                     <div className="text-xl md:text-3xl text-foreground/80 font-body font-light leading-relaxed">
-                        <TextReveal text="Delivering digital elegance." />
+                        <TextReveal text={t.Common.deliveringElegance} />
                     </div>
                 </div>
 

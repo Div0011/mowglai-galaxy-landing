@@ -5,6 +5,7 @@ import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import NextImage from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 const projects = [
     {
@@ -58,6 +59,7 @@ const projects = [
 ];
 
 export default function SelectedWork() {
+    const { t } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const autoplayRef = useRef<NodeJS.Timeout | null>(null);
@@ -136,11 +138,11 @@ export default function SelectedWork() {
             <div className="container mx-auto px-6 relative z-20">
                 <div className="flex flex-col items-center mb-16 space-y-4 text-center" data-aos="fade-up">
                     <h2 className="text-[10vw] md:text-6xl font-display font-black tracking-tighter text-foreground relative z-10 flex flex-col md:block">
-                        <span className="opacity-30 uppercase mr-4">Selected</span>
-                        <span className="text-primary uppercase">Work</span>
+                        <span className="opacity-30 uppercase mr-4">{t.SelectedWork.selected}</span>
+                        <span className="text-primary uppercase">{t.SelectedWork.work}</span>
                     </h2>
                     <p className="max-w-2xl text-lg text-foreground/70 font-light">
-                        A curated collection of our most impactful digital voyages.
+                        {t.SelectedWork.collectionDesc}
                     </p>
                 </div>
 
@@ -223,14 +225,14 @@ export default function SelectedWork() {
                                                 if (projects[currentIndex].link === "#") {
                                                     e.preventDefault();
                                                     toast({
-                                                        title: "Case Study Coming Soon",
-                                                        description: `The case study for ${projects[currentIndex].title} is currently being finalized. Check back shortly!`,
+                                                        title: t.SelectedWork.comingSoonTitle,
+                                                        description: t.SelectedWork.comingSoonDesc,
                                                     });
                                                 }
                                                 e.stopPropagation();
                                             }}
                                         >
-                                            <span className="text-xs md:text-base">EXPLORE CASE</span>
+                                            <span className="text-xs md:text-base">{t.SelectedWork.exploreCase}</span>
                                             <ExternalLink size={14} className="md:w-5 md:h-5" />
                                         </a>
                                     </div>

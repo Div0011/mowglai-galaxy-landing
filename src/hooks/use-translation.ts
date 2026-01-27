@@ -3,13 +3,15 @@
 import { useLanguage } from '@/context/LanguageContext';
 
 export function useTranslation(namespace?: string) {
-    const { dictionary } = useLanguage();
+    const { t: resources } = useLanguage();
 
     const t = (key: string) => {
         if (namespace) {
-            return dictionary[namespace]?.[key] || key;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return (resources as any)[namespace]?.[key] || key;
         }
-        return dictionary[key] || key;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return (resources as any)[key] || key;
     };
 
     return t;
