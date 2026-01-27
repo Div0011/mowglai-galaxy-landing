@@ -132,7 +132,7 @@ export default function SelectedWork() {
     };
 
     return (
-        <section className="relative w-full py-24 overflow-hidden bg-transparent">
+        <section className="relative w-full py-24 overflow-hidden bg-transparent gpu-accelerate">
             {/* Gradient blending removed for seamless look */}
 
             <div className="container mx-auto px-6 relative z-20">

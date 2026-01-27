@@ -168,6 +168,13 @@
       animation: spin 8s linear infinite;
     }
 
+    .gpu-accelerate {
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+      will-change: transform;
+    }
+
     @keyframes spin {
       from {
         transform: rotate(0deg);

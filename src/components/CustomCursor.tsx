@@ -64,17 +64,6 @@ const CustomCursor = () => {
 
       setIsPointer(prev => prev === isClickable ? prev : isClickable);
 
-      const dist = Math.hypot(e.clientX - lastRipplePos.current.x, e.clientY - lastRipplePos.current.y);
-      if (dist > 120) {
-        lastRipplePos.current = { x: e.clientX, y: e.clientY };
-        const id = Date.now();
-        setRipples((prev) => [...prev, { x: e.clientX, y: e.clientY, id }]);
-        setTimeout(() => {
-          setRipples((prev) => prev.filter((r) => r.id !== id));
-        }, 1000);
-      }
-
-
       const themeElement = target.closest('[data-theme="gold"]');
       const shouldInvert = !!themeElement;
       setIsInverted(prev => prev === shouldInvert ? prev : shouldInvert);
