@@ -155,8 +155,7 @@ const SettingsToggle = () => {
                                         "w-full justify-between hover:bg-primary/5 rounded-xl h-12",
                                         language === lang.code && "bg-primary/5 border border-primary/20"
                                     )}
-                                    // @ts-ignore
-                                    onClick={() => onSelectChange(lang.code)}
+                                    onClick={() => onSelectChange(lang.code as Language)}
                                 >
                                     <div className="flex items-center gap-3">
                                         <span className="font-display font-bold w-8 text-center text-primary/80 bg-primary/10 rounded-md py-1 text-xs">
