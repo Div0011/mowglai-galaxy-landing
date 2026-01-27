@@ -4,7 +4,7 @@ import { useEffect, Suspense, useState } from "react";
 import dynamic from "next/dynamic";
 import FullScreenNav from "@/components/FullScreenNav";
 import MobileNav from "@/components/MobileNav";
-import ThemeToggle from "@/components/ThemeToggle";
+import SettingsToggle from "@/components/SettingsToggle";
 import { Bot } from "lucide-react";
 
 import Footer from "@/components/Footer";
@@ -39,7 +39,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
             <ScrollToTop />
             <BackToTopButton />
             <CustomCursor />
-            <ThemeToggle />
+            <SettingsToggle />
 
             {/* Background - Spans entire page height */}
             <div className="absolute inset-0 z-0 pointer-events-none">

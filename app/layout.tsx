@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "../src/index.css";
 import { Providers } from "@/components/Providers";
 import { AOSInit } from "@/components/AOSInit";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const boldonse = localFont({
     src: "../public/fonts/Boldonse-Regular.ttf",
@@ -87,115 +88,117 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`}>
+        <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`} suppressHydrationWarning>
             <body className="antialiased">
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            document.documentElement.classList.add('js-enabled');
-                        `
-                    }}
-                />
-                <noscript>
-                    <div style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: '#0a0a0a',
-                        color: '#ffffff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        zIndex: 999999,
-                        textAlign: 'center',
-                        padding: '20px'
-                    }}>
-                        <h1 style={{
-                            fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
-                            fontWeight: 'bold',
-                            marginBottom: '1rem'
+                <LanguageProvider>
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                document.documentElement.classList.add('js-enabled');
+                            `
+                        }}
+                    />
+                    <noscript>
+                        <div style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: '#0a0a0a',
+                            color: '#ffffff',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            zIndex: 999999,
+                            textAlign: 'center',
+                            padding: '20px'
                         }}>
-                            JavaScript Required
-                        </h1>
-                        <p style={{
-                            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-                            maxWidth: '600px',
-                            lineHeight: 1.6
-                        }}>
-                            To continue exploring our website, please enable JavaScript in your browser settings.
-                        </p>
+                            <h1 style={{
+                                fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+                                fontWeight: 'bold',
+                                marginBottom: '1rem'
+                            }}>
+                                JavaScript Required
+                            </h1>
+                            <p style={{
+                                fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+                                maxWidth: '600px',
+                                lineHeight: 1.6
+                            }}>
+                                To continue exploring our website, please enable JavaScript in your browser settings.
+                            </p>
+                        </div>
+                    </noscript>
+                    <div id="main-content" style={{ display: 'none' }}>
+                        <Providers>
+                            <AOSInit />
+                            {children}
+                        </Providers>
                     </div>
-                </noscript>
-                <div id="main-content" style={{ display: 'none' }}>
-                    <Providers>
-                        <AOSInit />
-                        {children}
-                    </Providers>
-                </div>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            document.getElementById('main-content').style.display = 'block';
-                        `
-                    }}
-                />
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@graph": [
-                                {
-                                    "@type": "WebSite",
-                                    "@id": "https://mowglai.in/#website",
-                                    "url": "https://mowglai.in",
-                                    "name": "Mowglai Digital Agency",
-                                    "description": "Premium digital agency specializing in high-performance web development, 3D experiences, and digital transformation.",
-                                    "publisher": {
-                                        "@id": "https://mowglai.in/#organization"
-                                    },
-                                    "potentialAction": {
-                                        "@type": "SearchAction",
-                                        "target": {
-                                            "@type": "EntryPoint",
-                                            "urlTemplate": "https://mowglai.in/search?q={search_term_string}"
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                document.getElementById('main-content').style.display = 'block';
+                            `
+                        }}
+                    />
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@graph": [
+                                    {
+                                        "@type": "WebSite",
+                                        "@id": "https://mowglai.in/#website",
+                                        "url": "https://mowglai.in",
+                                        "name": "Mowglai Digital Agency",
+                                        "description": "Premium digital agency specializing in high-performance web development, 3D experiences, and digital transformation.",
+                                        "publisher": {
+                                            "@id": "https://mowglai.in/#organization"
                                         },
-                                        "query-input": "required name=search_term_string"
+                                        "potentialAction": {
+                                            "@type": "SearchAction",
+                                            "target": {
+                                                "@type": "EntryPoint",
+                                                "urlTemplate": "https://mowglai.in/search?q={search_term_string}"
+                                            },
+                                            "query-input": "required name=search_term_string"
+                                        }
+                                    },
+                                    {
+                                        "@type": "ProfessionalService",
+                                        "@id": "https://mowglai.in/#organization",
+                                        "name": "Mowglai Digital Agency",
+                                        "url": "https://mowglai.in",
+                                        "logo": "https://mowglai.in/logo1.png",
+                                        "image": "https://mowglai.in/logo1.png",
+                                        "priceRange": "$$",
+                                        "description": "Premium digital agency providing web development, 3D design, and digital transformation services.",
+                                        "address": {
+                                            "@type": "PostalAddress",
+                                            "addressCountry": "IN"
+                                        },
+                                        "geo": {
+                                            "@type": "GeoCoordinates",
+                                            "latitude": "20.5937",
+                                            "longitude": "78.9629"
+                                        },
+                                        "openingHoursSpecification": {
+                                            "@type": "OpeningHoursSpecification",
+                                            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                            "opens": "09:00",
+                                            "closes": "18:00"
+                                        },
+                                        "areaServed": "Worldwide"
                                     }
-                                },
-                                {
-                                    "@type": "ProfessionalService",
-                                    "@id": "https://mowglai.in/#organization",
-                                    "name": "Mowglai Digital Agency",
-                                    "url": "https://mowglai.in",
-                                    "logo": "https://mowglai.in/logo1.png",
-                                    "image": "https://mowglai.in/logo1.png",
-                                    "priceRange": "$$",
-                                    "description": "Premium digital agency providing web development, 3D design, and digital transformation services.",
-                                    "address": {
-                                        "@type": "PostalAddress",
-                                        "addressCountry": "IN"
-                                    },
-                                    "geo": {
-                                        "@type": "GeoCoordinates",
-                                        "latitude": "20.5937",
-                                        "longitude": "78.9629"
-                                    },
-                                    "openingHoursSpecification": {
-                                        "@type": "OpeningHoursSpecification",
-                                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                                        "opens": "09:00",
-                                        "closes": "18:00"
-                                    },
-                                    "areaServed": "Worldwide"
-                                }
-                            ]
-                        }),
-                    }}
-                />
+                                ]
+                            }),
+                        }}
+                    />
+                </LanguageProvider>
             </body>
         </html>
     );
