@@ -1,15 +1,14 @@
 "use client";
 
-import PageLayout from "@/components/PageLayout";
-import PricingSection from "@/components/PricingSection";
-import NextPageButton from "@/components/NextPageButton";
-import { Button } from "@/components/ui/button";
-import { Download, FileText, Sparkles } from "lucide-react";
-import { useState } from "react";
-import { downloadAsHtml } from "@/utils/pdfDownloader";
-import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import { useStyle } from "@/context/StyleContext";
+import { Suspense } from "react";
 
+const OriginalInvestment = dynamic(() => import("@/styles/original/Investment"));
+const MinimalInvestment = dynamic(() => import("@/styles/minimal/Investment"));
+const CandyInvestment = dynamic(() => import("@/styles/candy/Investment"));
+
+<<<<<<<< HEAD:src/styles/original/Investment.tsx
 export default function OriginalInvestment() {
     const { resolvedTheme } = useTheme();
     const isDark = resolvedTheme === "dark";
@@ -130,5 +129,16 @@ export default function OriginalInvestment() {
 
             <NextPageButton label="SAY HELLO" href="/contact" />
         </PageLayout>
+========
+export default function InvestmentClient() {
+    const { style } = useStyle();
+
+    return (
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Content...</div>}>
+            {style === "original" && <OriginalInvestment />}
+            {style === "minimal" && <MinimalInvestment />}
+            {style === "candy" && <CandyInvestment />}
+        </Suspense>
+>>>>>>>> feature/multi-theme:app/investment/InvestmentClient.tsx
     );
 }

@@ -1,11 +1,17 @@
 "use client";
 
+<<<<<<<< HEAD:src/styles/original/Services.tsx
 import PageLayout from "@/components/PageLayout";
 import { Palette, Shield, Rocket, Globe, BarChart, Bot } from "lucide-react";
 import NextPageButton from "@/components/NextPageButton";
 import TextReveal from "@/components/TextReveal";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+========
+import dynamic from "next/dynamic";
+import { useStyle } from "@/context/StyleContext";
+import { Suspense } from "react";
+>>>>>>>> feature/multi-theme:app/services/ServicesClient.tsx
 
 const services = [
     {
@@ -121,74 +127,10 @@ const ServicePanel = ({ service, index }: { service: any, index: number }) => {
     const isEven = index % 2 === 0;
 
     return (
-        <div className={cn(
-            "w-full flex",
-            isEven ? "justify-end" : "justify-start"
-        )}>
-            <motion.div
-                initial={{ scaleX: 0, opacity: 0 }}
-                whileInView={{ scaleX: 1, opacity: 1 }}
-                whileHover={{ scale: 1.02, y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.8, ease: "circOut" }}
-                style={{ originX: isEven ? 1 : 0 }}
-                className={cn(
-                    "w-full md:w-[90%] lg:w-[85%] relative rounded-[2.5rem] overflow-hidden border backdrop-blur-3xl",
-                    "min-h-[350px] md:min-h-[400px] flex flex-col md:flex-row",
-                    service.border,
-                    service.glow
-                )}
-            >
-                <div className={cn(
-                    "absolute inset-0 bg-gradient-to-br opacity-100",
-                    service.color
-                )} />
-
-                <div className="relative z-10 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-16 items-start md:items-center w-full">
-                    <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-6 md:w-1/4 shrink-0">
-                        <motion.div
-                            initial={{ opacity: 0, x: isEven ? 20 : -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.3, duration: 0.5 }}
-                            className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-6"
-                        >
-                            <div className={cn("p-4 rounded-2xl bg-white/5 border border-white/10 shadow-lg", service.text)}>
-                                <service.icon size={40} strokeWidth={1.5} />
-                            </div>
-                            <span className="text-6xl md:text-8xl font-display font-black text-foreground/5">{service.id}</span>
-                        </motion.div>
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.5 }}
-                        className="flex-1 space-y-6"
-                    >
-                        <div className="space-y-2">
-                            <div className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-base font-bold text-primary uppercase tracking-wider mb-2">
-                                {service.category}
-                            </div>
-                            <h2 className="text-xl sm:text-3xl md:text-5xl font-display font-bold text-foreground leading-[1.1]">
-                                {service.title}
-                            </h2>
-                        </div>
-
-                        <p className="text-[22px] text-muted-foreground leading-relaxed max-w-2xl">
-                            {service.description}
-                        </p>
-
-                        <div className="pt-6 border-t border-foreground/5 flex flex-wrap gap-3">
-                            {service.details.map((tag: string, i: number) => (
-                                <span key={i} className="text-lg font-medium text-foreground/70 flex items-center gap-2">
-                                    <div className={cn("w-1.5 h-1.5 rounded-full", service.text.replace('text-', 'bg-'))} />
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </motion.div>
-        </div>
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Content...</div>}>
+            {style === "original" && <OriginalServices />}
+            {style === "minimal" && <MinimalServices />}
+            {style === "candy" && <CandyServices />}
+        </Suspense>
     );
 }

@@ -1,26 +1,14 @@
 "use client";
 
-import { useState, useMemo, useEffect } from 'react'
-import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-    ArrowRight, Filter, X, Check, Search, SlidersHorizontal, ArrowUpDown,
-    DollarSign, Layers, Monitor, Zap
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
-import PageLayout from '@/components/PageLayout'
-import Link from 'next/link'
-import { sectors, allTemplates, Template } from '@/data/templates'
-import NextPageButton from "@/components/NextPageButton";
+import dynamic from "next/dynamic";
+import { useStyle } from "@/context/StyleContext";
+import { Suspense } from "react";
 
-// --- Constants ---
-const pageRanges = [
-    { label: 'Single Page', value: '1', count: '1' },
-    { label: 'Small', value: 'small', count: '2-5' },
-    { label: 'Medium', value: 'medium', count: '6-10' },
-    { label: 'Large', value: 'large', count: '11+' }
-]
+const OriginalExplore = dynamic(() => import("@/styles/original/Explore"));
+const MinimalExplore = dynamic(() => import("@/styles/minimal/Explore"));
+const CandyExplore = dynamic(() => import("@/styles/candy/Explore"));
 
+<<<<<<<< HEAD:src/styles/original/Explore.tsx
 const budgetRanges = [
     { label: 'Under $300', value: 'under_300' },
     { label: '$300 - $600', value: '300_600' },
@@ -507,4 +495,16 @@ function TemplateCard({ template }: { template: Template }) {
             </div>
         </motion.div>
     )
+========
+export default function ExploreClient() {
+    const { style } = useStyle();
+
+    return (
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Content...</div>}>
+            {style === "original" && <OriginalExplore />}
+            {style === "minimal" && <MinimalExplore />}
+            {style === "candy" && <CandyExplore />}
+        </Suspense>
+    );
+>>>>>>>> feature/multi-theme:app/explore/ExploreClient.tsx
 }
