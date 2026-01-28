@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import PageLayout from '@/components/PageLayout'
 import Link from 'next/link'
 import { sectors, allTemplates, Template } from '@/data/templates'
+import { useLanguage } from "@/context/LanguageContext";
 import NextPageButton from "@/components/NextPageButton";
 
 // --- Constants ---
@@ -144,6 +145,9 @@ export default function ExplorePage() {
 
     const activeFilterCount = pageRange.length + websiteTypes.length + structures.length + cmsTypes.length + selectedFeatures.length + selectedStyles.length + budget.length
 
+    const { t } = useLanguage();
+    const { Explore } = t;
+
     return (
         <PageLayout>
             <div className="min-h-screen bg-background text-foreground relative selection:bg-primary/20">
@@ -155,16 +159,16 @@ export default function ExplorePage() {
                         <div className="flex flex-col md:flex-row justify-between items-end gap-6">
                             <div className="w-full">
                                 <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-4">
-                                    DESIGN <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[200%_auto] animate-text-shimmer">FUTURE</span>
+                                    {Explore.hero.subtitle} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[200%_auto] animate-text-shimmer">{Explore.hero.title}</span>
                                 </h1>
                                 <p className="text-lg text-muted-foreground/80 font-light max-w-xl mx-auto md:mx-0 border-l-0 md:border-l-2 border-primary/20 pl-0 md:pl-4">
-                                    Curated interface aesthetics for the next generation of web experiences.
+                                    {Explore.hero.description}
                                 </p>
                             </div>
                             <div className="flex items-center gap-4 justify-center md:justify-end w-full md:w-auto">
                                 <div className="text-center md:text-right">
                                     <div className="text-3xl font-bold font-mono">{filteredTemplates.length}</div>
-                                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Systems Online</div>
+                                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{Explore.stats.systems}</div>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +190,7 @@ export default function ExplorePage() {
                                         : "bg-transparent border-border hover:border-primary/50 text-muted-foreground hover:text-foreground"
                                 )}
                             >
-                                All Systems
+                                {Explore.filters.all}
                             </button>
                             {sectors.map(sector => (
                                 <button
@@ -229,7 +233,7 @@ export default function ExplorePage() {
                                 )}
                             >
                                 <SlidersHorizontal className="w-3.5 h-3.5" />
-                                Filters
+                                {Explore.filters.filterBtn}
                                 {activeFilterCount > 0 && (
                                     <span className="ml-1 w-4 h-4 rounded-full bg-white text-primary flex items-center justify-center text-[9px] font-extrabold">
                                         {activeFilterCount}
@@ -249,15 +253,15 @@ export default function ExplorePage() {
                         >
                             {filteredTemplates.length > 0 ? (
                                 filteredTemplates.map((template) => (
-                                    <TemplateCard key={template.id} template={template} />
+                                    <TemplateCard key={template.id} template={template} viewProjectText={Explore.card.viewProject} pagesText={Explore.card.pages} />
                                 ))
                             ) : (
                                 <div className="col-span-full py-40 flex flex-col items-center justify-center text-center opacity-50">
                                     <Search className="w-24 h-24 mb-6 text-muted-foreground/20" />
-                                    <h3 className="text-2xl font-bold mb-2">NO SIGNALS FOUND</h3>
-                                    <p className="text-muted-foreground mb-8">Try broadening your search parameters.</p>
+                                    <h3 className="text-2xl font-bold mb-2">{Explore.filters.noSignals}</h3>
+                                    <p className="text-muted-foreground mb-8">{Explore.filters.broaden}</p>
                                     <button onClick={clearAllFilters} className="px-8 py-3 bg-primary text-primary-foreground rounded-full text-xs font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)] transition-all">
-                                        Reset Parameters
+                                        {Explore.filters.resetParams}
                                     </button>
                                 </div>
                             )}
@@ -441,7 +445,7 @@ function FilterChip({ label, active, onClick }: { label: string, active: boolean
     )
 }
 
-function TemplateCard({ template }: { template: Template }) {
+function TemplateCard({ template, viewProjectText, pagesText }: { template: Template, viewProjectText: string, pagesText: string }) {
     const [isHovered, setIsHovered] = useState(false)
 
     return (
@@ -485,7 +489,7 @@ function TemplateCard({ template }: { template: Template }) {
                         href={`/explore/${template.id}`}
                         className="px-6 py-3 bg-white text-black text-xs font-extrabold uppercase tracking-widest rounded-full hover:scale-105 transition-transform flex items-center gap-2"
                     >
-                        View Project <ArrowRight className="w-3 h-3" />
+                        {viewProjectText} <ArrowRight className="w-3 h-3" />
                     </Link>
                 </div>
             </div>
@@ -494,7 +498,7 @@ function TemplateCard({ template }: { template: Template }) {
             <div>
                 <div className="flex items-center justify-between mb-1">
                     <span className="text-[10px] font-mono text-primary uppercase">{template.type}</span>
-                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest">{template.pages} Pages</span>
+                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest">{template.pages} {pagesText}</span>
                 </div>
                 {/*  Using template.title if available or generic. */}
                 <h3 className="text-lg font-bold tracking-tight text-foreground leading-tight group-hover:text-primary transition-colors">

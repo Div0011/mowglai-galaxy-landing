@@ -109,6 +109,7 @@ interface Translations {
         hero: { titleMain: string; titleSub: string; subtitle: string };
         info: { email: string; phone: string; whatsapp: string; hours: string; hoursValue: string; location: string; locationValue: string };
         form: { namePlaceholder: string; emailPlaceholder: string; messagePlaceholder: string; buttonSend: string; buttonSending: string };
+        customQuote: { title: string; titleSub: string; description: string; buttonMain: string; buttonSub: string };
     };
     ProjectRequest: {
         hero: { titleSuffix: string; includedFeatures: string; beforeCommit: string; downloadText: string; downloadButton: string };
@@ -121,6 +122,12 @@ interface Translations {
         step1: { title: string; description: string; placeholder: string; button: string };
         step2: { title: string; description: string; labels: { name: string; email: string; phone: string; website: string; budget: string; timeline: string; additional: string }; buttonBack: string; buttonSubmit: string };
         success: { title: string; description: string; checkEmail: string; button: string };
+    };
+    Explore: {
+        hero: { title: string; subtitle: string; description: string };
+        stats: { systems: string };
+        filters: { all: string; filterBtn: string; reset: string; show: string; budget: string; complexity: string; tech: string; aesthetics: string; noSignals: string; broaden: string; resetParams: string };
+        card: { viewProject: string; pages: string };
     };
 }
 
@@ -266,7 +273,8 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            customQuote: { title: "NEED", titleSub: "A CUSTOMIZED QUOTATION?", description: "Every project is unique. Let us provide a detailed, tailored breakdown of costs and timelines for your specific requirements.", buttonMain: "REQUEST CUSTOM", buttonSub: "QUOTATION" }
         },
         ProjectRequest: {
             hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
@@ -279,6 +287,12 @@ const translations: Record<Language, Translations> = {
             step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
             step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
             success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
+        },
+        Explore: {
+            hero: { title: "FUTURE", subtitle: "DESIGN", description: "Curated interface aesthetics for the next generation of web experiences." },
+            stats: { systems: "Systems Online" },
+            filters: { all: "All Systems", filterBtn: "Filters", reset: "Reset", show: "Show", budget: "Budget Range", complexity: "Complexity", tech: "Tech Stack", aesthetics: "Aesthetics", noSignals: "NO SIGNALS FOUND", broaden: "Try broadening your search parameters.", resetParams: "Reset Parameters" },
+            card: { viewProject: "View Project", pages: "Pages" }
         }
     },
     hi: {
@@ -422,7 +436,8 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            customQuote: { title: "NEED", titleSub: "A CUSTOMIZED QUOTATION?", description: "हर परियोजना अद्वितीय है। आइए आपकी विशिष्ट आवश्यकताओं के लिए लागत और समयसीमा का विस्तृत विवरण प्रदान करें।", buttonMain: "REQUEST CUSTOM", buttonSub: "QUOTATION" }
         },
         ProjectRequest: {
             hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
@@ -435,6 +450,12 @@ const translations: Record<Language, Translations> = {
             step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
             step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
             success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
+        },
+        Explore: {
+            hero: { title: "भविष्य", subtitle: "डिज़ाइन", description: "वेब अनुभवों की अगली पीढ़ी के लिए क्यूरेटेड इंटरफेस सौंदर्यशास्त्र।" },
+            stats: { systems: "सिस्टम ऑनलाइन" },
+            filters: { all: "सभी सिस्टम", filterBtn: "फिल्टर", reset: "रीसेट", show: "दिखाएं", budget: "बजट रेंज", complexity: "जटिलता", tech: "टेक स्टैक", aesthetics: "सौंदर्यशास्त्र", noSignals: "कोई संकेत नहीं मिला", broaden: "अपने खोज मापदंडों को व्यापक बनाने का प्रयास करें।", resetParams: "रीसेट पैरामीटर" },
+            card: { viewProject: "प्रोजेक्ट देखें", pages: "पृष्ठ" }
         }
     },
     es: {
@@ -578,7 +599,8 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            customQuote: { title: "NECESITA", titleSub: "¿UNA COTIZACIÓN PERSONALIZADA?", description: "Cada proyecto es único. Permítanos proporcionar un desglose detallado y personalizado de costos y plazos para sus requisitos específicos.", buttonMain: "SOLICITAR", buttonSub: "COTIZACIÓN" }
         },
         ProjectRequest: {
             hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
@@ -591,6 +613,12 @@ const translations: Record<Language, Translations> = {
             step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
             step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
             success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
+        },
+        Explore: {
+            hero: { title: "FUTURO", subtitle: "DISEÑO", description: "Estética de interfaz curada para la próxima generación de experiencias web." },
+            stats: { systems: "Sistemas en Línea" },
+            filters: { all: "Todos los Sistemas", filterBtn: "Filtros", reset: "Reiniciar", show: "Mostrar", budget: "Rango de Presupuesto", complexity: "Complejidad", tech: "Tecnología", aesthetics: "Estética", noSignals: "NO SE ENCONTRARON SEÑALES", broaden: "Intenta ampliar tus parámetros de búsqueda.", resetParams: "Restablecer Parámetros" },
+            card: { viewProject: "Ver Proyecto", pages: "Páginas" }
         }
     },
     fr: {
@@ -734,7 +762,8 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            customQuote: { title: "BESOIN", titleSub: "D'UNE OFFRE PERSONNALISÉE ?", description: "Chaque projet est unique. Laissez-nous vous fournir une ventilation détaillée et sur mesure des coûts et des délais pour vos besoins spécifiques.", buttonMain: "DEMANDER", buttonSub: "DEVIS" }
         },
         ProjectRequest: {
             hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
@@ -747,6 +776,12 @@ const translations: Record<Language, Translations> = {
             step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
             step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
             success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
+        },
+        Explore: {
+            hero: { title: "FUTUR", subtitle: "DESIGN", description: "L'esthétique de l'interface organisée pour la prochaine génération d'expériences Web." },
+            stats: { systems: "Systèmes en Ligne" },
+            filters: { all: "Tous les Systèmes", filterBtn: "Filtres", reset: "Réinitialiser", show: "Afficher", budget: "Budget", complexity: "Complexité", tech: "Technologie", aesthetics: "Esthétique", noSignals: "AUCUN SIGNAL TROUVÉ", broaden: "Essayez d'élargir vos paramètres de recherche.", resetParams: "Réinitialiser Paramètres" },
+            card: { viewProject: "Voir le Projet", pages: "Pages" }
         }
     }
 };
