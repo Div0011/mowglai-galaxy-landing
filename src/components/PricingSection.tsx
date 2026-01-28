@@ -5,56 +5,45 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
-
-const plans = [
-  {
-    name: "BASIC",
-    price: "$499",
-    description: "Perfect for small businesses getting started online",
-    features: [
-      "Single page website",
-      "Mobile responsive design",
-      "Basic SEO optimization",
-      "Contact form integration",
-      "1 month support",
-    ],
-    popular: false,
-    proposalFile: "mowglai-proposal-basic.html",
-  },
-  {
-    name: "ADVANCED",
-    price: "$999",
-    description: "Ideal for growing businesses needing more features",
-    features: [
-      "Multi-page website (up to 5)",
-      "Custom animations",
-      "Advanced SEO & Analytics",
-      "CMS integration",
-      "E-commerce ready",
-      "3 months support",
-    ],
-    popular: true,
-    proposalFile: "mowglai-proposal-advanced.html",
-  },
-  {
-    name: "EPIC",
-    price: "Custom",
-    description: "Full-scale solutions for large organizations",
-    features: [
-      "Unlimited pages",
-      "Custom web applications",
-      "API development",
-      "Database integration",
-      "Priority 24/7 support",
-      "Dedicated team",
-    ],
-    popular: false,
-    proposalFile: "mowglai-proposal-epic.html",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 const PricingSection = () => {
   const router = useRouter();
+  const { t } = useLanguage();
+  const { Pricing } = t;
+
+  const plans = [
+    {
+      id: "basic",
+      name: Pricing.plans.basic.name,
+      price: "$499",
+      description: Pricing.plans.basic.description,
+      features: Pricing.plans.basic.features,
+      popular: false,
+      proposalFile: "mowglai-proposal-basic.html",
+      buttonText: Pricing.plans.basic.button
+    },
+    {
+      id: "advanced",
+      name: Pricing.plans.advanced.name,
+      price: "$999",
+      description: Pricing.plans.advanced.description,
+      features: Pricing.plans.advanced.features,
+      popular: true,
+      proposalFile: "mowglai-proposal-advanced.html",
+      buttonText: Pricing.plans.advanced.button
+    },
+    {
+      id: "epic",
+      name: Pricing.plans.epic.name,
+      price: "Custom",
+      description: Pricing.plans.epic.description,
+      features: Pricing.plans.epic.features,
+      popular: false,
+      proposalFile: "mowglai-proposal-epic.html",
+      buttonText: Pricing.plans.epic.button
+    },
+  ];
 
   const handlePlanClick = (plan: typeof plans[0]) => {
     if (plan.price === "Custom") {
@@ -70,7 +59,7 @@ const PricingSection = () => {
 
         <div className="mb-16 text-center">
           <p className="text-xl text-primary font-body tracking-[0.3em] uppercase opacity-60">
-            Value Beyond Measurement
+            {Pricing.subtitle}
           </p>
         </div>
 
@@ -128,7 +117,7 @@ const PricingSection = () => {
                       : "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-background"
                   )}
                 >
-                  START {plan.price === "Custom" ? "DIALOGUE" : "ASCENT"}
+                  {plan.buttonText}
                 </Button>
 
                 <a
@@ -140,7 +129,7 @@ const PricingSection = () => {
                   }}
                 >
                   <Download className="w-4 h-4" />
-                  Download Proposal
+                  {Pricing.download}
                 </a>
               </div>
             </div>

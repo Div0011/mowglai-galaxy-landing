@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/utils/emailSender";
+import { useLanguage } from "@/context/LanguageContext";
 
 
 const CONTACT_EMAIL = "info@mowglai.in"; // REPLACE THIS WITH YOUR PERSONAL EMAIL FOR TESTING
@@ -18,6 +19,9 @@ const FULL_PHONE_NUMBER = `${COUNTRY_CODE}${LOCAL_PHONE_NUMBER}`;
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
+  const { Contact } = t;
+
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -66,8 +70,8 @@ ${formData.message}
         {/* Huge Header */}
         <div className="mb-24 relative">
           <h2 className="text-[13vw] sm:text-[12vw] md:text-[10vw] font-display font-black text-foreground select-none relative z-10 py-4 leading-[0.85]">
-            <TextReveal text="GET IN" />
-            <span className="text-primary ml-0 -mr-12 md:ml-[38vw] block -mt-[1vw] md:-mt-[2vw]"><TextReveal text="TOUCH" delay={2} /></span>
+            <TextReveal text={Contact.hero.titleMain} />
+            <span className="text-primary ml-0 -mr-12 md:ml-[38vw] block -mt-[1vw] md:-mt-[2vw]"><TextReveal text={Contact.hero.titleSub} delay={2} /></span>
           </h2>
         </div>
 
@@ -75,17 +79,17 @@ ${formData.message}
           {/* Contact Info - Minimal & Large */}
           <div className="space-y-12">
             <p className="text-3xl font-light text-foreground/80 max-w-lg leading-snug">
-              Ready to start your project? Let's create something amazing together.
+              {Contact.hero.subtitle}
             </p>
 
             <div className="space-y-8">
               <div className="group cursor-pointer">
-                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">Email</p>
+                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">{Contact.info.email}</p>
                 <p className="text-2xl sm:text-3xl font-display font-bold text-foreground group-hover:text-primary transition-colors">{CONTACT_EMAIL}</p>
               </div>
 
               <div className="group flex flex-col gap-2">
-                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">Phone & WhatsApp</p>
+                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">{Contact.info.phone}</p>
                 <div className="flex flex-wrap gap-4 items-center">
                   <a
                     href={`tel:+${FULL_PHONE_NUMBER}`}
@@ -101,19 +105,19 @@ ${formData.message}
                     className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all"
                   >
                     <MessageCircle className="w-5 h-5" />
-                    <span className="text-sm font-bold">WhatsApp</span>
+                    <span className="text-sm font-bold">{Contact.info.whatsapp}</span>
                   </a>
                 </div>
               </div>
 
               <div className="group cursor-pointer">
-                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">Hours</p>
-                <p className="text-xl sm:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors">Mon - Sat • Global Zones</p>
+                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">{Contact.info.hours}</p>
+                <p className="text-xl sm:text-2xl font-display font-bold text-foreground group-hover:text-primary transition-colors">{Contact.info.hoursValue}</p>
               </div>
 
               <div className="group cursor-pointer">
-                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">HQ Location</p>
-                <p className="text-2xl sm:text-3xl font-display font-bold text-foreground group-hover:text-primary transition-colors">Noida, India</p>
+                <p className="text-sm text-foreground/50 uppercase tracking-widest mb-1">{Contact.info.location}</p>
+                <p className="text-2xl sm:text-3xl font-display font-bold text-foreground group-hover:text-primary transition-colors">{Contact.info.locationValue}</p>
               </div>
             </div>
           </div>
@@ -124,7 +128,7 @@ ${formData.message}
               <div className="space-y-6">
                 <Input
                   required
-                  placeholder="Your Name"
+                  placeholder={Contact.form.namePlaceholder}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-display font-bold"
@@ -132,7 +136,7 @@ ${formData.message}
                 <Input
                   required
                   type="email"
-                  placeholder="Email Address"
+                  placeholder={Contact.form.emailPlaceholder}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-display font-bold"
@@ -140,7 +144,7 @@ ${formData.message}
                 <Textarea
                   required
                   rows={4}
-                  placeholder="Tell us about your project..."
+                  placeholder={Contact.form.messagePlaceholder}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 resize-none transition-all font-display font-bold"
@@ -152,7 +156,7 @@ ${formData.message}
                 disabled={isSubmitting}
                 className="w-full bg-foreground text-background hover:bg-background hover:text-foreground border-2 border-foreground font-display font-black text-sm sm:text-lg md:text-xl py-6 md:py-8 rounded-xl transition-all uppercase tracking-widest"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? Contact.form.buttonSending : Contact.form.buttonSend}
               </Button>
             </form>
           </div>

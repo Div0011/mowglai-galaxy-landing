@@ -86,6 +86,42 @@ interface Translations {
             description: string;
         };
     };
+    Navigation: {
+        value: string;
+    };
+    Investment: {
+        hero: { titleMain: string; titleSub: string };
+        tabs: { standard: string; premium: string };
+        apex: { title: string; description: string; button: string };
+        brochure: { title: string; description: string; button: string };
+        customQuote: { title: string; description: string; button: string };
+    };
+    Pricing: {
+        subtitle: string;
+        download: string;
+        plans: {
+            basic: { name: string; description: string; features: string[]; button: string };
+            advanced: { name: string; description: string; features: string[]; button: string };
+            epic: { name: string; description: string; features: string[]; button: string };
+        };
+    };
+    Contact: {
+        hero: { titleMain: string; titleSub: string; subtitle: string };
+        info: { email: string; phone: string; whatsapp: string; hours: string; hoursValue: string; location: string; locationValue: string };
+        form: { namePlaceholder: string; emailPlaceholder: string; messagePlaceholder: string; buttonSend: string; buttonSending: string };
+    };
+    ProjectRequest: {
+        hero: { titleSuffix: string; includedFeatures: string; beforeCommit: string; downloadText: string; downloadButton: string };
+        form: { title: string; subtitle: string; labels: { company: string; contactName: string; email: string; startDate: string; vision: string }; placeholders: { company: string; contactName: string; email: string; startDate: string; vision: string }; button: string };
+        success: { title: string; description: string };
+    };
+    CustomRequest: {
+        hero: { titleMain: string; titleSub: string; subtitle: string };
+        steps: { idea: string; details: string };
+        step1: { title: string; description: string; placeholder: string; button: string };
+        step2: { title: string; description: string; labels: { name: string; email: string; phone: string; website: string; budget: string; timeline: string; additional: string }; buttonBack: string; buttonSubmit: string };
+        success: { title: string; description: string; checkEmail: string; button: string };
+    };
 }
 
 const translations: Record<Language, Translations> = {
@@ -207,6 +243,42 @@ const translations: Record<Language, Translations> = {
                 quote: "\"Bringing world-class quality to clients worldwide. We create modest, stylish, and professional websites for any industry.\"",
                 description: "We are built for flexibility. Operating Monday to Saturday across multiple time zones, we align perfectly with your schedule. Whether you are a startup or an enterprise, our global team delivers modern digital craftsmanship that speaks a universal language."
             }
+        },
+        Navigation: {
+            value: "Next Chapter"
+        },
+        Investment: {
+            hero: { titleMain: "THE", titleSub: "PURCHASE" },
+            tabs: { standard: "STANDARD", premium: "PREMIUM" },
+            apex: { title: "Apex Solutions", description: "Our premium tier offers bespoke digital architecture, dedicated 24/7 survival support, and unmatched growth for industry leaders.", button: "Inquire for Apex" },
+            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our wild strategies and success stories.", button: "Download Brochure" },
+            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us your goal and we'll generate a personalized strategy for your market habitat.", button: "Download Quotation" }
+        },
+        Pricing: {
+            subtitle: "Value Beyond Measurement",
+            download: "Download Proposal",
+            plans: {
+                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "START ASCENT" },
+                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "START ASCENT" },
+                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "START DIALOGUE" }
+            }
+        },
+        Contact: {
+            hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
+            info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+        },
+        ProjectRequest: {
+            hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
+            form: { title: "Tell Us More", subtitle: "To initialize the protocol, we need to know who you are and what you want to achieve.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Vision / Work Plan" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your goals, requirements, or what you want to achieve..." }, button: "Send Project Details" },
+            success: { title: "Request Sent!", description: "We've received your project details and will be in touch shortly." }
+        },
+        CustomRequest: {
+            hero: { titleMain: "CUSTOM", titleSub: "REQUEST", subtitle: "Tell Us Your Vision" },
+            steps: { idea: "Your Idea", details: "Your Details" },
+            step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
+            step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
+            success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
         }
     },
     hi: {
@@ -327,6 +399,42 @@ const translations: Record<Language, Translations> = {
                 quote: "\"दुनिया भर के ग्राहकों के लिए विश्व स्तरीय गुणवत्ता लाना। हम किसी भी उद्योग के लिए मामूली, स्टाइलिश और पेशेवर वेबसाइट बनाते हैं।\"",
                 description: "हम लचीलेपन के लिए बनाए गए हैं। कई समय क्षेत्रों में सोमवार से शनिवार तक काम करते हुए, हम आपके कार्यक्रम के साथ पूरी तरह से संरेखित होते हैं। चाहे आप एक स्टार्टअप हों या एक उद्यम, हमारी वैश्विक टीम आधुनिक डिजिटल शिल्प कौशल प्रदान करती है जो एक सार्वभौमिक भाषा बोलती है।"
             }
+        },
+        Navigation: {
+            value: "अगला अध्याय"
+        },
+        Investment: {
+            hero: { titleMain: "THE", titleSub: "PURCHASE" },
+            tabs: { standard: "STANDARD", premium: "PREMIUM" },
+            apex: { title: "Apex Solutions", description: "Our premium tier offers bespoke digital architecture, dedicated 24/7 survival support, and unmatched growth for industry leaders.", button: "Inquire for Apex" },
+            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our wild strategies and success stories.", button: "Download Brochure" },
+            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us your goal and we'll generate a personalized strategy for your market habitat.", button: "Download Quotation" }
+        },
+        Pricing: {
+            subtitle: "Value Beyond Measurement",
+            download: "Download Proposal",
+            plans: {
+                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "START ASCENT" },
+                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "START ASCENT" },
+                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "START DIALOGUE" }
+            }
+        },
+        Contact: {
+            hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
+            info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+        },
+        ProjectRequest: {
+            hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
+            form: { title: "Tell Us More", subtitle: "To initialize the protocol, we need to know who you are and what you want to achieve.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Vision / Work Plan" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your goals, requirements, or what you want to achieve..." }, button: "Send Project Details" },
+            success: { title: "Request Sent!", description: "We've received your project details and will be in touch shortly." }
+        },
+        CustomRequest: {
+            hero: { titleMain: "CUSTOM", titleSub: "REQUEST", subtitle: "Tell Us Your Vision" },
+            steps: { idea: "Your Idea", details: "Your Details" },
+            step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
+            step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
+            success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
         }
     },
     es: {
@@ -447,6 +555,42 @@ const translations: Record<Language, Translations> = {
                 quote: "\"Brindando calidad de clase mundial a clientes de todo el mundo. Creamos sitios web modestos, elegantes y profesionales para cualquier industria.\"",
                 description: "Estamos construidos para la flexibilidad. Operando de lunes a sábado en múltiples zonas horarias, nos alineamos perfectamente con su horario. Ya sea una startup o una empresa, nuestro equipo global ofrece artesanía digital moderna que habla un idioma universal."
             }
+        },
+        Navigation: {
+            value: "Siguiente Capítulo"
+        },
+        Investment: {
+            hero: { titleMain: "THE", titleSub: "PURCHASE" },
+            tabs: { standard: "STANDARD", premium: "PREMIUM" },
+            apex: { title: "Apex Solutions", description: "Our premium tier offers bespoke digital architecture, dedicated 24/7 survival support, and unmatched growth for industry leaders.", button: "Inquire for Apex" },
+            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our wild strategies and success stories.", button: "Download Brochure" },
+            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us your goal and we'll generate a personalized strategy for your market habitat.", button: "Download Quotation" }
+        },
+        Pricing: {
+            subtitle: "Value Beyond Measurement",
+            download: "Download Proposal",
+            plans: {
+                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "START ASCENT" },
+                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "START ASCENT" },
+                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "START DIALOGUE" }
+            }
+        },
+        Contact: {
+            hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
+            info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+        },
+        ProjectRequest: {
+            hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
+            form: { title: "Tell Us More", subtitle: "To initialize the protocol, we need to know who you are and what you want to achieve.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Vision / Work Plan" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your goals, requirements, or what you want to achieve..." }, button: "Send Project Details" },
+            success: { title: "Request Sent!", description: "We've received your project details and will be in touch shortly." }
+        },
+        CustomRequest: {
+            hero: { titleMain: "CUSTOM", titleSub: "REQUEST", subtitle: "Tell Us Your Vision" },
+            steps: { idea: "Your Idea", details: "Your Details" },
+            step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
+            step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
+            success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
         }
     },
     fr: {
@@ -567,6 +711,42 @@ const translations: Record<Language, Translations> = {
                 quote: "Apporter une qualité de classe mondiale aux clients du monde entier. Nous créons des sites Web modestes, élégants et professionnels pour toute industrie.",
                 description: "Nous sommes construits pour la flexibilité. Opérant du lundi au samedi sur plusieurs fuseaux horaires, nous nous alignons parfaitement avec votre emploi du temps. Que vous soyez une startup ou une entreprise, notre équipe mondiale offre un savoir-faire numérique moderne qui parle un langage universel."
             }
+        },
+        Navigation: {
+            value: "Chapitre Suivant"
+        },
+        Investment: {
+            hero: { titleMain: "THE", titleSub: "PURCHASE" },
+            tabs: { standard: "STANDARD", premium: "PREMIUM" },
+            apex: { title: "Apex Solutions", description: "Our premium tier offers bespoke digital architecture, dedicated 24/7 survival support, and unmatched growth for industry leaders.", button: "Inquire for Apex" },
+            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our wild strategies and success stories.", button: "Download Brochure" },
+            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us your goal and we'll generate a personalized strategy for your market habitat.", button: "Download Quotation" }
+        },
+        Pricing: {
+            subtitle: "Value Beyond Measurement",
+            download: "Download Proposal",
+            plans: {
+                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "START ASCENT" },
+                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "START ASCENT" },
+                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "START DIALOGUE" }
+            }
+        },
+        Contact: {
+            hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
+            info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." }
+        },
+        ProjectRequest: {
+            hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
+            form: { title: "Tell Us More", subtitle: "To initialize the protocol, we need to know who you are and what you want to achieve.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Vision / Work Plan" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your goals, requirements, or what you want to achieve..." }, button: "Send Project Details" },
+            success: { title: "Request Sent!", description: "We've received your project details and will be in touch shortly." }
+        },
+        CustomRequest: {
+            hero: { titleMain: "CUSTOM", titleSub: "REQUEST", subtitle: "Tell Us Your Vision" },
+            steps: { idea: "Your Idea", details: "Your Details" },
+            step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
+            step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
+            success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
         }
     }
 };

@@ -1,104 +1,212 @@
-import ServicesClient from "./ServicesClient";
+"use client";
 
-export const metadata = {
-    title: "Our Services: Web Development & Digital Solutions",
-    description: "Explore Mowglai's comprehensive web development services: custom websites, 3D web experiences, React & Next.js applications, UI/UX design, and digital transformation solutions. Expert development for your business.",
-    keywords: ["web development services", "custom website development", "React development", "Next.js development", "3D web development", "UI/UX design services", "mobile app development", "digital transformation", "software development", "web application development"],
-    alternates: {
-        canonical: "/services",
-    },
-    openGraph: {
-        title: "Our Services: Web Development & Digital Solutions",
-        description: "Explore Mowglai's comprehensive web development services: custom websites, 3D web experiences, React & Next.js applications, UI/UX design.",
-        url: "/services",
-        images: [
-            {
-                url: "/mowglai-logo-new.jpg",
-                width: 1200,
-                height: 1200,
-                alt: "Mowglai Web Development Services"
-            }
-        ],
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Our Services: Web Development & Digital Solutions",
-        description: "Explore Mowglai's comprehensive web development services: custom websites, 3D web experiences, React & Next.js applications.",
-        images: ["/mowglai-logo-new.jpg"],
-    },
-};
-
-const jsonLdBreadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://mowglai.in"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "https://mowglai.in/services"
-        }
-    ]
-};
-
-const jsonLdServices = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Mowglai Web Development Services",
-    "description": "Explore Mowglai's comprehensive web development services: custom websites, 3D web experiences, React & Next.js applications, UI/UX design, and digital transformation solutions.",
-    "provider": {
-        "@id": "https://mowglai.in/#organization"
-    },
-    "areaServed": "Worldwide",
-    "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Web Development Services",
-        "itemListElement": [
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Custom Website Development"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "3D Web Development"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "React & Next.js Development"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "UI/UX Design"
-                }
-            }
-        ]
-    }
-};
+import PageLayout from "@/components/PageLayout";
+import { Button } from "@/components/ui/button";
+import { Palette, Shield, Rocket, Globe, BarChart, Bot } from "lucide-react";
+import NextPageButton from "@/components/NextPageButton";
+import TextReveal from "@/components/TextReveal";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ServicesPage() {
+    const { t } = useLanguage();
+    const { Services } = t;
+
+    const services = [
+        {
+            id: "01",
+            category: Services.cards.webDesign.category,
+            title: Services.cards.webDesign.title,
+            description: Services.cards.webDesign.description,
+            details: Services.cards.webDesign.details,
+            icon: Palette,
+            color: "from-amber-500/5 to-orange-500/5",
+            border: "border-amber-500/20",
+            text: "text-amber-500",
+            glow: "shadow-[0_0_50px_-20px_rgba(245,158,11,0.3)]"
+        },
+        {
+            id: "02",
+            category: Services.cards.development.category,
+            title: Services.cards.development.title,
+            description: Services.cards.development.description,
+            details: Services.cards.development.details,
+            icon: Rocket,
+            color: "from-blue-500/5 to-cyan-500/5",
+            border: "border-blue-500/20",
+            text: "text-blue-500",
+            glow: "shadow-[0_0_50px_-20px_rgba(59,130,246,0.3)]"
+        },
+        {
+            id: "03",
+            category: Services.cards.redesign.category,
+            title: Services.cards.redesign.title,
+            description: Services.cards.redesign.description,
+            details: Services.cards.redesign.details,
+            icon: Shield,
+            color: "from-purple-500/5 to-pink-500/5",
+            border: "border-purple-500/20",
+            text: "text-purple-500",
+            glow: "shadow-[0_0_50px_-20px_rgba(168,85,247,0.3)]"
+        },
+        {
+            id: "04",
+            category: Services.cards.database.category,
+            title: Services.cards.database.title,
+            description: Services.cards.database.description,
+            details: Services.cards.database.details,
+            icon: BarChart,
+            color: "from-red-500/5 to-rose-500/5",
+            border: "border-red-500/20",
+            text: "text-red-500",
+            glow: "shadow-[0_0_50px_-20px_rgba(239,68,68,0.3)]"
+        },
+        {
+            id: "05",
+            category: Services.cards.strategy.category,
+            title: Services.cards.strategy.title,
+            description: Services.cards.strategy.description,
+            details: Services.cards.strategy.details,
+            icon: Globe,
+            color: "from-emerald-500/5 to-green-500/5",
+            border: "border-emerald-500/20",
+            text: "text-emerald-500",
+            glow: "shadow-[0_0_50px_-20px_rgba(16,185,129,0.3)]"
+        },
+        {
+            id: "06",
+            category: Services.cards.ai.category,
+            title: Services.cards.ai.title,
+            description: Services.cards.ai.description,
+            details: Services.cards.ai.details,
+            icon: Bot,
+            color: "from-indigo-500/5 to-violet-500/5",
+            border: "border-indigo-500/20",
+            text: "text-indigo-500",
+            glow: "shadow-[0_0_50px_-20px_rgba(99,102,241,0.3)]"
+        }
+    ];
+
     return (
-        <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdServices) }} />
-            <ServicesClient />
-        </>
+        <PageLayout>
+            {/* Hero Section */}
+            <section className="relative min-h-[50vh] flex items-center justify-center pt-32 pb-12 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
+                <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
+
+                <div className="container mx-auto px-6 relative z-10 text-center">
+                    <h1 className="text-5xl sm:text-7xl md:text-[10vw] font-display font-black text-foreground mb-6 leading-[0.85] uppercase">
+                        <span className="block opacity-10"><TextReveal text={Services.hero.subtitle} /></span>
+                        <span className="block text-primary -mt-4 uppercase"><TextReveal text={Services.hero.title} delay={2} /></span>
+                    </h1>
+
+                    <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                        {Services.hero.description}
+                    </p>
+                </div>
+            </section>
+
+            {/* Alternating Expansion Section */}
+            <section className="relative py-24 px-4 overflow-hidden">
+                <div className="container mx-auto px-0 md:px-6 flex flex-col gap-12 sm:gap-24">
+                    {services.map((service, index) => (
+                        <ServicePanel key={service.id} service={service} index={index} />
+                    ))}
+                </div>
+            </section>
+
+            <NextPageButton label={t.Navigation.value} href="/investment" />
+        </PageLayout>
+    );
+};
+
+interface Service {
+    id: string;
+    category: string;
+    title: string;
+    description: string;
+    details: string[];
+    icon: React.ElementType;
+    color: string;
+    border: string;
+    text: string;
+    glow: string;
+}
+
+const ServicePanel = ({ service, index }: { service: Service, index: number }) => {
+    const isEven = index % 2 === 0;
+
+    return (
+        <div className={cn(
+            "w-full flex",
+            isEven ? "justify-end" : "justify-start"
+        )}>
+            <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                whileHover={{ scale: 1.02, y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, ease: "circOut" }}
+                style={{ originX: isEven ? 1 : 0 }}
+                className={cn(
+                    "w-full md:w-[90%] lg:w-[85%] relative rounded-[2.5rem] overflow-hidden border backdrop-blur-3xl",
+                    "min-h-[350px] md:min-h-[400px] flex flex-col md:flex-row",
+                    service.border,
+                    service.glow
+                )}
+            >
+                <div className={cn(
+                    "absolute inset-0 bg-gradient-to-br opacity-100",
+                    service.color
+                )} />
+
+                <div className="relative z-10 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-16 items-start md:items-center w-full">
+                    <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-6 md:w-1/4 shrink-0">
+                        <motion.div
+                            initial={{ opacity: 0, x: isEven ? 20 : -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
+                            className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-6"
+                        >
+                            <div className={cn("p-4 rounded-2xl bg-white/5 border border-white/10 shadow-lg", service.text)}>
+                                <service.icon size={40} strokeWidth={1.5} />
+                            </div>
+                            <span className="text-6xl md:text-8xl font-display font-black text-foreground/5">{service.id}</span>
+                        </motion.div>
+                    </div>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.4, duration: 0.5 }}
+                        className="flex-1 space-y-6"
+                    >
+                        <div className="space-y-2">
+                            <div className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-base font-bold text-primary uppercase tracking-wider mb-2">
+                                {service.category}
+                            </div>
+                            <h2 className="text-xl sm:text-3xl md:text-5xl font-display font-bold text-foreground leading-[1.1]">
+                                {service.title}
+                            </h2>
+                        </div>
+
+                        <p className="text-[22px] text-muted-foreground leading-relaxed max-w-2xl">
+                            {service.description}
+                        </p>
+
+                        <div className="pt-6 border-t border-foreground/5 flex flex-wrap gap-3">
+                            {service.details.map((tag: string, i: number) => (
+                                <span key={i} className="text-lg font-medium text-foreground/70 flex items-center gap-2">
+                                    <div className={cn("w-1.5 h-1.5 rounded-full", service.text.replace('text-', 'bg-'))} />
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
+            </motion.div>
+        </div>
     );
 }
