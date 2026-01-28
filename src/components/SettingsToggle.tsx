@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Languages, Monitor, Check } from "lucide-react";
+import { Moon, Sun, Languages, Monitor, Check, Palette, Minimize2, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -13,10 +13,12 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useLanguage, Language } from "@/context/LanguageContext";
+import { useStyle } from "@/context/StyleContext";
 
 const SettingsToggle = () => {
     const { setTheme, theme } = useTheme();
     const { language, setLanguage, t } = useLanguage();
+    const { style, setStyle } = useStyle();
 
     const [mounted, setMounted] = useState(false);
     const [showLanguageIcon, setShowLanguageIcon] = useState(false);
@@ -141,6 +143,48 @@ const SettingsToggle = () => {
                         </div>
                     </div>
 
+                    {/* Style Selection */}
+                    <div className="space-y-3">
+                        <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                            Visual Style
+                        </h4>
+                        <div className="grid grid-cols-3 gap-2">
+                            <Button
+                                variant={style === "original" ? "default" : "outline"}
+                                className={cn(
+                                    "flex flex-col items-center gap-2 h-auto py-4 rounded-xl transition-all duration-300",
+                                    style === "original" ? "border-primary shadow-md scale-[1.02]" : "border-primary/20 hover:border-primary/50"
+                                )}
+                                onClick={() => setStyle("original")}
+                            >
+                                <Palette className="w-5 h-5" />
+                                <span className="text-xs">Original</span>
+                            </Button>
+                            <Button
+                                variant={style === "minimal" ? "default" : "outline"}
+                                className={cn(
+                                    "flex flex-col items-center gap-2 h-auto py-4 rounded-xl transition-all duration-300",
+                                    style === "minimal" ? "border-primary shadow-md scale-[1.02]" : "border-primary/20 hover:border-primary/50"
+                                )}
+                                onClick={() => setStyle("minimal")}
+                            >
+                                <Minimize2 className="w-5 h-5" />
+                                <span className="text-xs">Minimal</span>
+                            </Button>
+                            <Button
+                                variant={style === "candy" ? "default" : "outline"}
+                                className={cn(
+                                    "flex flex-col items-center gap-2 h-auto py-4 rounded-xl transition-all duration-300",
+                                    style === "candy" ? "border-primary shadow-md scale-[1.02]" : "border-primary/20 hover:border-primary/50"
+                                )}
+                                onClick={() => setStyle("candy")}
+                            >
+                                <Zap className="w-5 h-5 text-pink-500" />
+                                <span className="text-xs">Candy</span>
+                            </Button>
+                        </div>
+                    </div>
+
                     {/* Language Selection */}
                     <div className="space-y-3">
                         <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
@@ -174,6 +218,13 @@ const SettingsToggle = () => {
                                 </Button>
                             ))}
                         </div>
+                    </div>
+
+                    {/* Windows Performance Note */}
+                    <div className="pt-4 border-t border-primary/10">
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 leading-relaxed text-center px-4">
+                            Windows User Note: For the most fluid animations, we recommend using Chromium-based browsers (Chrome/Edge).
+                        </p>
                     </div>
                 </div>
             </DialogContent>

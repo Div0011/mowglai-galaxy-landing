@@ -11,7 +11,7 @@ const navItems = [
     { icon: Users, label: "Story", href: "/about" },
     { icon: Palette, label: "Craft", href: "/services" },
     { icon: LayoutGrid, label: "Blueprint", href: "/explore" },
-    { icon: DollarSign, label: "Value", href: "/investment" },
+    { icon: DollarSign, label: "Investment", href: "/investment" },
     { icon: Mail, label: "Hello", href: "/contact" },
 ];
 
