@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         default: "Mowglai | Premium Digital Agency & Web Development",
         template: "%s | Mowglai"
     },
-    description: "Mowglai is a premium digital agency specializing in high-performance web development, 3D experiences, and digital transformation.",
+    description: "Mowglai is a premium digital agency crafting award-winning websites, 3D experiences, and high-performance web apps. Dominate your industry with our digital excellence.",
     keywords: ["web development", "web design", "digital agency", "3D websites", "React developer", "Next.js", "SEO services", "premium website templates", "creative agency", "Mowglai"],
     authors: [{ name: "Mowglai" }],
     creator: "Mowglai",
@@ -175,22 +175,36 @@ export default function RootLayout({
                                         "url": "https://mowglai.in",
                                         "logo": "https://mowglai.in/logo1.png",
                                         "image": "https://mowglai.in/logo1.png",
-                                        "priceRange": "$$",
+                                        "priceRange": "$$-$$$",
                                         "description": "Premium digital agency providing web development, 3D design, and digital transformation services.",
                                         "address": {
                                             "@type": "PostalAddress",
+                                            "addressLocality": "Noida",
+                                            "addressRegion": "Uttar Pradesh",
                                             "addressCountry": "IN"
                                         },
                                         "geo": {
                                             "@type": "GeoCoordinates",
-                                            "latitude": "20.5937",
-                                            "longitude": "78.9629"
+                                            "latitude": "28.5355",
+                                            "longitude": "77.3910"
                                         },
+                                        "contactPoint": {
+                                            "@type": "ContactPoint",
+                                            "telephone": "+91-9528545302",
+                                            "contactType": "customer service",
+                                            "areaServed": "Worldwide",
+                                            "availableLanguage": ["English", "Hindi"]
+                                        },
+                                        "sameAs": [
+                                            "https://www.instagram.com/mowglai",
+                                            "https://www.linkedin.com/company/mowglai",
+                                            "https://twitter.com/mowglai"
+                                        ],
                                         "openingHoursSpecification": {
                                             "@type": "OpeningHoursSpecification",
-                                            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                                             "opens": "09:00",
-                                            "closes": "18:00"
+                                            "closes": "20:00"
                                         },
                                         "areaServed": "Worldwide"
                                     }

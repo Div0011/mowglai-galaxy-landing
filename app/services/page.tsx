@@ -54,9 +54,7 @@ const jsonLdServices = {
     "name": "Mowglai Web Development Services",
     "description": "Explore Mowglai's comprehensive web development services: custom websites, 3D web experiences, React & Next.js applications, UI/UX design, and digital transformation solutions.",
     "provider": {
-        "@type": "Organization",
-        "name": "Mowglai",
-        "url": "https://mowglai.in"
+        "@id": "https://mowglai.in/#organization"
     },
     "areaServed": "Worldwide",
     "hasOfferCatalog": {

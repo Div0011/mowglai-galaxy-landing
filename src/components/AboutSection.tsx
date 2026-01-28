@@ -8,17 +8,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import MowglaiLogo from "@/components/MowglaiLogo";
 
-const features = [
-  { id: 1, icon: Palette, title: "Modern & Stylish", description: "Creating modest yet visually striking designs tailored for any client profile." },
-  { id: 2, icon: Shield, title: "Professional Grade", description: "Robust protocols ensuring your digital presence is secure and reliable." },
-  { id: 3, icon: Rocket, title: "Peak Performance", description: "Optimized for speed and smoothness, respecting your user's time." },
-  { id: 4, icon: Globe, title: "International Exp.", description: "Proven track record with leading firms across multiple continents." },
-  { id: 5, icon: BarChart, title: "Client Centric", description: "We adapt to your specific needs, regardless of industry or scale." },
-  { id: 6, icon: Headphones, title: "Flexible Schedule", description: "Active Mon-Sat across different time zones to match your workflow." },
+import { useLanguage } from "@/context/LanguageContext";
+
+const featuresConfig = [
+  { id: 1, icon: Palette },
+  { id: 2, icon: Shield },
+  { id: 3, icon: Rocket },
+  { id: 4, icon: Globe },
+  { id: 5, icon: BarChart },
+  { id: 6, icon: Headphones },
 ];
 
 const AboutSection = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   return (
     <section id="about" className="relative w-full py-16 z-20 overflow-hidden">
@@ -28,8 +31,8 @@ const AboutSection = () => {
         <div className="space-y-12" data-aos="fade-right">
           {/* Two-line heading with one word faded - Jungle Theme */}
           <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[11vw] font-display font-black tracking-tighter text-foreground relative z-10 drop-shadow-sm flex flex-col">
-            <span className="leading-[0.8] opacity-10 uppercase">Digital</span>
-            <span className="text-primary leading-[0.8] uppercase">Artisans</span>
+            <span className="leading-[0.8] opacity-10 uppercase">{t.About.hero.digital}</span>
+            <span className="text-primary leading-[0.8] uppercase">{t.About.hero.artisans}</span>
           </h2>
 
           {/* Integrated Logo Element - Magnetic & Foggy */}
@@ -62,7 +65,7 @@ const AboutSection = () => {
 
           <div className="max-w-md ml-auto md:ml-12">
             <p className="text-2xl font-light text-foreground/80 leading-relaxed italic border-l-4 border-primary/30 pl-6 text-center md:text-left">
-              "We are your flexible digital partners. Partnering with ambitious brands worldwide, we craft stylish, professional websites that fit your unique vision."
+              {t.About.hero.description}
             </p>
           </div>
         </div>
@@ -78,14 +81,18 @@ const AboutSection = () => {
         >
           {/* Added hover:pause to the marquee stage */}
           <div id="about-cards-stage" className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-marquee-vertical hover:[animation-play-state:paused] py-10 transition-transform duration-500">
-            {[...features, ...features].map((feature, i) => {
-              const Icon = feature.icon;
-              const isSelected = selectedId === feature.id;
+            {/* Duplicate content strictly for marquee effect */}
+            {[...featuresConfig, ...featuresConfig].map((config, i) => {
+              // Map features from translations based on index (modulo length of original config)
+              const originalIndex = i % featuresConfig.length;
+              const featureText = t.About.features[originalIndex];
+
+              const isSelected = selectedId === config.id;
               return (
                 <motion.div
                   layout
-                  key={`${feature.id}-${i}`}
-                  onMouseEnter={() => setSelectedId(feature.id)}
+                  key={`${config.id}-${i}`}
+                  onMouseEnter={() => setSelectedId(config.id)}
                   onMouseLeave={() => setSelectedId(null)}
                   className={cn(
                     "group/card relative w-full aspect-square bg-primary/5 border border-primary/20 hover:bg-background/90 hover:border-primary rounded-full hover:rounded-[2.5rem] flex flex-col items-center justify-center p-8 cursor-pointer overflow-hidden transition-colors duration-500",
@@ -106,17 +113,17 @@ const AboutSection = () => {
                   <div className="relative z-10 flex flex-col items-center justify-center w-full h-full text-center transition-all duration-500">
                     <div className="flex flex-col items-center gap-4 group-hover/card:-translate-y-4 transition-transform duration-500">
                       <div className="p-5 rounded-full bg-primary/10 text-primary group-hover/card:bg-primary group-hover/card:text-primary-foreground transition-all duration-500 shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)]">
-                        <Icon size={36} strokeWidth={1.5} />
+                        <config.icon size={36} strokeWidth={1.5} />
                       </div>
                       <h3 className="text-xl font-display font-bold text-foreground group-hover/card:text-primary transition-colors">
-                        {feature.title}
+                        {featureText.title}
                       </h3>
                     </div>
 
                     {/* Shortened Description - Centered and fitting */}
                     <div className="opacity-0 group-hover/card:opacity-100 transition-all duration-500 delay-100 mt-4 max-w-[90%]">
                       <p className="text-lg text-foreground/70 font-body leading-relaxed">
-                        {feature.description}
+                        {featureText.description}
                       </p>
                     </div>
                   </div>
