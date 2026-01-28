@@ -27,7 +27,7 @@ jobs:
       - name: Sync files to Hostinger via SSH
         uses: burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avzr --exclude '.next' --exclude 'node_modules' --exclude '.git'
+          switches: "-avzr --exclude '.next' --exclude 'node_modules' --exclude '.git'"
           path: ./out/
           remote_path: ${{ secrets.REMOTE_PATH }}
           remote_host: ${{ secrets.SSH_HOST }}

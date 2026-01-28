@@ -1,58 +1,21 @@
-import ContactClient from "./ContactClient";
+"use client";
 
-export const metadata = {
-    title: "Contact Us: Start Your Project Today",
-    description: "Get in touch with Mowglai's expert development team. Request a custom web development quote, discuss your project vision, or schedule a consultation. We're ready to build your extraordinary digital experience.",
-    keywords: ["contact Mowglai", "web development quote", "request project quote", "hire web developers", "custom web development", "digital agency contact", "start web project", "web development consultation"],
-    alternates: {
-        canonical: "/contact",
-    },
-    openGraph: {
-        title: "Contact Us: Start Your Project Today",
-        description: "Get in touch with Mowglai's expert development team. Request a custom web development quote or schedule a consultation.",
-        url: "/contact",
-        images: [
-            {
-                url: "/mowglai-logo-new.jpg",
-                width: 1200,
-                height: 1200,
-                alt: "Contact Mowglai Digital Agency"
-            }
-        ],
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Contact Us: Start Your Project Today",
-        description: "Get in touch with Mowglai's expert development team. Request a custom web development quote or schedule a consultation.",
-        images: ["/mowglai-logo-new.jpg"],
-    },
-};
+import dynamic from "next/dynamic";
+import { useStyle } from "@/context/StyleContext";
+import { Suspense } from "react";
 
-const jsonLdBreadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://mowglai.in"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Contact Us",
-            "item": "https://mowglai.in/contact"
-        }
-    ]
-};
+const OriginalContact = dynamic(() => import("@/styles/original/Contact"));
+const MinimalContact = dynamic(() => import("@/styles/minimal/Contact"));
+const CandyContact = dynamic(() => import("@/styles/candy/Contact"));
 
 export default function Contact() {
+    const { style } = useStyle();
+
     return (
-        <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
-            <ContactClient />
-        </>
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Content...</div>}>
+            {style === "original" && <OriginalContact />}
+            {style === "minimal" && <MinimalContact />}
+            {style === "candy" && <CandyContact />}
+        </Suspense>
     );
 }

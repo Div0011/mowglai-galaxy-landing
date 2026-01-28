@@ -1,58 +1,21 @@
-import DNAClient from "./DNAClient";
+"use client";
 
-export const metadata = {
-    title: "Our DNA: Core Values & Development Process",
-    description: "Discover Mowglai's DNA: our core values, innovative development process, and workflow methodology. Learn how we deliver world-class digital experiences through precision, creativity, and technical excellence.",
-    keywords: ["Mowglai DNA", "web development process", "agency core values", "development workflow", "web development methodology", "digital agency culture", "creative process", "technical excellence", "project workflow"],
-    alternates: {
-        canonical: "/our-dna",
-    },
-    openGraph: {
-        title: "Our DNA: Core Values & Development Process",
-        description: "Discover Mowglai's DNA: our core values, innovative development process, and workflow methodology. Learn how we deliver world-class digital experiences.",
-        url: "/our-dna",
-        images: [
-            {
-                url: "/mowglai-logo-new.jpg",
-                width: 1200,
-                height: 1200,
-                alt: "Mowglai Our DNA - Core Values"
-            }
-        ],
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Our DNA: Core Values & Development Process",
-        description: "Discover Mowglai's DNA: our core values, innovative development process, and workflow methodology.",
-        images: ["/mowglai-logo-new.jpg"],
-    },
-};
+import dynamic from "next/dynamic";
+import { useStyle } from "@/context/StyleContext";
+import { Suspense } from "react";
 
-const jsonLdBreadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://mowglai.in"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Our DNA",
-            "item": "https://mowglai.in/our-dna"
-        }
-    ]
-};
+const OriginalDNA = dynamic(() => import("@/styles/original/DNA"));
+const MinimalDNA = dynamic(() => import("@/styles/minimal/DNA"));
+const CandyDNA = dynamic(() => import("@/styles/candy/DNA"));
 
 export default function OurDNA() {
+    const { style } = useStyle();
+
     return (
-        <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
-            <DNAClient />
-        </>
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Content...</div>}>
+            {style === "original" && <OriginalDNA />}
+            {style === "minimal" && <MinimalDNA />}
+            {style === "candy" && <CandyDNA />}
+        </Suspense>
     );
 }
