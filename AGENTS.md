@@ -37,6 +37,8 @@ This project uses **Next.js 15 (App Router)** with a split structure:
   - **AOS**: For simple scroll-into-view reveals.
 - **3D**: Three.js (@react-three/fiber, @react-three/drei)
 - **Icons**: Lucide React
+- **Internationalization**: Custom React Context (`LanguageContext`) + Typed Dictionaries
+- **Theming**: `next-themes` (Dark/Light/System modes)
 
 ## 4. Development Guidelines
 
@@ -76,6 +78,7 @@ This project uses **Next.js 15 (App Router)** with a split structure:
 - **Shared Components**: Place reusable UI in `src/components/ui/` (Shadcn style)
 - **Feature Components**: Place feature-specific components in `src/components/`
 - **Pages**: Route files in `app/` directory (`app/page.tsx`, `app/contact/page.tsx`)
+- **Single Source of Truth**: logic should reside in `page.tsx` imports or shared components. Avoid creating separate `...Client.tsx` files unless purely for small interactive islands.
 
 ### Import Conventions
 ```typescript
