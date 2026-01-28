@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-export type Language = "en" | "hi" | "es" | "fr";
+
+export type Language = "en" | "hi" | "es" | "fr" | "ja";
 
 interface Translations {
     SettingsToggle: {
@@ -782,6 +783,169 @@ const translations: Record<Language, Translations> = {
             stats: { systems: "Systèmes en Ligne" },
             filters: { all: "Tous les Systèmes", filterBtn: "Filtres", reset: "Réinitialiser", show: "Afficher", budget: "Budget", complexity: "Complexité", tech: "Technologie", aesthetics: "Esthétique", noSignals: "AUCUN SIGNAL TROUVÉ", broaden: "Essayez d'élargir vos paramètres de recherche.", resetParams: "Réinitialiser Paramètres" },
             card: { viewProject: "Voir le Projet", pages: "Pages" }
+        }
+    },
+    ja: {
+        SettingsToggle: {
+            title: "設定",
+            appearance: "外観",
+            light: "ライト",
+            dark: "ダーク",
+            system: "システム",
+            language: "言語"
+        },
+        Common: {
+            explore: "探る",
+            agency: "代理店",
+            sayHello: "こんにちは",
+            est: "設立",
+            deliveringElegance: "デジタルの優雅さを提供します。"
+        },
+        Home: {
+            weCreate: "私たちが創る",
+            the: "",
+            extraordinary: "非日常",
+            introText: "平凡なものが溢れるデジタル環境の中で、Mowglai Wild は成長の光として立っています。私たちは単にウェブサイトを構築するのではなく、ブランドのビジョンに命を吹き込むデジタル エコシステムを設計します。",
+            exploreDNA: "私たちのDNAを探る",
+            purchase: "購入",
+            templates: "テンプレート",
+            templateText: "業界特化型のプレミアム ウェブサイト テンプレートで立ち上げを加速しましょう。",
+            viewTemplates: "テンプレートを見る",
+            readyToBegin: "旅を始める準備はできましたか？",
+            consultFree: "無料相談",
+            studioStory: "スタジオストーリー",
+            knowMore: "まだよくわかりませんか？ 詳細はこちら"
+        },
+        SelectedWork: {
+            selected: "厳選された",
+            work: "作品",
+            collectionDesc: "私たちの最も影響力のあるデジタルの旅の厳選されたコレクション。",
+            exploreCase: "事例を見る",
+            comingSoonTitle: "ケーススタディ近日公開",
+            comingSoonDesc: "このプロジェクトのケーススタディは現在最終調整中です。"
+        },
+        AestheticShowcase: {
+            aesthetic: { title: "美学", text: "驚くべきビジュアル" },
+            global: { title: "グローバル", text: "ボーダーレスな体験" },
+            fast: { title: "高速", text: "圧倒的なパフォーマンス" },
+            deep: { title: "深さ", text: "簡素化された複雑さ" },
+            mobile: { title: "モバイル", text: "どこでも完璧" },
+            adaptation: { title: "適応", text: "絶え間ない進化" },
+            survival: { title: "生存", text: "強靭なコード" }
+        },
+        Services: {
+            hero: {
+                subtitle: "私たちの",
+                title: "サービス",
+                description: "デジタルリアリティに織り込まれた機能。"
+            },
+            cards: {
+                webDesign: {
+                    category: "ウェブデザイン",
+                    title: "美的卓越性",
+                    description: "ウェブサイトはブランドのデジタルの顔です。私たちは芸術的な表現と機能的な精度を融合させた、視覚的に素晴らしいレスポンシブなインターフェースを作成します。",
+                    details: ["UI/UXデザイン", "モーショングラフィックス", "ブランドアイデンティティ", "レスポンシブレイアウト", "モバイルファースト"]
+                },
+                development: {
+                    category: "開発",
+                    title: "堅牢なエンジニアリング",
+                    description: "美しさの下には野獣が潜んでいます。私たちの開発チームは、ビジネスを前進させるスケーラブルで安全、かつ超高速なアーキテクチャを構築します。",
+                    details: ["フルスタック開発", "Eコマース", "CMSソリューション", "API統合"]
+                },
+                redesign: {
+                    category: "リデザイン",
+                    title: "デジタル進化",
+                    description: "時代遅れが陳腐化を意味するべきではありません。私たちはレガシープラットフォームに新しい命を吹き込みます。ユーザビリティを向上させ、速度を改善し、デジタルの未来を確保します。",
+                    details: ["ビジュアルオーバーホール", "パフォーマンス最適化", "セキュリティパッチ", "UX戦略"]
+                },
+                database: {
+                    category: "データベース",
+                    title: "データインテリジェンス",
+                    description: "私たちは、情報が整理され、アクセス可能で、侵入不可能であることを保証する洗練されたデータベースソリューションを設計します。",
+                    details: ["DBアーキテクチャ", "クラウド移行", "データセキュリティ", "パフォーマンス調整"]
+                },
+                strategy: {
+                    category: "戦略",
+                    title: "グローバルリーチ",
+                    description: "私たちの戦略は、ブランドを世界地図に位置づけ、文化や国境を越えてオーディエンスに響くように設計されています。",
+                    details: ["市場分析", "SEO戦略", "コンテンツキュレーション", "グロースハック"]
+                },
+                ai: {
+                    category: "人工知能",
+                    title: "インテリジェントシステム",
+                    description: "次世代AIでプラットフォームを強化します。スマートチャットボットから予測分析まで、私たちはあなたのデジタルエコシステムに知能を統合します。",
+                    details: ["AIチャットボット", "機械学習", "自動化", "統合"]
+                }
+            }
+        },
+        About: {
+            hero: {
+                digital: "デジタル",
+                artisans: "職人",
+                description: "「私たちはあなたの柔軟なデジタルパートナーです。世界中の野心的なブランドと提携し、独自のビジョンに合ったスタイリッシュでプロフェッショナルなウェブサイトを作成します。」"
+            },
+            features: [
+                { title: "モダン＆スタイリッシュ", description: "あらゆるクライアントプロファイルに合わせた、控えめでありながら視覚的に印象的なデザインを作成します。" },
+                { title: "プロフェッショナルグレード", description: "デジタルプレゼンスが安全で信頼できるものであることを保証する堅牢なプロトコル。" },
+                { title: "ピークパフォーマンス", description: "ユーザーの時間を尊重し、速度とスムーズさのために最適化されています。" },
+                { title: "国際経験", description: "複数の大陸の主要企業との実績があります。" },
+                { title: "クライアント中心", description: "業界や規模に関係なく、お客様の特定のニーズに適応します。" },
+                { title: "柔軟なスケジュール", description: "ワークフローに合わせて、さまざまなタイムゾーンで月曜から土曜まで活動しています。" }
+            ],
+            mission: {
+                global: "ビジョン",
+                vision: "グローバル",
+                internationalStandard: "国際基準",
+                builtFor: "のために構築",
+                theWorld: "世界",
+                discover: "発見",
+                ourDna: "私たちのDNA",
+                quote: "「世界中のクライアントに世界クラスの品質をもたらします。私たちはあらゆる業界向けに控えめでスタイリッシュ、かつプロフェッショナルなウェブサイトを作成します。」",
+                description: "私たちは柔軟性のために作られています。複数のタイムゾーンで月曜日から土曜日まで営業しており、お客様のスケジュールに完全に合わせます。スタートアップでも大企業でも、私たちのグローバルチームは普遍的な言語を話す現代のデジタル職人技を提供します。"
+            }
+        },
+        Navigation: {
+            value: "次の章"
+        },
+        Investment: {
+            hero: { titleMain: "THE", titleSub: "PURCHASE" },
+            tabs: { standard: "STANDARD", premium: "PREMIUM" },
+            apex: { title: "Apex Solutions", description: "Our premium tier offers bespoke digital architecture, dedicated 24/7 survival support, and unmatched growth for industry leaders.", button: "Inquire for Apex" },
+            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our wild strategies and success stories.", button: "Download Brochure" },
+            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us your goal and we'll generate a personalized strategy for your market habitat.", button: "Download Quotation" }
+        },
+        Pricing: {
+            subtitle: "Value Beyond Measurement",
+            download: "Download Proposal",
+            plans: {
+                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "START ASCENT" },
+                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "START ASCENT" },
+                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "START DIALOGUE" }
+            }
+        },
+        Contact: {
+            hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
+            info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
+            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            customQuote: { title: "必要ですか", titleSub: "カスタマイズされた見積もり？", description: "すべてのプロジェクトはユニークです。お客様の特定の要件に対するコストとスケジュールの詳細でカスタマイズされた内訳を提供させてください。", buttonMain: "カスタム見積もり", buttonSub: "をリクエスト" }
+        },
+        ProjectRequest: {
+            hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
+            form: { title: "Tell Us More", subtitle: "To initialize the protocol, we need to know who you are and what you want to achieve.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Vision / Work Plan" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your goals, requirements, or what you want to achieve..." }, button: "Send Project Details" },
+            success: { title: "Request Sent!", description: "We've received your project details and will be in touch shortly." }
+        },
+        CustomRequest: {
+            hero: { titleMain: "CUSTOM", titleSub: "REQUEST", subtitle: "Tell Us Your Vision" },
+            steps: { idea: "Your Idea", details: "Your Details" },
+            step1: { title: "What's Your Business Idea?", description: "Share your vision, goals, and what you're looking to achieve. The more details you provide, the better we can tailor our solution for you.", placeholder: "Example: I'm launching an e-commerce platform...", button: "Continue" },
+            step2: { title: "Let's Get To Know You", description: "Help us understand your project better with a few more details.", labels: { name: "Your Name", email: "Email Address", phone: "Phone Number", website: "Current Website", budget: "Estimated Budget", timeline: "Timeline", additional: "Additional Information" }, buttonBack: "Back", buttonSubmit: "Submit Request" },
+            success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
+        },
+        Explore: {
+            hero: { title: "未来", subtitle: "デザイン", description: "次世代のウェブ体験のための厳選されたインターフェース美学。" },
+            stats: { systems: "システムオンライン" },
+            filters: { all: "すべてのシステム", filterBtn: "フィルター", reset: "リセット", show: "表示", budget: "予算範囲", complexity: "複雑さ", tech: "技術スタック", aesthetics: "美学", noSignals: "信号が見つかりません", broaden: "検索パラメータを広げてみてください。", resetParams: "パラメータをリセット" },
+            card: { viewProject: "プロジェクトを見る", pages: "ページ" }
         }
     }
 };

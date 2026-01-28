@@ -45,6 +45,7 @@ const SettingsToggle = () => {
         { code: "hi", name: "Hindi", native: "हिन्दी" },
         { code: "es", name: "Spanish", native: "Español" },
         { code: "fr", name: "French", native: "Français" },
+        { code: "ja", name: "Japanese", native: "日本語" },
     ];
 
     return (
