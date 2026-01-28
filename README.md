@@ -37,6 +37,8 @@ To run this project locally:
 - **Interactivity**: Framer Motion
 - **Animations**: GSAP
 - **3D Visuals**: Three.js (@react-three/fiber, @react-three/drei)
+- **Internationalization**: Custom React Context (`LanguageContext`) + Typed Dictionaries
+- **Theming**: `next-themes` (Dark/Light/System modes)
 - **Deployment**: Optimized for Vercel/Cloudflare
 - **Bespoke Templates**: Custom HTML/Tailwind templates for various sectors (Healthcare, Education, Real Estate, etc.) available in `public/previews`.
 
