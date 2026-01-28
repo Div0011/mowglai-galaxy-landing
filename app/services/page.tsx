@@ -11,6 +11,11 @@ import { useLanguage } from "@/context/LanguageContext";
 
 export default function ServicesPage() {
     const { t } = useLanguage();
+
+    if (!t || !t.Services) {
+        return <div className="min-h-screen bg-background" />;
+    }
+
     const { Services } = t;
 
     const services = [
@@ -117,7 +122,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            <NextPageButton label={t.Navigation.value} href="/investment" />
+            <NextPageButton label={t.Navigation?.value || "Next Chapter"} href="/investment" />
         </PageLayout>
     );
 };
