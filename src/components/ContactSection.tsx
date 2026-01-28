@@ -4,11 +4,13 @@ import { useState, useRef } from "react";
 import { Send, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import TextReveal from "./TextReveal";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/utils/emailSender";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "next-themes";
 
 
 const CONTACT_EMAIL = "info@mowglai.in"; // REPLACE THIS WITH YOUR PERSONAL EMAIL FOR TESTING
@@ -22,6 +24,8 @@ const ContactSection = () => {
   const { t } = useLanguage();
   const { Contact } = t;
 
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -123,7 +127,7 @@ ${formData.message}
           </div>
 
           {/* Form - Clean & underlined */}
-          <div className="glass-card p-10 md:p-14 rounded-[2rem]">
+          <div className={cn("p-10 md:p-14 rounded-[2rem] border border-primary/20", isDark ? "bg-[#253218]/95" : "glass-card")}>
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="space-y-6">
                 <Input

@@ -49,7 +49,7 @@ const jsonLdBreadcrumb = {
 
 export default function Home() {
     return (
-        <PageLayout>
+        <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
             <div className="relative w-full h-screen">
                 <HeroSection />

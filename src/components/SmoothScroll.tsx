@@ -2,25 +2,29 @@
 
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
+import { gsap } from "gsap";
 
 const SmoothScroll = () => {
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.0, // Slightly faster for less "floaty" feel
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
-            // orientation: "vertical", 
+            lerp: 0.1,
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
             smoothWheel: true,
-            touchMultiplier: 1.5, // Reduced from 2 for more natural touch feel
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
         });
 
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        const update = (time: number) => {
+            lenis.raf(time * 1000);
+        };
 
-        requestAnimationFrame(raf);
+        gsap.ticker.add(update);
+        gsap.ticker.lagSmoothing(0);
 
         return () => {
+            gsap.ticker.remove(update);
             lenis.destroy();
         };
     }, []);

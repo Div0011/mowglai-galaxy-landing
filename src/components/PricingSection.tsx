@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "next-themes";
 
 const PricingSection = () => {
   const router = useRouter();
   const { t } = useLanguage();
   const { Pricing } = t;
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const plans = [
     {
@@ -64,39 +67,63 @@ const PricingSection = () => {
         </div>
 
         {/* Plans List - Fixed height cards with hover effect */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch px-4 md:px-0">
           {plans.map((plan, i) => (
             <div
               key={i}
               data-aos="fade-up"
               data-aos-delay={i * 200}
               className={cn(
-                "relative p-10 md:p-12 glass-card border border-primary/20 transition-all duration-400 hover:-translate-y-4 hover:border-primary group flex flex-col h-full",
-                plan.popular ? "bg-primary/5 border-primary/40 shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)]" : "bg-background/40"
+                "relative p-10 md:p-12 glass-card border transition-all duration-400 hover:-translate-y-4 group flex flex-col h-full overflow-hidden",
+                plan.popular
+                  ? (isDark
+                    ? "bg-[#253218]/95 border-primary shadow-[0_0_50px_rgba(var(--primary-rgb),0.3)]"
+                    : "bg-primary/5 border-primary/40 shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)]")
+                  : (isDark
+                    ? "bg-[#253218]/95 border-primary/20"
+                    : "bg-background/40 border-primary/20")
               )}
             >
-              {/* Hover Golden Glow */}
-              <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 blur-[80px] transition-opacity duration-500 rounded-full -z-10" />
+              {/* Colored Glow Effects */}
+              <div className={cn(
+                "absolute -top-24 -right-24 w-64 h-64 blur-[100px] opacity-0 group-hover:opacity-20 transition-opacity rounded-full",
+                isDark ? "bg-primary" : "bg-primary/40"
+              )} />
 
-              <div className="mb-8 shrink-0">
+              <div className="mb-8 shrink-0 relative z-10">
                 {plan.popular && (
-                  <span className="inline-block px-4 py-1 rounded-full bg-primary text-background text-[10px] font-bold tracking-widest uppercase mb-6">Most Popular</span>
+                  <span className="inline-block px-4 py-1 rounded-full bg-primary text-black text-[10px] font-bold tracking-widest uppercase mb-6 shadow-lg">Most Popular</span>
                 )}
-                <h3 className="text-xl sm:text-3xl md:text-4xl font-display font-bold mb-4 text-foreground group-hover:text-primary transition-colors">
+                <h3 className={cn(
+                  "text-xl sm:text-3xl md:text-4xl font-display font-bold mb-4 transition-colors",
+                  isDark ? "text-primary" : "text-foreground group-hover:text-primary"
+                )}>
                   {plan.name}
                 </h3>
-                <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-foreground mb-4">
+                <div className={cn(
+                  "text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black mb-4",
+                  isDark ? "text-white" : "text-foreground"
+                )}>
                   {plan.price}
-                  {plan.price !== "Custom" && <span className="text-lg font-normal text-muted-foreground ml-2">/ project</span>}
+                  {plan.price !== "Custom" && <span className="text-lg font-normal opacity-60 ml-2">/ project</span>}
                 </div>
-                <p className="text-muted-foreground text-sm font-body leading-relaxed">{plan.description}</p>
+                <p className={cn(
+                  "text-sm font-body leading-relaxed",
+                  isDark ? "text-white/60" : "text-muted-foreground"
+                )}>{plan.description}</p>
               </div>
 
-              <div className="h-px w-full bg-primary/10 mb-8" />
+              <div className={cn(
+                "h-px w-full mb-8 relative z-10",
+                isDark ? "bg-primary/20" : "bg-primary/10"
+              )} />
 
-              <ul className="space-y-4 mb-12 flex-grow">
+              <ul className="space-y-4 mb-12 flex-grow relative z-10">
                 {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-start gap-4 text-xl text-foreground/80 leading-tight">
+                  <li key={j} className={cn(
+                    "flex items-start gap-4 text-xl leading-tight",
+                    isDark ? "text-white/80" : "text-foreground/80"
+                  )}>
                     <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <span>
                       {feature}
@@ -106,15 +133,16 @@ const PricingSection = () => {
                 ))}
               </ul>
 
-              <div className="flex flex-col gap-3 mt-auto">
+              <div className="flex flex-col gap-3 mt-auto relative z-10">
                 <Button
                   onClick={() => handlePlanClick(plan)}
-                  data-theme={plan.popular ? "gold" : undefined}
                   className={cn(
                     "w-full py-6 md:py-8 text-xs sm:text-lg md:text-xl font-display font-black uppercase tracking-widest rounded-full transition-all duration-500 shadow-lg",
                     plan.popular
-                      ? "bg-primary text-primary-foreground hover:bg-foreground hover:text-background"
-                      : "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-background"
+                      ? "bg-primary text-black hover:bg-white hover:text-black"
+                      : (isDark
+                        ? "bg-white/5 border border-primary text-primary hover:bg-primary hover:text-black"
+                        : "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white")
                   )}
                 >
                   {plan.buttonText}

@@ -12,8 +12,8 @@ const JungleBackground = () => {
             {/* 2. Fixed Atmosphere Layer - Overlays that stay with the viewport */}
             <div className="fixed inset-0 pointer-events-none">
                 {/* Dappled light effects - Subtle pulses */}
-                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/10 dark:bg-green-900/10 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/5 dark:bg-emerald-900/10 rounded-full blur-[150px] animate-bounce-slow" />
+                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/10 dark:bg-green-900/10 rounded-full blur-[120px] animate-pulse will-change-[opacity]" />
+                <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/5 dark:bg-emerald-900/10 rounded-full blur-[150px] animate-bounce-slow will-change-transform" />
 
                 {/* Subtle leaf/texture overlay */}
                 <div className="absolute inset-0 opacity-[0.06] dark:opacity-[0.04] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]" />
@@ -24,8 +24,8 @@ const JungleBackground = () => {
 
             <style>{`
                 @keyframes bounce-slow {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-30px); }
+                    0%, 100% { transform: translate3d(0, 0, 0); }
+                    50% { transform: translate3d(0, -30px, 0); }
                 }
                 .animate-bounce-slow {
                     animation: bounce-slow 15s ease-in-out infinite;

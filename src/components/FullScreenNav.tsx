@@ -17,7 +17,7 @@ const navItems: NavItem[] = [
     { icon: Users, label: "STORY", href: "/about" },
     { icon: Layers, label: "CRAFT", href: "/services" },
     { icon: LayoutTemplate, label: "BLUEPRINT", href: "/explore" },
-    { icon: DollarSign, label: "VALUE", href: "/investment" },
+    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
     { icon: Mail, label: "HELLO", href: "/contact" },
 ];
 
