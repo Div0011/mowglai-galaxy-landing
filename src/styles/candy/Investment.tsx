@@ -69,7 +69,7 @@ export default function CandyInvestment() {
                             {["standard", "premium"].map((type) => (
                                 <button
                                     key={type}
-                                    onClick={() => setPlanType(type as any)}
+                                    onClick={() => setPlanType(type as "standard" | "premium")}
                                     className={`px-6 md:px-12 py-3 md:py-4 rounded-[1rem] md:rounded-[1.5rem] text-[8px] md:text-[10px] font-black uppercase tracking-widest transition-all ${planType === type ? 'bg-black text-white shadow-lg' : isDark ? 'text-white/30 hover:text-white hover:bg-white/5' : 'text-black/30 hover:text-black hover:bg-white/50'}`}
                                 >
                                     {type}

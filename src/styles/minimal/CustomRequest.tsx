@@ -171,7 +171,7 @@ Idea: ${formData.businessIdea}
                                             type={field.type}
                                             placeholder={field.placeholder}
                                             className="bg-transparent border-0 border-b-2 border-foreground/10 focus:border-foreground rounded-none h-12 p-0 focus-visible:ring-0 text-xl font-bold"
-                                            value={(formData as any)[field.key]}
+                                            value={formData[field.key as keyof typeof formData]}
                                             onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
                                         />
                                     </div>

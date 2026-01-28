@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useStyle } from "@/context/StyleContext";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Language } from "@/context/LanguageContext";
 import { useTheme } from "next-themes";
 import { X, Sun, Moon, Palette, Check, Zap, Sparkles, Layout, Users, Layers, LayoutTemplate, DollarSign, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -136,7 +136,7 @@ export default function CandyNav() {
                                         ].map((s) => (
                                             <button
                                                 key={s.id}
-                                                onClick={() => setStyle(s.id as any)}
+                                                onClick={() => setStyle(s.id as "original" | "minimal" | "candy")}
                                                 className={`flex items-center gap-3 md:gap-4 px-4 md:px-6 py-4 md:py-5 rounded-[1.5rem] md:rounded-[2rem] text-[8px] md:text-[10px] font-black uppercase tracking-widest transition-all border-b-2 md:border-b-4 ${style === s.id ? (isDark ? 'bg-white text-black border-black/10 translate-y-1' : 'bg-black text-white border-black/20 translate-y-1') : (isDark ? 'bg-white/5 text-white/60 hover:bg-white/10 border-transparent hover:translate-y-[-2px]' : 'bg-black/5 text-black hover:bg-black/10 border-transparent hover:translate-y-[-2px]')}`}
                                             >
                                                 <s.icon size={12} className="md:w-3.5 md:h-3.5" style={{ color: s.color }} />
@@ -153,7 +153,7 @@ export default function CandyNav() {
                                         {languages.map((l) => (
                                             <button
                                                 key={l.code}
-                                                onClick={() => setLanguage(l.code as any)}
+                                                onClick={() => setLanguage(l.code as Language)}
                                                 className={`px-3 md:px-6 py-3 md:py-5 rounded-xl md:rounded-2xl text-[8px] md:text-[10px] font-black uppercase tracking-widest border-2 md:border-4 transition-all ${language === l.code ? 'bg-[#6ca2fb] text-white border-white shadow-xl' : (isDark ? 'border-white/5 text-white/40 hover:bg-white/5 hover:border-white/10' : 'border-black/5 text-black/40 hover:bg-black/5 hover:border-black/10')}`}
                                             >
                                                 {l.label}

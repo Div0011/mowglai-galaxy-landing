@@ -68,7 +68,7 @@ export default function MinimalInvestment() {
                             {["standard", "premium"].map((type) => (
                                 <button
                                     key={type}
-                                    onClick={() => setPlanType(type as any)}
+                                    onClick={() => setPlanType(type as "standard" | "premium")}
                                     className={`px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-all ${planType === type ? 'bg-black text-white' : 'text-neutral-400 hover:text-black'}`}
                                 >
                                     {type}
