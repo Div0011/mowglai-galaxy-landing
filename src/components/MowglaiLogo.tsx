@@ -36,8 +36,8 @@ const MowglaiLogo = ({ className, size = "md" }: MowglaiLogoProps) => {
   // Default to logo1-light (Dark Green/General) if not mounted or if dark theme
   // Use logo2 (Golden) only if mounted and theme is explicitly light
   const logoSrc = mounted && resolvedTheme === "light"
-    ? "/logo2.png"
-    : "/logo1-light.png";
+    ? "/logo2.webp"
+    : "/logo1-light.webp";
 
   return (
     <div

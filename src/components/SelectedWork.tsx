@@ -28,7 +28,7 @@ const projects = [
         id: 3,
         title: "Jayhawk",
         category: "Healthcare Services",
-        image: "/assets/projects/jayhawk.png",
+        image: "/assets/projects/jayhawk.webp",
         description: "A modern healthcare portal prioritizing patient accessibility and care. Features include secure appointment scheduling, medical record access, and virtual doctor consultations.",
         link: "https://div0011.github.io/jayhawkk"
     },
@@ -36,7 +36,7 @@ const projects = [
         id: 4,
         title: "More Interior",
         category: "Interior Design Studio",
-        image: "/assets/projects/more-interior.png",
+        image: "/assets/projects/more-interior.webp",
         description: "An immersive portfolio showcasing exquisite living spaces. The design emphasizes visual storytelling, allowing users to explore bespoke furniture and architectural elegance.",
         link: "https://moreinterior.in/"
     },

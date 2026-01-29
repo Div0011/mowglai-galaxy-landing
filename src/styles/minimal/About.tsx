@@ -53,7 +53,7 @@ export default function MinimalAbout() {
                     >
                         <div className="aspect-[4/3] xl:aspect-[3/4] bg-foreground/5 border border-foreground overflow-hidden relative grayscale group hover:grayscale-0 transition-all duration-700">
                             <img
-                                src="/minimal_about_philosophy.png"
+                                src="/minimal_about_philosophy.webp"
                                 alt="Philosophy Sculpture"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />

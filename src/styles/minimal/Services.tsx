@@ -114,7 +114,7 @@ export default function MinimalServices() {
                     </div>
                     <div className="aspect-square bg-foreground/5 border border-foreground relative grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden group">
                         <img
-                            src="/minimal_services_abstract.png"
+                            src="/minimal_services_abstract.webp"
                             alt="Services Abstract"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                         />
