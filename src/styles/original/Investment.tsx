@@ -5,13 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Download, FileText, Sparkles, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
-<<<<<<< HEAD
-import { useLanguage } from "@/context/LanguageContext";
-import { useRouter } from "next/navigation";
-import { downloadAsHtml } from "@/utils/pdfDownloader";
-import NextPageButton from "@/components/NextPageButton";
-=======
->>>>>>> main
 
 const plans = {
     standard: [
@@ -49,47 +42,6 @@ const plans = {
 };
 
 export default function OriginalInvestment() {
-<<<<<<< HEAD
-    const { t } = useLanguage();
-    const router = useRouter();
-    const [planType, setPlanType] = useState<"standard" | "premium">("standard");
-    const [discountCode, setDiscountCode] = useState("");
-    const [isDiscountApplied, setIsDiscountApplied] = useState(false);
-    const [discountError, setDiscountError] = useState("");
-
-    const handleApplyDiscount = () => {
-        if (discountCode.trim().toUpperCase() === "MOWGLAI10") {
-            setIsDiscountApplied(true);
-            setDiscountError("");
-        } else {
-            setIsDiscountApplied(false);
-            setDiscountError("Invalid Code");
-        }
-    };
-
-    const getPrice = (originalPrice: string) => {
-        if (!isDiscountApplied || originalPrice === "CUSTOM" || originalPrice.includes("+")) return originalPrice;
-        const numPrice = parseInt(originalPrice.replace("$", "").replace(",", ""));
-        if (isNaN(numPrice)) return originalPrice;
-        const discounted = Math.round(numPrice * 0.9);
-        return `$${discounted}`;
-    };
-
-    // Mapping for standard plans from translations + prices from local config
-    const standardPlans = [
-        { ...t.Pricing.plans.basic, price: plans.standard[0].price, type: 'basic' },
-        { ...t.Pricing.plans.advanced, price: plans.standard[1].price, type: 'advanced' },
-        { ...t.Pricing.plans.epic, price: plans.standard[2].price, type: 'epic' }
-    ];
-
-    return (
-        <PageLayout>
-            <div className="bg-transparent text-foreground min-h-screen px-4 md:px-24 py-32 font-sans overflow-hidden relative">
-
-                {/* Background Decor - Enhancing the Jungle vibe */}
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -mr-20 -mt-20 pointer-events-none animate-pulse" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -ml-20 -mb-20 pointer-events-none animate-pulse" />
-=======
     const [planType, setPlanType] = useState<"standard" | "premium">("standard");
 
     return (
@@ -99,7 +51,6 @@ export default function OriginalInvestment() {
                 {/* Background Decor */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-20 -mb-20 pointer-events-none" />
->>>>>>> main
 
                 {/* Header Area */}
                 <motion.div
@@ -110,33 +61,19 @@ export default function OriginalInvestment() {
                 >
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-primary/20 pb-12 gap-12">
                         <div>
-<<<<<<< HEAD
-                            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-primary block mb-6">Financial Strategy</span>
-                            <h1 className="text-5xl md:text-[6.5rem] lg:text-[7.5rem] font-display font-black leading-tight uppercase tracking-tighter">
-                                The <br /> <span className="text-primary italic">Economy</span>
-=======
                             <span className="text-xs font-bold uppercase tracking-[0.5em] text-primary block mb-6">Financial Strategy</span>
                             <h1 className="text-6xl md:text-8xl font-display font-black leading-tight uppercase tracking-tighter">
                                 The <br /> <span className="text-primary">Economy</span>
->>>>>>> main
                             </h1>
                         </div>
 
                         {/* Toggle */}
-<<<<<<< HEAD
-                        <div className="flex bg-background/20 p-1 rounded-full border border-primary/20 backdrop-blur-xl">
-=======
                         <div className="flex bg-secondary/30 p-1 rounded-full border border-primary/20 backdrop-blur-sm">
->>>>>>> main
                             {["standard", "premium"].map((type) => (
                                 <button
                                     key={type}
                                     onClick={() => setPlanType(type as "standard" | "premium")}
-<<<<<<< HEAD
                                     className={`px-8 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all rounded-full ${planType === type ? 'bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]' : 'text-primary/60 hover:text-primary'}`}
-=======
-                                    className={`px-8 py-3 text-xs font-bold uppercase tracking-widest transition-all rounded-full ${planType === type ? 'bg-primary text-background' : 'text-muted-foreground hover:text-foreground'}`}
->>>>>>> main
                                 >
                                     {type}
                                 </button>
@@ -145,50 +82,6 @@ export default function OriginalInvestment() {
                     </div>
                 </motion.div>
 
-<<<<<<< HEAD
-                {/* Discount Code Section */}
-                <div className="flex justify-center mb-16 relative z-10">
-                    <div className="flex flex-col items-center gap-4">
-                        <div className="flex items-center gap-2 bg-background/20 p-2 rounded-2xl border border-primary/20 backdrop-blur-xl group hover:border-primary/40 transition-colors">
-                            <input
-                                type="text"
-                                placeholder="Discount Code"
-                                value={discountCode}
-                                onChange={(e) => setDiscountCode(e.target.value)}
-                                className="bg-transparent border-none text-foreground placeholder:text-muted-foreground/30 focus:ring-0 text-sm uppercase tracking-wider w-40 md:w-48 px-4"
-                            />
-                            <button
-                                onClick={handleApplyDiscount}
-                                className="bg-primary/20 hover:bg-primary text-primary hover:text-primary-foreground px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all"
-                            >
-                                Apply
-                            </button>
-                        </div>
-                        <AnimatePresence>
-                            {isDiscountApplied && (
-                                <motion.span
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="text-primary text-[10px] md:text-xs font-bold uppercase tracking-widest flex items-center gap-2"
-                                >
-                                    <Check size={14} /> 10% Discount Applied!
-                                </motion.span>
-                            )}
-                            {discountError && (
-                                <motion.span
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    className="text-red-500 text-[10px] md:text-xs font-bold uppercase tracking-widest"
-                                >
-                                    {discountError}
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                    </div>
-                </div>
-
-=======
->>>>>>> main
                 {/* Investment Content */}
                 <div className="min-h-[600px] relative z-10">
                     <AnimatePresence mode="wait">
@@ -198,113 +91,6 @@ export default function OriginalInvestment() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.4 }}
-<<<<<<< HEAD
-                            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-                        >
-                            {planType === "standard" ? (
-                                standardPlans.map((plan, i) => (
-                                    <div
-                                        key={i}
-                                        className="p-10 md:p-14 rounded-[2.5rem] bg-secondary/20 border border-primary/10 hover:border-primary/40 hover:bg-secondary/30 transition-all duration-500 flex flex-col group relative overflow-hidden backdrop-blur-md"
-                                    >
-                                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-
-                                        <div className="mb-12 relative z-10">
-                                            <h3 className="text-3xl md:text-5xl font-display uppercase italic mb-4 text-primary group-hover:scale-105 transition-transform origin-left">{plan.name}</h3>
-                                            <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80">{plan.description}</p>
-                                        </div>
-
-                                        <div className="mb-16 relative z-10 h-16 sm:h-20 flex flex-col justify-center">
-                                            <div className="text-4xl sm:text-5xl md:text-6xl font-display font-black leading-none mb-3 text-foreground flex items-center flex-wrap gap-4">
-                                                <AnimatePresence mode="wait">
-                                                    {isDiscountApplied && plan.price !== "CUSTOM" && !plan.price.includes("+") ? (
-                                                        <motion.div
-                                                            key="discounted"
-                                                            initial={{ opacity: 0, y: 10 }}
-                                                            animate={{ opacity: 1, y: 0 }}
-                                                            exit={{ opacity: 0, y: -10 }}
-                                                            className="flex items-center gap-4"
-                                                        >
-                                                            <span className="line-through text-muted-foreground/30 text-3xl sm:text-4xl">{plan.price}</span>
-                                                            <span className="text-primary">{getPrice(plan.price)}</span>
-                                                        </motion.div>
-                                                    ) : (
-                                                        <motion.div
-                                                            key="regular"
-                                                            initial={{ opacity: 0 }}
-                                                            animate={{ opacity: 1 }}
-                                                            exit={{ opacity: 0 }}
-                                                        >
-                                                            {plan.price}
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
-                                            {plan.price !== "CUSTOM" && <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary/40">Initial Acquisition</span>}
-                                        </div>
-
-                                        <ul className="space-y-6 mb-16 flex-grow font-body text-base md:text-lg tracking-wide relative z-10">
-                                            {(plan.features as string[]).map((f, fi) => (
-                                                <li key={fi} className="flex gap-4 items-start text-foreground/80 group-hover:text-foreground transition-colors">
-                                                    <div className="mt-2 w-2 h-2 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
-                                                    <span className="leading-snug">{f}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        <Link
-                                            href={`/project-request?plan=${plan.type}`}
-                                            className="relative z-10 w-full py-6 border border-primary/30 text-center text-sm font-black uppercase tracking-[0.4em] transition-all bg-transparent text-primary hover:bg-primary hover:text-primary-foreground rounded-2xl mt-auto shadow-[0_0_20px_rgba(var(--primary-rgb),0.0)] hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]"
-                                        >
-                                            {plan.button}
-                                        </Link>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="col-span-full grid grid-cols-1 md:grid-cols-3 gap-8">
-                                    <div className="md:col-span-1 p-10 md:p-14 rounded-[2.5rem] bg-primary/10 border-2 border-primary/30 hover:border-primary transition-all duration-500 flex flex-col group relative overflow-hidden backdrop-blur-xl">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none" />
-
-                                        <div className="mb-12 relative z-10">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <h3 className="text-5xl font-display uppercase italic text-primary">APEX</h3>
-                                                <Sparkles className="w-8 h-8 text-primary animate-pulse" />
-                                            </div>
-                                            <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80">{t.Investment.apex.description}</p>
-                                        </div>
-
-                                        <div className="mb-20 relative z-10">
-                                            <div className="text-5xl md:text-7xl font-display font-black text-foreground mb-4">$4,999+</div>
-                                            <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary/40">Architecture Level</span>
-                                        </div>
-
-                                        <ul className="space-y-6 mb-16 flex-grow font-body text-base md:text-lg tracking-wide relative z-10">
-                                            {["Bespoke Digital Architecture", "Survival Ready Support", "Strategic Market Hegemony", "Liquid Motion Graphics", "Neural AI Integration"].map((f, fi) => (
-                                                <li key={fi} className="flex gap-4 items-start text-foreground/90">
-                                                    <div className="mt-2 w-2 h-2 rounded-full bg-primary" />
-                                                    <span className="leading-snug">{f}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        <Link
-                                            href="/contact"
-                                            className="relative z-10 w-full py-8 bg-primary text-primary-foreground text-center text-sm font-black uppercase tracking-[0.5em] rounded-2xl shadow-[0_20px_40px_rgba(var(--primary-rgb),0.3)] hover:scale-[1.02] transition-all"
-                                        >
-                                            {t.Investment.apex.button}
-                                        </Link>
-                                    </div>
-
-                                    <div className="md:col-span-2 p-16 flex flex-col justify-center items-center bg-background/10 border border-primary/10 rounded-[2.5rem] overflow-hidden relative backdrop-blur-sm group">
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-display font-black text-primary opacity-[0.03] select-none pointer-events-none italic group-hover:scale-110 transition-transform duration-1000">
-                                            APEX
-                                        </div>
-                                        <Sparkles size={120} className="text-primary opacity-20 mb-12 stroke-[1px] animate-pookie-float" />
-                                        <p className="max-w-md text-center text-foreground/60 font-display text-2xl md:text-3xl italic leading-relaxed uppercase tracking-widest">
-                                            "Tailored for those who demand <span className="text-primary">absolute hegemony</span>."
-                                        </p>
-                                    </div>
-=======
                             className="grid grid-cols-1 md:grid-cols-3 gap-6"
                         >
                             {(planType === "standard" ? plans.standard : plans.premium).map((plan, i) => (
@@ -349,7 +135,6 @@ export default function OriginalInvestment() {
                                     <p className="max-w-md text-center text-muted-foreground font-body text-xl italic leading-relaxed uppercase tracking-widest">
                                         Tailored specifically for those who demand absolute digital hegemony.
                                     </p>
->>>>>>> main
                                 </div>
                             )}
                         </motion.div>
@@ -359,43 +144,12 @@ export default function OriginalInvestment() {
                 {/* Resource Downloads */}
                 <div className="mt-48 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
                     {[
-<<<<<<< HEAD
-                        { title: t.Investment.brochure.title, icon: Download, label: t.Investment.brochure.description, btn: t.Investment.brochure.button, file: "mowglai-brochure.html", name: "Mowglai_Brochure.html" },
-                        { title: t.Investment.customQuote.title, icon: FileText, label: t.Investment.customQuote.description, btn: t.Investment.customQuote.button, link: "/custom-request" }
-=======
                         { title: "THE BROCHURE", icon: Download, label: "Digital Artifact Catalog" },
                         { title: "THE QUOTATION", icon: FileText, label: "Bespoke Request Engine" }
->>>>>>> main
                     ].map((item, i) => (
                         <motion.div
                             key={i}
                             whileHover={{ y: -10 }}
-<<<<<<< HEAD
-                            className="p-16 border border-primary/20 rounded-[2.5rem] flex flex-col justify-between items-center text-center space-y-10 bg-secondary/10 hover:bg-secondary/20 transition-all group backdrop-blur-md"
-                        >
-                            <div className="p-6 rounded-3xl bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                                <item.icon className="w-12 h-12 stroke-[1.5px]" />
-                            </div>
-                            <div>
-                                <h3 className="text-4xl md:text-5xl font-display uppercase mb-4 text-foreground">{item.title}</h3>
-                                <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/60">{item.label}</p>
-                            </div>
-                            {item.link ? (
-                                <Link
-                                    href={item.link}
-                                    className="mt-10 text-xs md:text-sm font-bold uppercase tracking-[0.5em] border-b-2 border-primary text-primary pb-3 hover:tracking-[0.7em] transition-all"
-                                >
-                                    {item.btn}
-                                </Link>
-                            ) : (
-                                <button
-                                    onClick={() => downloadAsHtml(`/${item.file!}`, item.name!)}
-                                    className="mt-10 text-xs md:text-sm font-bold uppercase tracking-[0.5em] border-b-2 border-primary text-primary pb-3 hover:tracking-[0.7em] transition-all"
-                                >
-                                    {item.btn}
-                                </button>
-                            )}
-=======
                             className="p-12 border border-primary/20 rounded-3xl flex flex-col justify-between items-center text-center space-y-8 bg-secondary/20 hover:bg-secondary/40 transition-all group backdrop-blur-sm"
                         >
                             <item.icon className="w-12 h-12 stroke-[1px] text-primary" />
@@ -406,44 +160,24 @@ export default function OriginalInvestment() {
                             <button className="mt-8 text-xs font-bold uppercase tracking-[0.5em] border-b border-primary text-primary pb-2 hover:opacity-80 transition-opacity">
                                 Secure Access
                             </button>
->>>>>>> main
                         </motion.div>
                     ))}
                 </div>
 
                 {/* Footnote */}
-<<<<<<< HEAD
-                <div className="mt-48 pt-12 border-t border-primary/20 flex flex-col md:flex-row justify-between items-start gap-12 relative z-10 opacity-60">
-                    <div className="max-w-md space-y-6">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Protocol Note</p>
-=======
                 <div className="mt-48 pt-12 border-t border-primary/20 flex flex-col md:flex-row justify-between items-start gap-12 relative z-10">
                     <div className="max-w-md space-y-6">
                         <p className="text-xs font-bold uppercase tracking-[0.5em] text-primary/60">Protocol Note</p>
->>>>>>> main
                         <p className="text-xs font-body leading-loose text-muted-foreground uppercase tracking-widest">
                             All investments require a 50% initiation fee prior to architecture development. Timelines are subject to studio bandwidth and project complexity.
                         </p>
                     </div>
-<<<<<<< HEAD
-                    <div className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary/40 italic">
-                        © {new Date().getFullYear()} Mowglai / Reserved
-=======
                     <div className="text-xs font-bold uppercase tracking-[0.5em] text-primary/40 italic">
                         © 2025 Mowglai / Reserved
->>>>>>> main
                     </div>
                 </div>
 
                 {/* Next Chapter CTA - Final Narrative */}
-<<<<<<< HEAD
-                <div className="mt-32 relative z-10">
-                    <NextPageButton
-                        label="HELLO"
-                        href="/contact"
-                        tagline="Initiate Dialogue"
-                    />
-=======
                 <div className="mt-64 pt-32 border-t border-primary/20 flex flex-col items-center text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -463,9 +197,7 @@ export default function OriginalInvestment() {
                         </h4>
                         <p className="mt-8 text-xs font-bold uppercase tracking-[0.3em] text-primary/60 group-hover:text-primary transition-opacity">Initiate Dialogue & Project Scoping</p>
                     </Link>
->>>>>>> main
                 </div>
             </div>
         </PageLayout>
-    );
-}
+    )};
