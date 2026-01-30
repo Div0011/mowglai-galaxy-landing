@@ -164,7 +164,7 @@ export default function ReferralPage() {
                                                 onClick={() => {
                                                     const subject = encodeURIComponent(`${userData.name} has a gift for you!`);
                                                     const body = encodeURIComponent(`Hey ${friendData.name},\n\nYour friend ${userData.name} thinks you'd love Mowglai! We build digital experiences that perform, inspire, and grow.\n\nUse this referral code: MOW10-DISCOUNT to get 10% OFF your first project.\n\nLet's build something extraordinary together.\n\nCheers,\nThe Mowglai Team`);
-                                                    window.location.href = `mailto:${friendData.email}?subject=${subject}&body=${body}`;
+                                                    window.location.href = `mailto:${encodeURIComponent(friendData.email)}?subject=${subject}&body=${body}`;
                                                 }}
                                                 className="bg-primary text-primary-foreground hover:scale-105 active:scale-95 transition-all font-display font-bold px-10 py-7 rounded-full uppercase tracking-widest text-xs w-full shadow-[0_20px_40px_rgba(var(--primary-rgb),0.3)]"
                                             >
