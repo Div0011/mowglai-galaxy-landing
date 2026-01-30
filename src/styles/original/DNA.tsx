@@ -69,9 +69,7 @@ export default function OriginalDNA() {
     return (
         <PageLayout>
             <section className="relative min-h-screen flex items-center justify-center py-16 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
-                <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
+
 
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center max-w-5xl mx-auto">

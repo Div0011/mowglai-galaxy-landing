@@ -154,7 +154,7 @@ export default function ExplorePage() {
 
                 {/* Hero / Header Section */}
                 <div className="relative pt-32 px-6 md:px-12 pb-12 overflow-hidden text-center md:text-left">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
+
                     <div className="max-w-[1800px] mx-auto relative z-10">
                         <div className="flex flex-col md:flex-row justify-between items-end gap-6">
                             <div className="w-full">
