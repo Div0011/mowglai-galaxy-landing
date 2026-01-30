@@ -29,7 +29,7 @@ const MissionSection = () => {
                 trigger: text,
                 start: "top bottom",
                 end: "bottom center",
-                scrub: 1
+                scrub: 2
             }
         });
 
