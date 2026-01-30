@@ -4,6 +4,8 @@ import PageLayout from "@/components/PageLayout";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import NextPageButton from "@/components/NextPageButton";
 
 const services = [
     {
@@ -45,106 +47,110 @@ const services = [
 ];
 
 export default function OriginalServices() {
+    const { t } = useLanguage();
+    const { Services: s } = t;
+    const servicesData = [
+        { id: "01", ...s.cards.webDesign },
+        { id: "02", ...s.cards.development },
+        { id: "03", ...s.cards.redesign },
+        { id: "04", ...s.cards.database },
+        { id: "05", ...s.cards.strategy },
+        { id: "06", ...s.cards.ai }
+    ];
+
     return (
         <PageLayout>
-            <div className="bg-background text-foreground min-h-screen px-4 md:px-24 py-32 font-sans relative overflow-hidden">
-                {/* Background Decor */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -ml-20 -mb-20 pointer-events-none" />
+            <div className="bg-transparent text-foreground min-h-screen px-4 md:px-24 py-32 font-sans relative overflow-hidden">
 
-                {/* Header Section */}
+                {/* Background Decor - Immersive Pulses */}
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -mr-20 -mt-20 pointer-events-none animate-pookie-float" />
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -ml-20 -mb-20 pointer-events-none animate-pulse" />
+
+                {/* Header Section - Massive Regular Style */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative z-10 mt-12 md:mt-20 mb-24 md:mb-32 flex flex-col md:flex-row justify-between items-end border-b border-primary/20 pb-12"
+                    className="relative z-10 mt-12 md:mt-20 mb-32 flex flex-col md:flex-row justify-between items-end border-b-2 border-primary/20 pb-16 gap-12"
                 >
-                    <h1 className="text-5xl md:text-8xl font-display font-black leading-tight uppercase tracking-tighter">
-                        Our <br /> <span className="text-primary">Services</span>
-                    </h1>
-                    <div className="text-left md:text-right max-w-sm md:pb-4 mt-8 md:mt-0">
-                        <span className="text-xs uppercase tracking-[0.2em] font-body text-primary block mb-4">Capabilities</span>
-                        <p className="text-lg font-body leading-relaxed text-muted-foreground">
-                            Capabilities woven into digital reality. Designing and developing for a world that demands better interaction.
+                    <div>
+                        <span className="text-sm md:text-base font-bold uppercase tracking-[0.5em] text-primary block mb-6">{s.hero.subtitle}</span>
+                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black leading-tight uppercase tracking-tighter -ml-2 md:-ml-4">
+                            <span className="text-primary italic">{s.hero.title}</span>
+                        </h1>
+                    </div>
+                    <div className="text-left md:text-right max-w-md md:pb-4">
+                        <p className="text-lg md:text-xl font-body leading-relaxed text-muted-foreground italic">
+                            {s.hero.description}
                         </p>
                     </div>
                 </motion.div>
 
-                {/* Services Grid */}
-                <div className="relative z-10 grid grid-cols-1 gap-8 md:gap-12">
-                    {services.map((service, index) => (
+                {/* Services Stack - Immersive List */}
+                <div className="relative z-10 space-y-12">
+                    {servicesData.map((service, index) => (
                         <motion.div
                             key={service.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 p-8 md:p-12 rounded-3xl bg-secondary/30 border border-primary/10 hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.1)]"
+                            initial={{ opacity: 0, x: index % 2 === 0 ? -150 : 150 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                            className="group relative grid grid-cols-1 lg:grid-cols-12 gap-6 p-8 md:p-12 rounded-[2.5rem] bg-secondary/10 border border-primary/10 hover:border-primary/40 hover:bg-secondary/20 transition-all duration-700 backdrop-blur-xl overflow-hidden"
                         >
-                            <div className="md:col-span-1">
-                                <span className="text-2xl md:text-3xl font-display font-bold text-primary/50 group-hover:text-primary transition-colors">/{service.id}</span>
-                            </div>
-                            <div className="md:col-span-12 lg:col-span-5 flex flex-col justify-center">
-                                <span className="text-xs uppercase tracking-[0.2em] font-body text-muted-foreground mb-3">{service.category}</span>
-                                <h2 className="text-3xl md:text-5xl font-display uppercase group-hover:text-primary transition-colors duration-500 leading-none">{service.title}</h2>
-                            </div>
-                            <div className="md:col-span-12 lg:col-span-6 flex flex-col justify-center mt-4 lg:mt-0">
-                                <p className="text-lg md:text-xl font-body leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors max-w-xl">
-                                    {service.desc}
-                                </p>
+                            <div className="flex flex-col relative z-10 w-full">
+                                <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start">
+                                    {/* Left: Huge Serial Number */}
+                                    <div className="shrink-0 select-none pointer-events-none">
+                                        <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-black text-primary/10 group-hover:text-primary transition-colors duration-700 leading-[0.8] tracking-tighter">
+                                            {service.id}
+                                        </span>
+                                    </div>
+
+                                    {/* Middle: Main Content */}
+                                    <div className="flex flex-col gap-8 pt-4 lg:pt-8 relative flex-1">
+                                        <div>
+                                            <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-primary/80 mb-8 block">
+                                                {service.category}
+                                            </span>
+                                            <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black uppercase text-foreground group-hover:text-primary transition-colors duration-500 leading-[1.05] tracking-tighter">
+                                                {service.title}
+                                            </h2>
+                                        </div>
+                                        <p className="text-lg md:text-2xl font-body font-light leading-relaxed text-foreground/80 group-hover:text-foreground transition-colors duration-500 max-w-3xl">
+                                            {service.description}
+                                        </p>
+
+                                        <Link
+                                            href="/contact"
+                                            className="inline-flex items-center gap-3 text-xs md:text-sm font-black uppercase tracking-[0.3em] text-primary group-hover:gap-5 transition-all w-fit hover:text-foreground"
+                                        >
+                                            Initiate Development <ArrowRight className="w-5 h-5" />
+                                        </Link>
+                                    </div>
+
+                                    {/* Right: Keywords (Desktop Side / Mobile Bottom) */}
+                                    <div className="w-full lg:w-[40%] shrink-0 mt-8 lg:mt-0 pt-6 lg:pt-4 border-t lg:border-t-0 lg:border-l border-primary/10 lg:pl-6">
+                                        <div className="flex flex-wrap lg:flex-col items-start lg:items-end gap-3">
+                                            {service.details.map((detail, i) => (
+                                                <span key={i} className="px-6 py-3 rounded-full border border-primary/20 bg-primary/5 text-primary/90 text-sm md:text-lg font-bold tracking-wider hover:bg-primary/20 hover:border-primary/40 transition-all cursor-default whitespace-nowrap shadow-sm">
+                                                    {detail}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Methodology Section */}
-                <div className="relative z-10 mt-32 md:mt-48 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-                    <div className="space-y-12">
-                        <h3 className="text-4xl font-display uppercase tracking-wider text-foreground">Methodology</h3>
-                        <div className="space-y-10">
-                            {[
-                                { t: "Immersion", d: "First, we inhabit your brand. Understanding the nuances of your vision and the friction of your challenges." },
-                                { t: "Reduction", d: "We strip away the noise. Only what is necessary survives the transition from idea to artifact." },
-                                { t: "Refinement", d: "Iteration is constant. We polish every interaction until it feels effortless." }
-                            ].map((item, i) => (
-                                <div key={i} className="flex gap-8">
-                                    <span className="font-display font-bold text-4xl text-primary/50">0{i + 1}</span>
-                                    <div>
-                                        <h4 className="font-display font-bold uppercase tracking-widest text-lg mb-3 text-foreground">{item.t}</h4>
-                                        <p className="font-body text-muted-foreground leading-relaxed text-base">{item.d}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="aspect-square rounded-[3rem] overflow-hidden border border-primary/20 shadow-2xl relative group bg-secondary/20">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-50 mix-blend-overlay" />
-                        <div className="absolute inset-0 flex items-center justify-center text-[20vw] font-display font-black text-primary opacity-5 select-none pointer-events-none group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-1000">S</div>
-                    </div>
-                </div>
-
-                {/* Call to Action */}
-                <div className="relative z-10 mt-32 md:mt-48 py-24 md:py-32 border-t border-primary/20">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-16 text-center md:text-left">
-                        <div className="flex-1">
-                            <span className="text-xs uppercase tracking-[0.3em] font-body text-primary block mb-6">Next Steps</span>
-                            <Link href="/explore" className="group block">
-                                <h4 className="text-5xl md:text-7xl font-display uppercase leading-none hover:text-primary transition-all duration-500 py-4 flex items-center gap-4 justify-center md:justify-start">
-                                    Explore <ArrowRight className="w-12 h-12 md:w-20 md:h-20 opacity-0 group-hover:opacity-100 -translate-x-10 group-hover:translate-x-0 transition-all duration-500" />
-                                </h4>
-                                <p className="mt-2 text-sm md:text-base font-body uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">View our latest artifacts and systems</p>
-                            </Link>
-                        </div>
-                        <div className="flex-1 flex flex-col items-center md:items-end text-center md:text-right">
-                            <span className="text-xs uppercase tracking-[0.3em] font-body text-primary block mb-6">Inquiry</span>
-                            <Link href="/contact" className="group block">
-                                <h4 className="text-5xl md:text-7xl font-display uppercase leading-none hover:text-primary transition-all duration-500 py-4 flex items-center gap-4 justify-center md:justify-end">
-                                    <ArrowRight className="w-12 h-12 md:w-20 md:h-20 opacity-0 group-hover:opacity-100 translate-x-10 group-hover:translate-x-0 transition-all duration-500 rotate-180 md:rotate-0" /> Contact
-                                </h4>
-                                <p className="mt-2 text-sm md:text-base font-body uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">Skip the gallery and start a dialogue</p>
-                            </Link>
-                        </div>
-                    </div>
+                {/* Final Navigation */}
+                <div className="mt-32 relative z-10">
+                    <NextPageButton
+                        label="INVESTMENT"
+                        href="/investment"
+                        tagline="View Strategic Plans"
+                    />
                 </div>
             </div>
         </PageLayout>

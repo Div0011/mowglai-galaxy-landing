@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 import { cn } from "@/lib/utils";
 
@@ -32,18 +33,22 @@ const BackToTopButton = () => {
 
     return (
         <div className={cn(
-            "fixed bottom-24 right-[calc(0.875rem+env(safe-area-inset-right))] md:bottom-8 md:right-32 z-50 transition-all duration-500 transform",
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
+            "fixed z-[60] transition-all duration-500 transform",
+            // Positioned vertically above the Settings/Menu Toggle on the left
+            "bottom-[calc(5rem+env(safe-area-inset-bottom))] left-[calc(0.875rem+env(safe-area-inset-left))]",
+            "md:bottom-[calc(7rem+env(safe-area-inset-bottom))] md:left-[calc(2rem+env(safe-area-inset-left))]",
+            isVisible ? "translate-y-0 opacity-100 scale-100" : "translate-y-20 opacity-0 scale-50 pointer-events-none"
         )}>
-            <Magnetic>
-                <button
-                    onClick={scrollToTop}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary text-primary-foreground border border-primary/20 shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group"
-                    aria-label="Back to Top"
-                >
-                    <ArrowUp className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:-translate-y-1" />
-                </button>
-            </Magnetic>
+            <motion.button
+                onClick={scrollToTop}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="relative group w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-all duration-300 shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)] backdrop-blur-md border border-white/20"
+                aria-label="Back to Top"
+            >
+                <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20 group-hover:opacity-40" />
+                <ArrowUp className="w-7 h-7 md:w-8 md:h-8 z-10" />
+            </motion.button>
         </div>
     );
 };

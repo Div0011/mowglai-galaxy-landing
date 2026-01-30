@@ -4,6 +4,7 @@ import Magnetic from "@/components/Magnetic";
 import Link from "next/link";
 import { ArrowRight, Fingerprint } from "lucide-react";
 import { AestheticShowcase } from "@/components/AestheticShowcase";
+import FlashText from "@/components/FlashText";
 import SelectedWork from "@/components/SelectedWork";
 import NextPageButton from "@/components/NextPageButton";
 import { useLanguage } from "@/context/LanguageContext";
@@ -78,9 +79,12 @@ export default function HomeContent() {
 
                 {/* Full Width Button */}
                 <div className="w-full" data-aos="fade-up" data-aos-delay="200">
-                    <NextPageButton label={t.Home.viewTemplates} href="/explore" />
+                    <NextPageButton label="BLUEPRINT" href="/explore" />
                 </div>
             </section>
+
+            {/* Flash Text Referral */}
+            <FlashText />
 
 
 
@@ -102,7 +106,7 @@ export default function HomeContent() {
 
             <div className="w-full">
                 <NextPageButton
-                    label={t.Home.studioStory}
+                    label="STORY"
                     href="/about"
                     tagline={t.Home.knowMore}
                 />

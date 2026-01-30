@@ -12,7 +12,7 @@ export default function OriginalAbout() {
             <AboutSection />
             <MissionSection />
             <TestimonialsSection />
-            <NextPageButton label="THE CRAFT" href="/services" />
+            <NextPageButton label="CRAFT" href="/services" />
         </PageLayout>
     );
 }

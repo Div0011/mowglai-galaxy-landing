@@ -1,21 +1,16 @@
-"use client";
 
-import dynamic from "next/dynamic";
-import { useStyle } from "@/context/StyleContext";
+import OriginalCustomRequest from "@/styles/original/CustomRequest";
 import { Suspense } from "react";
 
-const OriginalCustomRequest = dynamic(() => import("@/styles/original/CustomRequest"));
-const MinimalCustomRequest = dynamic(() => import("@/styles/minimal/CustomRequest"));
-const CandyCustomRequest = dynamic(() => import("@/styles/candy/CustomRequest"));
+export const metadata = {
+    title: "Start Project | Mowglai",
+    description: "Begin your journey with Mowglai. Select your plan and tell us about your vision. We are ready to build.",
+};
 
 export default function ProjectRequestPage() {
-    const { style } = useStyle();
-
     return (
-        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading...</div>}>
-            {style === "original" && <OriginalCustomRequest />}
-            {style === "minimal" && <MinimalCustomRequest />}
-            {style === "candy" && <CandyCustomRequest />}
+        <Suspense fallback={<div>Loading...</div>}>
+            <OriginalCustomRequest />
         </Suspense>
     );
 }

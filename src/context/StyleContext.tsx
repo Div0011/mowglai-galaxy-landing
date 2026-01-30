@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export type VisualStyle = "original" | "minimal" | "candy";
+export type VisualStyle = "original";
 
 interface StyleContextType {
     style: VisualStyle;
@@ -16,27 +16,25 @@ export function StyleProvider({ children }: { children: React.ReactNode }) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        const savedStyle = localStorage.getItem("visual-style") as VisualStyle;
-        if (savedStyle && ["original", "minimal", "candy"].includes(savedStyle)) {
-            setStyle(savedStyle);
-        }
         setMounted(true);
     }, []);
 
     useEffect(() => {
         if (mounted) {
-            localStorage.setItem("visual-style", style);
+            localStorage.setItem("visual-style", "original");
 
-            // Update body class for global CSS variable overrides
-            document.body.classList.remove("style-original", "style-minimal", "style-candy");
-            document.body.classList.add(`style-${style}`);
+            const root = document.documentElement;
+            const body = document.body;
+
+            const classesToRemove = ["style-minimal", "style-candy"];
+            root.classList.remove(...classesToRemove);
+            body.classList.remove(...classesToRemove);
+
+            root.classList.add("style-original");
+            body.classList.add("style-original");
+            root.setAttribute("data-style", "original");
         }
-    }, [style, mounted]);
-
-    // Avoid hydration mismatch by rendering children only after mount, 
-    // or just accept that server renders default and client updates it.
-    // For style changes that affect layout significantly, a loading state might be better
-    // or just initial render matches server (default).
+    }, [mounted]);
 
     return (
         <StyleContext.Provider value={{ style, setStyle }}>

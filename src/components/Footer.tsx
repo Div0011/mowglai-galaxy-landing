@@ -10,19 +10,14 @@ const Footer = () => {
       title: "EXPLORE",
       links: [
         { label: "START", href: "/" },
-        { label: "CRAFT", href: "/services" },
-        { label: "VALUE", href: "/investment" },
-        { label: "BLUEPRINT", href: "/explore" },
-      ],
-    },
-    {
-      title: "AGENCY",
-      links: [
         { label: "STORY", href: "/about" },
-        { label: "OUR DNA", href: "/our-dna" },
+        { label: "CRAFT", href: "/services" },
+        { label: "BLUEPRINT", href: "/explore" },
+        { label: "INVESTMENT", href: "/investment" },
         { label: "HELLO", href: "/contact" },
       ],
     },
+
   ];
 
   const socialLinks = [

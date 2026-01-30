@@ -215,22 +215,7 @@
   }
 }
 
-/* --- CANDY STYLE ENFORCEMENT --- */
-body.style-candy {
-  font-family: var(--font-body) !important;
-}
-
-body.style-candy * {
-  border-radius: 1rem !important;
-}
-
-body.style-candy .pookie-shadow {
-  box-shadow: 0 10px 40px -10px hsla(var(--foreground) / 0.1);
-}
-
-body.style-candy .pookie-glow {
-  filter: drop-shadow(0 0 8px hsla(var(--primary) / 0.4));
-}
+/* --- ANIMATIONS --- */
 
 @keyframes pookie-float {
 
@@ -276,69 +261,6 @@ body.style-candy .pookie-glow {
 
 .animate-pookie-bounce {
   animation: pookie-bounce 3s ease-in-out infinite;
-}
-
-/* --- MINIMAL STYLE ENFORCEMENT --- */
-body.style-minimal {
-  font-family: var(--font-body) !important;
-}
-
-body.style-minimal::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 100;
-  opacity: 0.03;
-  background-image: url("https://www.transparenttextures.com/patterns/p6.png");
-}
-
-body.style-minimal *,
-body.style-minimal *::before,
-body.style-minimal *::after {
-  border-radius: 0 !important;
-}
-
-body.style-minimal .fixed.rounded-full,
-body.style-minimal .cursor-inner,
-body.style-minimal .cursor-outer {
-  border-radius: 9999px !important;
-}
-
-body.style-minimal h1,
-body.style-minimal h2,
-body.style-minimal h3 {
-  font-family: var(--font-display) !important;
-  text-transform: uppercase !important;
-  letter-spacing: -0.02em !important;
-}
-
-/* Glass Card Override for Minimal */
-body.style-minimal .glass-card {
-  background: hsl(var(--background)) !important;
-  border: 1px solid hsl(var(--foreground)) !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-}
-
-/* Dark Mode adjustment for Minimal Glass - Covered by the general rule above now */
-
-/* Buttons for Minimal */
-body.style-minimal button:not(.fixed-settings-toggle),
-body.style-minimal .button-gradient {
-  border: 1px solid currentColor !important;
-  background: transparent !important;
-  text-transform: uppercase;
-  font-family: var(--font-body);
-  transition: all 0.3s ease;
-}
-
-body.style-minimal button:not(.fixed-settings-toggle):hover {
-  background: currentColor !important;
-  mix-blend-mode: difference;
 }
 
 @layer components {

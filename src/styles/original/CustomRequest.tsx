@@ -128,9 +128,9 @@ ${formData.workPlan}
 
     return (
         <PageLayout>
-            <section className="relative min-h-screen py-24 px-6 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-background z-0" />
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none" />
+            <div className="bg-transparent text-foreground min-h-screen px-4 md:px-24 py-32 font-sans relative overflow-hidden">
+                <div className="absolute inset-0 bg-transparent z-0" />
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.05),transparent_70%)] pointer-events-none" />
 
                 <div className="container relative z-10 max-w-6xl">
                     <Button
@@ -155,8 +155,8 @@ ${formData.workPlan}
                                 <div className="space-y-4 mb-10">
                                     <h3 className="text-sm font-display uppercase tracking-widest text-muted-foreground">{ProjectRequest.hero.includedFeatures}</h3>
                                     <ul className="space-y-3">
-                                        {/* NOTE: Features here are hardcoded in English in the plan object above. 
-                                            Ideally we should map them or use translate checks. 
+                                        {/* NOTE: Features here are hardcoded in English in the plan object above.
+                                            Ideally we should map them or use translate checks.
                                             For now, leaving as-is for the Plan object but UI labels are translated. */}
                                         {plan.features.map((feature: string, i: number) => (
                                             <li key={i} className="flex items-center gap-3 text-foreground/80">

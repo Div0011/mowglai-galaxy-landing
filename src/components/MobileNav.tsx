@@ -7,12 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 
 const navItems = [
-    { icon: Home, label: "Home", href: "/" },
-    { icon: Users, label: "Story", href: "/about" },
-    { icon: Palette, label: "Craft", href: "/services" },
-    { icon: LayoutGrid, label: "Blueprint", href: "/explore" },
-    { icon: DollarSign, label: "Investment", href: "/investment" },
-    { icon: Mail, label: "Hello", href: "/contact" },
+    { icon: Home, label: "START", href: "/" },
+    { icon: Users, label: "STORY", href: "/about" },
+    { icon: Palette, label: "CRAFT", href: "/services" },
+    { icon: LayoutGrid, label: "BLUEPRINT", href: "/explore" },
+    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
+    { icon: Mail, label: "HELLO", href: "/contact" },
 ];
 
 const socialItems = [

@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import FullScreenNav from "@/components/FullScreenNav";
 import MobileNav from "@/components/MobileNav";
 import SettingsToggle from "@/components/SettingsToggle";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Bot } from "lucide-react";
 
 import Footer from "@/components/Footer";
@@ -40,6 +41,7 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
             <BackToTopButton />
             <CustomCursor />
             <SettingsToggle />
+            <WhatsAppButton />
 
             {/* Background - Spans entire page height */}
             <div className="absolute inset-0 z-0 pointer-events-none">

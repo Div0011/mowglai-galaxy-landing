@@ -1,6 +1,3 @@
-import PageLayout from "@/components/PageLayout";
-import HeroSection from "@/components/HeroSection";
-import HomeContent from "@/components/HomeContent";
 
 export const metadata = {
     title: "Premium Digital Agency - Web Development & Design",
@@ -47,14 +44,13 @@ const jsonLdBreadcrumb = {
     ]
 };
 
+import OriginalHome from "@/styles/original/Home";
+
 export default function Home() {
     return (
-        <PageLayout>
+        <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
-            <div className="relative w-full h-screen">
-                <HeroSection />
-            </div>
-            <HomeContent />
-        </PageLayout>
+            <OriginalHome />
+        </>
     );
 }

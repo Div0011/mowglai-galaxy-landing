@@ -1,21 +1,11 @@
-"use client";
 
-import dynamic from "next/dynamic";
-import { useStyle } from "@/context/StyleContext";
-import { Suspense } from "react";
+import OriginalDNA from "@/styles/original/DNA";
 
-const OriginalDNA = dynamic(() => import("@/styles/original/DNA"));
-const MinimalDNA = dynamic(() => import("@/styles/minimal/DNA"));
-const CandyDNA = dynamic(() => import("@/styles/candy/DNA"));
+export const metadata = {
+    title: "Our DNA | Mowglai",
+    description: "Discover the principles and process behind Mowglai's digital excellence. Strategy, design, and engineering in perfect harmony.",
+};
 
-export default function OurDNA() {
-    const { style } = useStyle();
-
-    return (
-        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Content...</div>}>
-            {style === "original" && <OriginalDNA />}
-            {style === "minimal" && <MinimalDNA />}
-            {style === "candy" && <CandyDNA />}
-        </Suspense>
-    );
+export default function DnaPage() {
+    return <OriginalDNA />;
 }

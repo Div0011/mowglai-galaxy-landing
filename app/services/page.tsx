@@ -1,21 +1,11 @@
-"use client";
 
-import dynamic from "next/dynamic";
-import { useStyle } from "@/context/StyleContext";
-import { Suspense } from "react";
+import OriginalServices from "@/styles/original/Services";
 
-const OriginalServices = dynamic(() => import("@/styles/original/Services"));
-const MinimalServices = dynamic(() => import("@/styles/minimal/Services"));
-const CandyServices = dynamic(() => import("@/styles/candy/Services"));
+export const metadata = {
+    title: "Services | Mowglai - Web Development & Digital Strategy",
+    description: "Explore our premium digital services including web design, custom development, database solutions, and strategic digital growth.",
+};
 
 export default function ServicesPage() {
-    const { style } = useStyle();
-
-    return (
-        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Services...</div>}>
-            {style === "original" && <OriginalServices />}
-            {style === "minimal" && <MinimalServices />}
-            {style === "candy" && <CandyServices />}
-        </Suspense>
-    );
+    return <OriginalServices />;
 }

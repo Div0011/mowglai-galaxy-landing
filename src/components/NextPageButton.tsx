@@ -10,7 +10,7 @@ interface NextPageButtonProps {
 
 const NextPageButton = ({ label, href, tagline }: NextPageButtonProps) => {
     return (
-        <div className="w-full h-[300px] flex flex-col items-center justify-center relative overflow-hidden bg-background/5">
+        <div className="w-screen ml-[calc(50%-50vw)] h-[300px] flex flex-col items-center justify-center relative overflow-hidden bg-background/5">
 
             {/* Tagline - Just above button */}
             {tagline && (

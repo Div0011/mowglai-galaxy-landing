@@ -150,7 +150,7 @@ export default function ExplorePage() {
 
     return (
         <PageLayout>
-            <div className="min-h-screen bg-background text-foreground relative selection:bg-primary/20">
+            <div className="min-h-screen bg-transparent text-foreground relative selection:bg-primary/20">
 
                 {/* Hero / Header Section */}
                 <div className="relative pt-32 px-6 md:px-12 pb-12 overflow-hidden text-center md:text-left">
@@ -383,6 +383,7 @@ export default function ExplorePage() {
                 )}
 
             </div>
+            <NextPageButton label="INVESTMENT" href="/investment" />
             <NextPageButton label="MOWGLAI ACQUIRE" href="/investment" />
 
             <style jsx global>{`

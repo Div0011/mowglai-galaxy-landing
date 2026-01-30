@@ -22,7 +22,7 @@ export default function OriginalContact() {
 
             <section className="relative py-20">
                 <div className="container mx-auto px-6">
-                    <div className={cn("p-8 sm:p-12 md:p-20 rounded-[2.5rem] sm:rounded-[3rem] border-primary/20 text-center relative overflow-hidden group mx-4 md:mx-0 text-foreground", isDark ? "bg-[#253218]/95" : "glass-card")}>
+                    <div className={cn("p-8 sm:p-12 md:p-20 rounded-[2.5rem] sm:rounded-[3rem] border border-primary/20 text-center relative overflow-hidden group mx-4 md:mx-0 text-foreground bg-secondary/10 backdrop-blur-xl shadow-2xl")}>
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -mr-32 -mt-32 transition-all group-hover:bg-primary/10" />
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -ml-32 -mb-32 transition-all group-hover:bg-primary/10" />
 

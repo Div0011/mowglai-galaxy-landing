@@ -85,8 +85,9 @@ interface TestimonialsSectionProps {
     isDark?: boolean;
 }
 
-export default function TestimonialsSection({ isDark: isDarkProp }: TestimonialsSectionProps) {
+const TestimonialsSection = ({ isDark: isDarkProp }: TestimonialsSectionProps) => {
     const { resolvedTheme } = useTheme();
+
     const isDark = isDarkProp ?? resolvedTheme === "dark";
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -97,12 +98,6 @@ export default function TestimonialsSection({ isDark: isDarkProp }: Testimonials
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (!scrollContainerRef.current) return;
-            // Only scroll if the section is in view or user interaction is expected
-            // For simplicity, we'll allow it if the user is focused on the page, 
-            // but in a real app you might check if element is in viewport.
-            // Let's add a simple check if the element is roughly in view could be expensive,
-            // so we stick to simple arrow keys if the user has interacted.
-
             if (e.key === "ArrowLeft") {
                 scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
             } else if (e.key === "ArrowRight") {
@@ -177,13 +172,13 @@ export default function TestimonialsSection({ isDark: isDarkProp }: Testimonials
                                 className="flex-shrink-0 w-[85vw] md:w-[450px] snap-center"
                             >
                                 <div className={cn(
-                                    "h-full relative glass-card p-10 rounded-[2.5rem] border transition-all duration-500 hover:-translate-y-2 group flex flex-col items-center text-center shadow-lg overflow-hidden",
+                                    "h-full relative p-10 border transition-all duration-500 hover:-translate-y-2 group flex flex-col items-center text-center shadow-lg overflow-hidden",
+                                    // Style-specific Logic
+                                    "rounded-3xl bg-[#0a2310]/95", // Original (Default)
+
                                     t.accent === "gold"
                                         ? "border-primary/30 hover:border-primary shadow-primary/10"
                                         : "border-emerald-500/30 hover:border-emerald-500 shadow-emerald-500/10",
-                                    isDark
-                                        ? "bg-[#253218]/95"
-                                        : "bg-background/40"
                                 )}>
                                     {/* Accent Glow */}
                                     <div className={cn(
@@ -243,7 +238,7 @@ export default function TestimonialsSection({ isDark: isDarkProp }: Testimonials
 
             </div>
 
-            {/* Drag/Swipe Indicator - Fades out on interaction */}
+            {/* Drag Indicator */}
             <div
                 className={cn(
                     "mt-8 flex justify-center items-center gap-3 text-primary/60 font-display tracking-widest uppercase text-sm transition-opacity duration-500",
@@ -257,3 +252,5 @@ export default function TestimonialsSection({ isDark: isDarkProp }: Testimonials
         </section>
     );
 }
+
+export default TestimonialsSection;

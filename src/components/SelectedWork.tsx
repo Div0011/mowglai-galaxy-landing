@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
@@ -64,20 +64,20 @@ export default function SelectedWork() {
     const [direction, setDirection] = useState(0);
     const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-    const nextSlide = () => {
+    const nextSlide = useCallback(() => {
         setDirection(1);
         setCurrentIndex((prev) => (prev + 1) % projects.length);
-    };
+    }, []);
 
-    const prevSlide = () => {
+    const prevSlide = useCallback(() => {
         setDirection(-1);
         setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
-    };
+    }, []);
 
-    const resetAutoplay = () => {
+    const resetAutoplay = useCallback(() => {
         if (autoplayRef.current) clearInterval(autoplayRef.current);
         autoplayRef.current = setInterval(nextSlide, 5000);
-    };
+    }, [nextSlide]);
 
     useEffect(() => {
         resetAutoplay();

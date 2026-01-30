@@ -2,8 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
-import { useStyle } from "@/context/StyleContext";
-
 interface Ripple {
   x: number;
   y: number;
@@ -11,7 +9,6 @@ interface Ripple {
 }
 
 const CustomCursor = () => {
-  const { style } = useStyle();
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isInverted, setIsInverted] = useState(false);
@@ -103,47 +100,23 @@ const CustomCursor = () => {
     if (isMobile || !followerRef.current) return;
 
     let scale = isPointer ? 1.6 : 1;
-    // Black Hole Effect: Absorb when hovering
-    if (style === "minimal" && isPointer) scale = 2.5;
 
     gsap.to(followerRef.current, {
-      scale: style === "minimal" ? (isPointer ? 1.1 : 1.0) : scale,
+      scale: scale,
       duration: 0.3,
       ease: "power2.out"
     });
-  }, [isPointer, isMobile, style]);
+  }, [isPointer, isMobile]);
 
   if (isMobile) return null;
 
-  // Style Logic
-  const getCursorColors = () => {
-    switch (style) {
-      case "minimal":
-        return {
-          dot: "#ffffff",
-          followerBorder: "hsl(var(--foreground))",
-          followerBg: "transparent",
-          ripple: "hsla(var(--foreground), 0.2)"
-        };
-      case "candy":
-        return {
-          dot: "#ffffff",
-          followerBorder: "rgba(255,255,255,0.5)",
-          followerBg: "transparent",
-          ripple: "rgba(236, 72, 153, 0.4)" // Pink ripple
-        };
-      case "original":
-      default:
-        return {
-          dot: isInverted ? '#1B3022' : '#C5A059',
-          followerBorder: isInverted ? '#1B3022' : '#C5A059',
-          followerBg: isPointer ? (isInverted ? 'rgba(27, 48, 34, 0.1)' : 'rgba(197, 160, 89, 0.1)') : 'transparent',
-          ripple: isInverted ? 'rgba(27, 48, 34, 0.3)' : 'rgba(197, 160, 89, 0.3)'
-        };
-    }
+  // Force original style logic
+  const colors = {
+    dot: isInverted ? '#1B3022' : '#C5A059',
+    followerBorder: isInverted ? '#1B3022' : '#C5A059',
+    followerBg: isPointer ? (isInverted ? 'rgba(27, 48, 34, 0.1)' : 'rgba(197, 160, 89, 0.1)') : 'transparent',
+    ripple: isInverted ? 'rgba(27, 48, 34, 0.3)' : 'rgba(197, 160, 89, 0.3)'
   };
-
-  const colors = getCursorColors();
 
   return (
     <>
@@ -151,13 +124,12 @@ const CustomCursor = () => {
       {ripples.map((ripple) => (
         <div
           key={ripple.id}
-          className={`fixed pointer-events-none z-[9997] w-12 h-12 rounded-full border animate-ripple ${style === 'candy' ? 'bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-30 border-none' : ''}`}
+          className="fixed pointer-events-none z-[9997] w-12 h-12 rounded-full border animate-ripple bg-transparent"
           style={{
             left: ripple.x,
             top: ripple.y,
             borderColor: colors.ripple,
-            borderWidth: '1px',
-            backgroundColor: style === 'candy' ? undefined : 'transparent'
+            borderWidth: '1px'
           }}
         />
       ))}
@@ -167,14 +139,10 @@ const CustomCursor = () => {
         ref={followerRef}
         className={`fixed top-0 left-0 pointer-events-none z-[9998] transition-[opacity] duration-300 ease-out 
           ${isVisible ? 'opacity-100' : 'opacity-0'} 
-          ${style === "minimal" ? "w-10 h-10 rounded-full border border-foreground/50" : ""} 
-          ${style === "candy" ? "w-14 h-14 rounded-full bg-primary/10 border-2 border-white/20" : "w-10 h-10 rounded-full border"}`}
+          w-10 h-10 rounded-full border`}
         style={{
-          borderColor: style === 'candy' ? undefined : (style === 'original' ? colors.followerBorder : undefined),
-          backgroundColor: style === 'candy' ? undefined : (style === 'original' ? colors.followerBg : undefined),
-          backdropFilter: style === 'minimal' ? 'invert(1)' : (style === 'candy' ? 'saturate(200%)' : undefined),
-          WebkitBackdropFilter: style === 'minimal' ? 'invert(1)' : (style === 'candy' ? 'saturate(200%)' : undefined),
-          boxShadow: style === 'candy' ? '4px 0 10px rgba(255,0,255,0.3), -4px 0 10px rgba(0,255,255,0.3)' : undefined,
+          borderColor: colors.followerBorder,
+          backgroundColor: colors.followerBg,
           willChange: 'transform'
         }}
       />
@@ -184,10 +152,10 @@ const CustomCursor = () => {
         ref={cursorRef}
         className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full transition-[opacity,background-color] duration-300 ease-out 
           ${isVisible ? 'opacity-100' : 'opacity-0'} 
-          ${style === "candy" ? "w-4 h-4 bg-white shadow-[0_0_15px_#fff,0_0_30px_var(--primary)]" : "w-2.5 h-2.5"}`}
+          w-2.5 h-2.5`}
         style={{
-          mixBlendMode: (style === 'minimal' || style === 'candy') ? 'difference' : 'normal',
-          backgroundColor: (style === 'original') ? colors.dot : (style === 'minimal' ? '#ffffff' : (style === 'candy' ? '#ffffff' : undefined)),
+          mixBlendMode: 'normal',
+          backgroundColor: colors.dot,
           willChange: 'transform'
         }}
       />

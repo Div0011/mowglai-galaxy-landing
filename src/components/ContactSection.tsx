@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/utils/emailSender";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "next-themes";
+import { cn as clsx } from "@/lib/utils";
 
 
 const CONTACT_EMAIL = "info@mowglai.in"; // REPLACE THIS WITH YOUR PERSONAL EMAIL FOR TESTING
@@ -127,7 +128,7 @@ ${formData.message}
           </div>
 
           {/* Form - Clean & underlined */}
-          <div className={cn("p-10 md:p-14 rounded-[2rem] border border-primary/20", isDark ? "bg-[#253218]/95" : "glass-card")}>
+          <div className={clsx("p-10 md:p-14 rounded-[2rem] border border-primary/20 bg-secondary/10 backdrop-blur-xl shadow-2xl")}>
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="space-y-6">
                 <Input
