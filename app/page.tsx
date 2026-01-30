@@ -51,8 +51,8 @@ export default function Home() {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
-            <UnderMaintenance />
-            {/* <OriginalHome /> */}
+            {/* <UnderMaintenance /> */}
+            <OriginalHome />
         </>
     );
 }

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Construction, Clock, ArrowLeft, Sparkles, Mail, Phone, MessageCircle, Instagram, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
 import StarryBackground from "./StarryBackground";
+import CustomCursor from "./CustomCursor";
 
 const CONTACT_EMAIL = "info@mowglai.in";
 const WHATSAPP_NUMBER = "919528545302";
@@ -29,6 +30,7 @@ const UnderMaintenance = () => {
 
     return (
         <div className="relative min-h-screen w-full overflow-hidden bg-background">
+            <CustomCursor />
             <StarryBackground />
 
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />

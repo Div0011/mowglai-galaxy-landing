@@ -7,5 +7,7 @@ export const metadata = {
 };
 
 export default function AboutPage() {
-    return <OriginalAbout />;
+    return (
+        <OriginalAbout />
+    );
 }
