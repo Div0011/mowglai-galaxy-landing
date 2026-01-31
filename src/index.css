@@ -294,4 +294,8 @@
         hsl(var(--background)) 60%);
     border: 1px solid transparent;
   }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }

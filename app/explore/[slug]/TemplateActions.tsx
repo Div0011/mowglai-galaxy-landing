@@ -11,21 +11,30 @@ interface TemplateActionsProps {
 export default function TemplateActions({ templateId, price, isMobileBar }: TemplateActionsProps) {
     if (isMobileBar) {
         return (
-            <div className="w-full flex items-center justify-between gap-4">
-                <div className="flex flex-col">
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Price</span>
-                    <span className="text-lg font-bold text-white leading-none">{price || "$49"}</span>
+            <div className="flex items-center gap-3">
+                {/* Price Display - Samsung Now Bar style */}
+                <div className="flex flex-col items-start pl-1">
+                    <span className="text-[8px] uppercase tracking-[0.2em] text-white/40 font-semibold leading-none">Price</span>
+                    <span className="text-lg font-bold text-white leading-none tracking-tight font-display mt-0.5">{price || "$49"}</span>
                 </div>
-                <div className="flex items-center gap-2">
+
+                {/* Divider */}
+                <div className="w-px h-8 bg-white/10" />
+
+                {/* Actions */}
+                <div className="flex items-center gap-2 pr-1">
+                    {/* Preview Button */}
                     <button
                         onClick={() => window.open(`/previews/${templateId}.html`, '_blank')}
-                        className="w-10 h-10 flex items-center justify-center bg-white/10 border border-white/10 text-white rounded-full hover:bg-white/20 transition-colors"
+                        className="group w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 text-white/70 rounded-full hover:bg-white/10 hover:text-white hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-200"
+                        aria-label="Preview template"
                     >
-                        <Eye className="w-4 h-4" />
+                        <Eye className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
                     </button>
-                    <button className="h-10 px-5 bg-primary text-primary-foreground font-bold text-sm rounded-full flex items-center gap-2 shadow-lg shadow-primary/20">
-                        <ShoppingCart className="w-4 h-4" />
-                        Buy
+
+                    {/* Buy Button */}
+                    <button className="group w-9 h-9 bg-primary/20 border border-primary/30 text-primary rounded-full flex items-center justify-center hover:bg-primary/30 hover:border-primary/50 hover:scale-105 active:scale-95 transition-all duration-200">
+                        <ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
                     </button>
                 </div>
             </div>
@@ -58,3 +67,4 @@ export default function TemplateActions({ templateId, price, isMobileBar }: Temp
         </div>
     );
 }
+
