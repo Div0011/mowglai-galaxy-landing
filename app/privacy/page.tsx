@@ -48,6 +48,17 @@ export default function PrivacyPage() {
                             </p>
                         </div>
 
+                        {/* Section 3 */}
+                        <div className="mb-8">
+                            <p className="font-display font-bold text-primary text-xl mb-3">3. Payment Information Security</p>
+                            <p>
+                                Mowglai does not directly store your credit card information on our servers. All subscription and
+                                project payments are processed through secure, PCI-compliant third-party payment gateways
+                                (such as Stripe or Razorpay). We only retain payment reference tokens to manage your
+                                ongoing subscription status and billing history.
+                            </p>
+                        </div>
+
                         {/* Section 4 */}
                         <div className="mb-8">
                             <p className="font-display font-bold text-primary text-xl mb-3">4. Cookies and Tracking Technologies</p>

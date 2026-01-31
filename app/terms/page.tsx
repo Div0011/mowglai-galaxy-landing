@@ -182,8 +182,35 @@ export default function TermsPage() {
                         </div>
 
                         {/* Section 12 */}
+                        <div className="mb-8">
+                            <p className="font-display font-bold text-primary text-xl mb-3">12. Subscription Services</p>
+                            <p className="mb-4">
+                                For clients engaging in our recurring "Mowglai Care" or "Mowglai Growth" plans:
+                            </p>
+                            <ul className="list-disc pl-5 space-y-2 marker:text-primary text-muted-foreground">
+                                <li><strong>recurring Billing:</strong> Subscriptions are billed monthly in advance. Service is provided for the paid period.</li>
+                                <li><strong>Cancellation:</strong> You may cancel at any time with 30 days written notice. No pro-rated refunds are issued for partial months.</li>
+                                <li><strong>Support Scope:</strong> "Unlimited Support" refers to bug fixes, maintenance, and minor content updates (up to 1 hour/month for Basic). It does not cover new feature development or design overhauls.</li>
+                                <li><strong>Social Media:</strong> For plans including social media (Growth), we handle posting (2/week) based on agreed strategies. Content approval is required 48 hours in advance. Engagement metrics are not guaranteed.</li>
+                            </ul>
+                        </div>
+
+                        {/* Section 13 */}
+                        <div className="mb-8">
+                            <p className="font-display font-bold text-primary text-xl mb-3">13. Add-on Services & Feature Sprints</p>
+                            <p className="mb-4">
+                                Services purchased under "Feature Sprints" or individual Add-ons are treated as distinct, one-off engagements:
+                            </p>
+                            <ul className="list-disc pl-5 space-y-2 marker:text-primary text-muted-foreground">
+                                <li><strong>Scope Definition:</strong> Each feature request must be clearly defined and approved in writing (email or project dashboard) before work begins.</li>
+                                <li><strong>Pricing & Payment:</strong> Pricing is "Per Feature" and custom-quoted. Full payment (or an agreed deposit) is required prior to initiation.</li>
+                                <li><strong>Dependencies:</strong> We ensure the new feature works within your current system. Modifications to legacy code outside the immediate scope of the new feature may incur additional costs.</li>
+                            </ul>
+                        </div>
+
+                        {/* Section 14 */}
                         <div className="mb-0">
-                            <p className="font-display font-bold text-primary text-xl mb-3">12. Amendments and Governing Law</p>
+                            <p className="font-display font-bold text-primary text-xl mb-3">14. Amendments and Governing Law</p>
                             <p className="mb-0">
                                 Mowglai reserves the right to update these policies at any time to reflect changes in our service
                                 offerings or legal requirements. We encourage clients to review this page periodically. These
