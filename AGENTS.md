@@ -6,7 +6,7 @@
 - **Key Experience**: Smooth transitions, immersive 3D elements, and a feeling of "exploring" the agency.
 
 ## 2. Architecture & File Structure
-This project uses **Next.js 15 (App Router)** with a split structure:
+This project uses **Next.js 16 (App Router)** with a split structure:
 
 ### Directory Structure
 - **`app/`**: Contains ONLY routes, layouts, and pages.
@@ -231,6 +231,11 @@ const ChatbotModal = dynamic(() => import("@/components/ChatbotModal"), { ssr: f
 - **React Refresh**: Warns on non-component exports
 
 ## 11. Deployment
+
+### Hosting
+- **Provider**: Hostinger (Shared hosting plan)
+- **Type**: Static site deployed via SSH/rsync
+- **No Node.js server**: Uses static export (Next.js output mode)
 
 ### Automated Deployment
 - **GitHub Actions**: Push to `main` branch triggers automatic deployment
