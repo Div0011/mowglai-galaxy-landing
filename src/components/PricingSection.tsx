@@ -136,14 +136,7 @@ const PricingSection = () => {
               <div className="flex flex-col gap-3 mt-auto relative z-10">
                 <Button
                   onClick={() => handlePlanClick(plan)}
-                  className={cn(
-                    "w-full py-6 md:py-8 text-xs sm:text-lg md:text-xl font-display font-black uppercase tracking-widest rounded-full transition-all duration-500 shadow-lg",
-                    plan.popular
-                      ? "bg-primary text-black hover:bg-white hover:text-black"
-                      : (isDark
-                        ? "bg-white/5 border border-primary text-primary hover:bg-primary hover:text-black"
-                        : "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white")
-                  )}
+                  className="w-full h-auto px-8 sm:px-10 py-4 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center shadow-lg"
                 >
                   {plan.buttonText}
                 </Button>

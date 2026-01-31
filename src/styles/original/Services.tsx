@@ -91,10 +91,10 @@ export default function OriginalServices() {
                     {servicesData.map((service, index) => (
                         <motion.div
                             key={service.id}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -150 : 150 }}
+                            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 1.5, ease: "easeOut" }}
                             className="group relative grid grid-cols-1 lg:grid-cols-12 gap-6 p-8 md:p-12 rounded-[2.5rem] bg-secondary/10 border border-primary/10 hover:border-primary/40 hover:bg-secondary/20 transition-all duration-700 backdrop-blur-xl overflow-hidden"
                         >
                             <div className="flex flex-col relative z-10 w-full">
@@ -144,13 +144,30 @@ export default function OriginalServices() {
                     ))}
                 </div>
 
-                {/* Final Navigation */}
-                <div className="mt-32 relative z-10">
-                    <NextPageButton
-                        label="INVESTMENT"
-                        href="/investment"
-                        tagline="View Strategic Plans"
-                    />
+                {/* Final Navigation & Decision */}
+                <div className="mt-40 flex flex-col items-center gap-16 relative z-10">
+
+                    {/* Explore Option */}
+                    <div className="flex flex-col items-center gap-6 text-center" data-aos="fade-up">
+                        <h3 className="text-xl md:text-3xl font-display font-bold text-foreground/80 uppercase tracking-wide">
+                            Still exploring ideas?
+                        </h3>
+                        <Link
+                            href="/explore"
+                            className="px-12 py-5 rounded-full border border-primary text-primary font-display font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_20px_rgba(var(--primary-rgb),0.1)] hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)] text-sm md:text-base bg-background/5 backdrop-blur-sm"
+                        >
+                            Browse Blueprints
+                        </Link>
+                    </div>
+
+                    {/* Investment Option */}
+                    <div className="w-full">
+                        <NextPageButton
+                            label="INVESTMENT"
+                            href="/investment"
+                            tagline="Ready to Scale?"
+                        />
+                    </div>
                 </div>
             </div>
         </PageLayout>

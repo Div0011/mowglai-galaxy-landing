@@ -173,7 +173,7 @@ ${formData.workPlan}
                                         {ProjectRequest.hero.downloadText}
                                     </p>
                                     <button
-                                        className="w-full py-4 flex items-center justify-center gap-2 bg-primary text-background font-display font-bold uppercase tracking-widest hover:bg-foreground transition-colors rounded-xl shadow-lg cursor-pointer"
+                                        className="w-full py-4 px-8 flex items-center justify-center gap-2 bg-primary text-primary-foreground font-display font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full shadow-lg cursor-pointer"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             downloadAsHtml(`/${plan.proposalFile}`, `Mowglai_${plan.name}_Proposal.html`);
@@ -254,7 +254,7 @@ ${formData.workPlan}
 
                                 <Button
                                     type="submit"
-                                    className="w-full py-8 text-xl font-display font-black uppercase tracking-widest bg-primary text-background hover:bg-foreground hover:text-background transition-all duration-300 rounded-xl"
+                                    className="w-full h-auto py-6 px-8 sm:px-10 text-xl font-display font-black uppercase tracking-widest bg-primary text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all duration-300 rounded-full shadow-lg"
                                 >
                                     <Send className="w-5 h-5 mr-3" />
                                     {ProjectRequest.form.button}

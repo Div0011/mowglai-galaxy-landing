@@ -44,14 +44,12 @@ const jsonLdBreadcrumb = {
     ]
 };
 
-import UnderMaintenance from "@/components/UnderMaintenance";
 import OriginalHome from "@/styles/original/Home";
 
 export default function Home() {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
-            {/* <UnderMaintenance /> */}
             <OriginalHome />
         </>
     );

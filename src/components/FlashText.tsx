@@ -17,7 +17,7 @@ const FlashText = () => {
                         ease: "linear",
                     }}
                 >
-                    REFER AND EARN 10% OFF • REFER AND EARN 10% OFF • REFER AND EARN 10% OFF • REFER AND EARN 10% OFF •
+                    REFER AND EARN 10% COMMISSION • REFER AND EARN 10% COMMISSION • REFER AND EARN 10% COMMISSION • REFER AND EARN 10% COMMISSION •
                 </motion.div>
             </div>
 
@@ -36,7 +36,7 @@ const FlashText = () => {
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </Link>
                 <p className="text-[10px] md:text-xs text-center mt-3 md:mt-4 uppercase tracking-widest opacity-60">
-                    Get 10% off for you & a friend
+                    Get 10% commission for you & a friend
                 </p>
             </motion.div>
         </div>

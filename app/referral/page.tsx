@@ -89,7 +89,7 @@ export default function ReferralPage() {
                             {/* Left Column - Value Prop */}
                             <div className="space-y-10 md:space-y-12">
                                 <p className="text-2xl md:text-4xl font-light text-foreground/80 max-w-lg leading-tight md:leading-snug">
-                                    Invite your network to the tribe. Getting <span className="text-primary font-bold">10% OFF</span> has never been this elegant.
+                                    Invite your network to the tribe. Getting <span className="text-primary font-bold">10% COMMISSION</span> has never been this elegant.
                                 </p>
 
                                 <div className="space-y-8 md:space-y-10 text-muted-foreground">
@@ -108,7 +108,7 @@ export default function ReferralPage() {
                                         </li>
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">3</div>
-                                            <span className="text-foreground/70 leading-relaxed">Both of you receive a unique 10% discount code for your next digital evolution project.</span>
+                                            <span className="text-foreground/70 leading-relaxed">Both of you receive a unique 10% commission code for your next digital evolution project.</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -267,7 +267,7 @@ export default function ReferralPage() {
                                                 </motion.span>
                                             ) : (
                                                 <div className="flex items-center justify-center gap-2 md:gap-4">
-                                                    <span>Grant Access to 10% OFF</span>
+                                                    <span>Grant Access to 10% COMMISSION</span>
                                                     <Send className="w-3 h-3 md:w-5 md:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                                 </div>
                                             )}

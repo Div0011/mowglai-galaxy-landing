@@ -219,7 +219,7 @@ export default function OriginalInvestment() {
 
                                         <Link
                                             href={`/project-request?plan=${plan.type}`}
-                                            className="relative z-10 w-full py-6 border border-primary/30 text-center text-sm font-black uppercase tracking-[0.4em] transition-all bg-transparent text-primary hover:bg-primary hover:text-primary-foreground rounded-2xl mt-auto shadow-[0_0_20px_rgba(var(--primary-rgb),0.0)] hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]"
+                                            className="relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto"
                                         >
                                             {plan.button}
                                         </Link>
@@ -254,14 +254,14 @@ export default function OriginalInvestment() {
 
                                         <Link
                                             href="/contact"
-                                            className="relative z-10 w-full py-8 bg-primary text-primary-foreground text-center text-sm font-black uppercase tracking-[0.5em] rounded-2xl shadow-[0_20px_40px_rgba(var(--primary-rgb),0.3)] hover:scale-[1.02] transition-all"
+                                            className="relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center"
                                         >
                                             {t.Investment.apex.button}
                                         </Link>
                                     </div>
 
                                     <div className="md:col-span-2 p-16 flex flex-col justify-center items-center bg-background/10 border border-primary/10 rounded-[2.5rem] overflow-hidden relative backdrop-blur-sm group">
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-display font-black text-primary opacity-[0.03] select-none pointer-events-none italic group-hover:scale-110 transition-transform duration-1000">
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12vw] font-display font-black text-primary opacity-[0.03] select-none pointer-events-none italic group-hover:scale-110 transition-transform duration-1000">
                                             APEX
                                         </div>
                                         <Sparkles size={120} className="text-primary opacity-20 mb-12 stroke-[1px] animate-pookie-float" />
@@ -291,19 +291,19 @@ export default function OriginalInvestment() {
                             </div>
                             <div>
                                 <h3 className="text-4xl md:text-5xl font-display uppercase mb-4 text-foreground">{item.title}</h3>
-                                <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/60">{item.label}</p>
+                                <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/60 mb-8">{item.label}</p>
                             </div>
                             {item.link ? (
                                 <Link
                                     href={item.link}
-                                    className="mt-10 text-xs md:text-sm font-bold uppercase tracking-[0.5em] border-b-2 border-primary text-primary pb-3 hover:tracking-[0.7em] transition-all"
+                                    className="mt-10 inline-block w-full sm:w-auto px-8 sm:px-10 py-4 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center"
                                 >
                                     {item.btn}
                                 </Link>
                             ) : (
                                 <button
                                     onClick={() => downloadAsHtml(`/${item.file!}`, item.name!)}
-                                    className="mt-10 text-xs md:text-sm font-bold uppercase tracking-[0.5em] border-b-2 border-primary text-primary pb-3 hover:tracking-[0.7em] transition-all"
+                                    className="mt-10 inline-block w-full sm:w-auto px-8 sm:px-10 py-4 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center"
                                 >
                                     {item.btn}
                                 </button>
@@ -316,7 +316,7 @@ export default function OriginalInvestment() {
                 <div className="mt-48 pt-12 border-t border-primary/20 flex flex-col md:flex-row justify-between items-start gap-12 relative z-10 opacity-60">
                     <div className="max-w-md space-y-6">
                         <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Protocol Note</p>
-                        <p className="text-xs font-body leading-loose text-muted-foreground uppercase tracking-widest">
+                        <p className="text-sm font-body leading-loose text-muted-foreground uppercase tracking-widest">
                             All investments require a 50% initiation fee prior to architecture development. Timelines are subject to studio bandwidth and project complexity.
                         </p>
                     </div>
@@ -335,4 +335,5 @@ export default function OriginalInvestment() {
                 </div>
             </div>
         </PageLayout>
-    )};
+    )
+};

@@ -159,7 +159,7 @@ ${formData.message}
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-foreground text-background hover:bg-background hover:text-foreground border-2 border-foreground font-display font-black text-sm sm:text-lg md:text-xl py-6 md:py-8 rounded-xl transition-all uppercase tracking-widest"
+                className="w-full h-auto px-8 sm:px-10 py-6 bg-primary text-primary-foreground font-display font-black text-sm sm:text-lg md:text-xl rounded-full transition-all uppercase tracking-widest hover:bg-primary-foreground hover:text-primary shadow-lg"
               >
                 {isSubmitting ? Contact.form.buttonSending : Contact.form.buttonSend}
               </Button>

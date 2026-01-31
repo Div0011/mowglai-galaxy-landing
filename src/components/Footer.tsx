@@ -12,6 +12,11 @@ const Footer = () => {
         { label: "START", href: "/" },
         { label: "STORY", href: "/about" },
         { label: "CRAFT", href: "/services" },
+      ],
+    },
+    {
+      title: "ENGAGE",
+      links: [
         { label: "BLUEPRINT", href: "/explore" },
         { label: "INVESTMENT", href: "/investment" },
         { label: "HELLO", href: "/contact" },
