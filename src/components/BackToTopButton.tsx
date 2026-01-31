@@ -34,9 +34,9 @@ const BackToTopButton = () => {
     return (
         <div className={cn(
             "fixed z-[60] transition-all duration-500 transform",
-            // Positioned vertically above the Settings/Menu Toggle on the left
-            "bottom-[calc(5rem+env(safe-area-inset-bottom))] left-[calc(0.875rem+env(safe-area-inset-left))]",
-            "md:bottom-[calc(7rem+env(safe-area-inset-bottom))] md:left-[calc(2rem+env(safe-area-inset-left))]",
+            // Positioned vertically above the Contact Toggle on the right
+            "bottom-[calc(5rem+env(safe-area-inset-bottom))] right-[calc(0.875rem+env(safe-area-inset-right))]",
+            "md:bottom-[calc(7rem+env(safe-area-inset-bottom))] md:right-[calc(2rem+env(safe-area-inset-right))]",
             isVisible ? "translate-y-0 opacity-100 scale-100" : "translate-y-20 opacity-0 scale-50 pointer-events-none"
         )}>
             <motion.button

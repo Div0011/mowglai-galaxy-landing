@@ -1,16 +1,14 @@
 "use client";
 
-import { Moon, Sun, Languages, Monitor, Check, Palette, Minimize2, Zap } from "lucide-react";
+import { Moon, Sun, Languages, Monitor, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import {
     Select,
@@ -19,6 +17,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { motion } from "framer-motion";
 import { useLanguage, Language } from "@/context/LanguageContext";
 
 
@@ -28,6 +27,7 @@ const SettingsToggle = () => {
 
     const [mounted, setMounted] = useState(false);
     const [showLanguageIcon, setShowLanguageIcon] = useState(false);
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
     // Cycle icons every 2 seconds
     useEffect(() => {
@@ -55,8 +55,8 @@ const SettingsToggle = () => {
     ];
 
     return (
-        <Dialog>
-            <DialogTrigger asChild>
+        <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+            <PopoverTrigger asChild>
                 <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-[calc(0.875rem+env(safe-area-inset-left))] md:bottom-[calc(2rem+env(safe-area-inset-bottom))] md:left-[calc(2rem+env(safe-area-inset-left))] z-[60] flex items-center justify-center">
                     <button
                         className={cn(
@@ -66,16 +66,30 @@ const SettingsToggle = () => {
                                 ? "bg-primary/20 text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary"
                                 : "bg-background/5 text-primary hover:bg-primary/10 hover:border-primary/50"
                         )}
-                        aria-label="Toggle Theme & Language"
+                        aria-label={isPopoverOpen ? "Close menu" : "Toggle Theme & Language"}
                     >
                         <div className="relative w-5 h-5 flex items-center justify-center">
-                            {/* Theme Icons */}
+                            {/* Close X Icon - Shows when popover is open */}
                             <div
                                 className={cn(
-                                    "absolute inset-0 transition-all duration-500 transform",
-                                    showLanguageIcon
+                                    "absolute inset-0 transition-all duration-300 transform flex items-center justify-center",
+                                    isPopoverOpen
+                                        ? "rotate-0 opacity-100 scale-100"
+                                        : "-rotate-90 opacity-0 scale-50"
+                                )}
+                            >
+                                <X className="w-5 h-5" />
+                            </div>
+
+                            {/* Theme Icons - Shows when popover is closed */}
+                            <div
+                                className={cn(
+                                    "absolute inset-0 transition-all duration-300 transform flex items-center justify-center",
+                                    isPopoverOpen
                                         ? "rotate-90 opacity-0 scale-50"
-                                        : "rotate-0 opacity-100 scale-100"
+                                        : showLanguageIcon
+                                            ? "rotate-90 opacity-0 scale-50"
+                                            : "rotate-0 opacity-100 scale-100"
                                 )}
                             >
                                 {theme === "dark" ? (
@@ -85,13 +99,15 @@ const SettingsToggle = () => {
                                 )}
                             </div>
 
-                            {/* Language Icon */}
+                            {/* Language Icon - Shows when popover is closed */}
                             <div
                                 className={cn(
-                                    "absolute inset-0 transition-all duration-500 transform",
-                                    !showLanguageIcon
+                                    "absolute inset-0 transition-all duration-300 transform flex items-center justify-center",
+                                    isPopoverOpen
                                         ? "-rotate-90 opacity-0 scale-50"
-                                        : "rotate-0 opacity-100 scale-100"
+                                        : !showLanguageIcon
+                                            ? "-rotate-90 opacity-0 scale-50"
+                                            : "rotate-0 opacity-100 scale-100"
                                 )}
                             >
                                 <Languages className="w-5 h-5" />
@@ -99,67 +115,79 @@ const SettingsToggle = () => {
                         </div>
                     </button>
                 </div>
-            </DialogTrigger>
-            <DialogContent className="w-[90vw] max-w-[300px] bg-background/95 backdrop-blur-xl border-primary/10 rounded-xl gap-4 p-5 data-[state=open]:slide-in-from-bottom-1/2 sm:data-[state=open]:slide-in-from-left-1/2">
-                <DialogHeader>
-                    <DialogTitle className="font-display text-lg tracking-wide">
-                        {t.SettingsToggle.title}
-                    </DialogTitle>
-                </DialogHeader>
-
+            </PopoverTrigger>
+            <PopoverContent
+                side="top"
+                align="start"
+                sideOffset={12}
+                className="w-[280px] bg-background/95 backdrop-blur-xl border-primary/10 rounded-xl p-4 shadow-[0_0_30px_rgba(var(--primary-rgb),0.15)]"
+            >
                 <div className="space-y-4">
+                    <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        {t.SettingsToggle.title}
+                    </h4>
+
                     {/* Theme Selection */}
                     <div className="space-y-2">
-                        <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        <h5 className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
                             {t.SettingsToggle.appearance}
-                        </h4>
+                        </h5>
                         <div className="grid grid-cols-3 gap-2">
-                            <Button
-                                variant={theme === "light" ? "default" : "outline"}
+                            <motion.button
                                 className={cn(
-                                    "flex flex-col items-center gap-1 h-auto py-2 rounded-lg transition-all duration-300",
-                                    theme === "light" ? "border-primary shadow-sm scale-[1.02]" : "border-primary/20 hover:border-primary/50"
+                                    "flex flex-col items-center gap-1 h-auto py-3 rounded-xl border transition-all duration-300",
+                                    theme === "light"
+                                        ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                                        : "border-primary/20 hover:border-primary/50 bg-transparent"
                                 )}
                                 onClick={() => setTheme("light")}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <Sun className="w-4 h-4" />
                                 <span className="text-[10px]">{t.SettingsToggle.light}</span>
-                            </Button>
-                            <Button
-                                variant={theme === "dark" ? "default" : "outline"}
+                            </motion.button>
+                            <motion.button
                                 className={cn(
-                                    "flex flex-col items-center gap-1 h-auto py-2 rounded-lg transition-all duration-300",
-                                    theme === "dark" ? "border-primary shadow-sm scale-[1.02]" : "border-primary/20 hover:border-primary/50"
+                                    "flex flex-col items-center gap-1 h-auto py-3 rounded-xl border transition-all duration-300",
+                                    theme === "dark"
+                                        ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                                        : "border-primary/20 hover:border-primary/50 bg-transparent"
                                 )}
                                 onClick={() => setTheme("dark")}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <Moon className="w-4 h-4" />
                                 <span className="text-[10px]">{t.SettingsToggle.dark}</span>
-                            </Button>
-                            <Button
-                                variant={theme === "system" ? "default" : "outline"}
+                            </motion.button>
+                            <motion.button
                                 className={cn(
-                                    "flex flex-col items-center gap-1 h-auto py-2 rounded-lg transition-all duration-300",
-                                    theme === "system" ? "border-primary shadow-sm scale-[1.02]" : "border-primary/20 hover:border-primary/50"
+                                    "flex flex-col items-center gap-1 h-auto py-3 rounded-xl border transition-all duration-300",
+                                    theme === "system"
+                                        ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                                        : "border-primary/20 hover:border-primary/50 bg-transparent"
                                 )}
                                 onClick={() => setTheme("system")}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <Monitor className="w-4 h-4" />
                                 <span className="text-[10px]">{t.SettingsToggle.system}</span>
-                            </Button>
+                            </motion.button>
                         </div>
                     </div>
 
                     {/* Language Selection */}
                     <div className="space-y-2">
-                        <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        <h5 className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
                             {t.SettingsToggle.language}
-                        </h4>
+                        </h5>
                         <Select value={language} onValueChange={(val) => onSelectChange(val as Language)}>
-                            <SelectTrigger className="w-full">
+                            <SelectTrigger className="w-full rounded-xl">
                                 <SelectValue placeholder="Select Language" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="rounded-xl bg-background/95 backdrop-blur-xl border-primary/10 shadow-[0_0_30px_rgba(var(--primary-rgb),0.15)]">
                                 {languages.map((lang) => (
                                     <SelectItem key={lang.code} value={lang.code}>
                                         <div className="flex items-center gap-2">
@@ -172,8 +200,8 @@ const SettingsToggle = () => {
                         </Select>
                     </div>
                 </div>
-            </DialogContent>
-        </Dialog>
+            </PopoverContent>
+        </Popover>
     );
 };
 
