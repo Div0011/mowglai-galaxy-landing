@@ -99,7 +99,7 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobile || !followerRef.current) return;
 
-    let scale = isPointer ? 1.6 : 1;
+    const scale = isPointer ? 1.6 : 1;
 
     gsap.to(followerRef.current, {
       scale: scale,
