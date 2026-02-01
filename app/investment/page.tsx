@@ -51,6 +51,14 @@ const plans = {
             features: ["Everything in Care", "Priority Support Response", "Social Media Handling (2 posts/week)", "Monthly Analytics Report", "Basic SEO Health Check", "3 Hours Content Updates/mo"],
             cta: "Subscribe",
             type: "growth"
+        },
+        {
+            name: "Mowglai Elite",
+            price: "$99/mo",
+            description: "Complete peace of mind for business critical sites.",
+            features: ["Everything in Growth", "1 Hour Custom Dev/mo", "Weekly Backups & Tests", "Phone Support Access", "Performance Optimization"],
+            cta: "Subscribe",
+            type: "elite"
         }
     ],
     premium: [
@@ -69,6 +77,22 @@ const plans = {
             description: "Expand your platform's capabilities on demand.",
             features: ["New Page Creation", "E-commerce Catalogue", "Payment Gateway Integration", "Custom Forms & Logic", "API Connections"],
             cta: "Request Feature",
+            type: "addon"
+        },
+        {
+            name: "AI INTEGRATION",
+            price: "CUSTOM",
+            description: "Embed intelligence into your digital ecosystem.",
+            features: ["Custom Chatbots", "Automated Workflows", "Predictive Analytics", "OpenAI/Claude API", "Vector Database Setup"],
+            cta: "Deployment",
+            type: "addon"
+        },
+        {
+            name: "BRAND EVOLUTION",
+            price: "FROM $1499",
+            description: "Total visual and identity transformation.",
+            features: ["Logo Redesign", "Brand Guidelines", "Social Media Kit", "Typography System", "Marketing Assets"],
+            cta: "Evolve",
             type: "addon"
         }
     ]
@@ -112,12 +136,12 @@ export default function InvestmentPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                 <div className="mb-12 relative z-10">
-                    <h3 className="text-3xl md:text-5xl font-display uppercase italic mb-4 text-primary group-hover:scale-105 transition-transform origin-left">{plan.name}</h3>
+                    <h3 className="text-xl md:text-3xl font-display uppercase italic mb-4 text-primary group-hover:scale-105 transition-transform origin-left leading-relaxed break-words">{plan.name}</h3>
                     <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80">{plan.description}</p>
                 </div>
 
-                <div className="mb-16 relative z-10 h-16 sm:h-20 flex flex-col justify-center">
-                    <div className="text-4xl sm:text-5xl md:text-6xl font-display font-black leading-none mb-3 text-foreground flex items-center flex-wrap gap-4">
+                <div className="mb-16 relative z-10 min-h-[4rem] sm:min-h-[5rem] flex flex-col justify-center">
+                    <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-normal mb-3 text-foreground flex items-center flex-wrap gap-x-4">
                         <AnimatePresence mode="wait">
                             {type === 'standard' && isDiscountApplied && plan.price !== "CUSTOM" && !plan.price.includes("+") ? (
                                 <motion.div
@@ -183,34 +207,34 @@ export default function InvestmentPage() {
                             </h1>
                         </div>
 
-                        {/* Toggle */}
-                        <div className="w-full md:w-auto mx-auto relative z-20">
-                            <div className="flex justify-center">
-                                <div className="grid grid-cols-4 md:flex bg-background/40 backdrop-blur-xl p-1 md:p-1.5 rounded-2xl md:rounded-full border border-primary/20 w-full md:w-auto relative group hover:border-primary/40 transition-colors gap-1 md:gap-0">
-                                    {["standard", "care", "addons", "premium"].map((type) => (
-                                        <button
-                                            key={type}
-                                            onClick={() => setPlanType(type as "standard" | "care" | "addons" | "premium")}
-                                            className={cn(
-                                                "relative px-2 md:px-8 py-2 md:py-3 text-[9px] md:text-xs font-bold uppercase tracking-wider md:tracking-widest transition-colors rounded-xl md:rounded-full z-10 text-center w-full md:w-auto",
-                                                planType === type ? "text-primary-foreground" : "text-primary/60 hover:text-primary"
-                                            )}
-                                        >
-                                            <span className="relative z-10 truncate w-full block">{type}</span>
-                                            {planType === type && (
-                                                <motion.div
-                                                    layoutId="activeTab"
-                                                    className="absolute inset-0 bg-primary rounded-xl md:rounded-full shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]"
-                                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                                />
-                                            )}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        {/* Toggle Removed from Header */}
                     </div>
                 </motion.div>
+
+                {/* Toggle Section (Moved Here) */}
+                <div className="flex justify-center mb-12 relative z-20">
+                    <div className="grid grid-cols-4 md:flex bg-background/40 backdrop-blur-xl p-1 md:p-1.5 rounded-2xl md:rounded-full border border-primary/20 w-full md:w-auto relative group hover:border-primary/40 transition-colors gap-1 md:gap-0">
+                        {["standard", "care", "addons", "premium"].map((type) => (
+                            <button
+                                key={type}
+                                onClick={() => setPlanType(type as "standard" | "care" | "addons" | "premium")}
+                                className={cn(
+                                    "relative px-2 md:px-8 py-2 md:py-3 text-[10px] md:text-sm font-bold uppercase tracking-wider md:tracking-widest transition-colors rounded-xl md:rounded-full z-10 text-center w-full md:w-auto",
+                                    planType === type ? "text-primary-foreground" : "text-primary/60 hover:text-primary"
+                                )}
+                            >
+                                <span className="relative z-10 truncate w-full block">{type}</span>
+                                {planType === type && (
+                                    <motion.div
+                                        layoutId="activeTab"
+                                        className="absolute inset-0 bg-primary rounded-xl md:rounded-full shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
 
                 {/* Discount Code Section */}
                 <div className="flex justify-center mb-16 relative z-10">
@@ -374,7 +398,7 @@ export default function InvestmentPage() {
                         tagline="Initiate Dialogue"
                     />
                 </div>
-            </div>
-        </PageLayout>
+            </div >
+        </PageLayout >
     )
 };
