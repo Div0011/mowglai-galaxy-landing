@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShoppingCart } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Template } from '@/data/templates'
 
@@ -92,17 +92,15 @@ export default function TemplateCard({ template }: { template: Template }) {
                 </p>
 
                 <div className="mt-auto flex items-center justify-between pt-4 border-t border-border/30">
-                    <span className="text-2xl font-bold text-foreground font-display">
-                        {template.price}
-                    </span>
                     <button
-                        className="px-5 py-2.5 bg-foreground text-background text-sm font-bold rounded-full shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 group/btn"
+                        className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-bold rounded-full shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 group/btn"
                         onClick={(e) => {
                             e.preventDefault();
-                            window.location.href = `/explore/${template.id}`;
+                            window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${template.id}`;
                         }}
                     >
-                        Buy Now
+                        <ShoppingCart className="w-4 h-4" />
+                        Enquire
                     </button>
                 </div>
             </div>

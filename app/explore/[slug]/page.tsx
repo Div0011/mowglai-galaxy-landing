@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Check, ArrowRight } from "lucide-react";
+import { ArrowLeft, Check, ArrowRight, ShoppingCart } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { getTemplateById, allTemplates, type Template } from "@/data/templates";
 import TemplateActions from "./TemplateActions";
@@ -75,8 +75,8 @@ export default async function TemplateDetailsPage({
         "offers": {
             "@type": "Offer",
             "url": `https://mowglai.in/explore/${template.id}`,
-            "priceCurrency": "USD", // Assuming USD for now based on standard
-            "price": template.price === "Free" ? "0" : template.price.replace(/[^0-9.]/g, ''),
+            "priceCurrency": "USD",
+            "price": "0", // Handled via enquiry
             "availability": "https://schema.org/InStock"
         }
     };
@@ -181,9 +181,9 @@ export default async function TemplateDetailsPage({
                                         </div>
 
                                         <div className="hidden md:flex items-center justify-between py-6 border-t border-white/10 mb-6">
-                                            <div>
-                                                <span className="block text-xs uppercase tracking-widest text-muted-foreground mb-1">Price</span>
-                                                <span className="text-3xl font-display font-bold text-white">{template.price}</span>
+                                            <div className="flex flex-col items-start">
+                                                <span className="block text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-bold mb-1">Status</span>
+                                                <span className="text-xl font-display font-bold text-white italic">Custom Quote</span>
                                             </div>
                                             <div className="text-right">
                                                 <span className="block text-xs uppercase tracking-widest text-muted-foreground mb-1">Pages</span>

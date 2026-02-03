@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ExternalLink, Layers, Smartphone, Layout } from 'lucide-react'
+import { ArrowRight, ExternalLink, Layers, Smartphone, Layout, ShoppingCart } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Template } from '@/data/templates'
 
@@ -118,21 +118,16 @@ export default function PremiumTemplateCard({ template }: { template: Template }
 
                     {/* Footer Actions */}
                     <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
-                        <div className="text-2xl font-display font-bold text-white tracking-tight">
-                            {template.price}
-                        </div>
-
-                        <div className="flex gap-3">
-                            <button
-                                className="px-6 py-2.5 bg-primary text-background font-bold text-sm rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-300"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    window.location.href = `/explore/${template.id}`;
-                                }}
-                            >
-                                Buy Now
-                            </button>
-                        </div>
+                        <button
+                            className="px-6 py-2.5 bg-primary text-background font-bold text-sm rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${template.id}`;
+                            }}
+                        >
+                            <ShoppingCart className="w-4 h-4" />
+                            Enquire
+                        </button>
                     </div>
                 </div>
             </div>

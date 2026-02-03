@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     ArrowRight, Filter, X, Check, Search, SlidersHorizontal, ArrowUpDown,
-    DollarSign, Layers, Monitor, Zap
+    DollarSign, Layers, Monitor, Zap, ShoppingCart
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import PageLayout from '@/components/PageLayout'
@@ -22,17 +22,10 @@ const pageRanges = [
     { label: 'Large', value: 'large', count: '11+' }
 ]
 
-const budgetRanges = [
-    { label: 'Under $300', value: 'under_300' },
-    { label: '$300 - $600', value: '300_600' },
-    { label: '$600 - $1000', value: '600_1000' },
-    { label: '$1000+', value: 'over_1000' }
-]
+const budgetRanges = [] // Removed as per request
 
 const sortOptions = [
     { label: 'Recommended', value: 'relevant' },
-    { label: 'Price: Low to High', value: 'price_asc' },
-    { label: 'Price: High to Low', value: 'price_desc' },
     { label: 'Complexity: High', value: 'pages_desc' },
 ]
 
@@ -99,17 +92,7 @@ export default function ExplorePage() {
                 })
                 if (!matchesRange) return false
             }
-            if (budget.length > 0) {
-                const priceVal = template.price.toLowerCase() === 'free' ? 0 : parseInt(template.price.replace(/[^0-9]/g, '')) || 0
-                const matchesBudget = budget.some(range => {
-                    if (range === 'under_300') return priceVal < 300
-                    if (range === '300_600') return priceVal >= 300 && priceVal <= 600
-                    if (range === '600_1000') return priceVal > 600 && priceVal <= 1000
-                    if (range === 'over_1000') return priceVal > 1000
-                    return false
-                })
-                if (!matchesBudget) return false
-            }
+            // Removed budget filtering
 
             if (websiteTypes.length > 0 && !websiteTypes.includes(template.type)) return false
             if (structures.length > 0 && !structures.includes(template.structure)) return false
@@ -120,13 +103,8 @@ export default function ExplorePage() {
             return true
         })
 
-        if (sortBy === 'price_asc') {
-            result.sort((a, b) => parseInt(a.price.replace(/[^0-9]/g, '')) - parseInt(b.price.replace(/[^0-9]/g, '')))
-        } else if (sortBy === 'price_desc') {
-            result.sort((a, b) => parseInt(b.price.replace(/[^0-9]/g, '')) - parseInt(a.price.replace(/[^0-9]/g, '')))
-        } else if (sortBy === 'pages_desc') {
-            result.sort((a, b) => b.pages - a.pages)
-        }
+        // Removed price sorting
+        result.sort((a, b) => b.pages - a.pages)
 
         return result
     }, [selectedSector, pageRange, websiteTypes, structures, cmsTypes, selectedFeatures, selectedStyles, sortBy, budget, allTemplatesFlat])
@@ -295,18 +273,7 @@ export default function ExplorePage() {
 
                                     <div className="flex-1 overflow-y-auto p-6 space-y-10 custom-scrollbar min-h-0">
                                         {/* Filter Sections */}
-                                        <FilterSection title="Budget Range" icon={<DollarSign className="w-4 h-4" />}>
-                                            <div className="space-y-2">
-                                                {budgetRanges.map(range => (
-                                                    <CheckboxRow
-                                                        key={range.value}
-                                                        label={range.label}
-                                                        checked={budget.includes(range.value)}
-                                                        onChange={() => toggleFilter(budget, setBudget, range.value)}
-                                                    />
-                                                ))}
-                                            </div>
-                                        </FilterSection>
+                                        {/* Budget Section Removed */}
 
                                         <FilterSection title="Complexity" icon={<Layers className="w-4 h-4" />}>
                                             <div className="grid grid-cols-2 gap-3">
@@ -474,8 +441,8 @@ function TemplateCard({ template, viewProjectText, pagesText }: { template: Temp
                     <span className="px-2 py-1 bg-black/60 backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-white border border-white/10 rounded">
                         {template.structure}
                     </span>
-                    <span className="px-2 py-1 bg-white text-black text-[10px] font-bold uppercase tracking-wider rounded shadow-lg">
-                        {template.price}
+                    <span className="px-2 py-1 bg-primary text-primary-foreground text-[8px] font-bold uppercase tracking-wider rounded shadow-lg">
+                        Enquire
                     </span>
                 </div>
 
@@ -509,6 +476,27 @@ function TemplateCard({ template, viewProjectText, pagesText }: { template: Temp
                     {template.features.slice(0, 3).map((f, i) => (
                         <span key={i} className="text-[9px] font-medium text-muted-foreground border-b border-dotted border-muted-foreground/30">{f}</span>
                     ))}
+                </div>
+
+                {/* Added Footer with Enquire Button */}
+                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${template.id}`;
+                        }}
+                        className="px-4 py-2 bg-primary text-background text-[10px] font-bold uppercase tracking-widest rounded-md shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+                    >
+                        <ShoppingCart className="w-3 h-3" />
+                        Enquire
+                    </button>
+                    <Link
+                        href={`/explore/${template.id}`}
+                        className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-white transition-colors"
+                    >
+                        Details
+                    </Link>
                 </div>
             </div>
         </motion.div>
