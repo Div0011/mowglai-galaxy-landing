@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mowglai Creative Agency | Premium Digital Experience</title>
     <meta name="description" content="Mowglai Creative Agency - We build digital products that matter.">
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,16 +89,13 @@
             }
         }
 
-        /* Text Reveal */
-        .reveal-text {
-            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+        .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .reveal-text.active {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -110,22 +107,33 @@
         }
     </style>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-purple': '#7e22ce',
-                        'brand-dark': '#050505',
-                        'brand-gray': '#1a1a1a',
-                    },
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
-                        display: ['Syne', 'sans-serif'],
+        window.tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        colors: {
+                            'brand-purple': '#7e22ce',
+                            'brand-dark': '#050505',
+                            'brand-gray': '#1a1a1a',
+                        },
+                        fontFamily: {
+                            sans: ['Space Grotesk', 'sans-serif'],
+                            display: ['Syne', 'sans-serif'],
+                        },
+                        keyframes: {
+                            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                            fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
+                        },
+                        animation: {
+                            fadeIn: 'fadeIn 1.5s ease-out forwards',
+                            fadeInUp: 'fadeInUp 1.5s ease-out forwards',
+                        }
                     }
                 }
             }
         }
     </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body x-data="{ 
@@ -215,8 +223,8 @@
             <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/30 via-brand-dark/70 to-brand-dark z-10">
             </div>
             <!-- Background Image/Video Placeholder -->
-            <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2727&auto=format&fit=crop"
-                alt="Abstract Creative Background" class="w-full h-full object-cover opacity-60">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop"
+                alt="Creative Agency" class="w-full h-full object-cover opacity-60">
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto w-full">
@@ -282,10 +290,10 @@
                 <!-- Project 1 -->
                 <div class="group cursor-pointer pt-24" @mouseenter="cursorHover = true"
                     @mouseleave="cursorHover = false">
-                    <div class="aspect-[4/5] relative overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1600508774662-60912df41aa6?q=80&w=2670&auto=format&fit=crop"
+                    <div class="relative overflow-hidden mb-6 bg-brand-gray aspect-[4/5] block">
+                        <img src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?q=80&w=1200&auto=format&fit=crop"
                             alt="Project 1"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="flex justify-between items-center border-b border-white/20 pb-4">
                         <h3 class="text-3xl font-display font-bold">Mowglai Fashion</h3>
@@ -295,10 +303,10 @@
 
                 <!-- Project 2 -->
                 <div class="group cursor-pointer" @mouseenter="cursorHover = true" @mouseleave="cursorHover = false">
-                    <div class="aspect-[4/5] relative overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2670&auto=format&fit=crop"
+                    <div class="relative overflow-hidden mb-6 bg-brand-gray aspect-[4/5] block">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop"
                             alt="Project 2"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="flex justify-between items-center border-b border-white/20 pb-4">
                         <h3 class="text-3xl font-display font-bold">Urban Loft</h3>
@@ -309,27 +317,27 @@
                 <!-- Project 3 -->
                 <div class="group cursor-pointer md:-mt-32" @mouseenter="cursorHover = true"
                     @mouseleave="cursorHover = false">
-                    <div class="aspect-square relative overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1590529683973-4564345bb3e7?q=80&w=2670&auto=format&fit=crop"
+                    <div class="relative overflow-hidden mb-6 bg-brand-gray aspect-square block">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
                             alt="Project 3"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="flex justify-between items-center border-b border-white/20 pb-4">
-                        <h3 class="text-3xl font-display font-bold">TeleHealth Connect</h3>
-                        <span class="text-brand-purple">App Design</span>
+                        <h3 class="text-3xl font-display font-bold">Data Analytics</h3>
+                        <span class="text-brand-purple">Dashboard</span>
                     </div>
                 </div>
 
                 <!-- Project 4 -->
                 <div class="group cursor-pointer" @mouseenter="cursorHover = true" @mouseleave="cursorHover = false">
-                    <div class="aspect-[16/9] relative overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop"
+                    <div class="relative overflow-hidden mb-6 bg-brand-gray aspect-video block">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop"
                             alt="Project 4"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
                     <div class="flex justify-between items-center border-b border-white/20 pb-4">
-                        <h3 class="text-3xl font-display font-bold">Ivy League</h3>
-                        <span class="text-brand-purple">Educational</span>
+                        <h3 class="text-3xl font-display font-bold">Mobile First</h3>
+                        <span class="text-brand-purple">App Design</span>
                     </div>
                 </div>
             </div>
@@ -441,6 +449,7 @@
     <!-- Scripts for Scroll Reveal -->
     <script>
         // Simple Intersection Observer for scroll reveals
+        // Initializing the observer for any other reveal elements
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -449,7 +458,8 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
+        // No projects use reveal anymore, but keeping it for other potential elements
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 
