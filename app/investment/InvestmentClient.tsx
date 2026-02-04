@@ -4,7 +4,7 @@ import PageLayout from "@/components/PageLayout";
 import PricingSection from "@/components/PricingSection";
 import NextPageButton from "@/components/NextPageButton";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Sparkles } from "lucide-react";
+import { Download, FileText, Sparkles, Rocket } from "lucide-react";
 import { useState } from "react";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
 import { useTheme } from "next-themes";
@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 export default function InvestmentClient() {
     const { resolvedTheme } = useTheme();
-    const [planType, setPlanType] = useState<"standard" | "premium">("standard");
+    const [planType, setPlanType] = useState<"standard" | "premium" | "app">("standard");
 
     return (
         <PageLayout>
@@ -28,7 +28,7 @@ export default function InvestmentClient() {
                         </div>
 
                         {/* Plan Toggle Tabs */}
-                        <div className="flex bg-primary/5 p-1 rounded-full border border-primary/20 mb-4 w-full md:w-auto" data-aos="fade-left">
+                        <div className="flex bg-primary/5 p-1 rounded-full border border-primary/20 mb-4 w-full md:w-auto overflow-x-auto whitespace-nowrap scrollbar-hide" data-aos="fade-left">
                             <button
                                 onClick={() => setPlanType("standard")}
                                 className={`flex-1 md:flex-none px-6 sm:px-8 py-3 rounded-full font-display font-bold text-xs sm:text-sm transition-all ${planType === "standard" ? "bg-primary text-primary-foreground" : "text-foreground/50 hover:text-foreground"}`}
@@ -41,12 +41,29 @@ export default function InvestmentClient() {
                             >
                                 PREMIUM
                             </button>
+                            <button
+                                onClick={() => setPlanType("app")}
+                                className={`flex-1 md:flex-none px-6 sm:px-8 py-3 rounded-full font-display font-bold text-xs sm:text-sm transition-all ${planType === "app" ? "bg-primary text-primary-foreground" : "text-foreground/50 hover:text-foreground"}`}
+                            >
+                                APP
+                            </button>
                         </div>
                     </div>
 
                     {/* Pricing Content */}
                     <div className="transition-all duration-500">
-                        {planType === "standard" ? (
+                        {planType === "app" ? (
+                            <div className="py-40 text-center glass-card rounded-[3rem] border-primary/30 bg-gradient-to-br from-primary/10 to-transparent relative overflow-hidden group" data-aos="zoom-in">
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-display font-black text-primary opacity-[0.03] select-none pointer-events-none italic group-hover:scale-110 transition-transform duration-[2000ms]">
+                                    COMING
+                                </div>
+                                <Rocket className="w-16 h-16 text-primary mx-auto mb-6 animate-pulse" />
+                                <h2 className="text-5xl md:text-8xl font-display font-black text-primary mb-6 uppercase italic group-hover:tracking-widest transition-all duration-700">Coming Soon</h2>
+                                <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 uppercase tracking-[0.2em]">
+                                    App Development <span className="text-primary">Ecosystems</span>
+                                </p>
+                            </div>
+                        ) : planType === "standard" ? (
                             <PricingSection />
                         ) : (
                             <div className="py-20 text-center glass-card rounded-[3rem] border-primary/30 bg-gradient-to-br from-primary/10 to-transparent" data-aos="zoom-in">
