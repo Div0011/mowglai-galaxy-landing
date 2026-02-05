@@ -70,6 +70,32 @@ const plans = {
             cta: "Dominate"
         }
     ],
+    systems: [
+        {
+            name: "NATIVE OS",
+            price: "COMING SOON",
+            description: "High-Performance Mobile Applications",
+            features: ["iOS & Android Development", "Native Performance", "Offline Capabilities", "Device Hardware Access", "App Store Optimization"],
+            cta: "Waitlist",
+            type: "system"
+        },
+        {
+            name: "PURE API",
+            price: "COMING SOON",
+            description: "headless Architecture & Integrations",
+            features: ["Custom REST/gRPC APIs", "Third-party Integrations", "Secure Authentication", "Scalable Infrastructure", "Real-time Data Processing"],
+            cta: "Waitlist",
+            type: "system"
+        },
+        {
+            name: "NERVE CENTER",
+            price: "COMING SOON",
+            description: "Administrative Command & Intelligence",
+            features: ["Real-time user analytics", "Content Management", "Role-based Access", "Custom Reporting", "Server Health Monitoring"],
+            cta: "Waitlist",
+            type: "system"
+        }
+    ],
     addons: [
         {
             name: "FEATURE SPRINT",
@@ -101,7 +127,7 @@ const plans = {
 export default function InvestmentPage() {
     const { t } = useLanguage();
     const router = useRouter();
-    const [planType, setPlanType] = useState<"standard" | "care" | "addons" | "premium">("standard");
+    const [planType, setPlanType] = useState<"standard" | "care" | "addons" | "premium" | "systems">("standard");
     const [discountCode, setDiscountCode] = useState("");
     const [isDiscountApplied, setIsDiscountApplied] = useState(false);
     const [discountError, setDiscountError] = useState("");
@@ -126,8 +152,8 @@ export default function InvestmentPage() {
     };
 
     // Helper to render plans dynamically
-    const renderPlans = (type: "standard" | "care" | "addons") => {
-        const currentPlans = type === "standard" ? plans.standard : (type === "care" ? plans.care : plans.addons);
+    const renderPlans = (type: "standard" | "care" | "addons" | "systems") => {
+        const currentPlans = type === "standard" ? plans.standard : (type === "care" ? plans.care : (type === "systems" ? plans.systems : plans.addons));
         return currentPlans.map((plan, i) => (
             <div
                 key={i}
@@ -160,6 +186,7 @@ export default function InvestmentPage() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
+                                    className={cn(plan.price === "COMING SOON" && "text-2xl sm:text-3xl text-primary/70 tracking-widest")}
                                 >
                                     {plan.price}
                                 </motion.div>
@@ -178,8 +205,11 @@ export default function InvestmentPage() {
                 </ul>
 
                 <Link
-                    href={type === 'care' ? `/contact?subject=Subscription Request: ${plan.name}` : `/project-request?plan=${plan.name.toLowerCase()}`}
-                    className="relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto"
+                    href={type === 'care' ? `/contact?subject=Subscription Request: ${plan.name}` : (type === "systems" ? "/contact?subject=Systems Waitlist Request" : `/project-request?plan=${plan.name.toLowerCase()}`)}
+                    className={cn(
+                        "relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto",
+                        plan.price === "COMING SOON" && "opacity-80 hover:opacity-100"
+                    )}
                 >
                     {plan.cta}
                 </Link>
@@ -213,13 +243,13 @@ export default function InvestmentPage() {
 
                 {/* Toggle Section (Moved Here) */}
                 <div className="flex justify-center mb-12 relative z-20">
-                    <div className="grid grid-cols-4 md:flex bg-background/40 backdrop-blur-xl p-1 md:p-1.5 rounded-2xl md:rounded-full border border-primary/20 w-full md:w-auto relative group hover:border-primary/40 transition-colors gap-1 md:gap-0">
-                        {["standard", "care", "addons", "premium"].map((type) => (
+                    <div className="flex flex-wrap justify-center bg-background/40 backdrop-blur-xl p-1 md:p-1.5 rounded-2xl md:rounded-full border border-primary/20 w-full md:w-auto relative group hover:border-primary/40 transition-colors gap-1 md:gap-0">
+                        {["standard", "care", "systems", "addons", "premium"].map((type) => (
                             <button
                                 key={type}
-                                onClick={() => setPlanType(type as "standard" | "care" | "addons" | "premium")}
+                                onClick={() => setPlanType(type as "standard" | "care" | "addons" | "premium" | "systems")}
                                 className={cn(
-                                    "relative px-2 md:px-8 py-2 md:py-3 text-[10px] md:text-sm font-bold uppercase tracking-wider md:tracking-widest transition-colors rounded-xl md:rounded-full z-10 text-center w-full md:w-auto",
+                                    "relative px-4 sm:px-6 md:px-8 py-2 md:py-3 text-[10px] md:text-sm font-bold uppercase tracking-wider md:tracking-widest transition-colors rounded-xl md:rounded-full z-10 text-center flex-1 md:flex-none min-w-[30%] md:min-w-0",
                                     planType === type ? "text-primary-foreground" : "text-primary/60 hover:text-primary"
                                 )}
                             >
@@ -334,7 +364,7 @@ export default function InvestmentPage() {
                                     </div>
                                 </div>
                             ) : (
-                                renderPlans(planType as "standard" | "care" | "addons")
+                                renderPlans(planType as "standard" | "care" | "addons" | "systems")
                             )}
                         </motion.div>
                     </AnimatePresence>
