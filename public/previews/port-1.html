@@ -128,20 +128,20 @@
     </script>
 </head>
 
-<body x-data="{ 
+<body x-data="{
     cursorHover: false,
     mobileMenuOpen: false,
     initCursor() {
         const dot = this.$refs.cursorDot;
         const outline = this.$refs.cursorOutline;
-        
+
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
 
             dot.style.left = `${posX}px`;
             dot.style.top = `${posY}px`;
-            
+
             outline.animate({
                 left: `${posX}px`,
                 top: `${posY}px`
@@ -280,10 +280,10 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24">
                 <!-- Project 1 -->
-                <div class="group cursor-pointer pt-24" @mouseenter="cursorHover = true"
+                <div class="group cursor-pointer pt-24 mb-24" @mouseenter="cursorHover = true"
                     @mouseleave="cursorHover = false">
                     <div class="aspect-[4/5] relative overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1600508774662-60912df41aa6?q=80&w=2670&auto=format&fit=crop"
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2670&auto=format&fit=crop"
                             alt="Project 1"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
@@ -310,11 +310,11 @@
                 <div class="group cursor-pointer md:-mt-32" @mouseenter="cursorHover = true"
                     @mouseleave="cursorHover = false">
                     <div class="aspect-square relative overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1590529683973-4564345bb3e7?q=80&w=2670&auto=format&fit=crop"
+                        <img src="https://images.unsplash.com/photo-1555421689-43cad7100750?q=80&w=2670&auto=format&fit=crop"
                             alt="Project 3"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     </div>
-                    <div class="flex justify-between items-center border-b border-white/20 pb-4">
+                    <div class="flex justify-between items-center border-b border-white/20 pb-4 mt-16">
                         <h3 class="text-3xl font-display font-bold">TeleHealth Connect</h3>
                         <span class="text-brand-purple">App Design</span>
                     </div>

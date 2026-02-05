@@ -1,0 +1,77 @@
+Introduction and Scope
+This Privacy Policy governs the manner in which Mowglai (mowglai.in) collects, uses, maintains,
+and discloses information collected from users and clients. We are committed to protecting your
+privacy and ensuring that your personal and business data is handled with the highest level of
+security. This policy applies to all services offered by Mowglai, including custom website
+development, database management, and AI-driven optimizations. By utilizing our services, you
+acknowledge that you have read and understood how we process your data to deliver
+high-quality technical solutions.
+Data Collection and Usage
+We collect information through various channels, primarily during the onboarding and execution
+phases of our projects. This includes personal identifiers such as names and contact details, as
+well as highly sensitive technical data like server credentials, API keys, and database schemas.
+This information is used exclusively to facilitate project upgrades, maintain system integrity, and
+personalize your experience. We do not sell or lease your data to third parties; any data sharing
+is restricted to essential service providers, such as cloud hosting or AI model processing
+platforms, and is conducted under strict confidentiality agreements.
+AI and Database Security
+Given our specialization in AI handling and database management, Mowglai prioritizes data
+minimization and encryption. When processing data through AI models, we ensure that
+sensitive information is either anonymized or handled via secure API tunnels to prevent
+unauthorized exposure. For database services, we implement industry-standard security
+protocols to protect against unauthorized access, alteration, or destruction of your stored
+information. Our team continuously monitors these systems to ensure compliance with modern
+data protection standards, providing you with peace of mind regarding your intellectual and
+digital assets.
+Page 2: Terms & Conditions (Part I)
+Engagement of Services
+By accessing mowglai.in or entering into a service agreement with Mowglai, you agree to be
+bound by these Terms and Conditions. Our services encompass the end-to-end lifecycle of web
+development, from initial scratch-builds to complex project upgrades and SEO strategy
+implementation. Each project is defined by a specific scope of work, and any deviations or
+additions will be treated as supplemental tasks. We strive for excellence in every line of code
+and every database query, ensuring that your digital infrastructure is robust, scalable, and
+optimized for modern search engine standards.
+Intellectual Property and Ownership
+Mowglai believes in empowering our clients. Upon receipt of full and final payment, the
+ownership of the custom source code, website designs, and database architectures created
+specifically for your project will be transferred to you. However, Mowglai retains the rights to any
+pre-existing code libraries, proprietary AI prompts, or general-purpose scripts used during the
+development process. You are granted a non-exclusive, perpetual license to use these internal
+tools as they function within your specific project. This balance ensures you own your business
+assets while allowing us to continue innovating with our core technology stack.
+Client Responsibilities and Data Access
+
+To ensure the success of your project, particularly in areas like SEO and database migration, we
+require timely access to your existing digital environment. You represent that you have the legal
+right to provide us with access to any third-party platforms, hosting environments, or data sets
+required for the task. Mowglai is not responsible for project delays caused by a lack of access or
+incomplete information provided by the client. Furthermore, you are responsible for ensuring
+that all content provided for your website—including text, images, and data—complies with
+relevant copyright and intellectual property laws.
+Page 3: Terms & Conditions (Part II)
+AI Handling and SEO Performance
+Our AI-driven services and SEO optimizations are performed using the latest industry
+methodologies. However, because search engine algorithms and third-party AI models (such as
+those from OpenAI or Google) are subject to frequent, unannounced changes, Mowglai cannot
+guarantee specific ranking positions or permanent AI output consistency. We provide "White
+Hat" SEO services designed for long-term growth and implement AI logic that aims for accuracy,
+but we are not liable for the independent actions of these external platforms. Our role is to
+provide the best technical framework to navigate these evolving landscapes.
+Limitation of Liability and Indemnification
+In no event shall Mowglai, its founders, or employees be held liable for any indirect, incidental,
+or consequential damages arising from the use of our services, including but not limited to loss
+of data, business interruption, or system downtime during project upgrades. Our total liability for
+any claim related to our services is strictly limited to the amount paid by the client for the specific
+service in question. You agree to indemnify and hold Mowglai harmless from any claims or legal
+fees arising from your breach of these terms or your use of the final deliverables in a manner
+that violates local or international laws.
+Amendments and Governing Law
+Mowglai reserves the right to update these policies at any time to reflect changes in our service
+offerings or legal requirements. We encourage clients to review this page periodically. These
+terms are governed by the laws of the jurisdiction in which Mowglai operates. Any disputes
+arising from these agreements shall be resolved through good-faith negotiations or, if necessary,
+through the appropriate legal channels in our local jurisdiction. Your continued use of our
+services following any updates constitutes your acceptance of the revised terms.
+
+

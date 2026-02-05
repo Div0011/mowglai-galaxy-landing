@@ -32,8 +32,13 @@ build/
 next-env.d.ts
 *.zip
 
+<<<<<<< HEAD
 
 mowglai T&C .pdf
 mowglai policies and T&C.pdf
 policies.txt
 tc.txt
+=======
+mowglai T&C .pdf
+mowglai policies and T&C.pdf
+>>>>>>> origin/feature/template-covers
