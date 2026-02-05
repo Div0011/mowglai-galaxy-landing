@@ -55,10 +55,10 @@
 		"jspdf": "^4.1.0",
 		"lucide-react": "^0.462.0",
 		"next": "^16.1.6",
-		"next-themes": "^0.3.0",
+		"next-themes": "^0.4.4",
 		"react": "^19.2.4",
-		"react-day-picker": "^8.10.1",
-		"react-dom": "^18.3.1",
+		"react-day-picker": "^9.13.0",
+		"react-dom": "^19.2.4",
 		"react-helmet-async": "^2.0.5",
 		"react-hook-form": "^7.70.0",
 		"react-resizable-panels": "^2.1.9",
@@ -66,7 +66,7 @@
 		"sonner": "^2.0.7",
 		"tailwind-merge": "^2.6.0",
 		"tailwindcss-animate": "^1.0.7",
-		"vaul": "^0.9.9",
+		"vaul": "^1.1.2",
 		"zod": "^3.25.76"
 	},
 	"devDependencies": {
@@ -76,7 +76,7 @@
 		"@types/aos": "^3.0.7",
 		"@types/node": "^22.19.5",
 		"@types/react": "^19.2.10",
-		"@types/react-dom": "^18.3.0",
+		"@types/react-dom": "^19.0.3",
 		"autoprefixer": "^10.4.23",
 		"eslint": "^9.39.2",
 		"eslint-plugin-react-hooks": "^5.2.0",
@@ -86,5 +86,11 @@
 		"tailwindcss": "^3.4.19",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.52.0"
+	},
+	"overrides": {
+		"react-helmet-async": {
+			"react": "$react",
+			"react-dom": "$react-dom"
+		}
 	}
 }

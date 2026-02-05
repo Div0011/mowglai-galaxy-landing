@@ -1,16 +1,22 @@
-name: Deploy to Hostinger
+name: CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
     steps:
+      # ==========================================
+      # CI (Continuous Integration) Pipeline
+      # ==========================================
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -23,10 +29,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         run: npm run build
 
+      # ==========================================
+      # CD (Continuous Deployment) Pipeline
+      # ==========================================
       - name: Sync files to Hostinger via SSH
+        # Only deploy on push to main
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: "-avzr --exclude '.next' --exclude 'node_modules' --exclude '.git'"
