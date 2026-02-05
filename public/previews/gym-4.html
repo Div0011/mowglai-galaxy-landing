@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mowglai Training | Transform Your Life</title>
     <meta name="description" content="Mowglai Training - Elite personal coaching and transformation experts.">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,36 +14,25 @@
         href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Teko:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <script>
-        window.tailwind = {
-            config: {
-                theme: {
-                    extend: {
-                        colors: {
-                            'brand-yellow': '#facc15',
-                            'brand-black': '#0a0a0a',
-                            'brand-gray': '#1f1f1f',
-                        },
-                        fontFamily: {
-                            sans: ['Lato', 'sans-serif'],
-                            display: ['Teko', 'sans-serif'],
-                        },
-                        skew: {
-                            '15': '15deg',
-                        },
-                        keyframes: {
-                            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                            fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
-                        },
-                        animation: {
-                            fadeIn: 'fadeIn 1s ease-out forwards',
-                            fadeInUp: 'fadeInUp 1s ease-out forwards',
-                        }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-yellow': '#facc15',
+                        'brand-black': '#0a0a0a',
+                        'brand-gray': '#1f1f1f',
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        display: ['Teko', 'sans-serif'],
+                    },
+                    skew: {
+                        '15': '15deg',
                     }
                 }
             }
         }
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .clip-polygon {
             clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
@@ -57,17 +46,6 @@
         .text-outline-yellow {
             -webkit-text-stroke: 1px #facc15;
             color: transparent;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
@@ -121,7 +99,7 @@
                 class="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent z-10 md:w-3/4">
             </div>
             <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2669&auto=format&fit=crop"
-                class="w-full h-full object-cover object-center">
+                class="w-full h-full object-cover object-center transform scale-110">
         </div>
 
         <div class="max-w-7xl mx-auto px-6 w-full relative z-20 grid grid-cols-1 md:grid-cols-2">
@@ -275,54 +253,53 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Result 1 -->
                 <div class="group relative overflow-hidden">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="relative bg-brand-gray" style="min-height: 300px;">
-                            <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop"
-                                class="absolute inset-0 w-full h-full object-cover grayscale">
+                    <div class="grid grid-cols-2 gap-1">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2670&auto=format&fit=crop"
+                                class="w-full grayscale">
                             <div
-                                class="absolute top-4 left-4 bg-black/70 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest border border-white/20">
+                                class="absolute bottom-2 left-2 bg-black/50 text-white text-xs font-bold px-2 py-1 uppercase">
                                 Before</div>
                         </div>
-                        <div class="relative bg-brand-gray" style="min-height: 300px;">
-                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop"
-                                class="absolute inset-0 w-full h-full object-cover">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=2670&auto=format&fit=crop"
+                                class="w-full grayscale group-hover:grayscale-0 transition-all duration-500">
                             <div
-                                class="absolute top-4 left-4 bg-brand-yellow text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
+                                class="absolute bottom-2 left-2 bg-brand-yellow text-black text-xs font-bold px-2 py-1 uppercase">
                                 After</div>
                         </div>
                     </div>
-                    <div class="mt-6">
-                        <h3 class="font-display text-4xl font-bold uppercase italic tracking-wider">David S.</h3>
-                        <p class="text-brand-yellow font-bold text-sm mb-2 tracking-widest">-30lbs Fat / +10lbs Muscle
+                    <div class="mt-4">
+                        <h3 class="font-display text-3xl font-bold uppercase italic">David S.</h3>
+                        <p class="text-brand-yellow font-bold text-sm mb-2">-30lbs Fat / +10lbs Muscle</p>
+                        <p class="text-gray-400 text-sm">"The system works. I never thought I could see my abs at 40."
                         </p>
-                        <p class="text-gray-400 text-base leading-relaxed italic">"The system works. I never thought I
-                            could see my abs at 40."</p>
                     </div>
                 </div>
 
                 <!-- Result 2 -->
-                <div class="group relative overflow-hidden mt-12 md:mt-0">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="relative bg-brand-gray" style="min-height: 300px;">
-                            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop"
-                                class="absolute inset-0 w-full h-full object-cover grayscale">
+                <div class="group relative overflow-hidden mt-8 md:mt-0">
+                    <div class="grid grid-cols-2 gap-1">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2670&auto=format&fit=crop"
+                                class="w-full grayscale">
                             <div
-                                class="absolute top-4 left-4 bg-black/70 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest border border-white/20">
+                                class="absolute bottom-2 left-2 bg-black/50 text-white text-xs font-bold px-2 py-1 uppercase">
                                 Before</div>
                         </div>
-                        <div class="relative bg-brand-gray" style="min-height: 300px;">
-                            <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba?q=80&w=800&auto=format&fit=crop"
-                                class="absolute inset-0 w-full h-full object-cover">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1579047172169-515291e29467?q=80&w=2601&auto=format&fit=crop"
+                                class="w-full grayscale group-hover:grayscale-0 transition-all duration-500">
                             <div
-                                class="absolute top-4 left-4 bg-brand-yellow text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
+                                class="absolute bottom-2 left-2 bg-brand-yellow text-black text-xs font-bold px-2 py-1 uppercase">
                                 After</div>
                         </div>
                     </div>
-                    <div class="mt-6">
-                        <h3 class="font-display text-4xl font-bold uppercase italic tracking-wider">Sarah J.</h3>
-                        <p class="text-brand-yellow font-bold text-sm mb-2 tracking-widest">First Powerlifting Meet</p>
-                        <p class="text-gray-400 text-base leading-relaxed italic">"I added 100lbs to my total in 12
-                            weeks. The programming was precise."</p>
+                    <div class="mt-4">
+                        <h3 class="font-display text-3xl font-bold uppercase italic">Sarah J.</h3>
+                        <p class="text-brand-yellow font-bold text-sm mb-2">First Powerlifting Meet</p>
+                        <p class="text-gray-400 text-sm">"I added 100lbs to my total in 12 weeks. The programming was
+                            precise."</p>
                     </div>
                 </div>
             </div>
@@ -358,17 +335,6 @@
         </div>
     </footer>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
 </body>
 
 </html>
