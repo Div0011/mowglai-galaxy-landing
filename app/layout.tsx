@@ -18,11 +18,31 @@ const josefinSans = localFont({
 export const metadata: Metadata = {
     metadataBase: new URL("https://mowglai.in"),
     title: {
-        default: "Mowglai | Premium Digital Agency & Web Development",
-        template: "%s | Mowglai"
+        default: "Mowglai - Premium Web Development & Digital Agency India",
+        template: "%s | Mowglai - Web Development Agency"
     },
-    description: "Mowglai is a premium digital agency crafting award-winning websites, 3D experiences, and high-performance web apps. Dominate your industry with our digital excellence.",
-    keywords: ["web development", "web design", "digital agency", "3D websites", "React developer", "Next.js", "SEO services", "premium website templates", "creative agency", "Mowglai"],
+    description: "Mowglai is a premium web development and digital agency based in India. We create award-winning websites, 3D experiences, high-performance web apps, and provide expert SEO services. Specializing in React, Next.js, and modern web technologies.",
+    keywords: [
+        "Mowglai",
+        "Mowglai web development",
+        "Mowglai digital agency",
+        "web development India",
+        "web design agency",
+        "digital agency Noida",
+        "3D website development",
+        "React developer India",
+        "Next.js development",
+        "SEO services India",
+        "premium website templates",
+        "custom web development",
+        "e-commerce development",
+        "mobile app development",
+        "UI UX design agency",
+        "creative agency India",
+        "website redesign services",
+        "frontend development",
+        "full stack development"
+    ],
     authors: [{ name: "Mowglai" }],
     creator: "Mowglai",
     publisher: "Mowglai",
@@ -34,21 +54,21 @@ export const metadata: Metadata = {
     openGraph: {
         type: "website",
         url: "https://mowglai.in/",
-        title: "Mowglai | Premium Digital Agency & Web Development",
-        description: "Mowglai creates stunning, high-performance websites and web applications.",
-        siteName: "Mowglai",
+        title: "Mowglai - Premium Web Development & Digital Agency India",
+        description: "Award-winning web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps using React, Next.js, and modern technologies.",
+        siteName: "Mowglai - Web Development Agency",
         images: [{
             url: "https://mowglai.in/mowglai-logo-new.jpg",
             width: 1200,
             height: 1200,
-            alt: "Mowglai Digital Excellence"
+            alt: "Mowglai - Premium Digital Agency & Web Development"
         }],
         locale: "en_US",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Mowglai | Premium Digital Agency & Web Development",
-        description: "Mowglai creates stunning, high-performance websites and web applications.",
+        title: "Mowglai - Premium Web Development & Digital Agency India",
+        description: "Award-winning web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
         creator: "@mowglai",
     },
@@ -65,7 +85,7 @@ export const metadata: Metadata = {
         canonical: "https://mowglai.in",
     },
     verification: {
-        google: "google-site-verification-code", // Replace with actual code if available
+        google: "Evz63X8emo75NARUTxWl7zuik4hstQOoYls6MKipByA",
     },
     category: "technology",
     classification: "Digital Agency",
