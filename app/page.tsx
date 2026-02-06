@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Mowglai - Award-Winning Web Development & Digital Agency",
+    title: "Mowglai - Web Development & Digital Agency",
     description: "Mowglai is India's premier web development and digital agency. We specialize in creating stunning, high-performance websites, 3D web experiences, and custom web applications using React, Next.js, and cutting-edge technologies. Transform your digital presence today.",
     keywords: [
         "Mowglai",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         canonical: "https://mowglai.in/",
     },
     openGraph: {
-        title: "Mowglai - Award-Winning Web Development & Digital Agency",
+        title: "Mowglai - Web Development & Digital Agency",
         description: "India's premier web development agency creating stunning, high-performance websites and 3D web experiences. Expert React & Next.js developers.",
         url: "https://mowglai.in/",
         siteName: "Mowglai",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Mowglai - Award-Winning Web Development & Digital Agency",
+        title: "Mowglai - Web Development & Digital Agency",
         description: "India's premier web development agency creating stunning, high-performance websites and 3D web experiences.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
         creator: "@mowglai",
@@ -79,13 +79,13 @@ import OriginalHome from "@/styles/original/Home";
 export default function Home() {
     return (
         <>
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
             />
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
             />
             <OriginalHome />
         </>

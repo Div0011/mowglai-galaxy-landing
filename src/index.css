@@ -188,7 +188,13 @@
 
   * {
     @apply border-border;
-    cursor: none;
+  }
+
+  /* Apply custom cursor only on desktop devices */
+  @media (pointer: fine) {
+    * {
+      cursor: none;
+    }
   }
 
   html,

@@ -1,18 +1,25 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "../src/index.css";
 import { Providers } from "@/components/Providers";
 import { AOSInit } from "@/components/AOSInit";
 import { LanguageProvider } from "@/context/LanguageContext";
 
+// Preload critical fonts for better performance
 const boldonse = localFont({
     src: "../public/fonts/Boldonse-Regular.ttf",
     variable: "--font-display",
+    display: "swap",
+    preload: true,
+    fallback: ["system-ui", "sans-serif"],
 });
 
 const josefinSans = localFont({
     src: "../public/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf",
     variable: "--font-body",
+    display: "swap",
+    preload: true,
+    fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -55,7 +62,7 @@ export const metadata: Metadata = {
         type: "website",
         url: "https://mowglai.in/",
         title: "Mowglai - Premium Web Development & Digital Agency India",
-        description: "Award-winning web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps using React, Next.js, and modern technologies.",
+        description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps using React, Next.js, and modern technologies.",
         siteName: "Mowglai - Web Development Agency",
         images: [{
             url: "https://mowglai.in/mowglai-logo-new.jpg",
@@ -68,7 +75,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Mowglai - Premium Web Development & Digital Agency India",
-        description: "Award-winning web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps.",
+        description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
         creator: "@mowglai",
     },
@@ -100,6 +107,17 @@ export const metadata: Metadata = {
             'max-snippet': -1,
         },
     },
+};
+
+// Separate viewport export for Next.js optimization
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "#FDF3E7" },
+        { media: "(prefers-color-scheme: dark)", color: "#0a0f0c" },
+    ],
 };
 
 export default function RootLayout({

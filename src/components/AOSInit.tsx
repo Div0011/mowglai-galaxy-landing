@@ -6,16 +6,27 @@ import "aos/dist/aos.css";
 
 export const AOSInit = () => {
     useEffect(() => {
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        
+        if (prefersReducedMotion) {
+            // Disable animations for users who prefer reduced motion
+            return;
+        }
+
         // Initialize AOS with a slight delay to avoid hydration mismatches
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             AOS.init({
-                duration: 700, // Speed up from 1000ms
-                easing: 'ease-out-cubic', // Snappier easing
-                once: false,
-                mirror: true,
-                // offset: 50, // Optional: offset (in px) from the original trigger point
+                duration: 600, // Faster animations
+                easing: 'ease-out-cubic',
+                once: true, // Only animate once - improves performance
+                mirror: false, // Disable mirror mode - reduces calculations
+                offset: 50, // Smaller offset
+                disableMutationObserver: false, // Keep enabled for SPA navigation
             });
-        }, 100); // 100ms delay to ensure React hydration is complete
+        }, 100);
+
+        return () => clearTimeout(timer);
     }, []);
 
     return null;

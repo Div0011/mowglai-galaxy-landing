@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap } from "gsap";
+
 interface Ripple {
   x: number;
   y: number;
@@ -16,10 +17,13 @@ const CustomCursor = () => {
 
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
-  const lastRipplePos = useRef({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
+  const lastUpdateRef = useRef(0);
 
   const [isMobile, setIsMobile] = useState(false);
 
+  // Check for mobile/touch devices
   useEffect(() => {
     const checkMobile = () => {
       const isCoarse = window.matchMedia("(pointer: coarse)").matches;
@@ -28,10 +32,11 @@ const CustomCursor = () => {
       setIsMobile((isCoarse && isSmallScreen) || isMobileUA);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener("resize", checkMobile, { passive: true });
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Initialize GSAP animations
   useEffect(() => {
     if (isMobile) return;
 
@@ -42,13 +47,38 @@ const CustomCursor = () => {
     const followerX = gsap.quickTo(followerRef.current, "x", { duration: 0.35, ease: "power3.out" });
     const followerY = gsap.quickTo(followerRef.current, "y", { duration: 0.35, ease: "power3.out" });
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setIsVisible(prev => prev ? prev : true);
+    // Animation loop using requestAnimationFrame
+    const animate = () => {
+      const { x, y } = mousePosRef.current;
+      cursorX(x);
+      cursorY(y);
+      followerX(x);
+      followerY(y);
+      rafRef.current = requestAnimationFrame(animate);
+    };
 
-      cursorX(e.clientX);
-      cursorY(e.clientY);
-      followerX(e.clientX);
-      followerY(e.clientY);
+    rafRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [isMobile]);
+
+  // Mouse move handler with manual throttling for state updates
+  useEffect(() => {
+    if (isMobile) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mousePosRef.current = { x: e.clientX, y: e.clientY };
+      
+      // Throttle state updates to ~30fps (33ms)
+      const now = performance.now();
+      if (now - lastUpdateRef.current < 33) return;
+      lastUpdateRef.current = now;
+      
+      if (!isVisible) setIsVisible(true);
 
       const target = e.target as HTMLElement;
 
@@ -69,7 +99,7 @@ const CustomCursor = () => {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
@@ -78,12 +108,13 @@ const CustomCursor = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [isMobile]);
+  }, [isMobile, isVisible]);
 
+  // Click handler for ripples
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (isMobile) return;
+    if (isMobile) return;
 
+    const handleClick = (e: MouseEvent) => {
       const id = Date.now();
       setRipples((prev) => [...prev, { x: e.clientX, y: e.clientY, id }]);
 
@@ -92,10 +123,11 @@ const CustomCursor = () => {
       }, 600);
     };
 
-    window.addEventListener("click", handleClick);
+    window.addEventListener("click", handleClick, { passive: true });
     return () => window.removeEventListener("click", handleClick);
   }, [isMobile]);
 
+  // Scale animation on hover state change
   useEffect(() => {
     if (isMobile || !followerRef.current) return;
 

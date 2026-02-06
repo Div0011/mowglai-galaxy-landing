@@ -18,8 +18,28 @@ const nextConfig = {
             },
         ],
     },
+    // Experimental optimizations for better performance
+    experimental: {
+        optimizePackageImports: [
+            'lucide-react',
+            '@radix-ui/react-icons',
+            'recharts',
+            'framer-motion',
+            'gsap',
+            '@gsap/react',
+        ],
+        webpackBuildWorker: true,
+        parallelServerBuildTraces: true,
+    },
     // Ensure that GSAP and Three.js work correctly
     transpilePackages: ['gsap', 'three', '@react-three/fiber', '@react-three/drei'],
+    // Compiler optimizations
+    compiler: {
+        removeConsole: process.env.NODE_ENV === 'production',
+    },
+    // Performance optimizations for static export
+    poweredByHeader: false,
+    generateEtags: false,
 };
 
 export default withBundleAnalyzer(nextConfig);
