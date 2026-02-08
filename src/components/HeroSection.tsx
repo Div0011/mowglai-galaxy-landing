@@ -17,11 +17,6 @@ const HeroSection = () => {
             {/* Main Content Container */}
             <div className="container mx-auto px-6 relative z-20 flex flex-col items-center text-center">
 
-                {/* Pre-title */}
-                <div className="text-primary font-display tracking-[0.5em] text-sm md:text-lg uppercase mb-6">
-                    <TextReveal text={`${t.Common.est} 2025`} />
-                </div>
-
                 {/* Massive Title Block */}
                 <div className="flex flex-col items-center leading-none">
                     <h1
