@@ -263,7 +263,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
                 addMessage("Join our tribe in the digital wild. Follow us for updates, insights, and success stories.", 'bot', [
                     { label: "Instagram", action: () => { window.open("https://www.instagram.com/mowglai_", "_blank"); } },
                     { label: "LinkedIn", action: () => { window.open("https://linkedin.com/company/mowglai", "_blank"); } },
-                    { label: "X (Twitter)", action: () => { window.open("https://x.com/mowglai_in", "_blank"); } }
+                    { label: "X", action: () => { window.open("https://x.com/mowglai_in", "_blank"); } }
                 ]);
             } else {
                 // Fallback or Generic

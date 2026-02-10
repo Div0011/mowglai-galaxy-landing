@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Instagram, Twitter, Linkedin, ArrowUpRight } from "lucide-react";
+import { Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 import MowglaiLogo from "@/components/MowglaiLogo";
+import XLogo from "@/components/icons/XLogo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -27,7 +28,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-    { icon: Twitter, href: "https://x.com/mowglai_in", label: "Twitter" },
+    { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
   ];
 

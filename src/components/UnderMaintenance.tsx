@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Construction, Clock, ArrowLeft, Sparkles, Mail, Phone, MessageCircle, Instagram, Twitter, Linkedin } from "lucide-react";
+import { Construction, Clock, ArrowLeft, Sparkles, Mail, Phone, MessageCircle, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 import StarryBackground from "./StarryBackground";
 import CustomCursor from "./CustomCursor";
+import XLogo from "@/components/icons/XLogo";
 
 const CONTACT_EMAIL = "info@mowglai.in";
 const WHATSAPP_NUMBER = "919528545302";
@@ -13,7 +14,7 @@ const PHONE_NUMBER = "+91 95285 45302";
 
 const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-    { icon: Twitter, href: "https://x.com/mowglai_in", label: "Twitter" },
+    { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
 ];
 

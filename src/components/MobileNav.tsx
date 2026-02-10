@@ -1,10 +1,11 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Twitter, Linkedin } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
+import XLogo from "@/components/icons/XLogo";
 
 const navItems = [
     { icon: Home, label: "START", href: "/" },
@@ -17,7 +18,7 @@ const navItems = [
 
 const socialItems = [
     { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-    { icon: Twitter, href: "https://x.com/Mowglai_in", label: "X (Twitter)" },
+    { icon: XLogo, href: "https://x.com/Mowglai_in", label: "X" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
 ];
 

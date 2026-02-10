@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Home, Users, Mail, DollarSign, Menu, X, Instagram, Twitter, Linkedin, Layers, Bot, LayoutTemplate } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Menu, X, Instagram, Linkedin, Layers, Bot, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter, usePathname } from "next/navigation";
 import Magnetic from "@/components/Magnetic";
 import MowglaiLogo from "@/components/MowglaiLogo";
 import { useTheme } from "next-themes";
+import XLogo from "@/components/icons/XLogo";
 
 interface NavItem {
     icon: React.ElementType;
@@ -158,7 +159,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                     <div className="absolute bottom-10 left-0 w-full flex md:hidden justify-center gap-6 z-50">
                         {[
                             { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-                            { icon: Twitter, href: "https://x.com/mowglai_in", label: "X (Twitter)" },
+                            { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
                             { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
                         ].map((item, i) => (
                             <Magnetic key={i} amount={0.5}>
@@ -184,7 +185,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                             {/* Magnetic Social Icons */}
                             {[
                                 { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-                                { icon: Twitter, href: "https://x.com/mowglai_in", label: "X (Twitter)" },
+                                { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
                                 { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
                             ].map((item, i) => (
                                 <Magnetic key={i} amount={0.5}>

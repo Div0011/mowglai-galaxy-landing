@@ -1,9 +1,10 @@
 "use client";
 
-import { Github, Twitter, Mail, Linkedin, Globe } from "lucide-react";
+import { Github, Mail, Linkedin, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 // import { cn } from "@/lib/utils";
 import NextImage from "next/image";
+import XLogo from "@/components/icons/XLogo";
 
 const teamMembers = [
     {
@@ -102,7 +103,7 @@ const TeamSection = () => {
                                     <div className="flex justify-center gap-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
                                         {member.socials.twitter && (
                                             <a href={member.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors">
-                                                <Twitter size={20} />
+                                                <XLogo size={20} />
                                             </a>
                                         )}
                                         {member.socials.github && (
