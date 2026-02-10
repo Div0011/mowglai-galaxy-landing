@@ -27,7 +27,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-    { icon: Twitter, href: "https://x.com/Mowglai11", label: "Twitter" },
+    { icon: Twitter, href: "https://x.com/mowglai_in", label: "Twitter" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
   ];
 

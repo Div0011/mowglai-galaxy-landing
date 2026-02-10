@@ -43,8 +43,8 @@ export const metadata: Metadata = {
         title: "Mowglai - Web Development & Digital Agency",
         description: "India's premier web development agency creating stunning, high-performance websites and 3D web experiences.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
-        creator: "@mowglai",
-        site: "@mowglai",
+        creator: "@mowglai_in",
+        site: "@mowglai_in",
     },
 };
 

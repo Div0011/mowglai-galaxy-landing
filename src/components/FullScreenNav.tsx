@@ -158,7 +158,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                     <div className="absolute bottom-10 left-0 w-full flex md:hidden justify-center gap-6 z-50">
                         {[
                             { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-                            { icon: Twitter, href: "https://x.com/Mowglai11", label: "X (Twitter)" },
+                            { icon: Twitter, href: "https://x.com/mowglai_in", label: "X (Twitter)" },
                             { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
                         ].map((item, i) => (
                             <Magnetic key={i} amount={0.5}>
@@ -184,7 +184,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                             {/* Magnetic Social Icons */}
                             {[
                                 { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-                                { icon: Twitter, href: "https://x.com/Mowglai11", label: "X (Twitter)" },
+                                { icon: Twitter, href: "https://x.com/mowglai_in", label: "X (Twitter)" },
                                 { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
                             ].map((item, i) => (
                                 <Magnetic key={i} amount={0.5}>

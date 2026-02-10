@@ -77,7 +77,7 @@ export const metadata: Metadata = {
         title: "Mowglai - Premium Web Development & Digital Agency India",
         description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
-        creator: "@mowglai",
+        creator: "@mowglai_in",
     },
     icons: {
         icon: [
@@ -236,7 +236,7 @@ export default function RootLayout({
                                         "sameAs": [
                                             "https://www.instagram.com/mowglai",
                                             "https://www.linkedin.com/company/mowglai",
-                                            "https://twitter.com/mowglai"
+                                            "https://twitter.com/mowglai_in"
                                         ],
                                         "openingHoursSpecification": {
                                             "@type": "OpeningHoursSpecification",

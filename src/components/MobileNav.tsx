@@ -17,7 +17,7 @@ const navItems = [
 
 const socialItems = [
     { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
-    { icon: Twitter, href: "https://x.com/Mowglai11", label: "X (Twitter)" },
+    { icon: Twitter, href: "https://x.com/Mowglai_in", label: "X (Twitter)" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
 ];
 
