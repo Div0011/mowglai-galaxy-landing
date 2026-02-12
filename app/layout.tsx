@@ -228,7 +228,7 @@ export default function RootLayout({
                                         },
                                         "contactPoint": {
                                             "@type": "ContactPoint",
-                                            "telephone": "+91-9528545302",
+                                            "telephone": "+91-9452476331",
                                             "contactType": "customer service",
                                             "areaServed": "Worldwide",
                                             "availableLanguage": ["English", "Hindi"]

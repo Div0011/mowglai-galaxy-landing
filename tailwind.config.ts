@@ -100,6 +100,10 @@ export default {
           "0%": { transform: "translate(-50%, -50%) scale(0)", opacity: "0.5" },
           "100%": { transform: "translate(-50%, -50%) scale(4)", opacity: "0" },
         },
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
         "marquee-vertical": {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-50%)" },
@@ -112,6 +116,7 @@ export default {
         "scale-in": "scale-in 0.5s ease-out forwards",
         "slide-in-left": "slide-in-left 0.5s ease-out forwards",
         "ripple": "ripple 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+        "marquee": "marquee 60s linear infinite",
         "marquee-vertical": "marquee-vertical 80s linear infinite",
       },
     },

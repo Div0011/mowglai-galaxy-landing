@@ -132,22 +132,22 @@ export default function SelectedWork() {
     };
 
     return (
-        <section className="relative w-full py-24 overflow-hidden bg-transparent gpu-accelerate">
+        <section className="relative w-full py-12 md:py-20 overflow-hidden bg-transparent gpu-accelerate">
             {/* Gradient blending removed for seamless look */}
 
             <div className="container mx-auto px-6 relative z-20">
-                <div className="flex flex-col items-center mb-16 space-y-4 text-center" data-aos="fade-up">
-                    <h2 className="text-[10vw] md:text-6xl font-display font-black tracking-tighter text-foreground relative z-10 flex flex-col md:block">
+                <div className="flex flex-col items-center mb-10 space-y-2 text-center" data-aos="fade-up">
+                    <h2 className="text-[8vw] md:text-5xl font-display font-black tracking-tighter text-foreground relative z-10 flex flex-col md:block">
                         <span className="opacity-30 uppercase mr-4">{t.SelectedWork.selected}</span>
                         <span className="text-primary uppercase">{t.SelectedWork.work}</span>
                     </h2>
-                    <p className="max-w-2xl text-lg text-foreground/70 font-light">
+                    <p className="max-w-2xl text-base text-foreground/70 font-light px-4">
                         {t.SelectedWork.collectionDesc}
                     </p>
                 </div>
 
                 <div
-                    className="relative w-full aspect-[2/3] sm:aspect-video md:aspect-[21/9] max-w-6xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-card"
+                    className="relative w-full aspect-[4/5] sm:aspect-video md:aspect-[21/8] max-w-5xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-card"
                     onMouseEnter={() => {
                         if (autoplayRef.current) clearInterval(autoplayRef.current);
                         autoplayRef.current = null;

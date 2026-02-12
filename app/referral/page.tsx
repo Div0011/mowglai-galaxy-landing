@@ -266,9 +266,10 @@ export default function ReferralPage() {
                                                     Processing Invitation...
                                                 </motion.span>
                                             ) : (
-                                                <div className="flex items-center justify-center gap-2 md:gap-4">
-                                                    <span>Grant Access to 10% COMMISSION</span>
-                                                    <Send className="w-3 h-3 md:w-5 md:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 md:gap-4 leading-[1.2] sm:leading-none py-1">
+                                                    <span className="whitespace-nowrap opacity-80 sm:opacity-100">Grant Access to</span>
+                                                    <span className="whitespace-nowrap text-[12px] sm:text-xs md:text-lg">10% COMMISSION</span>
+                                                    <Send className="hidden sm:block w-3 h-3 md:w-5 md:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                                 </div>
                                             )}
                                         </Button>

@@ -23,7 +23,7 @@ const ContactToggle = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-    const phoneNumber = "919528545302";
+    const phoneNumber = "919452476331";
     const message = "Hi, I'm interested in Mowglai's web & digital experience services. I'd like a quote and next steps.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

@@ -222,7 +222,7 @@ const translations: Record<Language, Translations> = {
                     category: "Artificial Intelligence",
                     title: "Intelligent Systems",
                     description: "Empower your platform with next-gen AI. From smart chatbots to predictive analytics, we integrate intelligence into your digital ecosystem.",
-                    details: ["AI Chatbots", "Machine Learning", "Automation", "Integrations"]
+                    details: ["AI Chatbots", "Machine Learning", "Automation", "Integration"]
                 }
             }
         },

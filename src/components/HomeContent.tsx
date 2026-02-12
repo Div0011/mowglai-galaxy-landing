@@ -8,6 +8,7 @@ import FlashText from "@/components/FlashText";
 import SelectedWork from "@/components/SelectedWork";
 import NextPageButton from "@/components/NextPageButton";
 import { useLanguage } from "@/context/LanguageContext";
+import TemplatesShowcase from "@/components/TemplatesShowcase";
 
 export default function HomeContent() {
     const { t } = useLanguage();
@@ -17,9 +18,9 @@ export default function HomeContent() {
             <section className="relative py-16 overflow-hidden">
                 <div className="container mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
-                        <div data-aos="fade-up" className="break-words w-full pt-12 md:pt-0">
-                            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-8 leading-tight">
-                                {t.Home.weCreate} <span className="opacity-10">{t.Home.the}</span> <span className="text-primary italic">{t.Home.extraordinary}</span>
+                        <div data-aos="fade-up" className="w-full pt-12 md:pt-0">
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-8 leading-tight">
+                                {t.Home.weCreate} <span className="opacity-10">{t.Home.the}</span> <span className="text-primary italic whitespace-nowrap">{t.Home.extraordinary}</span>
                             </h2>
                             <p className="text-lg text-muted-foreground mb-8 leading-relaxed md:text-xl">
                                 {t.Home.introText}
@@ -64,24 +65,13 @@ export default function HomeContent() {
 
             <SelectedWork />
 
-            {/* Explore Templates CTA */}
-            <section className="relative py-24 overflow-hidden">
-                <div className="container mx-auto px-6 text-center">
-                    <h3 className="text-3xl md:text-5xl font-display font-black mb-8 uppercase" data-aos="fade-up">
-                        {t.Home.purchase} <span className="text-primary italic">{t.Home.templates}</span>
-                    </h3>
-                    <div className="max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
-                        <p className="text-xl text-muted-foreground">
-                            {t.Home.templateText}
-                        </p>
-                    </div>
-                </div>
+            {/* Premium Templates Showcase */}
+            <TemplatesShowcase />
 
-                {/* Full Width Button */}
-                <div className="w-full" data-aos="fade-up" data-aos-delay="200">
-                    <NextPageButton label="BLUEPRINT" href="/explore" />
-                </div>
-            </section>
+            {/* Explore Templates CTA (Blueprint Button Below Showcase) */}
+            <div className="w-full relative z-20 -mt-24 sm:-mt-40" data-aos="fade-up">
+                <NextPageButton label="BLUEPRINT" href="/explore" />
+            </div>
 
             {/* Flash Text Referral */}
             <FlashText />

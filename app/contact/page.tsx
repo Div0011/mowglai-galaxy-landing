@@ -69,7 +69,7 @@ const jsonLdContactPage = {
     "mainEntity": {
         "@type": "Organization",
         "name": "Mowglai Digital Agency",
-        "telephone": "+91-9528545302",
+        "telephone": "+91-9452476331",
         "email": "hello@mowglai.in",
         "address": {
             "@type": "PostalAddress",
@@ -83,13 +83,13 @@ const jsonLdContactPage = {
 export default function ContactPage() {
     return (
         <>
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
             />
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdContactPage) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdContactPage) }}
             />
             <OriginalContact />
         </>

@@ -16,7 +16,7 @@ import { cn as clsx } from "@/lib/utils";
 
 const CONTACT_EMAIL = "info@mowglai.in"; // REPLACE THIS WITH YOUR PERSONAL EMAIL FOR TESTING
 const COUNTRY_CODE = "91";
-const LOCAL_PHONE_NUMBER = "9528545302";
+const LOCAL_PHONE_NUMBER = "9452476331";
 const FULL_PHONE_NUMBER = `${COUNTRY_CODE}${LOCAL_PHONE_NUMBER}`;
 
 

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const WhatsAppButton = () => {
     // Actual Mowglai contact details
-    const phoneNumber = "919528545302";
+    const phoneNumber = "919452476331";
     // Pre-filled message from Get in Touch section
     const message = "Hi, I’m interested in Mowglai’s web & digital experience services. I’d like a quote and next steps.";
 

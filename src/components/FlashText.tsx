@@ -5,20 +5,16 @@ import Link from "next/link";
 
 const FlashText = () => {
     return (
-        <div className="w-full min-h-[300px] md:min-h-[400px] flex flex-col items-center justify-center overflow-hidden relative py-12 md:py-20 gap-8 bg-background/50 backdrop-blur-sm border-y border-primary/5">
+        <div className="w-screen ml-[calc(50%-50vw)] min-h-[300px] md:min-h-[440px] flex flex-col items-center justify-center overflow-hidden relative py-12 md:py-20 gap-8 bg-background/50 backdrop-blur-sm border-y border-primary/5">
             {/* Continuous Trail Above Button - Made bold and visible */}
             <div className="w-full overflow-hidden absolute top-12 md:top-20 left-0 flex items-center pointer-events-none opacity-40">
-                <motion.div
-                    className="whitespace-nowrap font-display font-black text-4xl sm:text-5xl md:text-7xl uppercase italic tracking-tighter text-primary"
-                    animate={{ x: ["0%", "-50%"] }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
-                >
-                    REFER AND EARN 10% COMMISSION • REFER AND EARN 10% COMMISSION • REFER AND EARN 10% COMMISSION • REFER AND EARN 10% COMMISSION •
-                </motion.div>
+                <div className="flex animate-marquee whitespace-nowrap items-center">
+                    {[...Array(4)].map((_, i) => (
+                        <span key={i} className="px-10 font-display font-black text-4xl sm:text-5xl md:text-7xl uppercase italic tracking-tighter text-primary">
+                            REFER AND EARN 10% COMMISSION •
+                        </span>
+                    ))}
+                </div>
             </div>
 
             {/* Referral Button - Centered and prominent */}

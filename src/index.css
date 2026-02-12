@@ -283,6 +283,24 @@
   animation: marquee-vertical 40s linear infinite;
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 25s linear infinite;
+}
+
 @layer components {
   .glass-card {
     background: linear-gradient(135deg, hsl(var(--glass-bg) / 0.7), hsl(var(--glass-bg) / 0.4));

@@ -22,28 +22,28 @@ const NextPageButton = ({ label, href, tagline }: NextPageButtonProps) => {
             {/* Button + Marquee Container - Linked together for alignment */}
             <div className="relative w-full flex items-center justify-center">
 
-                {/* Marquee Trail - Absolute centered to this wrapper */}
-                <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 transform pointer-events-none opacity-40 z-0">
-                    <div className="relative w-full flex overflow-visible group/marquee">
-                        <div className="flex animate-marquee-infinite group-hover/marquee:[animation-play-state:paused] whitespace-nowrap items-center flex-shrink-0">
-                            {[...Array(12)].map((_, i) => (
+                {/* Marquee Trail - Robust breakout and consistent slow speed */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-screen -translate-y-1/2 transform pointer-events-none z-0">
+                    <div className="relative flex whitespace-nowrap overflow-hidden py-12">
+                        <div className="flex animate-marquee-slow items-center flex-shrink-0">
+                            {[...Array(8)].map((_, i) => (
                                 <div
                                     key={i}
-                                    className="inline-flex items-center gap-4 mx-8 text-4xl sm:text-6xl md:text-8xl font-display font-black text-foreground/10 uppercase tracking-widest"
+                                    className="inline-flex items-center gap-6 mx-10 text-xl sm:text-3xl md:text-4xl font-display font-black text-foreground/[0.08] uppercase tracking-widest"
                                 >
                                     <span>{label}</span>
-                                    <ArrowRight className="w-12 h-12" strokeWidth={3} />
+                                    <ArrowRight className="w-8 h-8 opacity-20" strokeWidth={2} />
                                 </div>
                             ))}
                         </div>
-                        <div className="flex animate-marquee-infinite group-hover/marquee:[animation-play-state:paused] whitespace-nowrap items-center flex-shrink-0" aria-hidden="true">
-                            {[...Array(12)].map((_, i) => (
+                        <div className="flex animate-marquee-slow items-center flex-shrink-0" aria-hidden="true">
+                            {[...Array(8)].map((_, i) => (
                                 <div
                                     key={i}
-                                    className="inline-flex items-center gap-4 mx-8 text-4xl sm:text-6xl md:text-8xl font-display font-black text-foreground/10 uppercase tracking-widest"
+                                    className="inline-flex items-center gap-6 mx-10 text-xl sm:text-3xl md:text-4xl font-display font-black text-foreground/[0.08] uppercase tracking-widest"
                                 >
                                     <span>{label}</span>
-                                    <ArrowRight className="w-12 h-12" strokeWidth={3} />
+                                    <ArrowRight className="w-8 h-8 opacity-20" strokeWidth={2} />
                                 </div>
                             ))}
                         </div>
@@ -68,15 +68,7 @@ const NextPageButton = ({ label, href, tagline }: NextPageButtonProps) => {
                 </Link>
             </div>
 
-            <style>{`
-        @keyframes marquee-infinite {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-100%); }
-        }
-        .animate-marquee-infinite {
-          animation: marquee-infinite 40s linear infinite;
-        }
-      `}</style>
+
         </div>
     );
 };

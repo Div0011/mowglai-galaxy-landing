@@ -161,13 +161,15 @@ export default function InvestmentPage() {
             >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-                <div className="mb-12 relative z-10">
-                    <h3 className="text-xl md:text-3xl font-display uppercase italic mb-4 text-primary group-hover:scale-105 transition-transform origin-left leading-relaxed break-words">{plan.name}</h3>
-                    <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80">{plan.description}</p>
+                <div className="mb-10 sm:mb-12 relative z-10">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-display uppercase italic mb-3 text-primary group-hover:scale-105 transition-transform origin-left leading-tight">{plan.name}</h3>
+                    <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-muted-foreground/80">{plan.description}</p>
                 </div>
-
-                <div className="mb-16 relative z-10 min-h-[4rem] sm:min-h-[5rem] flex flex-col justify-center">
-                    <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-normal mb-3 text-foreground flex items-center flex-wrap gap-x-4">
+                <div className="mb-12 sm:mb-16 relative z-10 min-h-[3rem] sm:min-h-[4rem] flex flex-col justify-center overflow-visible">
+                    <div className={cn(
+                        "font-display font-black leading-none text-foreground flex items-center whitespace-nowrap gap-x-2",
+                        plan.price.length > 8 ? "text-lg sm:text-xl md:text-2xl" : "text-3xl sm:text-4xl md:text-5xl"
+                    )}>
                         <AnimatePresence mode="wait">
                             {type === 'standard' && isDiscountApplied && plan.price !== "CUSTOM" && !plan.price.includes("+") ? (
                                 <motion.div
@@ -175,9 +177,9 @@ export default function InvestmentPage() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
-                                    className="flex items-center gap-4"
+                                    className="flex items-center gap-3"
                                 >
-                                    <span className="line-through text-muted-foreground/30 text-3xl sm:text-4xl">{plan.price}</span>
+                                    <span className="line-through text-muted-foreground/30 text-xl sm:text-2xl">{plan.price}</span>
                                     <span className="text-primary">{getPrice(plan.price)}</span>
                                 </motion.div>
                             ) : (
@@ -186,7 +188,7 @@ export default function InvestmentPage() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className={cn(plan.price === "COMING SOON" && "text-2xl sm:text-3xl text-primary/70 tracking-widest")}
+                                    className={cn(plan.price === "COMING SOON" && "text-base sm:text-lg text-primary/70 tracking-[0.2em]")}
                                 >
                                     {plan.price}
                                 </motion.div>
@@ -326,9 +328,8 @@ export default function InvestmentPage() {
                                         <div className="mb-12 relative z-10">
                                             <div className="flex items-center gap-3 mb-4">
                                                 <h3 className="text-5xl font-display uppercase italic text-primary">APEX</h3>
-                                                <Sparkles className="w-8 h-8 text-primary animate-pulse" />
+                                                <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80">{t.Investment.apex.description}</p>
                                             </div>
-                                            <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground/80">{t.Investment.apex.description}</p>
                                         </div>
 
                                         <div className="mb-20 relative z-10">
