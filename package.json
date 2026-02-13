@@ -72,6 +72,7 @@
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@next/bundle-analyzer": "^16.1.6",
+		"@tailwindcss/postcss": "^4.1.18",
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/aos": "^3.0.7",
 		"@types/node": "^22.19.5",
