@@ -1,5 +1,6 @@
 @config "../tailwind.config.ts";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;600;800&display=swap');
+@import "tailwindcss";
 
 @font-face {
   font-family: 'Boldonse';
@@ -40,10 +41,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
   :root {
@@ -308,7 +305,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid hsl(var(--glass-border) / 0.3);
-    @apply rounded-2xl;
+    border-radius: 1rem;
   }
 
   .nav-icon-button {
