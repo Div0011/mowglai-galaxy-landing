@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Home, Users, Mail, DollarSign, Menu, X, Instagram, Linkedin, Layers, Bot, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter, usePathname } from "next/navigation";
@@ -46,7 +46,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Logo state: 
+    // Logo state:
     // - Visible (opacity-100, blur-0) if menu is open, OR at top of page, OR hovered locally.
     // - Dim/Blurred otherwise.
     const isLogoActive = isOpen || !scrolled;
