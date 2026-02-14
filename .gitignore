@@ -40,3 +40,5 @@ tc.txt
 # env
 .env
 .env.local
+
+public/.htaccess

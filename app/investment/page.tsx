@@ -109,7 +109,7 @@ const plans: {
             features: ["Everything in Growth", "1 Hour Custom Dev/mo", "Weekly Backups & Tests", "Phone Support Access", "Performance Optimization"],
             cta: "Subscribe",
             type: "elite",
-            razorpayPlanId: "plan_SG1jKJ8tcJTgOS"
+            razorpayPlanId: "plan_SG1jkJ8tcJTgOS"
         }
     ],
     premium: [

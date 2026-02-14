@@ -24,7 +24,7 @@ $planName = isset($input['plan_name']) ? (string) $input['plan_name'] : '';
 $allowedPlans = [
     'plan_SG1iI7omyDN39z',
     'plan_SG1j6DcHgFk70v',
-    'plan_SG1jKJ8tcJTgOS',
+    'plan_SG1jkJ8tcJTgOS',
 ];
 
 if ($planId === '' || !in_array($planId, $allowedPlans, true)) {
