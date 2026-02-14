@@ -4,8 +4,11 @@ node_modules
 README.md
 Dockerfile
 docker-compose.yml
-.env
 dist
 *.md
 .email_mowglai.html
 logo_*.txt
+
+# env
+.env
+.env.local

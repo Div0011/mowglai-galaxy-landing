@@ -2,7 +2,7 @@
 
 import PageLayout from "@/components/PageLayout";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Download, FileText, Sparkles, Check, ArrowRight, Clock, Rocket } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
@@ -11,7 +11,55 @@ import { downloadAsHtml } from "@/utils/pdfDownloader";
 import NextPageButton from "@/components/NextPageButton";
 import { cn } from "@/lib/utils";
 
-const plans = {
+interface Plan {
+    name: string;
+    price: string;
+    description: string;
+    features: string[];
+    cta: string;
+    type?: string;
+    razorpayPlanId?: string;
+}
+
+declare global {
+    interface Window {
+        Razorpay?: new (options: RazorpayOptions) => RazorpayInstance;
+    }
+}
+
+interface RazorpayOptions {
+    key: string;
+    subscription_id: string;
+    name: string;
+    description?: string;
+    image?: string;
+    prefill?: {
+        name?: string;
+        email?: string;
+        contact?: string;
+    };
+    notes?: Record<string, string>;
+    theme?: {
+        color?: string;
+    };
+    handler?: (response: { razorpay_payment_id?: string; razorpay_subscription_id?: string; razorpay_signature?: string }) => void;
+    modal?: {
+        ondismiss?: () => void;
+    };
+}
+
+interface RazorpayInstance {
+    open: () => void;
+    on: (event: string, handler: (response: { error: { description?: string } }) => void) => void;
+}
+
+const plans: {
+    standard: Plan[];
+    care: Plan[];
+    premium: Plan[];
+    systems: Plan[];
+    addons: Plan[];
+} = {
     standard: [
         {
             name: "BASIC",
@@ -42,7 +90,8 @@ const plans = {
             description: "Essential maintenance to keep your site secure.",
             features: ["Premium Managed Hosting", "24/7 Uptime Monitoring", "Monthly Security Scans", "Technical Support (Bugs)", "1 Hour Minor Updates/mo"],
             cta: "Subscribe",
-            type: "care"
+            type: "care",
+            razorpayPlanId: "plan_SG1iI7omyDN39z"
         },
         {
             name: "Mowglai Growth",
@@ -50,7 +99,8 @@ const plans = {
             description: "Proactive improvements and analytics.",
             features: ["Everything in Care", "Priority Support Response", "Social Media Handling (2 posts/week)", "Monthly Analytics Report", "Basic SEO Health Check", "3 Hours Content Updates/mo"],
             cta: "Subscribe",
-            type: "growth"
+            type: "growth",
+            razorpayPlanId: "plan_SG1j6DcHgFk70v"
         },
         {
             name: "Mowglai Elite",
@@ -58,7 +108,8 @@ const plans = {
             description: "Complete peace of mind for business critical sites.",
             features: ["Everything in Growth", "1 Hour Custom Dev/mo", "Weekly Backups & Tests", "Phone Support Access", "Performance Optimization"],
             cta: "Subscribe",
-            type: "elite"
+            type: "elite",
+            razorpayPlanId: "plan_SG1jKJ8tcJTgOS"
         }
     ],
     premium: [
@@ -131,6 +182,49 @@ export default function InvestmentPage() {
     const [discountCode, setDiscountCode] = useState("");
     const [isDiscountApplied, setIsDiscountApplied] = useState(false);
     const [discountError, setDiscountError] = useState("");
+    const [razorpayReady, setRazorpayReady] = useState(false);
+    const [razorpayError, setRazorpayError] = useState("");
+    const [processingPlan, setProcessingPlan] = useState<string | null>(null);
+    const razorpayKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ?? "";
+    const subscriptionEndpoint = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT ?? "/api/create-subscription.php";
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const loadRazorpay = () =>
+            new Promise<boolean>((resolve) => {
+                if (window.Razorpay) {
+                    resolve(true);
+                    return;
+                }
+
+                const existingScript = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+                if (existingScript) {
+                    existingScript.addEventListener("load", () => resolve(true));
+                    existingScript.addEventListener("error", () => resolve(false));
+                    return;
+                }
+
+                const script = document.createElement("script");
+                script.src = "https://checkout.razorpay.com/v1/checkout.js";
+                script.async = true;
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
+
+        loadRazorpay().then((ready) => {
+            if (!isMounted) return;
+            setRazorpayReady(ready);
+            if (!ready) {
+                setRazorpayError("Razorpay failed to load. Please refresh and try again.");
+            }
+        });
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     const handleApplyDiscount = () => {
         if (discountCode.trim().toUpperCase() === "MOWGLAI10") {
@@ -149,6 +243,91 @@ export default function InvestmentPage() {
         if (isNaN(numPrice)) return originalPrice;
         const discounted = Math.round(numPrice * 0.9);
         return `$${discounted}`;
+    };
+
+    const handleCareSubscribe = (plan: Plan) => {
+        setRazorpayError("");
+
+        if (!razorpayKeyId) {
+            setRazorpayError("Razorpay key is missing. Add NEXT_PUBLIC_RAZORPAY_KEY_ID to proceed.");
+            return;
+        }
+
+        if (!razorpayReady || !window.Razorpay) {
+            setRazorpayError("Razorpay is not ready yet. Please try again in a moment.");
+            return;
+        }
+
+        if (!plan.razorpayPlanId) {
+            setRazorpayError("Plan ID is missing for this subscription.");
+            return;
+        }
+
+        setProcessingPlan(plan.name);
+
+        fetch(subscriptionEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                plan_id: plan.razorpayPlanId,
+                plan_name: plan.name,
+            }),
+        })
+            .then(async (res) => {
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || "Failed to create subscription.");
+                }
+                return res.json() as Promise<{ subscription_id?: string }>;
+            })
+            .then((data) => {
+                if (!data.subscription_id) {
+                    throw new Error("Subscription creation failed.");
+                }
+
+                const RazorpayConstructor = window.Razorpay;
+                if (!RazorpayConstructor) {
+                    throw new Error("Razorpay failed to load.");
+                }
+
+                const options: RazorpayOptions = {
+                    key: razorpayKeyId,
+                    subscription_id: data.subscription_id,
+                    name: "Mowglai Care Plans",
+            description: plan.name,
+            image: "/mowglai-logo-light.png",
+            notes: {
+                plan: plan.name,
+                category: "care",
+            },
+            theme: {
+                color: "#3FE0C5",
+            },
+            handler: () => {
+                setProcessingPlan(null);
+            },
+            modal: {
+                ondismiss: () => setProcessingPlan(null),
+            },
+                };
+
+                const razorpay = new RazorpayConstructor(options);
+                razorpay.on("payment.failed", (response) => {
+                    setProcessingPlan(null);
+                    setRazorpayError(response.error?.description || "Payment failed. Please try again.");
+                });
+                razorpay.open();
+            })
+            .catch((error) => {
+                setProcessingPlan(null);
+                if (process.env.NODE_ENV === "development" && subscriptionEndpoint.startsWith("/")) {
+                    setRazorpayError("Local dev: run a PHP server and set NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT to its URL.");
+                    return;
+                }
+                setRazorpayError(error instanceof Error ? error.message : "Subscription setup failed.");
+            });
     };
 
     // Helper to render plans dynamically
@@ -206,15 +385,28 @@ export default function InvestmentPage() {
                     ))}
                 </ul>
 
-                <Link
-                    href={type === 'care' ? `/contact?subject=Subscription Request: ${plan.name}` : (type === "systems" ? "/contact?subject=Systems Waitlist Request" : `/project-request?plan=${plan.name.toLowerCase()}`)}
-                    className={cn(
-                        "relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto",
-                        plan.price === "COMING SOON" && "opacity-80 hover:opacity-100"
-                    )}
-                >
-                    {plan.cta}
-                </Link>
+                {type === "care" ? (
+                    <button
+                        type="button"
+                        onClick={() => handleCareSubscribe(plan)}
+                        className={cn(
+                            "relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto",
+                            processingPlan === plan.name && "opacity-80 cursor-wait"
+                        )}
+                    >
+                        {processingPlan === plan.name ? "Processing" : plan.cta}
+                    </button>
+                ) : (
+                    <Link
+                        href={type === "systems" ? "/contact?subject=Systems Waitlist Request" : `/project-request?plan=${plan.name.toLowerCase()}`}
+                        className={cn(
+                            "relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto",
+                            plan.price === "COMING SOON" && "opacity-80 hover:opacity-100"
+                        )}
+                    >
+                        {plan.cta}
+                    </Link>
+                )}
             </div>
         ));
     };
@@ -303,6 +495,15 @@ export default function InvestmentPage() {
                                     className="text-red-500 text-[10px] md:text-xs font-bold uppercase tracking-widest"
                                 >
                                     {discountError}
+                                </motion.span>
+                            )}
+                            {razorpayError && (
+                                <motion.span
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="text-red-500 text-[10px] md:text-xs font-bold uppercase tracking-widest"
+                                >
+                                    {razorpayError}
                                 </motion.span>
                             )}
                         </AnimatePresence>
