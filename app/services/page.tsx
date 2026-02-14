@@ -3,10 +3,14 @@ import OriginalServices from "@/styles/original/Services";
 
 export const metadata: Metadata = {
     title: "Web Development Services | Mowglai Digital Agency",
-    description: "Explore Mowglai's premium web development services: custom website design, React & Next.js development, 3D web experiences, e-commerce solutions, SEO optimization, and digital strategy. Serving clients worldwide from India.",
+    description: "Explore Mowglai's premium web development services: SaaS platforms, MVP builds, MVC architecture, custom website design, React & Next.js development, 3D web experiences, e-commerce solutions, SEO optimization, and digital strategy. Serving startups and enterprises worldwide from India.",
     keywords: [
         "Mowglai services",
         "web development services",
+        "SaaS development",
+        "MVP development",
+        "MVC architecture",
+        "startup product development",
         "custom website design",
         "React development",
         "Next.js development",
@@ -24,7 +28,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: "Web Development Services | Mowglai Digital Agency",
-        description: "Premium web development services: custom websites, React & Next.js, 3D experiences, e-commerce, SEO, and digital strategy.",
+        description: "Premium web development services for startups and enterprises: SaaS, MVPs, MVC architecture, custom websites, React & Next.js, 3D experiences, e-commerce, SEO, and digital strategy.",
         url: "https://mowglai.in/services",
         images: [
             {
@@ -39,7 +43,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Web Development Services | Mowglai Digital Agency",
-        description: "Premium web development services: custom websites, React & Next.js, 3D experiences, e-commerce, SEO.",
+        description: "Premium web development services: SaaS, MVPs, MVC architecture, custom websites, React & Next.js, 3D experiences, e-commerce, SEO.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
     },
 };
@@ -84,6 +88,27 @@ const jsonLdService = {
                 "itemOffered": {
                     "@type": "Service",
                     "name": "Custom Website Development"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "SaaS Platform Development"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "MVP Builds for Startups"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "MVC Architecture Consulting"
                 }
             },
             {

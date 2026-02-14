@@ -198,7 +198,7 @@ const translations: Record<Language, Translations> = {
                     category: "Development",
                     title: "Robust Engineering",
                     description: "Beneath the beauty lies a beast. Our development team builds scalable, secure, and lightning-fast architectures that drive your business forward.",
-                    details: ["Full-Stack Dev", "E-Commerce", "CMS Solutions", "API Integration"]
+                    details: ["Full-Stack Dev", "SaaS Platforms", "MVP Builds", "MVC Architecture", "E-Commerce", "CMS Solutions", "API Integration"]
                 },
                 redesign: {
                     category: "Redesign",
@@ -361,7 +361,7 @@ const translations: Record<Language, Translations> = {
                     category: "विकास",
                     title: "मजबूत इंजीनियरिंग",
                     description: "सुंदरता के नीचे एक जानवर निहित है। हमारी विकास टीम स्केलेबल, सुरक्षित और बिजली की तेज वास्तुकला का निर्माण करती है जो आपके व्यवसाय को आगे बढ़ाती है।",
-                    details: ["पूर्ण-स्टैक देव", "ई-कॉमर्स", "CMS समाधान", "API एकीकरण"]
+                    details: ["पूर्ण-स्टैक देव", "SaaS प्लेटफ़ॉर्म", "MVP बिल्ड", "MVC आर्किटेक्चर", "ई-कॉमर्स", "CMS समाधान", "API एकीकरण"]
                 },
                 redesign: {
                     category: "पुनः डिज़ाइन",
@@ -524,7 +524,7 @@ const translations: Record<Language, Translations> = {
                     category: "Desarrollo",
                     title: "Ingeniería Robusta",
                     description: "Debajo de la belleza yace una bestia. Nuestro equipo de desarrollo construye arquitecturas escalables, seguras y ultrarrápidas que impulsan tu negocio.",
-                    details: ["Dev Full-Stack", "Comercio Electrónico", "Soluciones CMS", "Integración API"]
+                    details: ["Dev Full-Stack", "Plataformas SaaS", "MVPs", "Arquitectura MVC", "Comercio Electrónico", "Soluciones CMS", "Integración API"]
                 },
                 redesign: {
                     category: "Rediseño",
@@ -687,7 +687,7 @@ const translations: Record<Language, Translations> = {
                     category: "Développement",
                     title: "Ingénierie Robuste",
                     description: "Sous la beauté se cache une bête. Notre équipe de développement construit des architectures évolutives, sécurisées et ultra-rapides.",
-                    details: ["Full-Stack Dev", "E-Commerce", "Solutions CMS", "Intégration API"]
+                    details: ["Full-Stack Dev", "Plateformes SaaS", "MVP", "Architecture MVC", "E-Commerce", "Solutions CMS", "Intégration API"]
                 },
                 redesign: {
                     category: "Refonte",
@@ -850,7 +850,7 @@ const translations: Record<Language, Translations> = {
                     category: "開発",
                     title: "堅牢なエンジニアリング",
                     description: "美しさの下には野獣が潜んでいます。私たちの開発チームは、ビジネスを前進させるスケーラブルで安全、かつ超高速なアーキテクチャを構築します。",
-                    details: ["フルスタック開発", "Eコマース", "CMSソリューション", "API統合"]
+                    details: ["フルスタック開発", "SaaSプラットフォーム", "MVP構築", "MVCアーキテクチャ", "Eコマース", "CMSソリューション", "API統合"]
                 },
                 redesign: {
                     category: "リデザイン",

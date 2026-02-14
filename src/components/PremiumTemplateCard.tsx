@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ExternalLink, Layers, Smartphone, Layout, ShoppingCart } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -54,16 +55,22 @@ export default function PremiumTemplateCard({ template }: { template: Template }
                     <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/60 to-transparent z-20 opacity-60" />
 
                     <AnimatePresence mode="wait">
-                        <motion.img
+                        <motion.div
                             key={currentImageIndex}
-                            src={images[currentImageIndex]}
-                            alt={`${template.title} view ${currentImageIndex + 1}`}
-                            initial={{ scale: 1.1, opacity: 0.8 }}
-                            animate={{ scale: isHovered ? 1.05 : 1, opacity: 1 }}
+                            initial={{ scale: 1.05, opacity: 0.8 }}
+                            animate={{ scale: isHovered ? 1.03 : 1, opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.7 }}
-                            className="w-full h-full object-cover"
-                        />
+                            className="absolute inset-0"
+                        >
+                            <Image
+                                src={images[currentImageIndex]}
+                                alt={`${template.title} view ${currentImageIndex + 1}`}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                className="object-cover"
+                            />
+                        </motion.div>
                     </AnimatePresence>
 
                     {/* View Details Overlay Button */}

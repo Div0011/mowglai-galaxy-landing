@@ -144,6 +144,62 @@ export default function OriginalServices() {
                     ))}
                 </div>
 
+                {/* Startup-Ready Pathways */}
+                <div className="relative z-10 max-w-7xl mx-auto mt-24">
+                    <div className="rounded-[2.5rem] border border-primary/15 bg-secondary/10 p-8 md:p-12 backdrop-blur-xl">
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                            <div>
+                                <p className="text-xs md:text-sm font-display tracking-[0.4em] uppercase text-primary/70">Startup Paths</p>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase tracking-tight mt-3">
+                                    SaaS, MVP, and Next.js Builds
+                                </h2>
+                                <p className="text-muted-foreground max-w-2xl mt-4">
+                                    Dedicated landing paths for founders and teams. Validate faster, ship smarter, and scale with clean MVC architecture.
+                                </p>
+                            </div>
+                            <Link
+                                href="/contact"
+                                className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs sm:text-sm hover:scale-105 transition-transform"
+                            >
+                                Launch My MVP
+                            </Link>
+                        </div>
+                        <div className="grid gap-6 md:grid-cols-3 mt-10">
+                            {[
+                                {
+                                    title: "SaaS MVP Development",
+                                    text: "From idea to validated MVP with rapid sprints.",
+                                    href: "/saas-mvp-development",
+                                },
+                                {
+                                    title: "Next.js Development",
+                                    text: "High-performance web apps and SaaS platforms.",
+                                    href: "/nextjs-development-agency",
+                                },
+                                {
+                                    title: "Web Development India",
+                                    text: "Full-stack teams for startups and enterprises.",
+                                    href: "/web-development-agency-india",
+                                },
+                            ].map((card) => (
+                                <Link
+                                    key={card.title}
+                                    href={card.href}
+                                    className="group rounded-3xl border border-primary/10 bg-background/5 p-6 sm:p-8 transition-all hover:border-primary/40 hover:bg-primary/5"
+                                >
+                                    <h3 className="text-lg sm:text-xl font-display font-bold uppercase mb-2 group-hover:text-primary transition-colors">
+                                        {card.title}
+                                    </h3>
+                                    <p className="text-sm sm:text-base text-muted-foreground mb-4">{card.text}</p>
+                                    <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em] text-primary">
+                                        Explore <ArrowRight className="w-4 h-4" />
+                                    </span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
                 {/* Final Navigation & Decision */}
                 <div className="mt-40 flex flex-col items-center gap-16 relative z-10 py-20">
 

@@ -22,6 +22,7 @@ const CustomCursor = () => {
   const lastUpdateRef = useRef(0);
 
   const [isMobile, setIsMobile] = useState(false);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   // Check for mobile/touch devices
   useEffect(() => {
@@ -36,9 +37,18 @@ const CustomCursor = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Respect reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setIsReducedMotion(mediaQuery.matches);
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   // Initialize GSAP animations
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || isReducedMotion) return;
 
     gsap.set([cursorRef.current, followerRef.current], { xPercent: -50, yPercent: -50 });
 
@@ -68,7 +78,7 @@ const CustomCursor = () => {
 
   // Mouse move handler with manual throttling for state updates
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || isReducedMotion) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePosRef.current = { x: e.clientX, y: e.clientY };
@@ -112,7 +122,7 @@ const CustomCursor = () => {
 
   // Click handler for ripples
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || isReducedMotion) return;
 
     const handleClick = (e: MouseEvent) => {
       const id = Date.now();
@@ -129,7 +139,7 @@ const CustomCursor = () => {
 
   // Scale animation on hover state change
   useEffect(() => {
-    if (isMobile || !followerRef.current) return;
+    if (isMobile || isReducedMotion || !followerRef.current) return;
 
     const scale = isPointer ? 1.6 : 1;
 
@@ -140,7 +150,7 @@ const CustomCursor = () => {
     });
   }, [isPointer, isMobile]);
 
-  if (isMobile) return null;
+  if (isMobile || isReducedMotion) return null;
 
   // Force original style logic
   const colors = {

@@ -1,13 +1,17 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Mowglai - Web Development & Digital Agency",
-    description: "Mowglai is India's premier web development and digital agency. We specialize in creating stunning, high-performance websites, 3D web experiences, and custom web applications using React, Next.js, and cutting-edge technologies. Transform your digital presence today.",
+    title: "Mowglai - Web Development, SaaS MVP & Digital Agency",
+    description: "Mowglai is India's premier web development and digital agency. We build SaaS platforms, MVPs, MVC architecture, high-performance websites, 3D web experiences, and custom web applications using React and Next.js. Transform your digital presence today.",
     keywords: [
         "Mowglai",
         "Mowglai web development",
         "Mowglai digital agency",
         "web development company India",
+        "SaaS development India",
+        "MVP development India",
+        "startup product development",
+        "MVC architecture",
         "best web design agency",
         "custom website development",
         "React development services",
@@ -23,8 +27,8 @@ export const metadata: Metadata = {
         canonical: "https://mowglai.in/",
     },
     openGraph: {
-        title: "Mowglai - Web Development & Digital Agency",
-        description: "India's premier web development agency creating stunning, high-performance websites and 3D web experiences. Expert React & Next.js developers.",
+        title: "Mowglai - Web Development, SaaS MVP & Digital Agency",
+        description: "India's premier web development agency for startups and enterprises. SaaS, MVPs, MVC architecture, high-performance websites, and 3D web experiences with React & Next.js.",
         url: "https://mowglai.in/",
         siteName: "Mowglai",
         images: [
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Mowglai - Web Development & Digital Agency",
-        description: "India's premier web development agency creating stunning, high-performance websites and 3D web experiences.",
+        title: "Mowglai - Web Development, SaaS MVP & Digital Agency",
+        description: "India's premier web development agency for SaaS, MVPs, MVC architecture, and high-performance websites.",
         images: ["https://mowglai.in/mowglai-logo-new.jpg"],
         creator: "@mowglai_in",
         site: "@mowglai_in",

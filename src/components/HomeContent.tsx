@@ -68,8 +68,58 @@ export default function HomeContent() {
             {/* Premium Templates Showcase */}
             <TemplatesShowcase />
 
+            {/* Startup SEO Landing Links */}
+            <section className="w-full py-10 sm:py-16">
+                <div className="container mx-auto px-6">
+                    <div className="flex flex-col items-center text-center gap-4 mb-8">
+                        <p className="text-xs md:text-sm font-display tracking-[0.4em] uppercase text-primary/70">
+                            Startup Growth
+                        </p>
+                        <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-black uppercase tracking-tight">
+                            Launch Faster with Mowglai
+                        </h2>
+                        <p className="text-muted-foreground max-w-2xl">
+                            Focused paths for founders and teams building SaaS, MVPs, and Next.js products.
+                        </p>
+                    </div>
+                    <div className="grid gap-6 md:grid-cols-3">
+                        {[
+                            {
+                                title: "SaaS MVP Development",
+                                text: "Validate ideas fast with production-grade MVPs.",
+                                href: "/saas-mvp-development",
+                            },
+                            {
+                                title: "Next.js Development",
+                                text: "High-performance web apps with clean architecture.",
+                                href: "/nextjs-development-agency",
+                            },
+                            {
+                                title: "Web Development India",
+                                text: "Full-stack teams for startups and enterprises.",
+                                href: "/web-development-agency-india",
+                            },
+                        ].map((card) => (
+                            <Link
+                                key={card.title}
+                                href={card.href}
+                                className="group rounded-3xl border border-primary/10 bg-background/5 p-6 sm:p-8 transition-all hover:border-primary/40 hover:bg-primary/5"
+                            >
+                                <h3 className="text-lg sm:text-xl font-display font-bold uppercase mb-2 group-hover:text-primary transition-colors">
+                                    {card.title}
+                                </h3>
+                                <p className="text-sm sm:text-base text-muted-foreground mb-4">{card.text}</p>
+                                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em] text-primary">
+                                    Explore <ArrowRight className="w-4 h-4" />
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Explore Templates CTA (Blueprint Button Below Showcase) */}
-            <div className="w-full relative z-20 -mt-24 sm:-mt-40" data-aos="fade-up">
+            <div className="w-full relative z-20 mt-8 sm:mt-12" data-aos="fade-up">
                 <NextPageButton label="BLUEPRINT" href="/explore" />
             </div>
 

@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import {
     ArrowRight, Filter, X, Check, Search, SlidersHorizontal, ArrowUpDown,
     DollarSign, Layers, Monitor, Zap, ShoppingCart
@@ -427,12 +428,13 @@ function TemplateCard({ template, viewProjectText, pagesText }: { template: Temp
         >
             {/* Image Area */}
             <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-secondary/20">
-                <Link href={`/explore/${template.id}`} className="block w-full h-full">
-                    <img
+                <Link href={`/explore/${template.id}`} className="relative block w-full h-full">
+                    <Image
                         src={template.image}
                         alt={template.title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                 </Link>
 

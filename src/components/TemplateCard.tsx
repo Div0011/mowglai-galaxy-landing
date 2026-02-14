@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ShoppingCart } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -47,16 +48,22 @@ export default function TemplateCard({ template }: { template: Template }) {
             {/* Image Slider - Strict 16:9 Aspect Ratio */}
             <div className="aspect-video relative overflow-hidden bg-muted">
                 <AnimatePresence mode="wait">
-                    <motion.img
+                    <motion.div
                         key={currentImageIndex}
-                        src={images[currentImageIndex]}
-                        alt={`${template.title} view ${currentImageIndex + 1}`}
-                        initial={{ opacity: 0, scale: 1.1 }}
+                        initial={{ opacity: 0, scale: 1.05 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.7 }}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                        className="absolute inset-0"
+                    >
+                        <Image
+                            src={images[currentImageIndex]}
+                            alt={`${template.title} view ${currentImageIndex + 1}`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </motion.div>
                 </AnimatePresence>
 
                 {/* Overlay with View Button */}
