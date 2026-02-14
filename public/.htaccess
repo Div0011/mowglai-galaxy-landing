@@ -53,3 +53,7 @@
 
 # Error Pages
 ErrorDocument 404 /404.html
+
+# Razorpay Keys (server-only; do not commit secrets)
+# SetEnv RAZORPAY_KEY_ID rzp_test_...
+# SetEnv RAZORPAY_KEY_SECRET your_secret

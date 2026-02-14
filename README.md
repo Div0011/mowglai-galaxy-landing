@@ -29,6 +29,14 @@ To run this project locally:
     npm run dev
     ```
 
+## Razorpay Subscription Setup (Hostinger)
+
+- Frontend requires `NEXT_PUBLIC_RAZORPAY_KEY_ID` at build time for the checkout key to be embedded in the static bundle.
+- PHP endpoint (`public/api/create-subscription.php`) reads server env vars:
+  - `RAZORPAY_KEY_ID`
+  - `RAZORPAY_KEY_SECRET`
+- On shared Hostinger, set the PHP env vars in `public/.htaccess` (server-only; do not commit secrets).
+
 ## Technologies
 
 - **Framework**: Next.js 15
