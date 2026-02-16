@@ -44,11 +44,11 @@ export default function ServiceRequestForm({
     const router = useRouter();
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [formData, setFormData] = useState<Record<string, any>>({});
+    const [formData, setFormData] = useState<Record<string, string | string[]>>({});
 
     // Initialize checkboxes as arrays
     useState(() => {
-        const initialData: Record<string, any> = {};
+        const initialData: Record<string, string | string[]> = {};
         fields.forEach(field => {
             if (field.type === 'checkbox-group') {
                 initialData[field.id] = [];
@@ -59,13 +59,13 @@ export default function ServiceRequestForm({
         setFormData(initialData);
     });
 
-    const handleInputChange = (id: string, value: any) => {
+    const handleInputChange = (id: string, value: string) => {
         setFormData(prev => ({ ...prev, [id]: value }));
     };
 
     const handleCheckboxChange = (id: string, option: string, checked: boolean, max?: number) => {
         setFormData(prev => {
-            const current = prev[id] || [];
+            const current = (prev[id] as string[]) || [];
             if (checked) {
                 if (max && current.length >= max) return prev; // Limit reached
                 return { ...prev, [id]: [...current, option] };
@@ -175,7 +175,7 @@ export default function ServiceRequestForm({
                                                 required={field.required}
                                                 placeholder={field.placeholder}
                                                 className="bg-background/30 border-primary/20 focus:border-primary h-12 text-lg"
-                                                value={formData[field.id] || ''}
+                                                value={(formData[field.id] as string) || ''}
                                                 onChange={(e) => handleInputChange(field.id, e.target.value)}
                                             />
                                         )}
@@ -186,7 +186,7 @@ export default function ServiceRequestForm({
                                                 type="email"
                                                 placeholder={field.placeholder}
                                                 className="bg-background/30 border-primary/20 focus:border-primary h-12 text-lg"
-                                                value={formData[field.id] || ''}
+                                                value={(formData[field.id] as string) || ''}
                                                 onChange={(e) => handleInputChange(field.id, e.target.value)}
                                             />
                                         )}
@@ -196,7 +196,7 @@ export default function ServiceRequestForm({
                                                 required={field.required}
                                                 placeholder={field.placeholder}
                                                 className="bg-background/30 border-primary/20 min-h-[150px] resize-none text-lg p-4"
-                                                value={formData[field.id] || ''}
+                                                value={(formData[field.id] as string) || ''}
                                                 onChange={(e) => handleInputChange(field.id, e.target.value)}
                                             />
                                         )}
@@ -205,7 +205,7 @@ export default function ServiceRequestForm({
                                             <select
                                                 required={field.required}
                                                 className="w-full bg-background/30 border border-primary/20 focus:border-primary h-12 text-lg rounded-md px-3"
-                                                value={formData[field.id] || ''}
+                                                value={(formData[field.id] as string) || ''}
                                                 onChange={(e) => handleInputChange(field.id, e.target.value)}
                                             >
                                                 <option value="" disabled>Select an option</option>
@@ -218,7 +218,7 @@ export default function ServiceRequestForm({
                                         {field.type === 'radio' && (
                                             <RadioGroup
                                                 onValueChange={(val) => handleInputChange(field.id, val)}
-                                                value={formData[field.id]}
+                                                value={(formData[field.id] as string)}
                                                 className="flex flex-col space-y-2"
                                             >
                                                 {field.options?.map(opt => (
@@ -236,7 +236,7 @@ export default function ServiceRequestForm({
                                                     <div key={opt} className="flex items-center space-x-2 bg-white/5 p-3 rounded-lg border border-white/5 hover:border-primary/30 transition-colors">
                                                         <Checkbox
                                                             id={`${field.id}-${opt}`}
-                                                            checked={(formData[field.id] || []).includes(opt)}
+                                                            checked={(formData[field.id] as string[] || []).includes(opt)}
                                                             onCheckedChange={(checked) => handleCheckboxChange(field.id, opt, checked as boolean, field.maxSelections)}
                                                         />
                                                         <Label htmlFor={`${field.id}-${opt}`} className="cursor-pointer">{opt}</Label>

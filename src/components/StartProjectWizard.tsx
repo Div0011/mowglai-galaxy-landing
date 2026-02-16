@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowIcons } from "@/components/icons";
+
 import { ArrowLeft, ArrowRight, Check, Send, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
