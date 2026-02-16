@@ -42,3 +42,4 @@ tc.txt
 .env.local
 
 public/.htaccess
+out/.htaccess
