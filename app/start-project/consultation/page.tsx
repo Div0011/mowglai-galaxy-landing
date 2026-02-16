@@ -1,13 +1,9 @@
+"use client";
+
 import ServiceRequestForm, { FormField } from "@/components/ServiceRequestForm";
 import { MessageSquare } from "lucide-react";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-    title: "Custom Request | Mowglai",
-    description: "Tell us about your unique project or get a free consultation.",
-};
-
-export default function CustomRequestPage() {
+export default function ConsultationPage() {
     const fields: FormField[] = [
         { id: "name", label: "Full Name", type: "text", required: true, placeholder: "Your Name" },
         { id: "email", label: "Email Address", type: "email", required: true, placeholder: "you@email.com" },

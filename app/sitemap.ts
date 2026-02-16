@@ -5,7 +5,7 @@ export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://mowglai.in'
-    
+
     // Static routes with priorities
     const staticRoutes: MetadataRoute.Sitemap = [
         {
@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.6,
         },
         {
-            url: `${baseUrl}/project-request`,
+            url: `${baseUrl}/start-project`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.6,

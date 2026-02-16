@@ -52,7 +52,7 @@ export default function OriginalContact() {
                             </div>
 
                             <Button asChild className="relative z-10 w-full sm:w-auto px-5 sm:px-12 py-6 sm:py-8 text-[10px] sm:text-xl font-display font-black uppercase tracking-widest bg-primary text-primary-foreground hover:bg-foreground hover:text-background transition-all rounded-full shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)] mx-auto inline-flex items-center justify-center">
-                                <Link href="/custom-request" className="flex flex-col sm:flex-row items-center justify-center leading-tight gap-1 sm:gap-3">
+                                <Link href="/start-project/custom-quote" className="flex flex-col sm:flex-row items-center justify-center leading-tight gap-1 sm:gap-3">
                                     <span className="whitespace-nowrap">{Contact.customQuote.buttonMain}</span>
                                     <span className="whitespace-nowrap">{Contact.customQuote.buttonSub}</span>
                                 </Link>

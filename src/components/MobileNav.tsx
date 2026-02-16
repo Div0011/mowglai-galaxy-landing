@@ -1,4 +1,4 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -78,7 +78,7 @@ const MobileNav = () => {
             aria-label="Mobile Navigation"
         >
             {/* Toggle Button - Fixed Top Right */}
-            <div className="fixed top-[calc(1rem+env(safe-area-inset-top))] right-[calc(0.875rem+env(safe-area-inset-right))] z-[60]">
+            <div className="fixed top-[calc(1rem+env(safe-area-inset-top))] right-[calc(0.875rem+env(safe-area-inset-right))] z-[60] flex flex-col items-center gap-4">
                 <Magnetic>
                     <motion.button
                         layout
@@ -97,6 +97,25 @@ const MobileNav = () => {
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </motion.button>
                 </Magnetic>
+
+                {/* Shopping Cart Icon - Only on Investment Page */}
+                {pathname?.includes('/investment') && !isOpen && (
+                    <motion.button
+                        onClick={() => router.push('/investment?modal=purchases', { scroll: false })}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        className={cn(
+                            "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-md border border-primary/20 shadow-lg",
+                            resolvedTheme === 'light'
+                                ? "bg-primary/10 text-primary hover:bg-primary/20"
+                                : "bg-background/40 text-primary hover:bg-primary/10"
+                        )}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <ShoppingCart className="w-5 h-5" />
+                    </motion.button>
+                )}
             </div>
 
             {/* Full Screen Overlay */}

@@ -172,7 +172,7 @@ ${formData.workPlan}
                                     <p className="text-sm text-foreground/70 mb-4">
                                         {ProjectRequest.hero.downloadText}
                                     </p>
-                                    <button
+                                    <Button
                                         className="w-full py-4 px-8 flex items-center justify-center gap-2 bg-primary text-primary-foreground font-display font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full shadow-lg cursor-pointer"
                                         onClick={(e) => {
                                             e.preventDefault();
@@ -181,7 +181,7 @@ ${formData.workPlan}
                                     >
                                         <Download className="w-5 h-5" />
                                         {ProjectRequest.hero.downloadButton}
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </div>

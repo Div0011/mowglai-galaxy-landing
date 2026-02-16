@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
 import NextPageButton from "@/components/NextPageButton";
+import UserPurchasesSection from "@/components/UserPurchasesSection";
 
 const plans = {
     standard: [
@@ -81,7 +82,7 @@ export default function OriginalInvestment() {
 
     return (
         <PageLayout>
-            <div className="bg-transparent text-foreground min-h-screen px-4 md:px-24 py-32 font-sans overflow-hidden relative">
+            <div className="bg-transparent text-foreground min-h-screen px-4 md:px-24 py-32 font-sans relative">
 
 
                 {/* Header Area */}
@@ -99,17 +100,28 @@ export default function OriginalInvestment() {
                             </h1>
                         </div>
 
-                        {/* Toggle */}
-                        <div className="flex bg-background/20 p-1 rounded-full border border-primary/20 backdrop-blur-xl">
-                            {["standard", "premium"].map((type) => (
-                                <button
-                                    key={type}
-                                    onClick={() => setPlanType(type as "standard" | "premium")}
-                                    className={`px-8 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all rounded-full ${planType === type ? 'bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]' : 'text-primary/60 hover:text-primary'}`}
-                                >
-                                    {type}
-                                </button>
-                            ))}
+                        <div className="flex flex-col items-end gap-6">
+                            {/* Purchases Button */}
+                            <button
+                                onClick={() => document.getElementById('user-purchases')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="px-8 py-4 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] transition-all flex items-center gap-3 z-50 animate-pulse hover:animate-none"
+                            >
+                                <Sparkles className="w-5 h-5" />
+                                Your Assets
+                            </button>
+
+                            {/* Toggle */}
+                            <div className="flex bg-background/20 p-1 rounded-full border border-primary/20 backdrop-blur-xl">
+                                {["standard", "premium"].map((type) => (
+                                    <button
+                                        key={type}
+                                        onClick={() => setPlanType(type as "standard" | "premium")}
+                                        className={`px-8 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all rounded-full ${planType === type ? 'bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)]' : 'text-primary/60 hover:text-primary'}`}
+                                    >
+                                        {type}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </motion.div>
@@ -218,7 +230,7 @@ export default function OriginalInvestment() {
                                         </ul>
 
                                         <Link
-                                            href={`/project-request?plan=${plan.type}`}
+                                            href={`/start-project?plan=${plan.type}`}
                                             className="relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto"
                                         >
                                             {plan.button}
@@ -311,6 +323,9 @@ export default function OriginalInvestment() {
                         </motion.div>
                     ))}
                 </div>
+
+                {/* User Purchases Section - New Addition */}
+                <UserPurchasesSection />
 
                 {/* Footnote */}
                 <div className="mt-48 pt-12 border-t border-primary/20 flex flex-col md:flex-row justify-between items-start gap-12 relative z-10 opacity-60">

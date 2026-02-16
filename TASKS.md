@@ -1,6 +1,6 @@
 # Project Tasks
 
-- [x] fix all missing images in templates
-- [ ] fix missing images in gym-4, port-1, re-1
-- [ ] make a new branch and add all the images in cover of templates
-- [ ] merge that branch to main
+- [ ] Move "Refer and Earn" section below "Selected Work" section.
+- [ ] Move "Blueprint" button below "Blueprint Showcase" section.
+- [ ] Redesign "Launch Start Up" section to match website aesthetic.
+- [ ] Create "Start Project" dialogue page (Elaborate Idea -> Business Details).

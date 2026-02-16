@@ -52,7 +52,7 @@ const PricingSection = () => {
     if (plan.price === "Custom") {
       router.push("/custom-request");
     } else {
-      router.push(`/project-request?plan=${plan.name.toLowerCase()}`);
+      router.push(`/start-project?plan=${plan.name.toLowerCase()}`);
     }
   };
 

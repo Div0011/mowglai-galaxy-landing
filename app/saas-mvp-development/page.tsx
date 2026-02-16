@@ -1,188 +1,206 @@
-import type { Metadata } from "next";
+"use client";
+
+import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight, Check, Rocket, Code2, Layout, Database, Shield, Zap, TrendingUp, Users } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
-
-export const metadata: Metadata = {
-    title: "SaaS MVP Development India | Mowglai",
-    description: "Launch a SaaS MVP fast with Mowglai. We design, build, and scale MVPs with React, Next.js, and MVC architecture for startups in India and worldwide.",
-    keywords: [
-        "SaaS MVP development India",
-        "MVP development agency",
-        "startup product development",
-        "MVP build",
-        "MVC architecture",
-        "React MVP",
-        "Next.js MVP",
-        "SaaS product development",
-    ],
-    alternates: {
-        canonical: "https://mowglai.in/saas-mvp-development",
-    },
-    openGraph: {
-        title: "SaaS MVP Development India | Mowglai",
-        description: "Design, build, and launch SaaS MVPs fast. React, Next.js, MVC architecture, and startup-ready delivery.",
-        url: "https://mowglai.in/saas-mvp-development",
-        images: [
-            {
-                url: "https://mowglai.in/mowglai-logo-new.jpg",
-                width: 1200,
-                height: 1200,
-                alt: "Mowglai SaaS MVP Development",
-            },
-        ],
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "SaaS MVP Development India | Mowglai",
-        description: "Launch a SaaS MVP fast with React, Next.js, and MVC architecture.",
-        images: ["https://mowglai.in/mowglai-logo-new.jpg"],
-    },
-};
-
-const jsonLdService = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "SaaS MVP Development",
-    "provider": {
-        "@type": "Organization",
-        "name": "Mowglai Digital Agency",
-        "url": "https://mowglai.in",
-    },
-    "areaServed": "Worldwide",
-    "offers": {
-        "@type": "Offer",
-        "name": "SaaS MVP Build",
-        "url": "https://mowglai.in/saas-mvp-development",
-    },
-};
+import NextPageButton from "@/components/NextPageButton";
+import Magnetic from "@/components/Magnetic";
 
 export default function SaasMvpDevelopmentPage() {
     return (
         <PageLayout>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
-            />
-            <div className="bg-transparent text-foreground min-h-screen px-4 md:px-24 py-24 font-body">
-                <div className="max-w-6xl mx-auto">
-                    <section className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] items-center mb-20">
-                        <div className="space-y-6">
-                            <p className="text-xs md:text-sm font-display tracking-[0.4em] uppercase text-primary/80">Startup Launch</p>
-                            <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-black uppercase tracking-tight">
-                                SaaS MVP Development
-                            </h1>
-                            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                                Validate your idea fast with a production-grade MVP. We build SaaS products with clean MVC architecture,
-                                rapid iteration cycles, and scalable foundations using React and Next.js.
-                            </p>
-                            <div className="flex flex-wrap gap-4">
+            <main className="min-h-screen bg-transparent relative selection:bg-primary/30 pt-32 pb-20">
+                {/* Background Elements */}
+                {/* Global gradient background provided by layout */}
+                <div className="fixed top-20 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none z-0" />
+                <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none z-0" />
+
+                <div className="container mx-auto px-6 relative z-10">
+
+                    {/* Hero Section */}
+                    <section className="flex flex-col items-center text-center mb-20 md:mb-32">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-8"
+                        >
+                            <Rocket className="w-4 h-4 text-primary" />
+                            <span className="text-sm font-bold text-primary uppercase tracking-widest">
+                                Startup Launchpad
+                            </span>
+                        </motion.div>
+
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-black uppercase tracking-tighter mb-8 leading-snug md:leading-tight pb-2"
+                        >
+                            SaaS MVP <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 bg-[length:200%_auto] animate-gradient">
+                                Development
+                            </span>
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="text-muted-foreground text-lg md:text-2xl max-w-3xl font-light leading-relaxed mb-12"
+                        >
+                            Validate your idea fast with a production-grade MVP. We build scalable SaaS products with clean architecture and rapid iteration cycles.
+                        </motion.p>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                        >
+                            <Magnetic>
                                 <Link
-                                    href="/contact"
-                                    className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs sm:text-sm hover:scale-105 transition-transform"
+                                    href="/start-project/saas"
+                                    className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-lg font-bold uppercase tracking-widest rounded-full hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)] transition-all"
                                 >
                                     Start Your MVP
+                                    <ArrowRight className="w-5 h-5" />
                                 </Link>
-                                <Link
-                                    href="/services"
-                                    className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-primary/30 text-primary font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-primary/10 transition-colors"
-                                >
-                                    View Services
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="rounded-3xl border border-primary/15 bg-secondary/10 p-8 backdrop-blur-xl">
-                            <p className="text-xs font-display uppercase tracking-[0.3em] text-primary/70">What You Get</p>
-                            <ul className="mt-5 space-y-3 text-sm sm:text-base text-foreground/80">
-                                <li>Product strategy and scope in 7-10 days</li>
-                                <li>Clickable prototype and UX flows</li>
-                                <li>Core feature build with MVC foundations</li>
-                                <li>Analytics, auth, and payments ready</li>
-                                <li>Launch plan and post-MVP roadmap</li>
-                            </ul>
-                        </div>
+                            </Magnetic>
+                        </motion.div>
                     </section>
 
-                    <section className="grid gap-8 md:grid-cols-3 mb-20">
-                        {[
-                            {
-                                title: "Built for Startups",
-                                text: "Rapid sprints, pragmatic scope, and a roadmap that investors understand.",
-                            },
-                            {
-                                title: "Scalable Architecture",
-                                text: "Clean MVC patterns, modular services, and future-proof foundations.",
-                            },
-                            {
-                                title: "Speed + Quality",
-                                text: "Ship fast without cutting corners on performance, security, and UX.",
-                            },
-                        ].map((item) => (
-                            <div key={item.title} className="rounded-3xl border border-primary/10 bg-background/5 p-8">
-                                <h2 className="text-xl font-display font-bold uppercase mb-3">{item.title}</h2>
-                                <p className="text-muted-foreground leading-relaxed">{item.text}</p>
-                            </div>
-                        ))}
-                    </section>
-
-                    <section className="rounded-3xl border border-primary/10 bg-secondary/10 p-8 md:p-12 mb-20">
-                        <h2 className="text-3xl md:text-4xl font-display font-black uppercase mb-6">MVP Delivery Process</h2>
-                        <div className="grid gap-6 md:grid-cols-3">
+                    {/* Features Grid */}
+                    <section className="mb-24 md:mb-32">
+                        <div className="grid md:grid-cols-3 gap-8">
                             {[
-                                { title: "Discovery", text: "Market, scope, and UX mapping to define the MVP core." },
-                                { title: "Build", text: "Sprints for features, API, and UI with weekly demos." },
-                                { title: "Launch", text: "Deployment, analytics, and roadmap for iteration." },
-                            ].map((step) => (
-                                <div key={step.title} className="rounded-2xl border border-primary/10 bg-background/5 p-6">
-                                    <h3 className="text-lg font-display font-bold uppercase mb-2">{step.title}</h3>
-                                    <p className="text-muted-foreground">{step.text}</p>
-                                </div>
+                                {
+                                    icon: <Zap className="w-8 h-8 text-yellow-400" />,
+                                    title: "Rapid Development",
+                                    desc: "Go from concept to launch in 4-8 weeks. We prioritize core features to get you to market fast."
+                                },
+                                {
+                                    icon: <Layout className="w-8 h-8 text-blue-400" />,
+                                    title: "Scalable Architecture",
+                                    desc: "Built on Next.js and robust cloud infrastructure that grows with your user base."
+                                },
+                                {
+                                    icon: <Users className="w-8 h-8 text-green-400" />,
+                                    title: "User-Centric UX",
+                                    desc: "Beautiful, intuitive interfaces that convert visitors into loyal users from day one."
+                                }
+                            ].map((item, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="group p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 overflow-hidden"
+                                >
+                                    <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit border border-white/10 group-hover:scale-110 transition-transform">
+                                        {item.icon}
+                                    </div>
+                                    <h3 className="text-xl md:text-2xl font-display font-bold uppercase mb-4 break-words">{item.title}</h3>
+                                    <p className="text-muted-foreground leading-relaxed break-words">{item.desc}</p>
+                                </motion.div>
                             ))}
                         </div>
                     </section>
 
-                    <section className="grid gap-8 md:grid-cols-2 mb-20">
-                        <div className="rounded-3xl border border-primary/10 bg-background/5 p-8">
-                            <h2 className="text-2xl font-display font-bold uppercase mb-4">Tech Stack</h2>
-                            <div className="flex flex-wrap gap-3">
-                                {[
-                                    "React",
-                                    "Next.js",
-                                    "TypeScript",
-                                    "Node.js",
-                                    "PostgreSQL",
-                                    "Redis",
-                                    "Stripe",
-                                    "AWS/Vercel",
-                                ].map((tech) => (
-                                    <span key={tech} className="px-4 py-2 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs sm:text-sm font-bold uppercase tracking-widest">
+                    {/* Tech Stack Marquee */}
+                    <section className="mb-20 md:mb-32 overflow-hidden">
+                        <p className="text-center text-sm font-bold uppercase tracking-widest text-muted-foreground mb-12">
+                            Powered by Modern Tech
+                        </p>
+                        <div className="flex w-full overflow-hidden mask-linear-fade">
+                            <div className="flex gap-12 animate-marquee whitespace-nowrap opacity-50 hover:opacity-100 transition-opacity min-w-full">
+                                {[...["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "AWS", "Vercel", "Prisma", "Stripe", "Supabase"], ...["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "AWS", "Vercel", "Prisma", "Stripe", "Supabase"]].map((tech, i) => (
+                                    <span key={i} className="text-4xl md:text-6xl font-display font-black uppercase text-transparent bg-clip-text bg-gradient-to-b from-white/20 to-white/5">
                                         {tech}
                                     </span>
                                 ))}
                             </div>
                         </div>
-                        <div className="rounded-3xl border border-primary/10 bg-background/5 p-8">
-                            <h2 className="text-2xl font-display font-bold uppercase mb-4">FAQs</h2>
-                            <div className="space-y-4 text-sm sm:text-base text-muted-foreground">
-                                <p><span className="text-foreground font-semibold">How fast can we ship?</span> Typically 4-8 weeks for a focused MVP.</p>
-                                <p><span className="text-foreground font-semibold">Do you handle product strategy?</span> Yes, we align scope, market, and metrics early.</p>
-                                <p><span className="text-foreground font-semibold">Can you scale after MVP?</span> We design for growth and add teams post-launch.</p>
+                    </section>
+
+                    {/* Detailed Offerings */}
+                    <section className="grid lg:grid-cols-2 gap-16 items-center mb-20 md:mb-32">
+                        <div className="space-y-8">
+                            <h2 className="text-4xl md:text-5xl font-display font-black uppercase leading-tight">
+                                What's included in your <br />
+                                <span className="text-primary">MVP Package</span>
+                            </h2>
+                            <p className="text-xl text-muted-foreground font-light">
+                                We don't just write code. We deliver a complete product ready for users and investors.
+                            </p>
+
+                            <div className="grid gap-4">
+                                {[
+                                    "Product Strategy & Roadmap",
+                                    "UI/UX Design & Prototyping",
+                                    "Full-Stack Development",
+                                    "Database Design & Setup",
+                                    "Authentication & Authorization",
+                                    "Payment Gateway Integration",
+                                    "Admin Dashboard",
+                                    "Analytics & SEO Setup"
+                                ].map((feature, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.05 }}
+                                        className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors"
+                                    >
+                                        <div className="p-2 rounded-full bg-primary/20 text-primary">
+                                            <Check className="w-4 h-4" />
+                                        </div>
+                                        <span className="text-lg font-medium">{feature}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="relative mt-12 lg:mt-24">
+                            <div className="aspect-square rounded-[2rem] bg-gradient-to-br from-blue-500/20 via-primary/20 to-purple-500/20 border border-white/10 backdrop-blur-3xl overflow-hidden p-8 flex items-center justify-center">
+                                <div className="absolute inset-0 bg-grid-white/[0.05]" />
+                                <div className="relative z-10 text-center space-y-8">
+                                    <div className="text-6xl font-display font-black">4-8</div>
+                                    <div className="text-xl uppercase tracking-widest text-muted-foreground">Weeks Delivery</div>
+                                    <div className="w-24 h-[1px] bg-white/20 mx-auto" />
+                                    <div className="text-6xl font-display font-black">100%</div>
+                                    <div className="text-xl uppercase tracking-widest text-muted-foreground">Ownership</div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
-                    <section className="text-center rounded-3xl border border-primary/10 bg-primary/10 p-10">
-                        <h2 className="text-3xl md:text-4xl font-display font-black uppercase mb-4">Launch Your SaaS MVP</h2>
-                        <p className="text-muted-foreground mb-6">Tell us your idea and timeline. We will map the MVP and ship fast.</p>
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center justify-center px-8 sm:px-10 py-4 rounded-full bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs sm:text-sm hover:scale-105 transition-transform"
-                        >
-                            Book a Strategy Call
-                        </Link>
+                    {/* CTA Section */}
+                    <section className="relative rounded-[3rem] bg-primary overflow-hidden px-6 py-24 text-center">
+                        <div className="absolute inset-0 bg-black/10" />
+                        <div className="relative z-10 max-w-4xl mx-auto space-y-8">
+                            <h2 className="text-4xl md:text-6xl font-display font-black text-primary-foreground uppercase leading-tight">
+                                Ready to Disrupt the Market?
+                            </h2>
+                            <p className="text-xl md:text-2xl text-primary-foreground/80 font-medium">
+                                Let's turn your vision into a live product.
+                            </p>
+                            <div className="flex justify-center pt-8">
+                                <Link
+                                    href="/contact"
+                                    className="px-10 py-5 bg-background text-foreground text-lg font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-2xl"
+                                >
+                                    Book Strategy Call
+                                </Link>
+                            </div>
+                        </div>
                     </section>
+
                 </div>
-            </div>
+            </main>
         </PageLayout>
     );
 }

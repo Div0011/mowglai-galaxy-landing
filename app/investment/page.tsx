@@ -3,13 +3,14 @@
 import PageLayout from "@/components/PageLayout";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Download, FileText, Sparkles, Check, ArrowRight, Clock, Rocket } from "lucide-react";
+import { Download, FileText, Sparkles, Check, ArrowRight, Clock, Rocket, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
 import NextPageButton from "@/components/NextPageButton";
 import { cn } from "@/lib/utils";
+import UserPurchasesSection from "@/components/UserPurchasesSection";
 
 interface Plan {
     name: string;
@@ -296,21 +297,21 @@ export default function InvestmentPage() {
                     key: razorpayKeyId,
                     subscription_id: data.subscription_id,
                     name: "Mowglai Care Plans",
-            description: plan.name,
-            image: "/mowglai-logo-light.png",
-            notes: {
-                plan: plan.name,
-                category: "care",
-            },
-            theme: {
-                color: "#3FE0C5",
-            },
-            handler: () => {
-                setProcessingPlan(null);
-            },
-            modal: {
-                ondismiss: () => setProcessingPlan(null),
-            },
+                    description: plan.name,
+                    image: "/mowglai-logo-light.png",
+                    notes: {
+                        plan: plan.name,
+                        category: "care",
+                    },
+                    theme: {
+                        color: "#3FE0C5",
+                    },
+                    handler: () => {
+                        setProcessingPlan(null);
+                    },
+                    modal: {
+                        ondismiss: () => setProcessingPlan(null),
+                    },
                 };
 
                 const razorpay = new RazorpayConstructor(options);
@@ -431,7 +432,11 @@ export default function InvestmentPage() {
                             </h1>
                         </div>
 
-                        {/* Toggle Removed from Header */}
+                        <Link href="?modal=purchases" scroll={false} className="mb-4 md:mb-8 hidden md:block">
+                            <div className="p-4 md:p-6 rounded-full bg-primary/10 border border-primary/20 text-primary hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg group">
+                                <ShoppingCart className="w-6 h-6 md:w-8 md:h-8" />
+                            </div>
+                        </Link>
                     </div>
                 </motion.div>
 
@@ -571,6 +576,9 @@ export default function InvestmentPage() {
                         </motion.div>
                     </AnimatePresence>
                 </div>
+
+                {/* User Purchases Section */}
+                <UserPurchasesSection />
 
                 {/* Resource Downloads */}
                 <div className="mt-48 grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">

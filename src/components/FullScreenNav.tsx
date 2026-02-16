@@ -88,12 +88,18 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
 
 
             {/* Logo - Fixed Top Left - Visible Always but Reactive */}
-            <div className="fixed top-[calc(1rem+env(safe-area-inset-top))] left-[calc(0.875rem+env(safe-area-inset-left))] md:top-[calc(2rem+env(safe-area-inset-top))] md:left-[calc(2rem+env(safe-area-inset-left))] z-[60]">
+            {/* Logo - Fixed Top Left - Visible Always but Reactive */}
+            <div
+                className="fixed top-[calc(1rem+env(safe-area-inset-top))] left-[calc(0.875rem+env(safe-area-inset-left))] md:top-[calc(2rem+env(safe-area-inset-top))] md:left-[calc(2rem+env(safe-area-inset-left))] z-[60]"
+                onMouseEnter={() => setHoveredItem("LOGO")}
+                onMouseLeave={() => setHoveredItem(null)}
+            >
                 <Magnetic amount={0.4}>
                     <div
                         className={cn(
                             "cursor-pointer group/logo transition-all duration-700",
-                            !isLogoActive ? "opacity-30 blur-[4px] hover:opacity-100 hover:blur-0" : "opacity-100 blur-0"
+                            // Logo is active if: Menu is open OR page not scrolled OR logo is specifically hovered
+                            (isLogoActive || hoveredItem === "LOGO") ? "opacity-100 blur-0" : "opacity-30 blur-[4px]"
                         )}
                         onClick={() => router.push('/')}
                     >
