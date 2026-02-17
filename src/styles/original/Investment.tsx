@@ -75,7 +75,7 @@ export default function OriginalInvestment() {
 
         // 1. Get Base Price
         // Use assertion or safer check
-        const basePrice = (BASE_PRICES_USD as any)[priceKey];
+        const basePrice = (BASE_PRICES_USD as Record<string, number>)[priceKey];
         if (!basePrice) return "CUSTOM"; // Should not happen based on types
 
         // 2. Convert

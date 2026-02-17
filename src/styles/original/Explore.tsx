@@ -108,7 +108,7 @@ export default function ExplorePage() {
         result.sort((a, b) => b.pages - a.pages)
 
         return result
-    }, [selectedSector, pageRange, websiteTypes, structures, cmsTypes, selectedFeatures, selectedStyles, sortBy, budget, allTemplatesFlat])
+    }, [selectedSector, pageRange, websiteTypes, structures, cmsTypes, selectedFeatures, selectedStyles, allTemplatesFlat])
 
     // --- Clear All Handler ---
     const clearAllFilters = () => {
