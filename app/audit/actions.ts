@@ -1,6 +1,4 @@
-'use server'
-
-import { string, z } from "zod";
+import { z } from "zod";
 
 const auditSchema = z.object({
     url: z.string().url({ message: "Please enter a valid URL (including http:// or https://)" }),
@@ -53,7 +51,6 @@ export async function analyzeWebsite(formData: FormData): Promise<AuditResult> {
             headers: {
                 'User-Agent': 'Mowglai-Audit-Bot/1.0',
             },
-            next: { revalidate: 0 } // No cache
         });
 
         if (!response.ok) {
