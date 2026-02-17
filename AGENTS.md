@@ -237,6 +237,11 @@ const ChatbotModal = dynamic(() => import("@/components/ChatbotModal"), { ssr: f
 - **Type**: Static site deployed via SSH/rsync
 - **No Node.js server**: Uses static export (Next.js output mode)
 
+### Backend Policy (Shared Hosting)
+- **PHP only**: Any server-side logic must be implemented as PHP scripts.
+- **Location**: Place PHP endpoints under `public/api/` so they are included in the static export.
+- **No server actions**: Avoid Next.js Server Actions or any Node.js backend requirements.
+
 ### Automated Deployment
 - **GitHub Actions**: Push to `main` branch triggers automatic deployment
 - **Build**: Next.js static export builds to `out/` directory
