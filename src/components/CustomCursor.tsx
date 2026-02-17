@@ -74,7 +74,7 @@ const CustomCursor = () => {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [isMobile]);
+  }, [isMobile, isReducedMotion]);
 
   // Mouse move handler with manual throttling for state updates
   useEffect(() => {
@@ -118,7 +118,7 @@ const CustomCursor = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [isMobile, isVisible]);
+  }, [isMobile, isReducedMotion, isVisible]);
 
   // Click handler for ripples
   useEffect(() => {
@@ -135,7 +135,7 @@ const CustomCursor = () => {
 
     window.addEventListener("click", handleClick, { passive: true });
     return () => window.removeEventListener("click", handleClick);
-  }, [isMobile]);
+  }, [isMobile, isReducedMotion]);
 
   // Scale animation on hover state change
   useEffect(() => {
@@ -148,7 +148,7 @@ const CustomCursor = () => {
       duration: 0.3,
       ease: "power2.out"
     });
-  }, [isPointer, isMobile]);
+  }, [isPointer, isMobile, isReducedMotion]);
 
   if (isMobile || isReducedMotion) return null;
 

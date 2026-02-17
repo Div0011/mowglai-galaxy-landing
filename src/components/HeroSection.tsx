@@ -48,6 +48,15 @@ const HeroSection = () => {
                             START THE PROJECT
                         </Link>
                     </Magnetic>
+
+                    <Magnetic>
+                        <Link
+                            href="/audit"
+                            className="inline-block w-full sm:w-auto px-8 sm:px-10 py-4 border border-primary/20 bg-background/5 text-primary text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 rounded-full text-center backdrop-blur-sm"
+                        >
+                            GET FREE AUDIT
+                        </Link>
+                    </Magnetic>
                 </div>
 
             </div>

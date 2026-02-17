@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { X, Send, Bot, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -81,57 +81,27 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
     const [draftData, setDraftData] = useState({ service: '', details: '' });
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const handleDraftInputRef = useRef<(text: string) => void>(() => {});
+    const startDraftingRef = useRef<() => void>(() => {});
     const router = useRouter();
 
-    // Initial Greeting
-    useEffect(() => {
-        if (isOpen && messages.length === 0) {
-            setMessages([
-                {
-                    id: '1',
-                    sender: 'bot',
-                    text: "Greetings, traveler. I am the Mowglai Guardian. I can guide you to the perfect digital solution. Tell me, what are you looking to build or achieve?",
-                    options: [
-                        { label: "I need a Website", action: () => processInput("I need a Website") },
-                        { label: "Start a Project Request", action: () => startDrafting() },
-                        { label: "View Pricing", action: () => processInput("View Pricing") }
-                    ]
-                }
-            ]);
-        }
-    }, [isOpen]);
-
-    useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages, isTyping]);
-
-    const addMessage = (text: string, sender: 'user' | 'bot', options?: Message['options']) => {
+    const addMessage = useCallback((text: string, sender: 'user' | 'bot', options?: Message['options']) => {
         setMessages(prev => [...prev, { id: Date.now().toString(), text, sender, options }]);
-    };
+    }, []);
 
-    const simulateTyping = (callback: () => void) => {
+    const simulateTyping = useCallback((callback: () => void) => {
         setIsTyping(true);
         setTimeout(() => {
             setIsTyping(false);
             callback();
         }, 1000);
-    };
+    }, []);
 
-    // --- DRAFTING FLOW ---
-    const startDrafting = () => {
-        setDraftStep('service');
-        addMessage("Initiating Protocol: Project Request.", 'bot');
-        simulateTyping(() => {
-            addMessage("First, what kind of service do you require? (e.g., Web Design, Development, SEO, Full Redesign)", 'bot', [
-                { label: "Web Design", action: () => handleDraftInput("Web Design") },
-                { label: "Development", action: () => handleDraftInput("Development") },
-                { label: "Full Custom Project", action: () => handleDraftInput("Full Custom Project") }
-            ]);
-        });
-    };
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages, isTyping]);
 
-    const handleDraftInput = (text: string) => {
-        // Echo user choice
+    const handleDraftInput = useCallback((text: string) => {
         addMessage(text, 'user');
 
         if (draftStep === 'service') {
@@ -143,7 +113,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
         }
         else if (draftStep === 'details') {
             setDraftData(prev => ({ ...prev, details: text }));
-            setDraftStep('none'); // End drafting
+            setDraftStep('none');
 
             simulateTyping(() => {
                 const mailSubject = `New Project Request: ${draftData.service}`;
@@ -153,14 +123,34 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
                 addMessage("I have compiled your request dossier. You can now transmit this directly to our command center.", 'bot');
                 addMessage(`Summary:\nService: ${draftData.service}\nDetails: ${text}`, 'bot', [
                     { label: "Send Request via Email", action: () => { window.location.href = mailToLink; } },
-                    { label: "Restart", action: () => startDrafting() }
+                    { label: "Restart", action: () => startDraftingRef.current() }
                 ]);
             });
         }
-    };
+    }, [addMessage, draftData.service, draftStep, simulateTyping]);
+
+    const startDrafting = useCallback(() => {
+        setDraftStep('service');
+        addMessage("Initiating Protocol: Project Request.", 'bot');
+        simulateTyping(() => {
+            addMessage("First, what kind of service do you require? (e.g., Web Design, Development, SEO, Full Redesign)", 'bot', [
+                { label: "Web Design", action: () => handleDraftInputRef.current("Web Design") },
+                { label: "Development", action: () => handleDraftInputRef.current("Development") },
+                { label: "Full Custom Project", action: () => handleDraftInputRef.current("Full Custom Project") }
+            ]);
+        });
+    }, [addMessage, simulateTyping]);
+
+    useEffect(() => {
+        handleDraftInputRef.current = handleDraftInput;
+    }, [handleDraftInput]);
+
+    useEffect(() => {
+        startDraftingRef.current = startDrafting;
+    }, [startDrafting]);
 
     // --- BRAIN ---
-    const processInput = (input: string) => {
+    const processInput = useCallback((input: string) => {
         // If in drafting mode, route to draft handler
         if (draftStep !== 'none') {
             handleDraftInput(input);
@@ -174,7 +164,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
         simulateTyping(() => {
             // Priority Check: "Write request", "Hire", "Project"
             if (lowerInput.includes('hire') || lowerInput.includes('project') || lowerInput.includes('request') || lowerInput.includes('proposal')) {
-                startDrafting();
+                startDraftingRef.current();
                 return;
             }
 
@@ -268,15 +258,33 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
             } else {
                 // Fallback or Generic
                 addMessage("I am processing your signal. While I didn't catch a specific service request, our team can likely assist. We specialize in Web Design, Development, and Digital Strategy.", 'bot', [
-                    { label: "Start a Project Request", action: () => startDrafting() },
+                    { label: "Start a Project Request", action: () => startDraftingRef.current() },
                     { label: "View All Services", action: () => { onClose(); router.push('/services'); } },
                     { label: "Contact Human Command", action: () => { onClose(); router.push('/contact'); } }
                 ]);
             }
         });
-    };
+    }, [addMessage, draftStep, handleDraftInput, onClose, router, simulateTyping]);
 
-    const recommendPlan = (plan: string) => {
+    // Initial Greeting
+    useEffect(() => {
+        if (isOpen && messages.length === 0) {
+            setMessages([
+                {
+                    id: '1',
+                    sender: 'bot',
+                    text: "Greetings, traveler. I am the Mowglai Guardian. I can guide you to the perfect digital solution. Tell me, what are you looking to build or achieve?",
+                    options: [
+                        { label: "I need a Website", action: () => processInput("I need a Website") },
+                        { label: "Start a Project Request", action: () => startDrafting() },
+                        { label: "View Pricing", action: () => processInput("View Pricing") }
+                    ]
+                }
+            ]);
+        }
+    }, [isOpen, messages.length, processInput, startDrafting]);
+
+    const recommendPlan = useCallback((plan: string) => {
         addMessage(plan, 'user');
         simulateTyping(() => {
             let text = "";
@@ -289,14 +297,14 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
                 { label: "Request This Plan", action: () => { onClose(); router.push('/contact'); } }
             ]);
         });
-    };
+    }, [addMessage, onClose, router, simulateTyping]);
 
-    const handleSend = () => {
+    const handleSend = useCallback(() => {
         if (!inputValue.trim()) return;
         const temp = inputValue;
         setInputValue('');
         processInput(temp);
-    };
+    }, [inputValue, processInput]);
 
     return (
         <AnimatePresence>

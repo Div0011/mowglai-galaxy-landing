@@ -84,7 +84,7 @@ export default function SelectedWork() {
         return () => {
             if (autoplayRef.current) clearInterval(autoplayRef.current);
         };
-    }, []);
+    }, [resetAutoplay]);
 
     // Keyboard Navigation
     useEffect(() => {
@@ -99,7 +99,7 @@ export default function SelectedWork() {
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
+    }, [nextSlide, prevSlide, resetAutoplay]);
 
     const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         if (info.offset.x < -50) {
