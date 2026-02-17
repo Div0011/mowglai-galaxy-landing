@@ -37,6 +37,17 @@ jobs:
         env:
           NEXT_PUBLIC_RAZORPAY_KEY_ID: ${{ secrets.NEXT_PUBLIC_RAZORPAY_KEY_ID }}
 
+      - name: Inject Secrets into .htaccess
+        env:
+          RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+          RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
+        run: |
+          echo "" >> ./out/.htaccess
+          echo "# Injected by CI/CD" >> ./out/.htaccess
+          echo "SetEnv RAZORPAY_KEY_ID $RAZORPAY_KEY_ID" >> ./out/.htaccess
+          echo "SetEnv RAZORPAY_KEY_SECRET $RAZORPAY_KEY_SECRET" >> ./out/.htaccess
+        shell: bash
+
       # ==========================================
       # CD (Continuous Deployment) Pipeline
       # ==========================================

@@ -25,22 +25,7 @@ try {
     $purchases = $stmt->fetchAll();
 
     if (empty($purchases)) {
-        // Return mock data for demonstration if no DB connection or empty result
-        // TODO: Remove this mock data in production
-        echo json_encode([
-            'success' => true,
-            'purchases' => [
-                [
-                    'id' => 'sub_mock_123',
-                    'plan_name' => 'Mowglai Growth',
-                    'purchase_date' => date('Y-m-d'),
-                    'expiration_date' => date('Y-m-d', strtotime('+1 month')),
-                    'status' => 'active',
-                    'details' => 'Monthly subscription via Razorpay'
-                ]
-            ],
-            'mock' => true // Flag to indicate data is mocked
-        ]);
+        echo json_encode(['success' => true, 'purchases' => []]);
     } else {
         echo json_encode(['success' => true, 'purchases' => $purchases]);
     }
@@ -52,11 +37,11 @@ try {
         'purchases' => [
             [
                 'id' => 'err_mock_1',
-                'plan_name' => 'Demo Plan (DB Error)',
+                'plan_name' => 'Connection Error',
                 'purchase_date' => date('Y-m-d'), 
                 'expiration_date' => date('Y-m-d', strtotime('+1 year')),
                 'status' => 'active',
-                'details' => 'Database not connected. Please configure db.php.'
+                'details' => 'Error: ' . $e->getMessage()
             ]
         ],
         'error' => $e->getMessage()
