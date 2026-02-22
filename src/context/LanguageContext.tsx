@@ -109,7 +109,25 @@ interface Translations {
     Contact: {
         hero: { titleMain: string; titleSub: string; subtitle: string };
         info: { email: string; phone: string; whatsapp: string; hours: string; hoursValue: string; location: string; locationValue: string };
-        form: { namePlaceholder: string; emailPlaceholder: string; messagePlaceholder: string; buttonSend: string; buttonSending: string };
+        form: {
+            namePlaceholder: string;
+            emailPlaceholder: string;
+            countryCodePlaceholder: string;
+            phonePlaceholder: string;
+            socialPlaceholder: string;
+            preferredContactPlaceholder: string;
+            optionalLabel: string;
+            preferredContactOptions: {
+                phoneCall: string;
+                whatsappCall: string;
+                whatsappMessage: string;
+                email: string;
+                otherSocial: string;
+            };
+            messagePlaceholder: string;
+            buttonSend: string;
+            buttonSending: string;
+        };
         customQuote: { title: string; titleSub: string; description: string; buttonMain: string; buttonSub: string };
     };
     ProjectRequest: {
@@ -274,7 +292,25 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            form: {
+                namePlaceholder: "Your Name",
+                emailPlaceholder: "Email Address",
+                countryCodePlaceholder: "Country code (e.g. +91)",
+                phonePlaceholder: "Phone number (optional)",
+                socialPlaceholder: "Social media handle/link (optional)",
+                preferredContactPlaceholder: "Preferred contact method (optional)",
+                optionalLabel: "Optional",
+                preferredContactOptions: {
+                    phoneCall: "Phone call",
+                    whatsappCall: "WhatsApp call",
+                    whatsappMessage: "WhatsApp message",
+                    email: "Email",
+                    otherSocial: "Other social media DM"
+                },
+                messagePlaceholder: "Tell us about your project...",
+                buttonSend: "Send Message",
+                buttonSending: "Sending..."
+            },
             customQuote: { title: "NEED", titleSub: "A CUSTOMIZED QUOTATION?", description: "Every project is unique. Let us provide a detailed, tailored breakdown of costs and timelines for your specific requirements.", buttonMain: "REQUEST CUSTOM", buttonSub: "QUOTATION" }
         },
         ProjectRequest: {
@@ -437,7 +473,25 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            form: {
+                namePlaceholder: "Your Name",
+                emailPlaceholder: "Email Address",
+                countryCodePlaceholder: "देश कोड (जैसे +91)",
+                phonePlaceholder: "फोन नंबर (वैकल्पिक)",
+                socialPlaceholder: "सोशल मीडिया हैंडल/लिंक (वैकल्पिक)",
+                preferredContactPlaceholder: "पसंदीदा संपर्क तरीका (वैकल्पिक)",
+                optionalLabel: "वैकल्पिक",
+                preferredContactOptions: {
+                    phoneCall: "फोन कॉल",
+                    whatsappCall: "व्हाट्सएप कॉल",
+                    whatsappMessage: "व्हाट्सएप मैसेज",
+                    email: "ईमेल",
+                    otherSocial: "अन्य सोशल मीडिया DM"
+                },
+                messagePlaceholder: "Tell us about your project...",
+                buttonSend: "Send Message",
+                buttonSending: "Sending..."
+            },
             customQuote: { title: "NEED", titleSub: "A CUSTOMIZED QUOTATION?", description: "हर परियोजना अद्वितीय है। आइए आपकी विशिष्ट आवश्यकताओं के लिए लागत और समयसीमा का विस्तृत विवरण प्रदान करें।", buttonMain: "REQUEST CUSTOM", buttonSub: "QUOTATION" }
         },
         ProjectRequest: {
@@ -600,7 +654,25 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            form: {
+                namePlaceholder: "Your Name",
+                emailPlaceholder: "Email Address",
+                countryCodePlaceholder: "Código de país (p. ej. +91)",
+                phonePlaceholder: "Número de teléfono (opcional)",
+                socialPlaceholder: "Red social / enlace (opcional)",
+                preferredContactPlaceholder: "Método de contacto preferido (opcional)",
+                optionalLabel: "Opcional",
+                preferredContactOptions: {
+                    phoneCall: "Llamada telefónica",
+                    whatsappCall: "Llamada de WhatsApp",
+                    whatsappMessage: "Mensaje de WhatsApp",
+                    email: "Correo electrónico",
+                    otherSocial: "Otro DM en redes sociales"
+                },
+                messagePlaceholder: "Tell us about your project...",
+                buttonSend: "Send Message",
+                buttonSending: "Sending..."
+            },
             customQuote: { title: "NECESITA", titleSub: "¿UNA COTIZACIÓN PERSONALIZADA?", description: "Cada proyecto es único. Permítanos proporcionar un desglose detallado y personalizado de costos y plazos para sus requisitos específicos.", buttonMain: "SOLICITAR", buttonSub: "COTIZACIÓN" }
         },
         ProjectRequest: {
@@ -763,7 +835,25 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            form: {
+                namePlaceholder: "Your Name",
+                emailPlaceholder: "Email Address",
+                countryCodePlaceholder: "Indicatif du pays (ex. +91)",
+                phonePlaceholder: "Numéro de téléphone (optionnel)",
+                socialPlaceholder: "Réseau social / lien (optionnel)",
+                preferredContactPlaceholder: "Méthode de contact préférée (optionnel)",
+                optionalLabel: "Optionnel",
+                preferredContactOptions: {
+                    phoneCall: "Appel téléphonique",
+                    whatsappCall: "Appel WhatsApp",
+                    whatsappMessage: "Message WhatsApp",
+                    email: "Email",
+                    otherSocial: "Autre DM sur réseau social"
+                },
+                messagePlaceholder: "Tell us about your project...",
+                buttonSend: "Send Message",
+                buttonSending: "Sending..."
+            },
             customQuote: { title: "BESOIN", titleSub: "D'UNE OFFRE PERSONNALISÉE ?", description: "Chaque projet est unique. Laissez-nous vous fournir une ventilation détaillée et sur mesure des coûts et des délais pour vos besoins spécifiques.", buttonMain: "DEMANDER", buttonSub: "DEVIS" }
         },
         ProjectRequest: {
@@ -926,7 +1016,25 @@ const translations: Record<Language, Translations> = {
         Contact: {
             hero: { titleMain: "GET IN", titleSub: "TOUCH", subtitle: "Ready to start your project? Let's create something amazing together." },
             info: { email: "Email", phone: "Phone & WhatsApp", whatsapp: "WhatsApp", hours: "Hours", hoursValue: "Mon - Sat • Global Zones", location: "HQ Location", locationValue: "Noida, India" },
-            form: { namePlaceholder: "Your Name", emailPlaceholder: "Email Address", messagePlaceholder: "Tell us about your project...", buttonSend: "Send Message", buttonSending: "Sending..." },
+            form: {
+                namePlaceholder: "Your Name",
+                emailPlaceholder: "Email Address",
+                countryCodePlaceholder: "国番号（例：+91）",
+                phonePlaceholder: "電話番号（任意）",
+                socialPlaceholder: "SNSのハンドル/リンク（任意）",
+                preferredContactPlaceholder: "希望の連絡方法（任意）",
+                optionalLabel: "任意",
+                preferredContactOptions: {
+                    phoneCall: "電話",
+                    whatsappCall: "WhatsApp通話",
+                    whatsappMessage: "WhatsAppメッセージ",
+                    email: "メール",
+                    otherSocial: "その他のSNSのDM"
+                },
+                messagePlaceholder: "Tell us about your project...",
+                buttonSend: "Send Message",
+                buttonSending: "Sending..."
+            },
             customQuote: { title: "必要ですか", titleSub: "カスタマイズされた見積もり？", description: "すべてのプロジェクトはユニークです。お客様の特定の要件に対するコストとスケジュールの詳細でカスタマイズされた内訳を提供させてください。", buttonMain: "カスタム見積もり", buttonSub: "をリクエスト" }
         },
         ProjectRequest: {

@@ -72,14 +72,17 @@ const SelectContent = React.forwardRef<
         className,
       )}
       position={position}
+      onWheel={(event) => {
+        props.onWheel?.(event);
+        event.stopPropagation();
+      }}
       {...props}
     >
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={cn(
-          "p-1",
-          position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
+          "h-full p-1 overflow-y-auto overscroll-contain",
+          position === "popper" && "w-full min-w-[var(--radix-select-trigger-width)]",
         )}
       >
         {children}
