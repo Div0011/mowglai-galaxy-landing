@@ -150,8 +150,8 @@ const AuditReport: React.FC<AuditReportProps> = ({ result }) => {
                 {/* Footer */}
                 <div className="relative z-10 mt-12 pt-8 border-t border-[#c5a059]/20 flex justify-between items-end text-xs text-white/40">
                     <div className="max-w-md">
-                        <p className="mb-2">This report is automatically generated using simulated analysis metrics for demonstration purposes.</p>
-                        <p>Mowglai uses advanced heuristics to estimate performance and SEO health.</p>
+                        <p className="mb-2">This report is generated using real-time automated analysis heuristics.</p>
+                        <p>Mowglai analyzes performance, SEO health, and security posture.</p>
                     </div>
                     <div className="text-right">
                         <p className="font-bold text-[#c5a059]">MOWGLAI</p>
