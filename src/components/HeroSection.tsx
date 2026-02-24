@@ -4,6 +4,7 @@ import Link from "next/link";
 import TextReveal from "./TextReveal";
 import Magnetic from "./Magnetic";
 import { useLanguage } from "../context/LanguageContext";
+import AuditCircularButton from "./AuditCircularButton";
 
 const HeroSection = () => {
     const { t } = useLanguage();
@@ -29,15 +30,15 @@ const HeroSection = () => {
                 </div>
 
                 {/* Subtitle / Value Prop */}
-                <div className="mt-8 md:mt-12 max-w-3xl" data-aos="fade-up" data-aos-delay="300">
-                    <div className="text-xl md:text-3xl text-foreground/80 font-body font-light leading-relaxed">
+                <div className="mt-1 max-w-3xl" data-aos="fade-up" data-aos-delay="300">
+                    <div className="text-lg md:text-xl text-foreground/70 font-body font-light leading-none">
                         <TextReveal text={t.Common.deliveringElegance} />
                     </div>
                 </div>
 
                 {/* CTA Buttons */}
                 <div
-                    className="mt-12 flex flex-wrap justify-center gap-4 md:gap-6 opacity-0 animate-fade-in px-4"
+                    className="mt-2 flex flex-col items-center gap-4 opacity-0 animate-fade-in px-4"
                     style={{ animationDelay: "1s", animationFillMode: "forwards" }}
                 >
                     <Magnetic>
@@ -49,14 +50,7 @@ const HeroSection = () => {
                         </Link>
                     </Magnetic>
 
-                    <Magnetic>
-                        <Link
-                            href="/audit"
-                            className="inline-block w-full sm:w-auto px-8 sm:px-10 py-4 border border-primary/20 bg-background/5 text-primary text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 rounded-full text-center backdrop-blur-sm"
-                        >
-                            GET FREE AUDIT
-                        </Link>
-                    </Magnetic>
+                    <AuditCircularButton size="lg" />
                 </div>
 
             </div>

@@ -64,14 +64,13 @@ export default function HomeContent() {
             </section>
 
 
+            {/* 2. LAUNCH FASTER WITH MOWGLAI */}
+            <StartupGrowthSection />
+
+            {/* 3. SELECTED WORK */}
             <SelectedWork />
 
-            {/* Refer and Earn (Flash Text) */}
-            <div className="mt-12 md:mt-24">
-                <FlashText />
-            </div>
-
-            {/* Premium Templates Showcase */}
+            {/* 4. TEMPLATE (Premium Templates Showcase) */}
             <TemplatesShowcase />
 
             {/* Explore Templates CTA (Blueprint Button) */}
@@ -79,12 +78,12 @@ export default function HomeContent() {
                 <NextPageButton label="BLUEPRINT" href="/explore" />
             </div>
 
-            {/* Startup Growth Section (Redesigned) */}
-            <StartupGrowthSection />
+            {/* 5. COMMISSION (Refer and Earn Flash Text) */}
+            <div className="mt-12 md:mt-24 mb-12">
+                <FlashText />
+            </div>
 
-
-
-
+            {/* 6. CONSULT / STORY */}
             {/* Consult for Free Button */}
             <div className="w-full flex flex-col items-center justify-center pb-12 pt-12 relative z-20">
                 <p className="text-sm md:text-base font-display tracking-widest uppercase mb-8 text-muted-foreground/60 text-center max-w-2xl px-4 flex flex-col gap-2" data-aos="fade-up">

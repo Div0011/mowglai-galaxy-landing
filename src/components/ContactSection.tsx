@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Send, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import TextReveal from "./TextReveal";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -17,11 +16,10 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/utils/emailSender";
 import { useLanguage } from "@/context/LanguageContext";
-import { useTheme } from "next-themes";
 import { cn as clsx } from "@/lib/utils";
 
 
-const CONTACT_EMAIL = "info@mowglai.in"; // REPLACE THIS WITH YOUR PERSONAL EMAIL FOR TESTING
+const CONTACT_EMAIL = "info@mowglai.in";
 const COUNTRY_CODE = "91";
 const LOCAL_PHONE_NUMBER = "9452476331";
 const FULL_PHONE_NUMBER = `${COUNTRY_CODE}${LOCAL_PHONE_NUMBER}`;
@@ -55,8 +53,6 @@ const ContactSection = () => {
   const { t } = useLanguage();
   const { Contact } = t;
 
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -100,7 +96,6 @@ const ContactSection = () => {
         preferredContactMethod: "",
       });
     } else {
-      // Fallback
       const body = `
 Name: ${formData.name}
 Email: ${formData.email}
@@ -123,7 +118,7 @@ ${formData.message}
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="relative w-full py-32 z-20 overflow-hidden">
+    <section id="contact" ref={sectionRef} className="relative w-full py-32 z-20 overflow-hidden text-body">
       <div className="container mx-auto px-6">
 
         {/* Huge Header */}
@@ -183,14 +178,14 @@ ${formData.message}
 
           {/* Form - Clean & underlined */}
           <div className={clsx("p-10 md:p-14 rounded-[2rem] border border-primary/20 bg-secondary/10 backdrop-blur-xl shadow-2xl")}>
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8 font-sans">
               <div className="space-y-6">
                 <Input
                   required
                   placeholder={Contact.form.namePlaceholder}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-display font-bold"
+                  className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-sans"
                 />
                 <Input
                   required
@@ -198,11 +193,11 @@ ${formData.message}
                   placeholder={Contact.form.emailPlaceholder}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-display font-bold"
+                  className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-sans"
                 />
                 <div className="rounded-3xl border border-primary/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.01)_100%)] px-6 py-5 space-y-5 shadow-[0_20px_50px_rgba(0,0,0,0.12)]">
                   <div className="flex items-center gap-4">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-primary/70">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-primary/70 font-sans">
                       {Contact.form.optionalLabel}
                     </span>
                     <span className="h-px flex-1 bg-primary/15" />
@@ -211,15 +206,15 @@ ${formData.message}
                     value={formData.preferredContactMethod}
                     onValueChange={(value) => setFormData({ ...formData, preferredContactMethod: value })}
                   >
-                    <SelectTrigger className="bg-secondary/20 border border-primary/15 rounded-2xl px-4 py-4 text-lg focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all font-display font-bold shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur">
+                    <SelectTrigger className="bg-secondary/20 border border-primary/15 rounded-2xl px-4 py-4 text-lg focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all font-sans font-bold shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur">
                       <SelectValue placeholder={Contact.form.preferredContactPlaceholder} />
                     </SelectTrigger>
                     <SelectContent className="bg-background/90 border border-primary/15 shadow-[0_24px_60px_rgba(0,0,0,0.25)] backdrop-blur max-h-72 overflow-y-auto">
-                      <SelectItem value={Contact.form.preferredContactOptions.phoneCall}>{Contact.form.preferredContactOptions.phoneCall}</SelectItem>
-                      <SelectItem value={Contact.form.preferredContactOptions.whatsappCall}>{Contact.form.preferredContactOptions.whatsappCall}</SelectItem>
-                      <SelectItem value={Contact.form.preferredContactOptions.whatsappMessage}>{Contact.form.preferredContactOptions.whatsappMessage}</SelectItem>
-                      <SelectItem value={Contact.form.preferredContactOptions.email}>{Contact.form.preferredContactOptions.email}</SelectItem>
-                      <SelectItem value={Contact.form.preferredContactOptions.otherSocial}>{Contact.form.preferredContactOptions.otherSocial}</SelectItem>
+                      <SelectItem value={Contact.form.preferredContactOptions.phoneCall} className="font-sans">{Contact.form.preferredContactOptions.phoneCall}</SelectItem>
+                      <SelectItem value={Contact.form.preferredContactOptions.whatsappCall} className="font-sans">{Contact.form.preferredContactOptions.whatsappCall}</SelectItem>
+                      <SelectItem value={Contact.form.preferredContactOptions.whatsappMessage} className="font-sans">{Contact.form.preferredContactOptions.whatsappMessage}</SelectItem>
+                      <SelectItem value={Contact.form.preferredContactOptions.email} className="font-sans">{Contact.form.preferredContactOptions.email}</SelectItem>
+                      <SelectItem value={Contact.form.preferredContactOptions.otherSocial} className="font-sans">{Contact.form.preferredContactOptions.otherSocial}</SelectItem>
                     </SelectContent>
                   </Select>
                   <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-5">
@@ -227,12 +222,12 @@ ${formData.message}
                       value={formData.phoneCountryCode}
                       onValueChange={(value) => setFormData({ ...formData, phoneCountryCode: value })}
                     >
-                      <SelectTrigger className="bg-secondary/20 border border-primary/15 rounded-2xl px-4 py-4 text-lg focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all font-display font-bold shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur">
+                      <SelectTrigger className="bg-secondary/20 border border-primary/15 rounded-2xl px-4 py-4 text-lg focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all font-sans font-bold shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur">
                         <SelectValue placeholder={Contact.form.countryCodePlaceholder} />
                       </SelectTrigger>
                       <SelectContent className="bg-background/90 border border-primary/15 shadow-[0_24px_60px_rgba(0,0,0,0.25)] backdrop-blur max-h-72 overflow-y-auto">
                         {COUNTRY_CODE_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <SelectItem key={option.value} value={option.value} className="font-sans">
                             {option.label}
                           </SelectItem>
                         ))}
@@ -243,14 +238,14 @@ ${formData.message}
                       placeholder={Contact.form.phonePlaceholder}
                       value={formData.phoneNumber}
                       onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                      className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-4 text-lg focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-display font-bold"
+                      className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-4 text-lg focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-sans font-bold"
                     />
                   </div>
                   <Input
                     placeholder={Contact.form.socialPlaceholder}
                     value={formData.socialMedia}
                     onChange={(e) => setFormData({ ...formData, socialMedia: e.target.value })}
-                    className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-4 text-lg focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-display font-bold"
+                    className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-4 text-lg focus:border-primary focus:ring-0 placeholder:text-foreground/30 transition-all font-sans font-bold"
                   />
                 </div>
                 <Textarea
@@ -259,14 +254,14 @@ ${formData.message}
                   placeholder={Contact.form.messagePlaceholder}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 resize-none transition-all font-display font-bold"
+                  className="bg-transparent border-0 border-b-2 border-foreground/20 rounded-none px-0 py-6 text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/30 resize-none transition-all font-sans"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-auto px-8 sm:px-10 py-6 bg-primary text-primary-foreground font-display font-black text-sm sm:text-lg md:text-xl rounded-full transition-all uppercase tracking-widest hover:bg-primary-foreground hover:text-primary shadow-lg"
+                className="w-full h-auto px-8 sm:px-10 py-6 bg-primary text-primary-foreground font-sans font-black text-sm sm:text-lg md:text-xl rounded-full transition-all uppercase tracking-widest hover:bg-primary-foreground hover:text-primary shadow-lg"
               >
                 {isSubmitting ? Contact.form.buttonSending : Contact.form.buttonSend}
               </Button>

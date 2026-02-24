@@ -51,7 +51,17 @@ export async function analyzeWebsite(formData: FormData): Promise<AuditResult> {
             body: JSON.stringify({ url }),
         });
 
-        const data = await response.json();
+        const textResponse = await response.text();
+        let data;
+        try {
+            data = JSON.parse(textResponse);
+        } catch (parseError) {
+            // Next.js dev server returns an HTML 405/404 page when trying to POST to a PHP file
+            if (textResponse.trim().startsWith('<')) {
+                return createErrorResult(url, "Local Testing Notice: The Next.js dev server cannot execute PHP files natively. This feature relies on Hostinger's PHP server and will work perfectly once deployed live.");
+            }
+            return createErrorResult(url, "Invalid JSON response from the audit engine.");
+        }
 
         if (!response.ok) {
             const message = typeof data?.error === 'string' ? data.error : 'Audit request failed.';
