@@ -10,9 +10,15 @@ import NextPageButton from "@/components/NextPageButton";
 import { useLanguage } from "@/context/LanguageContext";
 import TemplatesShowcase from "@/components/TemplatesShowcase";
 import StartupGrowthSection from "@/components/StartupGrowthSection";
+import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 
 export default function HomeContent() {
     const { t } = useLanguage();
+    const consultX = useMotionValue(0);
+    const consultY = useMotionValue(0);
+    const consultSmoothX = useSpring(consultX, { stiffness: 50, damping: 20 });
+    const consultSmoothY = useSpring(consultY, { stiffness: 50, damping: 20 });
+
 
     return (
         <>

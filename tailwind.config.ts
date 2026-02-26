@@ -108,6 +108,14 @@ export default {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-50%)" },
         },
+        "slide-diagonal": {
+          "0%": { transform: "translate(0, 0)" },
+          "100%": { transform: "translate(100vw, 100vh)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

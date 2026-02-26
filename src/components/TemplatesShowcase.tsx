@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,6 +22,16 @@ export default function TemplatesShowcase() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Dynamic Flashlight Hover Tracker
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+    };
 
     const nextSlide = useCallback(() => {
         setCurrentIndex((prev) => (prev + 1) % showcaseItems.length);
@@ -82,13 +92,28 @@ export default function TemplatesShowcase() {
                             className={`flex flex-col md:flex-row items-center gap-10 lg:gap-20 ${isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                         >
                             {/* Image Part */}
-                            <div className="w-full md:w-3/5 relative aspect-[16/10] sm:aspect-video rounded-[2rem] sm:rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border border-primary/10">
+                            <div
+                                className="w-full md:w-3/5 relative aspect-[16/10] sm:aspect-video rounded-[2rem] sm:rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border border-primary/10"
+                                onMouseMove={handleMouseMove}
+                            >
+                                <motion.div
+                                    className="pointer-events-none absolute -inset-px z-50 opacity-0 transition duration-500 group-hover:opacity-100 mix-blend-soft-light"
+                                    style={{
+                                        background: useMotionTemplate`
+                                            radial-gradient(
+                                                500px circle at ${mouseX}px ${mouseY}px,
+                                                rgba(255, 255, 255, 0.5),
+                                                transparent 60%
+                                            )
+                                        `
+                                    }}
+                                />
                                 <Link href={`/explore/${activeItem.template.id}`}>
                                     <Image
                                         src={activeItem.template.image}
                                         alt={activeItem.template.title}
                                         fill
-                                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
                                         priority
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60" />

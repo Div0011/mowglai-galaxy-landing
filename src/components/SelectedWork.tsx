@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { motion, AnimatePresence, PanInfo, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import NextImage from "next/image";
@@ -63,6 +63,20 @@ export default function SelectedWork() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Faux-3D Depth Parallax
+    const mouseX = useMotionValue(0.5);
+    const mouseY = useMotionValue(0.5);
+
+    const springConfig = { damping: 25, stiffness: 150 };
+    const springX = useSpring(mouseX, springConfig);
+    const springY = useSpring(mouseY, springConfig);
+
+    const imgX = useTransform(springX, [0, 1], ["5%", "-5%"]);
+    const imgY = useTransform(springY, [0, 1], ["5%", "-5%"]);
+    const contentX = useTransform(springX, [0, 1], ["-2%", "2%"]);
+    const contentY = useTransform(springY, [0, 1], ["-2%", "2%"]);
+
 
     const nextSlide = useCallback(() => {
         setDirection(1);
@@ -166,6 +180,16 @@ export default function SelectedWork() {
                             dragConstraints={{ left: 0, right: 0 }}
                             dragElastic={1}
                             onDragEnd={handleDragEnd}
+                            onMouseMove={(e) => {
+                                const rect = e.currentTarget.getBoundingClientRect();
+                                // normalize 0 to 1
+                                mouseX.set((e.clientX - rect.left) / rect.width);
+                                mouseY.set((e.clientY - rect.top) / rect.height);
+                            }}
+                            onMouseLeave={() => {
+                                mouseX.set(0.5);
+                                mouseY.set(0.5);
+                            }}
                             transition={{
                                 x: { type: "spring", stiffness: 300, damping: 30 },
                                 opacity: { duration: 0.2 },
@@ -174,7 +198,9 @@ export default function SelectedWork() {
                             className="absolute inset-0 w-full h-full"
                         >
                             {/* IMAGE CONTAINER - Integrated Mobile (Top 50%), Full Desktop */}
-                            <div className="relative w-full h-[50%] md:absolute md:inset-0 md:h-full z-0 overflow-hidden">
+                            <div
+                                className="relative w-full h-[50%] md:absolute md:inset-0 md:h-full z-0 overflow-hidden"
+                            >
                                 <NextImage
                                     src={projects[currentIndex].image}
                                     alt={projects[currentIndex].title}
@@ -185,13 +211,14 @@ export default function SelectedWork() {
                                 <div className="hidden md:block absolute inset-0 bg-black/20" />
                             </div>
 
-                            {/* CONTENT CONTAINER - Integrated Mobile (Bottom 50%), Overlay Desktop */}
-                            <div className="relative w-full h-[50%] md:absolute md:inset-0 md:h-full z-10 flex flex-col justify-center items-center md:items-start bg-card md:bg-transparent pointer-events-auto md:pointer-events-none p-5 md:p-12">
+                            {/* CONTENT CONTAINER - Integrated Mobile (Bottom 50%), Overlay Desktop with Reverse Parallax */}
+                            <div className="relative w-full h-[50%] md:absolute md:inset-0 md:h-full z-10 flex flex-col justify-center items-center md:items-start bg-card md:bg-transparent pointer-events-none p-5 md:p-12 perspective-1000">
                                 <motion.div
+                                    style={{ x: contentX, y: contentY }}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2, duration: 0.5 }}
-                                    className="w-full h-full md:h-auto md:max-w-lg md:bg-card md:border md:border-border md:p-8 md:rounded-3xl md:shadow-2xl relative overflow-hidden group/card pointer-events-auto flex flex-col justify-between md:block"
+                                    className="w-full h-full md:h-auto md:max-w-lg md:bg-card md:border md:border-border md:p-8 md:rounded-3xl md:shadow-2xl relative overflow-hidden group/card pointer-events-auto flex flex-col justify-between md:block transform-gpu"
                                 >
                                     {/* Desktop-only internal container styling elements */}
                                     <div className="hidden md:block absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-transparent opacity-50" />

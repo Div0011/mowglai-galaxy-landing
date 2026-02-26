@@ -1,11 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Rocket, Code2, Globe } from "lucide-react";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useMotionValue, useSpring } from "framer-motion";
 
 const StartupGrowthSection = () => {
+    const sectionRef = useRef<HTMLElement>(null);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const smoothX = useSpring(mouseX, { stiffness: 30, damping: 20 });
+    const smoothY = useSpring(mouseY, { stiffness: 30, damping: 20 });
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!sectionRef.current) return;
+        const rect = sectionRef.current.getBoundingClientRect();
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+    };
+
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
@@ -53,9 +66,23 @@ const StartupGrowthSection = () => {
     ];
 
     return (
-        <section className="relative pt-12 pb-24 overflow-hidden">
-            {/* Background Elements - Simplified for Theme Matching */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <section
+            ref={sectionRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => {
+                // Return to center when mouse leaves
+                if (sectionRef.current) {
+                    mouseX.set(sectionRef.current.offsetWidth / 2);
+                    mouseY.set(sectionRef.current.offsetHeight / 2);
+                }
+            }}
+            className="relative pt-12 pb-24 overflow-hidden"
+        >
+            {/* Background Magnetic Spotlight */}
+            <motion.div
+                className="absolute w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"
+                style={{ x: smoothX, y: smoothY, left: 0, top: 0 }}
+            />
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col items-center text-center gap-4 mb-8">
