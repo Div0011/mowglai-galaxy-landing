@@ -51,25 +51,22 @@ export default function HomeContent() {
                                     </Link>
                                 </Magnetic>
                             </div>
-
-
                         </div>
 
                         {/* Sequential Cards Presentation - Pulled up */}
                         <div className="md:-mt-24">
                             <AestheticShowcase />
                         </div>
+
                     </div>
+                    {/* Startup Growth Section (Redesigned) */}
+                    <StartupGrowthSection />
                 </div>
             </section>
 
 
             <SelectedWork />
 
-            {/* Refer and Earn (Flash Text) */}
-            <div className="mt-12 md:mt-24">
-                <FlashText />
-            </div>
 
             {/* Premium Templates Showcase */}
             <TemplatesShowcase />
@@ -78,11 +75,6 @@ export default function HomeContent() {
             <div className="w-full relative z-20 -mt-20 md:-mt-32 mb-16" data-aos="fade-up">
                 <NextPageButton label="BLUEPRINT" href="/explore" />
             </div>
-
-            {/* Startup Growth Section (Redesigned) */}
-            <StartupGrowthSection />
-
-
 
 
             {/* Consult for Free Button */}
@@ -101,12 +93,18 @@ export default function HomeContent() {
                 </Magnetic>
             </div>
 
+
             <div className="w-full">
                 <NextPageButton
                     label="STORY"
                     href="/about"
                     tagline={t.Home.knowMore}
                 />
+            </div>
+
+            {/* Refer and Earn (Flash Text) */}
+            <div className="mt-12 md:mt-24">
+                <FlashText />
             </div>
         </>
     );
