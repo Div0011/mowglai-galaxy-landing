@@ -8,6 +8,6 @@ describe('cn', () => {
     });
 
     it('ignores falsey values', () => {
-        expect(cn('block', false && 'hidden', undefined, null)).toBe('block');
+        expect(cn('block', '', undefined, null)).toBe('block');
     });
 });
