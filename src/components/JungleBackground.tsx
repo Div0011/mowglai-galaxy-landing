@@ -13,43 +13,70 @@ const JungleBackground = () => {
         let handleMouseMove: ((e: MouseEvent) => void) | undefined;
         let handleMouseLeave: (() => void) | undefined;
 
+        // Dynamic scroll-based reveal positions
+        const scrollX = 0;
+        const scrollYPos = 0;
+        const scrollSize = 250;
+
         // Check if device is mobile/touch (no real mouse)
         const isMobile = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+        const updateMask = (x: number, y: number, size: number = 250) => {
+            if (maskRef.current) {
+                const maskStr = `radial-gradient(circle ${size}px at ${x}px ${y}px, transparent 0%, black 70%)`;
+                maskRef.current.style.webkitMaskImage = maskStr;
+                maskRef.current.style.maskImage = maskStr;
+            }
+        };
 
         if (isMobile) {
             // --- MOBILE AUTO "WIND" EFFECT ---
             let t = 0;
             const animateWind = () => {
-                t += 0.003; // Wind speed
-                // Complex Lissajous curve for organic, random-feeling wind sweeps
+                t += 0.003;
                 const vw = window.innerWidth;
                 const vh = window.innerHeight;
 
-                // Moves in a sweeping pattern
-                const x = (vw / 2) + Math.sin(t) * (vw * 0.6) * Math.cos(t * 0.7);
-                const y = (vh / 2) + Math.cos(t * 1.1) * (vh * 0.5) * Math.sin(t * 0.4);
+                const x = (vw / 2) + Math.sin(t) * (vw * 0.4) * Math.cos(t * 0.7);
+                const y = (vh / 2) + Math.cos(t * 0.9) * (vh * 0.4) * Math.sin(t * 0.4);
 
-                if (maskRef.current) {
-                    // Soft, elongated ellipse for wind
-                    const maskStr = `radial-gradient(ellipse 400px 300px at ${x}px ${y}px, transparent 0%, black 70%)`;
-                    maskRef.current.style.webkitMaskImage = maskStr;
-                    maskRef.current.style.maskImage = maskStr;
+                updateMask(x, y, 350);
+                if (bgRef.current) {
+                    bgRef.current.style.opacity = "0.7";
                 }
-
                 animationFrameId = requestAnimationFrame(animateWind);
             };
             animationFrameId = requestAnimationFrame(animateWind);
 
         } else {
-            // --- DESKTOP MOUSE FOLLOW EFFECT ---
+            // --- DESKTOP MOUSE + SCROLL REVEAL ---
             handleMouseMove = (e: MouseEvent) => {
                 if (!mouseTicking) {
                     requestAnimationFrame(() => {
-                        if (maskRef.current) {
-                            const maskStr = `radial-gradient(circle 250px at ${e.clientX}px ${e.clientY}px, transparent 0%, black 60%)`;
-                            maskRef.current.style.webkitMaskImage = maskStr;
-                            maskRef.current.style.maskImage = maskStr;
+                        const scrollPerc = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                        
+                        // Hard Textured Logic: Focus on contrast/hard elements
+                        if (bgRef.current) {
+                            bgRef.current.style.filter = `brightness(0.9) contrast(1.4) blur(${4 - (scrollPerc * 2)}px)`;
+                            bgRef.current.style.opacity = `${0.3 + (scrollPerc * 0.5)}`; // Fade in mid-scroll
                         }
+
+                        if (scrollPerc < 0.1) {
+                            updateMask(e.clientX, e.clientY, 250);
+                        } else if (scrollPerc >= 0.1 && scrollPerc < 0.4) {
+                            // Reveal from left as we scroll
+                            updateMask(e.clientX * 0.3 + (window.innerWidth * 0.3 * (scrollPerc * 2.5)), e.clientY, 350);
+                        } else if (scrollPerc >= 0.4 && scrollPerc < 0.7) {
+                            // Mid-Scrol: Blend back with fog (smaller mask)
+                            updateMask(e.clientX, e.clientY, 300 - (scrollPerc * 100));
+                        } else if (scrollPerc >= 0.7 && scrollPerc < 0.9) {
+                            // Reveal from bottom
+                            updateMask(e.clientX, e.clientY * 0.4 + (window.innerHeight * 0.6), 400);
+                        } else {
+                            // Footer state: Wide fog reveal
+                            updateMask(window.innerWidth / 2, window.innerHeight * 0.85, 600);
+                        }
+                        
                         mouseTicking = false;
                     });
                     mouseTicking = true;
@@ -59,24 +86,33 @@ const JungleBackground = () => {
             handleMouseLeave = () => {
                 requestAnimationFrame(() => {
                     if (maskRef.current) {
-                        const maskStr = `radial-gradient(circle 250px at -1000px -1000px, transparent 0%, black 60%)`;
-                        maskRef.current.style.webkitMaskImage = maskStr;
-                        maskRef.current.style.maskImage = maskStr;
+                        const scrollPerc = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                        if (scrollPerc > 0.9) {
+                            updateMask(window.innerWidth / 2, window.innerHeight * 0.8, 500);
+                        } else {
+                            updateMask(-1000, -1000, 250);
+                        }
                     }
                 });
             };
 
             window.addEventListener("mousemove", handleMouseMove, { passive: true });
             document.documentElement.addEventListener("mouseleave", handleMouseLeave, { passive: true });
-            handleMouseLeave(); // Hide initially until mouse enters
         }
 
-        // --- GLOBAL SCROLL PARALLAX ---
+        // --- GLOBAL SCROLL PARALLAX & REVEAL ---
         const handleScroll = () => {
             if (!scrollTicking) {
                 requestAnimationFrame(() => {
                     if (bgRef.current) {
-                        bgRef.current.style.backgroundPosition = `center ${-window.scrollY * 0.4}px`;
+                        bgRef.current.style.backgroundPosition = `center ${-window.scrollY * 0.3}px`;
+                    }
+                    // Trigger mask update if mouse is idle but scrolling
+                    if (!isMobile && !mouseTicking) {
+                        const scrollPerc = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                        if (scrollPerc > 0.8) {
+                             updateMask(window.innerWidth / 2, window.innerHeight * 0.9, 600);
+                        }
                     }
                     scrollTicking = false;
                 });
@@ -100,18 +136,19 @@ const JungleBackground = () => {
     return (
         <div className="fixed inset-0 w-full h-full -z-[100] overflow-hidden pointer-events-none bg-background">
             {/* 0. Hidden 3D Floral Texture (Bottom-most Layer) - Infinite Parallax Wall */}
+            {/* 0. Hidden 3D Floral Texture (Bottom-most Layer) - Infinite Parallax Wall */}
             <div className="absolute inset-0 w-full h-full pointer-events-none">
                 {/* Single Continuous Texture Wall */}
                 <div
                     ref={bgRef}
-                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-700"
                     style={{
                         backgroundImage: 'url(/floral_texture_custom.jpg)',
                         backgroundSize: '400px',
                         backgroundRepeat: 'repeat',
-                        filter: "brightness(0.9) contrast(1.1)",
-                        opacity: 1,
-                        willChange: "background-position",
+                        filter: "brightness(0.9) contrast(1.4) blur(4px)",
+                        opacity: 0.3,
+                        willChange: "background-position, filter, opacity",
                     }}
                 />
             </div>

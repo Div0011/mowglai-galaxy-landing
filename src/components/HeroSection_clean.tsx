@@ -101,17 +101,17 @@ const HeroSection = () => {
                     <Magnetic>
                         <Link
                             href="/investment"
-                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(var(--primary-rgb),0.5)]"
+                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.6)]"
                         >
-                            {/* Theme-Aware Gradient Liquid Fill */}
-                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            {/* Animated Inner Shine */}
+                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] skew-x-[-30deg] group-hover:animate-[shine_1.2s_ease-in-out]"></span>
                             
-                            {/* Floating Highlight */}
-                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></span>
+                            {/* Particle/Glow effect on hover */}
+                            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)]"></span>
                             
-                            <span className="relative z-10 flex items-center gap-2">
+                            <span className="relative z-10 flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-1">
                                 START THE PROJECT
-                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
+                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
                             </span>
                         </Link>
                     </Magnetic>
@@ -119,10 +119,13 @@ const HeroSection = () => {
                     <Magnetic>
                         <Link
                             href="/audit"
-                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/5 backdrop-blur-3xl border border-primary/30 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700"
+                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/5 backdrop-blur-2xl border border-primary/30 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700"
                         >
-                            {/* Theme-Aware Gradient Liquid Fill for Audit */}
-                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            {/* Fill from left to right on hover */}
+                            <span className="absolute inset-0 w-0 h-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            
+                            {/* Border Glow */}
+                            <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_20px_rgba(var(--primary-rgb),0.5)]"></span>
                             
                             <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
                                 GET FREE AUDIT
@@ -146,3 +149,4 @@ const HeroSection = () => {
     );
 };
 export default HeroSection;
+

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence, PanInfo, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import NextImage from "next/image";
@@ -64,20 +64,6 @@ export default function SelectedWork() {
     const [direction, setDirection] = useState(0);
     const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Faux-3D Depth Parallax
-    const mouseX = useMotionValue(0.5);
-    const mouseY = useMotionValue(0.5);
-
-    const springConfig = { damping: 25, stiffness: 150 };
-    const springX = useSpring(mouseX, springConfig);
-    const springY = useSpring(mouseY, springConfig);
-
-    const imgX = useTransform(springX, [0, 1], ["5%", "-5%"]);
-    const imgY = useTransform(springY, [0, 1], ["5%", "-5%"]);
-    const contentX = useTransform(springX, [0, 1], ["-2%", "2%"]);
-    const contentY = useTransform(springY, [0, 1], ["-2%", "2%"]);
-
-
     const nextSlide = useCallback(() => {
         setDirection(1);
         setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -100,191 +86,149 @@ export default function SelectedWork() {
         };
     }, [resetAutoplay]);
 
-    // Keyboard Navigation
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "ArrowLeft") {
-                prevSlide();
-                resetAutoplay();
-            } else if (e.key === "ArrowRight") {
-                nextSlide();
-                resetAutoplay();
-            }
-        };
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [nextSlide, prevSlide, resetAutoplay]);
-
     const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-        if (info.offset.x < -50) {
-            nextSlide();
-            resetAutoplay();
-        } else if (info.offset.x > 50) {
-            prevSlide();
-            resetAutoplay();
-        }
+        if (info.offset.x < -50) { nextSlide(); resetAutoplay(); }
+        else if (info.offset.x > 50) { prevSlide(); resetAutoplay(); }
     };
 
     const variants = {
         enter: (direction: number) => ({
-            x: direction > 0 ? 1000 : -1000,
+            x: direction > 0 ? 300 : -300,
             opacity: 0,
-            scale: 0.8
+            scale: 0.9
         }),
-        center: {
-            zIndex: 1,
-            x: 0,
-            opacity: 1,
-            scale: 1
-        },
+        center: { zIndex: 1, x: 0, opacity: 1, scale: 1 },
         exit: (direction: number) => ({
             zIndex: 0,
-            x: direction < 0 ? 1000 : -1000,
+            x: direction < 0 ? 300 : -300,
             opacity: 0,
-            scale: 0.8
+            scale: 0.9
         })
     };
 
     return (
-        <section className="relative w-full py-12 md:py-20 overflow-hidden bg-transparent gpu-accelerate">
-            {/* Gradient blending removed for seamless look */}
-
-            <div className="container mx-auto px-6 relative z-20">
-                <div className="flex flex-col items-center mb-10 space-y-2 text-center" data-aos="fade-up">
-                    <h2 className="text-[8vw] md:text-5xl font-display font-black tracking-tighter text-foreground relative z-10 flex flex-col md:block">
-                        <span className="opacity-30 uppercase mr-4">{t.SelectedWork.selected}</span>
-                        <span className="text-primary uppercase">{t.SelectedWork.work}</span>
-                    </h2>
-                    <p className="max-w-2xl text-base text-foreground/70 font-light px-4">
-                        {t.SelectedWork.collectionDesc}
-                    </p>
+        <div className="w-full h-full flex flex-col p-6 md:p-8">
+            {/* Context Header */}
+            <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                    <h3 className="text-[11px] font-display font-black tracking-[0.4em] uppercase text-foreground/40">
+                        {t.SelectedWork.selected} {t.SelectedWork.work}
+                    </h3>
                 </div>
-
-                <div
-                    className="relative w-full aspect-[4/5] sm:aspect-video md:aspect-[21/8] max-w-5xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-card"
-                    onMouseEnter={() => {
-                        if (autoplayRef.current) clearInterval(autoplayRef.current);
-                        autoplayRef.current = null;
-                    }}
-                    onMouseLeave={resetAutoplay}
-                >
-                    <AnimatePresence initial={false} custom={direction}>
-                        <motion.div
-                            key={currentIndex}
-                            custom={direction}
-                            variants={variants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            drag="x"
-                            dragConstraints={{ left: 0, right: 0 }}
-                            dragElastic={1}
-                            onDragEnd={handleDragEnd}
-                            onMouseMove={(e) => {
-                                const rect = e.currentTarget.getBoundingClientRect();
-                                // normalize 0 to 1
-                                mouseX.set((e.clientX - rect.left) / rect.width);
-                                mouseY.set((e.clientY - rect.top) / rect.height);
-                            }}
-                            onMouseLeave={() => {
-                                mouseX.set(0.5);
-                                mouseY.set(0.5);
-                            }}
-                            transition={{
-                                x: { type: "spring", stiffness: 300, damping: 30 },
-                                opacity: { duration: 0.2 },
-                                scale: { duration: 0.4 }
-                            }}
-                            className="absolute inset-0 w-full h-full"
-                        >
-                            {/* IMAGE CONTAINER - Integrated Mobile (Top 50%), Full Desktop */}
-                            <div
-                                className="relative w-full h-[50%] md:absolute md:inset-0 md:h-full z-0 overflow-hidden"
-                            >
-                                <NextImage
-                                    src={projects[currentIndex].image}
-                                    alt={projects[currentIndex].title}
-                                    fill
-                                    className="object-cover object-center"
-                                    priority
-                                />
-                                <div className="hidden md:block absolute inset-0 bg-black/20" />
-                            </div>
-
-                            {/* CONTENT CONTAINER - Integrated Mobile (Bottom 50%), Overlay Desktop with Reverse Parallax */}
-                            <div className="relative w-full h-[50%] md:absolute md:inset-0 md:h-full z-10 flex flex-col justify-center items-center md:items-start bg-card md:bg-transparent pointer-events-none p-5 md:p-12 perspective-1000">
-                                <motion.div
-                                    style={{ x: contentX, y: contentY }}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2, duration: 0.5 }}
-                                    className="w-full h-full md:h-auto md:max-w-lg md:bg-card md:border md:border-border md:p-8 md:rounded-3xl md:shadow-2xl relative overflow-hidden group/card pointer-events-auto flex flex-col justify-between md:block transform-gpu"
-                                >
-                                    {/* Desktop-only internal container styling elements */}
-                                    <div className="hidden md:block absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-transparent opacity-50" />
-
-                                    {/* Content Wrapper for Mobile Alignment */}
-                                    <div className="relative z-10 flex flex-col items-center md:items-start gap-2 md:gap-5 text-center md:text-left">
-                                        {/* Header */}
-                                        <div className="space-y-1">
-                                            <span className="text-primary font-display font-bold tracking-widest uppercase text-[10px] md:text-sm">
-                                                {projects[currentIndex].category}
-                                            </span>
-                                            <h3 className="text-xl md:text-5xl font-display font-black text-card-foreground leading-tight">
-                                                {projects[currentIndex].title}
-                                            </h3>
-                                        </div>
-
-                                        {/* Description */}
-                                        <p className="text-muted-foreground text-xs md:text-lg font-light leading-relaxed line-clamp-3 md:line-clamp-4">
-                                            {projects[currentIndex].description}
-                                        </p>
-                                    </div>
-
-                                    {/* Actions Row: Anchored to bottom on mobile */}
-                                    <div className="flex items-center justify-center w-full mt-4 relative z-10">
-                                        <a
-                                            href={projects[currentIndex].link}
-                                            target={projects[currentIndex].link === "#" ? "_self" : "_blank"}
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2 px-5 py-2.5 md:px-8 md:py-3 bg-primary text-primary-foreground font-bold rounded-full transition-all hover:brightness-110 hover:scale-105 active:scale-95 shadow-md hover:shadow-primary/20 cursor-pointer"
-                                            onClick={(e) => {
-                                                if (projects[currentIndex].link === "#") {
-                                                    e.preventDefault();
-                                                    toast({
-                                                        title: t.SelectedWork.comingSoonTitle,
-                                                        description: t.SelectedWork.comingSoonDesc,
-                                                    });
-                                                }
-                                                e.stopPropagation();
-                                            }}
-                                        >
-                                            <span className="text-xs md:text-base">{t.SelectedWork.exploreCase}</span>
-                                            <ExternalLink size={14} className="md:w-5 md:h-5" />
-                                        </a>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    {/* Navigation Buttons - Sides (Now Visible on Mobile) */}
-                    <button
-                        onClick={() => { prevSlide(); resetAutoplay(); }}
-                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 p-2 md:p-4 text-foreground/70 hover:text-primary hover:scale-110 transition-all rounded-full bg-foreground/5 hover:bg-foreground/10 backdrop-blur-sm"
-                        aria-label="Previous Slide"
-                    >
-                        <ArrowLeft className="w-6 h-6 md:w-8 md:h-8" />
-                    </button>
-                    <button
-                        onClick={() => { nextSlide(); resetAutoplay(); }}
-                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 p-2 md:p-4 text-foreground/70 hover:text-primary hover:scale-110 transition-all rounded-full bg-foreground/5 hover:bg-foreground/10 backdrop-blur-sm"
-                        aria-label="Next Slide"
-                    >
-                        <ArrowRight className="w-6 h-6 md:w-8 md:h-8" />
-                    </button>
+                
+                {/* Horizontal Indicators */}
+                <div className="flex gap-1.5 items-center">
+                    {projects.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => { setDirection(idx > currentIndex ? 1 : -1); setCurrentIndex(idx); resetAutoplay(); }}
+                            className={`transition-all duration-500 rounded-full ${
+                                idx === currentIndex ? "w-6 h-1 bg-primary" : "w-1 h-1 bg-foreground/10 hover:bg-primary/40"
+                            }`}
+                        />
+                    ))}
                 </div>
             </div>
-        </section>
+
+            {/* Slideshow Content Frame */}
+            <div
+                className="relative w-full aspect-[4/5] sm:aspect-[1.1/1] group/slide overflow-hidden"
+                onMouseEnter={() => { if (autoplayRef.current) clearInterval(autoplayRef.current); }}
+                onMouseLeave={resetAutoplay}
+            >
+                <AnimatePresence initial={false} custom={direction}>
+                    <motion.div
+                        key={currentIndex}
+                        custom={direction}
+                        variants={variants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.4}
+                        onDragEnd={handleDragEnd}
+                        transition={{
+                            x: { type: "spring", stiffness: 300, damping: 30 },
+                            scale: { duration: 0.4, ease: "easeOut" }
+                        }}
+                        className="absolute inset-0 w-full h-full flex flex-col"
+                    >
+                        {/* Immersive Image Canvas */}
+                        <div className="relative w-full flex-1 overflow-hidden rounded-2xl border border-foreground/[0.06] shadow-2xl">
+                            <NextImage
+                                src={projects[currentIndex].image}
+                                alt={projects[currentIndex].title}
+                                fill
+                                className="object-contain object-center transform scale-95 group-hover/slide:scale-100 transition-transform duration-1000 ease-out p-4"
+                                priority
+                            />
+                            {/* Overlay Vignette - Refined for visibility */}
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.2)_100%)] opacity-40 pointer-events-none" />
+                            
+                            {/* Floating Nav Button */}
+                            <div className="absolute top-4 right-4 z-40 flex gap-1">
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); prevSlide(); resetAutoplay(); }}
+                                    className="p-2 text-white/40 hover:text-primary hover:bg-white/10 transition-all rounded-full backdrop-blur-md border border-white/5 active:scale-95"
+                                >
+                                    <ArrowLeft size={14} />
+                                </button>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); nextSlide(); resetAutoplay(); }}
+                                    className="p-2 text-white/40 hover:text-primary hover:bg-white/10 transition-all rounded-full backdrop-blur-md border border-white/5 active:scale-95"
+                                >
+                                    <ArrowRight size={14} />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Minimal Meta */}
+                        <div className="mt-6 flex flex-col gap-2">
+                            <div className="flex items-center gap-4">
+                                <span className="text-primary font-display font-medium text-[9px] uppercase tracking-[0.2em] px-2 py-0.5 border border-primary/20 rounded-md">
+                                    0{projects[currentIndex].id} / 0{projects.length}
+                                </span>
+                                <span className="h-[1px] flex-1 bg-foreground/10" />
+                            </div>
+                            
+                            <div className="flex items-end justify-between gap-4">
+                                <div className="space-y-1">
+                                    <h4 className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">{projects[currentIndex].category}</h4>
+                                    <h3 className="text-2xl font-display font-black text-foreground tracking-tighter transition-colors group-hover/slide:text-primary leading-none">
+                                        {projects[currentIndex].title}
+                                    </h3>
+                                    <p className="text-[11px] text-foreground/50 max-w-[280px] line-clamp-2 md:line-clamp-none leading-relaxed pt-1">
+                                        {projects[currentIndex].description}
+                                    </p>
+                                </div>
+                                
+                                <a
+                                    href={projects[currentIndex].link}
+                                    target={projects[currentIndex].link === "#" ? "_self" : "_blank"}
+                                    rel="noopener noreferrer"
+                                    className="group/btn relative inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-background/5 backdrop-blur-3xl border border-primary/20 text-primary font-bold text-[9px] tracking-widest uppercase rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shrink-0"
+                                    onClick={(e) => {
+                                        if (projects[currentIndex].link === "#") {
+                                            e.preventDefault();
+                                            toast({
+                                                title: t.SelectedWork.comingSoonTitle,
+                                                description: t.SelectedWork.comingSoonDesc,
+                                            });
+                                        }
+                                    }}
+                                >
+                                    <span className="absolute inset-0 w-0 h-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/btn:w-full"></span>
+                                    <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-primary-foreground">
+                                        Case <ExternalLink className="w-2.5 h-2.5" />
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+        </div>
     );
 }

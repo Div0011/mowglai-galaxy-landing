@@ -1,0 +1,9 @@
+﻿
+C:\Users\divya\.vscode\mowglai.in\src\components\JungleBackground.tsx
+  17:13  error  'scrollX' is never reassigned. Use 'const' instead     prefer-const
+  18:13  error  'scrollYPos' is never reassigned. Use 'const' instead  prefer-const
+  19:13  error  'scrollSize' is never reassigned. Use 'const' instead  prefer-const
+
+Γ£û 3 problems (3 errors, 0 warnings)
+  3 errors and 0 warnings potentially fixable with the `--fix` option.
+
