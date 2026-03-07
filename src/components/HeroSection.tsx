@@ -78,7 +78,8 @@ const HeroSection = () => {
                     }}
                 >
                     <h1
-                        className="inline-block w-fit text-4xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-widest transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-105"
+                        className="text-4xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-widest transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-105"
+                        data-aos="zoom-out"
                         data-aos-duration="1000"
                     >
                         MOWGLAI
@@ -100,9 +101,13 @@ const HeroSection = () => {
                     <Magnetic>
                         <Link
                             href="/investment"
-                            className="inline-block w-full sm:w-auto px-8 sm:px-10 py-4 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center"
+                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/10 backdrop-blur-xl border border-primary/30 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:border-primary hover:bg-primary/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(var(--primary-rgb),0.5)]"
                         >
-                            START THE PROJECT
+                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-x-[150%] skew-x-[-30deg] group-hover:animate-[shine_1.5s_ease-in-out]"></span>
+                            <span className="relative z-10 transition-transform duration-500 group-hover:scale-95 group-hover:text-primary-foreground [text-shadow:0_0_15px_rgba(var(--primary-rgb),0.5)] group-hover:[text-shadow:none]">
+                                START THE PROJECT
+                            </span>
+                            <div className="absolute inset-0 rounded-full border border-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"></div>
                         </Link>
                     </Magnetic>
 

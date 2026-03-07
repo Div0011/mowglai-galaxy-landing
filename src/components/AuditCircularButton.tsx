@@ -58,13 +58,16 @@ const AuditCircularButton: React.FC<AuditCircularButtonProps> = ({
 
     return (
         <div
-            className={cn("relative flex items-center justify-center", className)}
+            className={cn("relative flex items-center justify-center group", className)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={() => router.push('/audit')}
             role="button"
             aria-label="Get a Free Website Audit"
         >
+            {/* Massive Background Glow Effect on Hover */}
+            <div className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/20 blur-[40px] transition-all duration-700 pointer-events-none scale-150" />
+
             {/* Trail effect - Prominent screen-spanning marquee behind the button */}
             <AnimatePresence>
                 {isHovered && (
@@ -74,18 +77,18 @@ const AuditCircularButton: React.FC<AuditCircularButtonProps> = ({
                             animate={{ x: "-100%", opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{
-                                duration: 5,
+                                duration: 8,
                                 repeat: Infinity,
                                 ease: "linear"
                             }}
-                            className="flex items-center gap-12 whitespace-nowrap"
+                            className="flex items-center gap-12 whitespace-nowrap mix-blend-screen"
                         >
                             {[...Array(8)].map((_, i) => (
                                 <span
                                     key={i}
-                                    className="text-[18vw] md:text-[22vw] font-display font-black uppercase text-[#c5a059]/20 select-none tracking-tighter italic filter blur-[1px]"
+                                    className="text-[15vw] md:text-[20vw] font-display font-black uppercase text-primary/10 select-none tracking-tighter italic filter blur-[2px]"
                                 >
-                                    GET FREE AUDIT •
+                                    AUDIT MOWGLAI •
                                 </span>
                             ))}
                         </motion.div>
@@ -93,59 +96,71 @@ const AuditCircularButton: React.FC<AuditCircularButtonProps> = ({
                 )}
             </AnimatePresence>
 
-            {/* Circle + rotating text */}
-            <div className={cn("relative flex items-center justify-center cursor-pointer transform-gpu z-10", sizeClasses[size])}>
-                {/* Pulse ring */}
-                <motion.span
-                    animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute inset-0 rounded-full border border-[#c5a059]/60 pointer-events-none"
-                />
+            {/* Circle Container */}
+            <div className={cn("relative flex items-center justify-center cursor-pointer transform-gpu z-10 transition-transform duration-500 group-hover:scale-110", sizeClasses[size])}>
 
-                {/* SVG rotating text - Always visible now */}
+                {/* Thin animated outer border */}
+                <motion.div
+                    className="absolute inset-0 rounded-full border border-primary/20 pointer-events-none"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                >
+                    <div className="absolute top-0 left-1/2 w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_rgba(var(--primary-rgb),1)] -translate-x-1/2 -translate-y-1/2"></div>
+                </motion.div>
+
+                {/* SVG rotating text */}
                 <motion.svg
                     animate={{
-                        opacity: isHovered ? 1 : 0.4,
-                        rotate: isHovered ? 90 : 0
+                        opacity: isHovered ? 1 : 0.6,
+                        scale: isHovered ? 1.05 : 1
                     }}
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     viewBox="0 0 100 100"
-                    className="absolute inset-0 w-full h-full pointer-events-none scale-[1.3]"
+                    className="absolute inset-0 w-full h-full pointer-events-none scale-[1.3] text-primary"
                     aria-hidden
                 >
                     <g ref={svgRef}>
                         <path id="auditRingBase" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none" />
-                        <text fontSize="8.5" letterSpacing="2" style={{ fontWeight: 800, textTransform: "uppercase" }}>
+                        <text fontSize="8.5" letterSpacing="3" style={{ fontWeight: 700, textTransform: "uppercase" }}>
                             <textPath
                                 href="#auditRingBase"
-                                fill="#c5a059"
+                                fill="currentColor"
                                 textLength="210"
                                 lengthAdjust="spacing"
                             >
-                                GET FREE AUDIT • GET FREE AUDIT •
+                                FREE AUDIT REPORT • FREE AUDIT REPORT •
                             </textPath>
                         </text>
                     </g>
                 </motion.svg>
 
-                {/* Inner disc - STATIONARY */}
-                <motion.div
-                    animate={{
-                        backgroundColor: isHovered ? "rgba(197,160,89,1)" : "rgba(197,160,89,0.15)",
-                        boxShadow: isHovered
-                            ? "0 0 50px rgba(197,160,89,0.5), 0 0 100px rgba(197,160,89,0.25)"
-                            : "0 0 0px transparent",
-                    }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                {/* Inner disc - The main interactive element */}
+                <div
                     className={cn(
-                        "rounded-full border border-[#c5a059]/40 backdrop-blur-xl flex items-center justify-center z-20",
-                        size === "sm" ? "w-8 h-8" : size === "md" ? "w-9 h-9 md:w-10 md:h-10" : "w-12 h-12 md:w-14 md:h-14"
+                        "relative rounded-full backdrop-blur-md flex items-center justify-center z-20 overflow-hidden transition-all duration-500",
+                        isHovered ? "bg-primary border-primary shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)]" : "bg-primary/10 border-primary/30",
+                        "border",
+                        size === "sm" ? "w-8 h-8" : size === "md" ? "w-10 h-10 md:w-12 md:h-12" : "w-14 h-14 md:w-16 md:h-16"
                     )}
                 >
-                    <motion.div animate={{ rotate: isHovered ? 45 : 0 }} transition={{ duration: 0.4 }}>
-                        <ArrowUpRight className={cn(iconSizes[size], isHovered ? "text-black" : "text-[#c5a059]")} />
-                    </motion.div>
-                </motion.div>
+                    {/* Animated Arrow that slides out and slides in from bottom left */}
+                    <div className="relative flex items-center justify-center w-full h-full">
+                        <ArrowUpRight
+                            className={cn(
+                                "absolute transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                                iconSizes[size],
+                                isHovered ? "text-primary-foreground translate-x-full -translate-y-full opacity-0" : "text-primary translate-x-0 translate-y-0 opacity-100"
+                            )}
+                        />
+                        <ArrowUpRight
+                            className={cn(
+                                "absolute transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                                iconSizes[size],
+                                isHovered ? "text-primary-foreground translate-x-0 translate-y-0 opacity-100" : "text-primary -translate-x-full translate-y-full opacity-0"
+                            )}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );

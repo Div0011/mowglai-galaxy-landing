@@ -13,7 +13,7 @@ const projects = [
         title: "Clarity Cartel",
         category: "Strategic Business Consultancy",
         image: "/assets/projects/clarity-cartel.png",
-        description: "A professional consultancy platform delivering actionable business strategies. We designed a clean, corporate interface that establishes authority and streamlines client engagement.",
+        description: "A professional consultancy platform delivering actionable business strategies.",
         link: "https://clarity-cartel.vercel.app/"
     },
     {
@@ -21,7 +21,7 @@ const projects = [
         title: "iElevate",
         category: "Business Growth & Coaching",
         image: "/assets/projects/ielevate.png",
-        description: "A comprehensive platform for professional development and business scaling. We built a dynamic learning hub empowering entrepreneurs with tools, courses, and mentorship.",
+        description: "A comprehensive platform for professional development and business scaling.",
         link: "https://www.ielevate.in/"
     },
     {
@@ -29,7 +29,7 @@ const projects = [
         title: "Jayhawk",
         category: "Healthcare Services",
         image: "/assets/projects/jayhawk.webp",
-        description: "A modern healthcare portal prioritizing patient accessibility and care. Features include secure appointment scheduling, medical record access, and virtual doctor consultations.",
+        description: "A modern healthcare portal prioritizing patient accessibility and care.",
         link: "https://div0011.github.io/jayhawkk"
     },
     {
@@ -37,7 +37,7 @@ const projects = [
         title: "More Interior",
         category: "Interior Design Studio",
         image: "/assets/projects/more-interior.webp",
-        description: "An immersive portfolio showcasing exquisite living spaces. The design emphasizes visual storytelling, allowing users to explore bespoke furniture and architectural elegance.",
+        description: "An immersive portfolio showcasing exquisite living spaces.",
         link: "https://moreinterior.in/"
     },
     {
@@ -45,7 +45,7 @@ const projects = [
         title: "True Ratings",
         category: "Movie & TV Ratings Platform",
         image: "/assets/projects/true-ratings.png",
-        description: "A comprehensive database for tracking movie and TV show ratings, similar to IMDb. We built a data-driven platform for entertainment discovery and detailed content analysis.",
+        description: "A comprehensive database for tracking movie and TV show ratings, similar to IMDb.",
         link: "https://true-ratings.vercel.app/"
     },
     {

@@ -1,13 +1,10 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Download, CheckCircle, XCircle, AlertTriangle, ChevronDown, ChevronRight } from "lucide-react";
-import html2canvas from 'html2canvas';
+import { Download, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import jsPDF from 'jspdf';
-import { AuditResult, AuditCategory, AuditDetail } from './actions';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Progress } from "@/components/ui/progress";
+import { AuditResult, AuditCategory } from './actions';
 
 interface AuditReportProps {
     result: AuditResult;
@@ -62,29 +59,200 @@ const CategoryCard = ({ category, delay }: { category: AuditCategory, delay: num
 };
 
 const AuditReport: React.FC<AuditReportProps> = ({ result }) => {
-    const reportRef = useRef<HTMLDivElement>(null);
-
     const handleDownloadPDF = async () => {
-        if (!reportRef.current) return;
-
         try {
-            const canvas = await html2canvas(reportRef.current, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: '#0d1a12' // Forest Green Background
-            });
-
-            const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF({
                 orientation: 'portrait',
                 unit: 'mm',
                 format: 'a4'
             });
 
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+            const margin = 12;
+            const contentWidth = pageWidth - (margin * 2);
+            const colors = {
+                forest: [13, 26, 18] as const,
+                card: [19, 35, 25] as const,
+                gold: [197, 160, 89] as const,
+                ivory: [242, 244, 248] as const,
+                muted: [160, 168, 175] as const,
+                pass: [74, 222, 128] as const,
+                warn: [250, 204, 21] as const,
+                fail: [248, 113, 113] as const,
+            };
+            const timestamp = new Date().toLocaleString();
+            let y = 54;
 
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            const drawPageBackground = () => {
+                pdf.setFillColor(...colors.forest);
+                pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+                pdf.setFillColor(26, 41, 31);
+                pdf.circle(pageWidth + 20, -10, 42, 'F');
+
+                pdf.setFillColor(22, 36, 49);
+                pdf.circle(-10, pageHeight + 8, 34, 'F');
+
+                pdf.setDrawColor(60, 74, 64);
+                pdf.setLineWidth(0.4);
+                pdf.line(margin, pageHeight - 11, pageWidth - margin, pageHeight - 11);
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(8);
+                pdf.setTextColor(...colors.muted);
+                pdf.text('MOWGLAI  |  DIGITAL HEALTH AUDIT', margin, pageHeight - 6.5);
+                pdf.text(`Generated ${timestamp}`, pageWidth - margin, pageHeight - 6.5, { align: 'right' });
+            };
+
+            const drawHeader = () => {
+                pdf.setDrawColor(...colors.gold);
+                pdf.setLineWidth(0.5);
+                pdf.roundedRect(margin, 14, contentWidth, 34, 3, 3, 'S');
+
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(9);
+                pdf.setTextColor(...colors.gold);
+                pdf.text('MOWGLAI INTELLIGENCE', margin + 4, 20);
+
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(19);
+                pdf.setTextColor(...colors.ivory);
+                pdf.text('Digital Health Audit', margin + 4, 30);
+
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(9);
+                pdf.setTextColor(...colors.muted);
+                const target = pdf.splitTextToSize(`Target: ${result.url}`, contentWidth - 52);
+                pdf.text(target, margin + 4, 37);
+
+                pdf.setFillColor(31, 47, 36);
+                pdf.roundedRect(pageWidth - margin - 34, 19, 30, 24, 2.5, 2.5, 'F');
+                pdf.setDrawColor(...colors.gold);
+                pdf.roundedRect(pageWidth - margin - 34, 19, 30, 24, 2.5, 2.5, 'S');
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(7);
+                pdf.setTextColor(...colors.gold);
+                pdf.text('OVERALL', pageWidth - margin - 19, 25, { align: 'center' });
+                pdf.text('GRADE', pageWidth - margin - 19, 29, { align: 'center' });
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(17);
+                pdf.text(grade, pageWidth - margin - 19, 38, { align: 'center' });
+                y = 54;
+            };
+
+            const nextPage = () => {
+                pdf.addPage();
+                drawPageBackground();
+                drawHeader();
+            };
+
+            const ensureSpace = (requiredHeight: number) => {
+                if (y + requiredHeight > pageHeight - 16) {
+                    nextPage();
+                }
+            };
+
+            const addWrappedText = (
+                text: string,
+                x: number,
+                maxWidth: number,
+                size = 9,
+                lineGap = 4.3,
+                weight: 'normal' | 'bold' = 'normal',
+                color: readonly [number, number, number] = colors.ivory
+            ) => {
+                pdf.setFont('helvetica', weight);
+                pdf.setFontSize(size);
+                pdf.setTextColor(...color);
+                const lines = pdf.splitTextToSize(text, maxWidth);
+                pdf.text(lines, x, y);
+                return lines.length * lineGap;
+            };
+
+            const getStatusColor = (status: 'pass' | 'warning' | 'fail') => {
+                if (status === 'pass') return colors.pass;
+                if (status === 'warning') return colors.warn;
+                return colors.fail;
+            };
+
+            const categoryList = [
+                categories.seo,
+                categories.performance,
+                categories.security,
+                categories.content,
+            ];
+
+            drawPageBackground();
+            drawHeader();
+
+            categoryList.forEach((category) => {
+                ensureSpace(28);
+                const titleLines = pdf.splitTextToSize(category.description, contentWidth - 40);
+                const categoryHeight = Math.max(22, 14 + (titleLines.length * 4.2));
+
+                pdf.setFillColor(...colors.card);
+                pdf.roundedRect(margin, y, contentWidth, categoryHeight, 3, 3, 'F');
+                pdf.setDrawColor(...colors.gold);
+                pdf.roundedRect(margin, y, contentWidth, categoryHeight, 3, 3, 'S');
+
+                y += 6;
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(12);
+                pdf.setTextColor(...colors.gold);
+                pdf.text(category.title, margin + 4, y);
+
+                pdf.setFillColor(33, 50, 39);
+                pdf.roundedRect(pageWidth - margin - 26, y - 4.5, 22, 7, 1.8, 1.8, 'F');
+                pdf.setDrawColor(...colors.gold);
+                pdf.roundedRect(pageWidth - margin - 26, y - 4.5, 22, 7, 1.8, 1.8, 'S');
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(9);
+                pdf.text(`${category.score}/100`, pageWidth - margin - 15, y + 0.5, { align: 'center' });
+
+                y += 5;
+                const categoryDescHeight = addWrappedText(category.description, margin + 4, contentWidth - 8, 9, 4.2, 'normal', colors.muted);
+                y += categoryDescHeight + 3;
+
+                category.items.forEach((item) => {
+                    const descLines = pdf.splitTextToSize(item.description, contentWidth - 24);
+                    const recLines = item.recommendation ? pdf.splitTextToSize(`Tip: ${item.recommendation}`, contentWidth - 24) : [];
+                    const itemHeight = 12 + (descLines.length * 4.1) + (recLines.length * 4.1);
+                    ensureSpace(itemHeight + 2);
+
+                    pdf.setFillColor(23, 39, 29);
+                    pdf.roundedRect(margin + 2, y, contentWidth - 4, itemHeight, 2.3, 2.3, 'F');
+
+                    const statusColor = getStatusColor(item.status);
+                    const statusLabel = item.status.toUpperCase();
+                    pdf.setFillColor(statusColor[0], statusColor[1], statusColor[2]);
+                    pdf.roundedRect(margin + 5, y + 3, 15, 5.5, 1.5, 1.5, 'F');
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(7);
+                    pdf.setTextColor(16, 23, 18);
+                    pdf.text(statusLabel, margin + 12.5, y + 6.8, { align: 'center' });
+
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(...colors.ivory);
+                    pdf.text(item.title, margin + 23, y + 6.8);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(8.5);
+                    pdf.setTextColor(...colors.muted);
+                    pdf.text(item.value, pageWidth - margin - 5, y + 6.8, { align: 'right' });
+
+                    y += 12;
+                    const descHeight = addWrappedText(item.description, margin + 23, contentWidth - 28, 8.5, 4.1, 'normal', colors.muted);
+                    y += descHeight;
+                    if (item.recommendation) {
+                        const recHeight = addWrappedText(`Tip: ${item.recommendation}`, margin + 23, contentWidth - 28, 8.5, 4.1, 'normal', colors.gold);
+                        y += recHeight;
+                    }
+                    y += 2;
+                });
+
+                y += 4;
+            });
+
             pdf.save(`Mowglai_Audit_${new Date().toISOString().split('T')[0]}.pdf`);
         } catch (error) {
             console.error("PDF Generation failed", error);
@@ -114,7 +282,7 @@ const AuditReport: React.FC<AuditReportProps> = ({ result }) => {
             </div>
 
             {/* Printable Area */}
-            <div ref={reportRef} className="bg-[#0d1a12] text-white p-8 md:p-12 rounded-3xl shadow-2xl border border-[#c5a059]/20 relative overflow-hidden">
+            <div className="bg-[#0d1a12] text-white p-8 md:p-12 rounded-3xl shadow-2xl border border-[#c5a059]/20 relative overflow-hidden">
 
                 {/* Background Elements */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#c5a059]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
