@@ -29,6 +29,11 @@ To run this project locally:
     npm run dev
     ```
 
+4.  Run tests with Bun:
+    ```sh
+    bun test
+    ```
+
 ## Razorpay Subscription Setup (Hostinger)
 
 - Frontend requires `NEXT_PUBLIC_RAZORPAY_KEY_ID` at build time for the checkout key to be embedded in the static bundle.
