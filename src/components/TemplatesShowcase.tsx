@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { sectors, allTemplates } from '@/data/templates';
-import { useLanguage } from '@/context/LanguageContext';
 
 // Get one representative template from each category
 const showcaseItems = sectors.map(sector => {
@@ -18,11 +17,10 @@ const showcaseItems = sectors.map(sector => {
 }).filter(item => item.template);
 
 export default function TemplatesShowcase() {
-    const { t } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const [direction, setDirection] = useState(0);
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const nextSlide = useCallback(() => {
         setDirection(1);
@@ -45,6 +43,10 @@ export default function TemplatesShowcase() {
 
     const activeItem = showcaseItems[currentIndex];
 
+    if (!activeItem) {
+        return null;
+    }
+
     const variants = {
         enter: (direction: number) => ({
             x: direction > 0 ? 300 : -300,
@@ -61,34 +63,25 @@ export default function TemplatesShowcase() {
     };
 
     return (
-        <div className="w-full h-full flex flex-col p-6 md:p-8">
-            {/* Context Header */}
-            <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    <h3 className="text-[11px] font-display font-black tracking-[0.4em] uppercase text-foreground/40">
-                        Blueprints
-                    </h3>
+        <div
+            className="relative h-full overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-gradient-to-b from-background via-background/85 to-background/95 p-4 sm:p-5"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-10 h-44 w-44 rounded-full bg-cyan-400/10 blur-3xl" />
+
+            <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="space-y-1">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/80">Premium Blueprints</p>
+                    <p className="text-sm text-foreground/75">Launch-ready website systems curated for specific industries.</p>
                 </div>
-                
-                {/* Horizontal Indicators */}
-                <div className="flex gap-1.5 items-center">
-                    {showcaseItems.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => { setDirection(idx > currentIndex ? 1 : -1); setCurrentIndex(idx); }}
-                            className={`transition-all duration-500 rounded-full ${
-                                idx === currentIndex ? "w-6 h-1 bg-primary" : "w-1 h-1 bg-foreground/10 hover:bg-primary/40"
-                            }`}
-                        />
-                    ))}
+                <div className="rounded-full border border-foreground/10 bg-background/60 px-3 py-1 text-[11px] font-medium text-foreground/70">
+                    {String(currentIndex + 1).padStart(2, '0')} / {String(showcaseItems.length).padStart(2, '0')}
                 </div>
             </div>
 
-            {/* Slideshow Content Frame */}
-            <div
-                className="relative w-full aspect-[4/5] sm:aspect-[1.1/1] group/slide overflow-hidden"
-            >
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={currentIndex}
@@ -98,81 +91,103 @@ export default function TemplatesShowcase() {
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 300, damping: 30 },
-                            scale: { duration: 0.4, ease: "easeOut" }
+                            x: { type: 'spring', stiffness: 300, damping: 30 },
+                            scale: { duration: 0.4, ease: 'easeOut' },
                         }}
-                        className="absolute inset-0 w-full h-full flex flex-col"
+                        className="relative"
                     >
-                        {/* Immersive Image Canvas */}
-                        <div className="relative w-full flex-1 overflow-hidden rounded-2xl border border-foreground/[0.06] shadow-2xl">
+                        <div className="relative aspect-[16/10] sm:aspect-[5/4]">
                             <Image
                                 src={activeItem.template.image}
                                 alt={activeItem.template.title}
                                 fill
-                                className="object-contain object-center transform scale-95 group-hover/slide:scale-100 transition-transform duration-1000 ease-out p-4"
+                                className="object-cover object-top"
                                 priority
                             />
-                            {/* Overlay Vignette */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.1)_100%)] opacity-30 pointer-events-none" />
-                            
-                            {/* Category Badge */}
-                            <div className="absolute top-4 left-4 z-20">
-                                <div className={`px-2 py-1 rounded-md backdrop-blur-md border border-white/10 text-white text-[8px] font-bold uppercase tracking-[0.2em] shadow-xl ${activeItem.sector.color.split(' ')[1]}`}>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+
+                            <div className="absolute left-4 top-4">
+                                <span className="inline-flex rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
                                     {activeItem.sector.label}
-                                </div>
-                            </div>
-
-                            {/* Floating Nav Button */}
-                            <div className="absolute top-4 right-4 z-40 flex gap-1">
-                                <button
-                                    onClick={(e) => { e.preventDefault(); prevSlide(); }}
-                                    className="p-2 text-white/40 hover:text-primary hover:bg-white/10 transition-all rounded-full backdrop-blur-md border border-white/5 active:scale-95"
-                                >
-                                    <ArrowLeft size={14} />
-                                </button>
-                                <button
-                                    onClick={(e) => { e.preventDefault(); nextSlide(); }}
-                                    className="p-2 text-white/40 hover:text-primary hover:bg-white/10 transition-all rounded-full backdrop-blur-md border border-white/5 active:scale-95"
-                                >
-                                    <ArrowRight size={14} />
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Minimal Meta */}
-                        <div className="mt-6 flex flex-col gap-2">
-                            <div className="flex items-center gap-4">
-                                <span className="text-primary font-display font-medium text-[9px] uppercase tracking-[0.2em] px-2 py-0.5 border border-primary/20 rounded-md">
-                                    BLUEPRINT / 0{currentIndex + 1}
                                 </span>
-                                <span className="h-[1px] flex-1 bg-foreground/10" />
                             </div>
-                            
-                            <div className="flex items-end justify-between gap-4">
-                                <div className="space-y-1">
-                                    <div className="flex flex-wrap gap-2 mb-1">
-                                        {activeItem.template.tags.map((tag, i) => (
-                                            <span key={i} className="text-[10px] text-primary/70 font-bold uppercase tracking-widest px-1.5 py-0.5 bg-primary/5 rounded border border-primary/10">#{tag}</span>
-                                        ))}
-                                    </div>
-                                    <h3 className="text-2xl font-display font-black text-foreground tracking-tighter transition-colors group-hover/slide:text-primary leading-none">
-                                        {activeItem.template.title}
-                                    </h3>
+
+                            <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-white/75 backdrop-blur-sm">
+                                conversion-focused
+                            </div>
+
+                            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                                <div className="mb-2 flex flex-wrap gap-2">
+                                    {activeItem.template.tags.slice(0, 3).map((tag, i) => (
+                                        <span
+                                            key={i}
+                                            className="rounded-md border border-white/15 bg-black/35 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-white/80"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
                                 </div>
-                                
-                                <Link
-                                    href={`/explore/${activeItem.template.id}`}
-                                    className="group/btn relative inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-background/5 backdrop-blur-3xl border border-primary/20 text-primary font-bold text-[9px] tracking-widest uppercase rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shrink-0"
-                                >
-                                    <span className="absolute inset-0 w-0 h-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/btn:w-full"></span>
-                                    <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-primary-foreground">
-                                        View <ChevronRight className="w-3 h-3" />
-                                    </span>
-                                </Link>
+                                <h3 className="text-xl font-display font-bold leading-tight text-white sm:text-2xl">
+                                    {activeItem.template.title}
+                                </h3>
+                                <p className="mt-1 text-xs text-white/70 sm:text-sm">
+                                    Structured pages, premium visual rhythm, and optimized conversion flow.
+                                </p>
                             </div>
                         </div>
                     </motion.div>
                 </AnimatePresence>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            prevSlide();
+                        }}
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        aria-label="Previous blueprint"
+                    >
+                        <ArrowLeft size={16} />
+                    </button>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            nextSlide();
+                        }}
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        aria-label="Next blueprint"
+                    >
+                        <ArrowRight size={16} />
+                    </button>
+
+                    <div className="ml-1 flex items-center gap-1.5">
+                        {showcaseItems.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => {
+                                    setDirection(idx > currentIndex ? 1 : -1);
+                                    setCurrentIndex(idx);
+                                }}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${
+                                    idx === currentIndex
+                                        ? 'w-6 bg-primary'
+                                        : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
+                                }`}
+                                aria-label={`Go to blueprint ${idx + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <Link
+                    href={`/explore/${activeItem.template.id}`}
+                    className="group/btn inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                >
+                    View Demo
+                    <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+                </Link>
             </div>
         </div>
     );

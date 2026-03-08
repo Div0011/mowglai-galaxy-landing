@@ -62,7 +62,7 @@ export default function SelectedWork() {
     const { t } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
-    const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+    const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const nextSlide = useCallback(() => {
         setDirection(1);
@@ -107,34 +107,27 @@ export default function SelectedWork() {
     };
 
     return (
-        <div className="w-full h-full flex flex-col p-6 md:p-8">
-            {/* Context Header */}
-            <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    <h3 className="text-[11px] font-display font-black tracking-[0.4em] uppercase text-foreground/40">
+        <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-gradient-to-b from-background via-background/85 to-background/95 p-4 sm:p-5">
+            <div className="pointer-events-none absolute -left-16 -top-24 h-52 w-52 rounded-full bg-primary/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -right-8 h-44 w-44 rounded-full bg-orange-400/10 blur-3xl" />
+
+            <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="space-y-1">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/80">
                         {t.SelectedWork.selected} {t.SelectedWork.work}
-                    </h3>
+                    </p>
+                    <p className="text-sm text-foreground/75">Proven launches crafted for measurable growth.</p>
                 </div>
-                
-                {/* Horizontal Indicators */}
-                <div className="flex gap-1.5 items-center">
-                    {projects.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => { setDirection(idx > currentIndex ? 1 : -1); setCurrentIndex(idx); resetAutoplay(); }}
-                            className={`transition-all duration-500 rounded-full ${
-                                idx === currentIndex ? "w-6 h-1 bg-primary" : "w-1 h-1 bg-foreground/10 hover:bg-primary/40"
-                            }`}
-                        />
-                    ))}
+                <div className="rounded-full border border-foreground/10 bg-background/60 px-3 py-1 text-[11px] font-medium text-foreground/70">
+                    {String(currentIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
                 </div>
             </div>
 
-            {/* Slideshow Content Frame */}
             <div
-                className="relative w-full aspect-[4/5] sm:aspect-[1.1/1] group/slide overflow-hidden"
-                onMouseEnter={() => { if (autoplayRef.current) clearInterval(autoplayRef.current); }}
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
+                onMouseEnter={() => {
+                    if (autoplayRef.current) clearInterval(autoplayRef.current);
+                }}
                 onMouseLeave={resetAutoplay}
             >
                 <AnimatePresence initial={false} custom={direction}>
@@ -147,87 +140,105 @@ export default function SelectedWork() {
                         exit="exit"
                         drag="x"
                         dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={0.4}
+                        dragElastic={0.35}
                         onDragEnd={handleDragEnd}
                         transition={{
-                            x: { type: "spring", stiffness: 300, damping: 30 },
-                            scale: { duration: 0.4, ease: "easeOut" }
+                            x: { type: 'spring', stiffness: 300, damping: 30 },
+                            scale: { duration: 0.4, ease: 'easeOut' },
                         }}
-                        className="absolute inset-0 w-full h-full flex flex-col"
+                        className="relative"
                     >
-                        {/* Immersive Image Canvas */}
-                        <div className="relative w-full flex-1 overflow-hidden rounded-2xl border border-foreground/[0.06] shadow-2xl">
+                        <div className="relative aspect-[16/10] sm:aspect-[5/4]">
                             <NextImage
                                 src={projects[currentIndex].image}
                                 alt={projects[currentIndex].title}
                                 fill
-                                className="object-contain object-center transform scale-95 group-hover/slide:scale-100 transition-transform duration-1000 ease-out p-4"
+                                className="object-cover object-top"
                                 priority
                             />
-                            {/* Overlay Vignette - Refined for visibility */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.2)_100%)] opacity-40 pointer-events-none" />
-                            
-                            {/* Floating Nav Button */}
-                            <div className="absolute top-4 right-4 z-40 flex gap-1">
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); prevSlide(); resetAutoplay(); }}
-                                    className="p-2 text-white/40 hover:text-primary hover:bg-white/10 transition-all rounded-full backdrop-blur-md border border-white/5 active:scale-95"
-                                >
-                                    <ArrowLeft size={14} />
-                                </button>
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); nextSlide(); resetAutoplay(); }}
-                                    className="p-2 text-white/40 hover:text-primary hover:bg-white/10 transition-all rounded-full backdrop-blur-md border border-white/5 active:scale-95"
-                                >
-                                    <ArrowRight size={14} />
-                                </button>
-                            </div>
-                        </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" />
 
-                        {/* Minimal Meta */}
-                        <div className="mt-6 flex flex-col gap-2">
-                            <div className="flex items-center gap-4">
-                                <span className="text-primary font-display font-medium text-[9px] uppercase tracking-[0.2em] px-2 py-0.5 border border-primary/20 rounded-md">
-                                    0{projects[currentIndex].id} / 0{projects.length}
+                            <div className="absolute left-4 top-4">
+                                <span className="inline-flex rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
+                                    Live Project
                                 </span>
-                                <span className="h-[1px] flex-1 bg-foreground/10" />
                             </div>
-                            
-                            <div className="flex items-end justify-between gap-4">
-                                <div className="space-y-1">
-                                    <h4 className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">{projects[currentIndex].category}</h4>
-                                    <h3 className="text-2xl font-display font-black text-foreground tracking-tighter transition-colors group-hover/slide:text-primary leading-none">
-                                        {projects[currentIndex].title}
-                                    </h3>
-                                    <p className="text-[11px] text-foreground/50 max-w-[280px] line-clamp-2 md:line-clamp-none leading-relaxed pt-1">
-                                        {projects[currentIndex].description}
-                                    </p>
-                                </div>
-                                
-                                <a
-                                    href={projects[currentIndex].link}
-                                    target={projects[currentIndex].link === "#" ? "_self" : "_blank"}
-                                    rel="noopener noreferrer"
-                                    className="group/btn relative inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-background/5 backdrop-blur-3xl border border-primary/20 text-primary font-bold text-[9px] tracking-widest uppercase rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shrink-0"
-                                    onClick={(e) => {
-                                        if (projects[currentIndex].link === "#") {
-                                            e.preventDefault();
-                                            toast({
-                                                title: t.SelectedWork.comingSoonTitle,
-                                                description: t.SelectedWork.comingSoonDesc,
-                                            });
-                                        }
-                                    }}
-                                >
-                                    <span className="absolute inset-0 w-0 h-full bg-primary transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/btn:w-full"></span>
-                                    <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-primary-foreground">
-                                        Case <ExternalLink className="w-2.5 h-2.5" />
-                                    </span>
-                                </a>
+
+                            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                                <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.15em] text-white/75">{projects[currentIndex].category}</p>
+                                <h3 className="text-xl font-display font-bold leading-tight text-white sm:text-2xl">
+                                    {projects[currentIndex].title}
+                                </h3>
+                                <p className="mt-1 line-clamp-2 text-xs text-white/70 sm:text-sm">
+                                    {projects[currentIndex].description}
+                                </p>
                             </div>
                         </div>
                     </motion.div>
                 </AnimatePresence>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            prevSlide();
+                            resetAutoplay();
+                        }}
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        aria-label="Previous project"
+                    >
+                        <ArrowLeft size={16} />
+                    </button>
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            nextSlide();
+                            resetAutoplay();
+                        }}
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        aria-label="Next project"
+                    >
+                        <ArrowRight size={16} />
+                    </button>
+
+                    <div className="ml-1 flex items-center gap-1.5">
+                        {projects.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => {
+                                    setDirection(idx > currentIndex ? 1 : -1);
+                                    setCurrentIndex(idx);
+                                    resetAutoplay();
+                                }}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${
+                                    idx === currentIndex ? 'w-6 bg-primary' : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
+                                }`}
+                                aria-label={`Go to project ${idx + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <a
+                    href={projects[currentIndex].link}
+                    target={projects[currentIndex].link === '#' ? '_self' : '_blank'}
+                    rel="noopener noreferrer"
+                    className="group/btn inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                    onClick={(e) => {
+                        if (projects[currentIndex].link === '#') {
+                            e.preventDefault();
+                            toast({
+                                title: t.SelectedWork.comingSoonTitle,
+                                description: t.SelectedWork.comingSoonDesc,
+                            });
+                        }
+                    }}
+                >
+                    View Case
+                    <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+                </a>
             </div>
         </div>
     );

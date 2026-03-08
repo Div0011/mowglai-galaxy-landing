@@ -69,44 +69,37 @@ export default function HomeContent() {
             {/* 2. Dual Showcase Frame: Selected Work + Blueprint Side-by-Side */}
             <section className="relative w-full py-16 md:py-24 overflow-hidden" data-aos="fade-up">
                 <div className="container mx-auto px-6">
-                    {/* Frame Header - Minimal & Premium */}
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 max-w-6xl mx-auto">
+                    <div className="pointer-events-none absolute left-1/2 top-8 h-56 w-[min(90vw,72rem)] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
+
+                    <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 max-w-6xl mx-auto">
                         <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-primary font-display font-bold text-xs tracking-[0.3em] uppercase opacity-70">
+                            <div className="flex items-center gap-2 text-primary font-display font-bold text-xs tracking-[0.3em] uppercase opacity-80">
                                 <span className="w-8 h-[1px] bg-primary"></span>
-                                Digital Ecosystem
+                                Premium Showcase
                             </div>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tighter text-foreground uppercase italic leading-[0.85]">
-                                Our <span className="opacity-20 not-italic">Showcase</span>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight text-foreground uppercase leading-[0.9]">
+                                Work + <span className="text-primary italic">Blueprints</span>
                             </h2>
                         </div>
-                        <p className="text-foreground/40 text-sm md:text-base font-light max-w-sm leading-relaxed border-l border-primary/20 pl-6">
-                            Handcrafted projects and premium blueprints precision-engineered for the modern web.
+                        <p className="text-foreground/60 text-sm md:text-base font-light max-w-md leading-relaxed border-l border-primary/30 pl-6">
+                            Explore real client outcomes and production-ready templates in one place. Swipe, browse, and open demos instantly.
                         </p>
                     </div>
 
-                    {/* Integrated Showcase Frame */}
                     <div className="relative group/frame max-w-6xl mx-auto">
-                        {/* Decorative background glow for the frame */}
-                        <div className="absolute -inset-4 bg-primary/5 blur-[100px] opacity-0 group-hover/frame:opacity-100 transition-opacity duration-1000"></div>
-                        
-                        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-px bg-foreground/10 border border-foreground/10 rounded-3xl overflow-hidden backdrop-blur-3xl shadow-2xl">
+                        <div className="absolute -inset-4 bg-primary/10 blur-[100px] opacity-50 transition-opacity duration-700 group-hover/frame:opacity-80"></div>
+
+                        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 rounded-[2rem] border border-foreground/10 bg-gradient-to-b from-background/75 to-background/90 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:p-5">
                             {/* Left Panel: Projects */}
-                            <div className="relative bg-background/40 hover:bg-background/20 transition-colors duration-500 overflow-hidden">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent opacity-50"></div>
+                            <div className="relative overflow-hidden rounded-[1.75rem]">
                                 <SelectedWork />
                             </div>
 
                             {/* Right Panel: Blueprints */}
-                            <div className="relative bg-background/40 hover:bg-background/20 transition-colors duration-500 overflow-hidden border-t md:border-t-0 md:border-l border-foreground/10">
-                                <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-primary to-transparent opacity-50"></div>
+                            <div className="relative overflow-hidden rounded-[1.75rem]">
                                 <TemplatesShowcase />
                             </div>
                         </div>
-
-                        {/* Corner Accents for Premium Feel */}
-                        <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-primary/30 rounded-tl-lg pointer-events-none"></div>
-                        <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-primary/30 rounded-br-lg pointer-events-none"></div>
                     </div>
                 </div>
             </section>
