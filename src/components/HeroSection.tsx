@@ -109,14 +109,9 @@ const HeroSection = () => {
                             {/* Floating Highlight */}
                             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></span>
 
-                            <span className="relative z-10 flex items-center gap-3 w-full h-full">
-                                <span>START THE PROJECT</span>
-                                <div className="relative w-6 h-6 overflow-hidden flex items-center justify-center translate-y-[-1px]">
-                                    <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-full group-hover:opacity-0 font-light text-2xl">
-                                        -
-                                    </span>
-                                    <ArrowRight className="absolute inset-0 m-auto w-5 h-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
-                                </div>
+                            <span className="relative z-10 flex items-center gap-2">
+                                START THE PROJECT
+                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
                             </span>
                         </Link>
                     </Magnetic>

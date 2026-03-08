@@ -46,11 +46,8 @@ export default function HomeContent() {
                                             </span>
                                         </div>
 
-                                        <div className="relative z-10 hidden sm:flex w-8 h-8 items-center justify-center overflow-hidden">
-                                            <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-0 group-hover:translate-x-full font-light text-2xl text-primary leading-none pb-1 group-hover:text-primary-foreground">
-                                                -
-                                            </span>
-                                            <ArrowRight className="absolute inset-0 m-auto w-6 h-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 -translate-x-full group-hover:opacity-100 group-hover:translate-x-0 text-primary-foreground" />
+                                        <div className="relative z-10 hidden sm:flex items-center justify-center pointer-events-none">
+                                            <ArrowRight className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-transform duration-300 group-hover:translate-x-2" />
                                         </div>
                                     </Link>
                                 </Magnetic>
@@ -129,14 +126,9 @@ export default function HomeContent() {
                                 <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] skew-x-[-30deg] group-hover:animate-[shine_1.2s_ease-in-out]"></span>
-                                <span className="relative z-10 flex items-center gap-3 w-full h-full">
-                                    <span>CONSULT FOR FREE</span>
-                                    <div className="relative w-6 h-6 overflow-hidden flex items-center justify-center translate-y-[-1px]">
-                                        <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-full group-hover:opacity-0 font-light text-2xl">
-                                            -
-                                        </span>
-                                        <ArrowRight className="absolute inset-0 m-auto w-5 h-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
-                                    </div>
+                                <span className="relative z-10 flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-1">
+                                    CONSULT FOR FREE
+                                    <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
                                 </span>
                             </Link>
                         </Magnetic>
@@ -149,14 +141,9 @@ export default function HomeContent() {
                                 {/* Theme-Aware Gradient Liquid Fill */}
                                 <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
-                                <span className="relative z-10 flex items-center gap-3 transition-colors duration-300 group-hover:text-primary-foreground w-full h-full">
-                                    <span>OUR STORY</span>
-                                    <div className="relative w-6 h-6 overflow-hidden flex items-center justify-center text-primary group-hover:text-primary-foreground transition-colors duration-300 translate-y-[-1px]">
-                                        <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-full group-hover:opacity-0 font-light text-2xl">
-                                            -
-                                        </span>
-                                        <ArrowRight className="absolute inset-0 m-auto w-5 h-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
-                                    </div>
+                                <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
+                                    OUR STORY
+                                    <ArrowRight className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:translate-x-1" />
                                 </span>
                             </Link>
                         </Magnetic>
