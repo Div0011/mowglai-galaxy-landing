@@ -81,7 +81,7 @@ export default function TemplatesShowcase() {
                 </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+            <div className="relative aspect-[16/10] sm:aspect-[5/4] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={currentIndex}
@@ -94,9 +94,9 @@ export default function TemplatesShowcase() {
                             x: { type: 'spring', stiffness: 300, damping: 30 },
                             scale: { duration: 0.4, ease: 'easeOut' },
                         }}
-                        className="relative"
+                        className="absolute inset-0 w-full h-full"
                     >
-                        <div className="relative aspect-[16/10] sm:aspect-[5/4]">
+                        <div className="relative w-full h-full">
                             <Image
                                 src={activeItem.template.image}
                                 alt={activeItem.template.title}
@@ -170,11 +170,10 @@ export default function TemplatesShowcase() {
                                     setDirection(idx > currentIndex ? 1 : -1);
                                     setCurrentIndex(idx);
                                 }}
-                                className={`h-1.5 rounded-full transition-all duration-300 ${
-                                    idx === currentIndex
+                                className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex
                                         ? 'w-6 bg-primary'
                                         : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
-                                }`}
+                                    }`}
                                 aria-label={`Go to blueprint ${idx + 1}`}
                             />
                         ))}

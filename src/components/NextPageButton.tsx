@@ -1,7 +1,10 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/Magnetic";
+import { useState } from "react";
 
 interface NextPageButtonProps {
     label: string;
@@ -10,9 +13,10 @@ interface NextPageButtonProps {
 }
 
 const NextPageButton = ({ label, href, tagline }: NextPageButtonProps) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
         <div className="w-screen ml-[calc(50%-50vw)] h-[300px] flex flex-col items-center justify-center relative overflow-hidden">
-
             {/* Tagline - Just above button */}
             {tagline && (
                 <p className="relative z-10 text-xs md:text-sm font-display tracking-widest uppercase mb-6 text-muted-foreground/60" data-aos="fade-up">
@@ -55,24 +59,40 @@ const NextPageButton = ({ label, href, tagline }: NextPageButtonProps) => {
                 <Magnetic>
                     <Link
                         href={href}
-                        className="group relative z-10 flex px-6 sm:px-12 py-4 sm:py-6 rounded-full border-2 border-primary/20 bg-background/40 hover:bg-primary hover:border-primary transition-all duration-400 overflow-hidden backdrop-blur-xl scale-100 sm:scale-110 md:scale-125"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        className={cn(
+                            "relative z-10 flex px-6 sm:px-12 py-4 sm:py-6 rounded-full border-2 border-primary/20 bg-background/40 transition-all duration-500 overflow-hidden backdrop-blur-xl scale-100 sm:scale-110 md:scale-125",
+                            isHovered ? "bg-primary text-primary-foreground" : "text-foreground"
+                        )}
                     >
-                        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors" />
-                        <div className="flex items-center gap-3 sm:gap-4 text-xl sm:text-4xl md:text-5xl font-display font-medium text-foreground group-hover:text-primary-foreground tracking-tight uppercase leading-none z-10">
+                        <div className="flex items-center gap-3 sm:gap-4 text-xl sm:text-4xl md:text-5xl font-display font-medium tracking-tight uppercase leading-none z-10 w-full h-full">
                             <span>{label}</span>
-                            <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
-                                {/* Dash - Visible by default, hidden on hover */}
-                                <span className="absolute transition-all duration-300 group-hover:opacity-0 group-hover:translate-x-4 font-light text-4xl sm:text-5xl leading-none">
+                            <div className="relative w-10 h-10 sm:w-12 sm:h-12 overflow-hidden flex items-center justify-center translate-y-[-1px]">
+                                {/* Dash - visible by default, slides right and fades on hover */}
+                                <span
+                                    className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] font-light text-4xl sm:text-5xl"
+                                    style={{
+                                        transform: isHovered ? 'translateX(100%)' : 'translateX(0)',
+                                        opacity: isHovered ? 0 : 1
+                                    }}
+                                >
                                     -
                                 </span>
-                                <ArrowRight strokeWidth={1.5} className="absolute transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground" />
+                                {/* Arrow - hidden to the left by default, slides center and appears on hover */}
+                                <ArrowRight
+                                    strokeWidth={2}
+                                    className="absolute inset-0 m-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground"
+                                    style={{
+                                        transform: isHovered ? 'translateX(0)' : 'translateX(-100%)',
+                                        opacity: isHovered ? 1 : 0
+                                    }}
+                                />
                             </div>
                         </div>
                     </Link>
                 </Magnetic>
             </div>
-
-
         </div>
     );
 };

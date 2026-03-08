@@ -124,7 +124,7 @@ export default function SelectedWork() {
             </div>
 
             <div
-                className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
+                className="relative aspect-[16/10] sm:aspect-[5/4] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
                 onMouseEnter={() => {
                     if (autoplayRef.current) clearInterval(autoplayRef.current);
                 }}
@@ -146,9 +146,9 @@ export default function SelectedWork() {
                             x: { type: 'spring', stiffness: 300, damping: 30 },
                             scale: { duration: 0.4, ease: 'easeOut' },
                         }}
-                        className="relative"
+                        className="absolute inset-0 w-full h-full"
                     >
-                        <div className="relative aspect-[16/10] sm:aspect-[5/4]">
+                        <div className="relative w-full h-full">
                             <NextImage
                                 src={projects[currentIndex].image}
                                 alt={projects[currentIndex].title}
@@ -212,9 +212,8 @@ export default function SelectedWork() {
                                     setCurrentIndex(idx);
                                     resetAutoplay();
                                 }}
-                                className={`h-1.5 rounded-full transition-all duration-300 ${
-                                    idx === currentIndex ? 'w-6 bg-primary' : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
-                                }`}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-6 bg-primary' : 'w-1.5 bg-foreground/20 hover:bg-foreground/40'
+                                    }`}
                                 aria-label={`Go to project ${idx + 1}`}
                             />
                         ))}

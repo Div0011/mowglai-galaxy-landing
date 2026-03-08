@@ -78,7 +78,7 @@ const HeroSection = () => {
                     }}
                 >
                     <h1
-                        className="text-4xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-widest transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-105"
+                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-[0.25em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-110 hover:text-primary"
                         data-aos="zoom-out"
                         data-aos-duration="1000"
                     >
@@ -105,13 +105,18 @@ const HeroSection = () => {
                         >
                             {/* Theme-Aware Gradient Liquid Fill */}
                             <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
-                            
+
                             {/* Floating Highlight */}
                             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></span>
-                            
-                            <span className="relative z-10 flex items-center gap-2">
-                                START THE PROJECT
-                                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
+
+                            <span className="relative z-10 flex items-center gap-3 w-full h-full">
+                                <span>START THE PROJECT</span>
+                                <div className="relative w-6 h-6 overflow-hidden flex items-center justify-center translate-y-[-1px]">
+                                    <span className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-full group-hover:opacity-0 font-light text-2xl">
+                                        -
+                                    </span>
+                                    <ArrowRight className="absolute inset-0 m-auto w-5 h-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
+                                </div>
                             </span>
                         </Link>
                     </Magnetic>
@@ -123,7 +128,7 @@ const HeroSection = () => {
                         >
                             {/* Theme-Aware Gradient Liquid Fill for Audit */}
                             <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
-                            
+
                             <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
                                 GET FREE AUDIT
                                 <ScanLine className="w-5 h-5 transition-all duration-500 group-hover:rotate-180 group-hover:scale-110" />

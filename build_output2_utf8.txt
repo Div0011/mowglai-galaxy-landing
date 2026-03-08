@@ -1,0 +1,91 @@
+﻿bun : $ next build
+At line:1 char:37
++ ... e-Item -Recurse -Force 
+.next ; bun run build > 
+build_output2.txt 2>&1
++                            
+        ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: ($ next   
+  build:String) [], Remote   
+ Exception
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+ΓÜá Warning: Next.js 
+inferred your workspace 
+root, but it may not be 
+correct.
+ We detected multiple 
+lockfiles and selected the 
+directory of C:\Users\divya\p
+ackage-lock.json as the root 
+directory.
+ To silence this warning, 
+set `turbopack.root` in your 
+Next.js config, or consider 
+removing one of the 
+lockfiles if it's not needed.
+   See https://nextjs.org/doc
+s/app/api-reference/config/ne
+xt-config-js/turbopack#root-d
+irectory for more 
+information.
+ Detected additional 
+lockfiles: 
+   * C:\Users\divya\.vscode\m
+owglai.in\package-lock.json
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Experiments (use with caution):
+  ┬╖ optimizePackageImports
+  Γ£ô parallelServerBuildTraces
+  Γ£ô webpackBuildWorker
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 72s
+  Running TypeScript ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/65) ...
+  Generating static pages using 3 workers (16/65) 
+  Generating static pages using 3 workers (32/65) 
+  Generating static pages using 3 workers (48/65) 
+Γ£ô Generating static pages using 3 workers (65/65) in 7.0s
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /about
+Γö£ Γùï /audit
+Γö£ Γùï /contact
+Γö£ Γùï /custom-request
+Γö£ Γùï /explore
+Γö£ ΓùÅ /explore/[slug]
+Γöé Γö£ /explore/health-1
+Γöé Γö£ /explore/health-2
+Γöé Γö£ /explore/health-3
+Γöé Γöö [+37 more paths]
+Γö£ Γùï /investment
+Γö£ Γùï /nextjs-development-agency
+Γö£ Γùï /our-dna
+Γö£ Γùï /privacy
+Γö£ Γùï /referral
+Γö£ Γùï /robots.txt
+Γö£ Γùï /saas-mvp-development
+Γö£ Γùï /services
+Γö£ Γùï /sitemap.xml
+Γö£ Γùï /start-project
+Γö£ Γùï /start-project/consultation
+Γö£ Γùï /start-project/custom-quote
+Γö£ Γùï /start-project/nextjs
+Γö£ Γùï /start-project/saas
+Γö£ Γùï /start-project/web-dev
+Γö£ Γùï /terms
+Γöö Γùï /web-development-agency-india
+
+
+Γùï  (Static)  prerendered as static content
+ΓùÅ  (SSG)     prerendered as static HTML (uses generateStaticParams)
+

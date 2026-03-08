@@ -1,0 +1,6 @@
+﻿.next/dev/types/routes.d.ts(75,14): error TS1109: Expression expected.
+.next/dev/types/routes.d.ts(81,5): error TS1161: Unterminated regular expression literal.
+.next/dev/types/routes.d.ts(88,1): error TS1128: Declaration or statement expected.
+.next/dev/types/validator.ts(206,27): error TS1005: ';' expected.
+.next/dev/types/validator.ts(206,29): error TS1002: Unterminated string literal.
+.next/dev/types/validator.ts(210,1): error TS1128: Declaration or statement expected.

@@ -21,6 +21,7 @@ const featuresConfig = [
 
 const AboutSection = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
   const { t } = useLanguage();
 
   return (
@@ -37,7 +38,8 @@ const AboutSection = () => {
 
           {/* Integrated Logo Element - Magnetic & Foggy */}
           <div
-            className="relative w-full aspect-square max-w-[400px] sm:max-w-[440px] md:max-w-[500px] mx-auto md:ml-0 flex items-center justify-center cursor-pointer group/logo-container p-4 sm:p-20"
+            className="relative w-full aspect-square max-w-[400px] sm:max-w-[440px] md:max-w-[500px] mx-auto md:ml-0 flex items-center justify-center cursor-pointer p-4 sm:p-20"
+            onMouseEnter={() => setIsLogoHovered(true)}
             onMouseMove={(e) => {
               const el = e.currentTarget;
               const rect = el.getBoundingClientRect();
@@ -47,6 +49,7 @@ const AboutSection = () => {
               if (logo) gsap.to(logo, { x: x * 0.6, y: y * 0.6, duration: 0.4, ease: "power3.out" });
             }}
             onMouseLeave={(e) => {
+              setIsLogoHovered(false);
               const logo = e.currentTarget.querySelector('.magnetic-logo');
               if (logo) gsap.to(logo, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
             }}
@@ -56,10 +59,16 @@ const AboutSection = () => {
 
             {/* The Logo Component */}
             <div className="magnetic-logo relative w-full h-full aspect-square transition-all duration-700">
-              <MowglaiLogo size="full" className="shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)] group-hover/logo-container:shadow-[0_0_60px_hsl(var(--primary))]" />
+              <MowglaiLogo size="full" className={cn(
+                "transition-shadow duration-500",
+                isLogoHovered ? "shadow-[0_0_60px_hsl(var(--primary))]" : "shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)]"
+              )} />
 
-              {/* Fog Layer - Disappears on hover */}
-              <div className="absolute inset-0 z-20 bg-gradient-to-tr from-background/20 via-primary/5 to-transparent backdrop-blur-sm opacity-100 group-hover/logo-container:opacity-0 transition-opacity duration-500 pointer-events-none rounded-full" />
+              {/* Fog Layer - Disappears on hover via React state to bypass GSAP composite issues */}
+              <div
+                className="absolute inset-0 z-20 bg-gradient-to-tr from-background/20 via-primary/5 to-transparent backdrop-blur-sm transition-opacity duration-500 pointer-events-none rounded-full"
+                style={{ opacity: isLogoHovered ? 0 : 1 }}
+              />
             </div>
           </div>
 
