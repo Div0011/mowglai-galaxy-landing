@@ -78,8 +78,7 @@ const HeroSection = () => {
                     }}
                 >
                     <h1
-                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-[0.25em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-110 hover:text-primary"
-                        data-aos="zoom-out"
+                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-[0.25em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-80 hover:text-primary"
                         data-aos-duration="1000"
                     >
                         MOWGLAI
