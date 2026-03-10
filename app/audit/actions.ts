@@ -37,7 +37,7 @@ export async function analyzeWebsite(formData: FormData): Promise<AuditResult> {
 
     const validatedFields = auditSchema.safeParse({ url: rawUrl });
     if (!validatedFields.success) {
-        return createErrorResult(rawUrl, validatedFields.error.errors[0].message);
+        return createErrorResult(rawUrl, validatedFields.error.issues[0]?.message ?? "Invalid URL.");
     }
 
     const url = validatedFields.data.url;
