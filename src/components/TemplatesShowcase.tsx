@@ -64,7 +64,7 @@ export default function TemplatesShowcase() {
 
     return (
         <div
-            className="relative h-full overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-gradient-to-b from-background via-background/85 to-background/95 p-4 sm:p-5"
+            className="relative h-full overflow-hidden rounded-[1.6rem] p-4 sm:p-5 group/card transition-all duration-700"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -146,7 +146,7 @@ export default function TemplatesShowcase() {
                             e.preventDefault();
                             prevSlide();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
                         aria-label="Previous blueprint"
                     >
                         <ArrowLeft size={16} />
@@ -156,7 +156,7 @@ export default function TemplatesShowcase() {
                             e.preventDefault();
                             nextSlide();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
                         aria-label="Next blueprint"
                     >
                         <ArrowRight size={16} />

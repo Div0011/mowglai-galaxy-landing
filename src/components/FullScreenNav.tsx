@@ -69,7 +69,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                     <button
                         onClick={toggleMenu}
                         className={cn(
-                            "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group border border-transparent backdrop-blur-sm",
+                            "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group backdrop-blur-sm",
                             resolvedTheme === "light"
                                 ? "bg-primary/20 text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary"
                                 : "bg-background/5 text-primary hover:bg-primary/10 hover:border-primary/20"

@@ -2,7 +2,7 @@
 
 const JungleBackground = () => {
     return (
-        <div className="fixed inset-0 w-full h-full -z-[100] overflow-hidden pointer-events-none bg-background">
+        <div className="fixed inset-0 w-full h-full -z-[100] overflow-hidden pointer-events-none">
 
             {/* 1. Base Gradient Layer - Spans entire page height (Unified, no mask) */}
             <div className="absolute inset-0 w-full h-full bg-gradient-to-b transition-colors duration-1000 

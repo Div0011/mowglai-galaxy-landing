@@ -11,7 +11,7 @@ const HomeContent = dynamic(() => import("@/components/HomeContent"), { ssr: fal
 export default function OriginalHome() {
     return (
         <OriginalLayout>
-            <div className="relative w-full h-screen">
+            <div className="relative w-full">
                 <HeroSection />
             </div>
             <HomeContent />

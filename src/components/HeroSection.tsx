@@ -62,11 +62,11 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative w-full h-screen z-10 overflow-hidden flex flex-col items-center justify-center"
+            className="relative w-full h-screen z-10 overflow-hidden flex flex-col items-center justify-center border-none"
         >
 
             {/* Main Content Container */}
-            <div className="container mx-auto px-6 relative z-20 flex flex-col items-center text-center">
+            <div className="container mx-auto px-6 relative z-20 flex flex-col items-center text-center border-none">
 
                 {/* Massive Title Block text wrapper with 3D tilt tracking */}
                 <div
@@ -118,7 +118,7 @@ const HeroSection = () => {
                     <Magnetic>
                         <Link
                             href="/audit"
-                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/5 backdrop-blur-3xl border border-primary/30 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700"
+                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/5 backdrop-blur-3xl text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700"
                         >
                             {/* Theme-Aware Gradient Liquid Fill for Audit */}
                             <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
@@ -137,7 +137,7 @@ const HeroSection = () => {
             <div className="absolute bottom-12 ml-2 left-24 hidden md:block text-xs font-display tracking-widest text-foreground/40 uppercase">
                 Global Digital Partnership
             </div>
-            <div className="absolute bottom-12 mr-2 right-24 hidden md:block text-xs font-display tracking-widest text-foreground/40 uppercase">
+            <div className="absolute bottom-12 mr-2 right-24 hidden md:block text-xs font-display tracking-widest text-foreground/40 uppercase border-none">
                 Scroll to Explore
             </div>
 
