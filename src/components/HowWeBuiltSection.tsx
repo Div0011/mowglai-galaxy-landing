@@ -69,7 +69,7 @@ export default function HowWeBuiltSection() {
   useGSAP(() => {
     if (!sectionRef.current) return;
 
-    const sections = gsap.utils.toArray(".process-block");
+    const sections = gsap.utils.toArray(".process-block") as HTMLElement[];
 
     // Pinning the decorative backdrop
     ScrollTrigger.create({
@@ -80,7 +80,7 @@ export default function HowWeBuiltSection() {
       pinSpacing: false,
     });
 
-    sections.forEach((section: any, i) => {
+    sections.forEach((section, i) => {
         // Individual progress tracking
         ScrollTrigger.create({
             trigger: section,
