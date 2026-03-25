@@ -103,7 +103,7 @@ const HeroSection = () => {
                             className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(var(--primary-rgb),0.5)]"
                         >
                             {/* Theme-Aware Gradient Liquid Fill */}
-                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                             {/* Floating Highlight */}
                             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></span>
@@ -121,7 +121,7 @@ const HeroSection = () => {
                             className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/5 backdrop-blur-3xl text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700"
                         >
                             {/* Theme-Aware Gradient Liquid Fill for Audit */}
-                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                             <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
                                 GET FREE AUDIT

@@ -47,21 +47,21 @@ const StartupGrowthSection = () => {
             description: "Validate your vision with production-grade SaaS MVPs built for rapid scale.",
             icon: <Rocket className="w-6 h-6 text-primary" />,
             href: "/saas-mvp-development",
-            color: "from-amber-500/20 to-orange-500/20",
+            color: "from-yellow-400/20 to-green-600/20",
         },
         {
             title: "Node.js & Next.js",
             description: "High-performance backend logic and frontend excellence with Next.js.",
             icon: <Code2 className="w-6 h-6 text-emerald-500" />,
             href: "/nextjs-development-agency",
-            color: "from-emerald-500/20 to-teal-500/20",
+            color: "from-yellow-400/20 to-green-600/20",
         },
         {
             title: "Web Development",
             description: "Deep-tech full-stack solutions for the next generation of digital pioneers.",
             icon: <Globe className="w-6 h-6 text-blue-500" />,
             href: "/web-development-agency-india",
-            color: "from-blue-500/20 to-indigo-500/20",
+            color: "from-yellow-400/20 to-green-600/20",
         },
     ];
 
@@ -106,7 +106,7 @@ const StartupGrowthSection = () => {
                         className="text-4xl md:text-6xl font-display font-black tracking-tight leading-[1.1] mb-4"
                     >
                         Launch Faster <br className="hidden md:block" /> with{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-green-500 to-primary bg-[length:200%_auto] animate-gradient">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-500 bg-[length:200%_auto] animate-gradient">
                             Mowglai
                         </span>
                     </motion.h2>

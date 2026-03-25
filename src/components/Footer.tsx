@@ -33,7 +33,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer id="footer" className="w-full bg-transparent relative z-10 overflow-hidden">
+    <footer id="footer" className="w-full bg-[#1b1505] dark:bg-[#1a2e05] border-t border-white/5 relative z-10 overflow-hidden text-white/90">
       <div className="container mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
 
@@ -42,10 +42,10 @@ const Footer = () => {
             <Link href="/" className="inline-block">
               <div className="flex items-center gap-3">
                 <MowglaiLogo size="sm" />
-                <span className="font-display font-black text-2xl tracking-tight text-foreground">MOWGLAI</span>
+                <span className="font-display font-black text-2xl tracking-tight text-white">MOWGLAI</span>
               </div>
             </Link>
-            <p className="text-muted-foreground text-lg max-w-sm leading-relaxed">
+            <p className="text-white/60 text-lg max-w-sm leading-relaxed">
               Crafting digital experiences that transcend boundaries. Global standards, local heart.
             </p>
             <div className="flex gap-4">
@@ -68,15 +68,15 @@ const Footer = () => {
           <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
             {footerLinks.map((group, idx) => (
               <div key={idx} className="space-y-6">
-                <h4 className="font-display font-bold text-lg text-foreground tracking-wide uppercase">{group.title}</h4>
+                <h4 className="font-display font-bold text-lg text-white tracking-wide uppercase">{group.title}</h4>
                 <ul className="space-y-4">
                   {group.links.map((link, lIdx) => (
                     <li key={lIdx}>
                       <Link
                         href={link.href}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center group w-fit"
+                        className="text-white/50 hover:text-primary transition-colors duration-300 flex items-center group w-fit"
                       >
-                        <span className="relative overflow-hidden">
+                        <span className="relative overflow-hidden text-sm font-medium tracking-wide">
                           {link.label}
                           <span className="absolute bottom-0 left-0 w-full h-px bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                         </span>
@@ -89,15 +89,15 @@ const Footer = () => {
 
             {/* Contact Column */}
             <div className="space-y-6">
-              <h4 className="font-display font-bold text-lg text-foreground tracking-wide uppercase">Say Hello</h4>
-              <ul className="space-y-4">
+              <h4 className="font-display font-bold text-lg text-white tracking-wide uppercase">Say Hello</h4>
+              <ul className="space-y-4 text-sm">
                 <li>
-                  <a href="mailto:info@mowglai.in" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group">
+                  <a href="mailto:info@mowglai.in" className="text-white/50 hover:text-primary transition-colors flex items-center gap-2 group">
                     info@mowglai.in
                     <ArrowUpRight size={14} className="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
                   </a>
                 </li>
-                <li className="text-muted-foreground">
+                <li className="text-white/40">
                   Noida, India
                 </li>
               </ul>
@@ -112,7 +112,7 @@ const Footer = () => {
               © {currentYear} Mowglai Galaxy. All rights reserved.
             </div>
             <div className="hidden md:block w-px h-4 bg-primary/10"></div>
-            <div className="flex gap-6 text-sm text-muted-foreground/40">
+            <div className="flex gap-6 text-sm text-white/30">
               <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
             </div>

@@ -78,7 +78,7 @@ export default function HomeContent() {
                                 href="/custom-request"
                                 className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 bg-primary text-primary-foreground text-sm md:text-base font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(var(--primary-rgb),0.5)]"
                             >
-                                <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                                <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                                 <span className="relative z-10 flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-1">
                                     Start a project
@@ -92,7 +92,7 @@ export default function HomeContent() {
                                 href="/about"
                                 className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 bg-background/5 backdrop-blur-2xl border border-foreground/15 text-foreground text-sm md:text-base font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700 hover:border-primary/50"
                             >
-                                <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[var(--primary)] via-indigo-600 to-purple-600 dark:from-primary dark:via-emerald-500 dark:to-teal-400 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                                <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                                 <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
                                     Our story

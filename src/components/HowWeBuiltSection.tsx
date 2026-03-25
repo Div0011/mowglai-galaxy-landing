@@ -134,13 +134,12 @@ export default function HowWeBuiltSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-screen bg-transparent py-40 perspective-[2000px]"
+      className="relative w-full min-h-screen bg-transparent py-20 md:py-40 perspective-[2000px]"
     >
 
 
-      {/* 1. ENHANCED DECORATIVE BACKDROP */}
+      {/* 1. ENHANCED DECORATIVE BACKDROP - Purely for interactive blobs, base texture is now global */}
       <div className="enhanced-backdrop absolute inset-0 w-full h-screen pointer-events-none overflow-hidden z-0">
-        <div className="absolute inset-0 noise-overlay" />
         
         {/* Floating Ambient Blobs */}
         <AnimatePresence mode="wait">
@@ -150,7 +149,7 @@ export default function HowWeBuiltSection() {
                 animate={{ opacity: 0.6, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.5 }}
                 transition={{ duration: 1.5, ease: "circOut" }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full blur-[200px]"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full blur-[200px] opacity-40 mix-blend-screen overflow-hidden"
                 style={{ backgroundColor: steps[activeIndex].glow }}
             />
         </AnimatePresence>
@@ -186,55 +185,55 @@ export default function HowWeBuiltSection() {
             className="process-block relative min-h-screen flex items-center justify-center py-20 overflow-visible"
           >
             {/* Parallax Background ID */}
-            <div className="enhanced-bg-num absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[45vw] font-display font-black text-white/[0.02] select-none pointer-events-none">
+            <div className="enhanced-bg-num absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[60vw] md:text-[45vw] font-display font-black text-white/[0.02] select-none pointer-events-none">
                 {step.id}
             </div>
 
             {/* The Enhanced Card */}
             <div className="enhanced-card relative w-full max-w-6xl">
-                <div className="relative group grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden rounded-[4rem] border border-white/10 bg-white/[0.01] backdrop-blur-[60px] shadow-[0_50px_100px_rgba(0,0,0,0.5)] animate-border-glow">
+                <div className="relative group grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden rounded-[2rem] md:rounded-[4rem] border border-white/10 bg-white/[0.01] backdrop-blur-[60px] shadow-[0_50px_100px_rgba(0,0,0,0.5)] animate-border-glow">
                     
                     {/* Left: Tactical Content */}
-                    <div className="p-10 md:p-20 space-y-12">
-                        <div className="space-y-6">
+                    <div className="relative z-10 p-6 md:p-20 space-y-10 md:space-y-12">
+                        <div className="space-y-4 md:space-y-6">
                             <motion.div 
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 className="flex items-center gap-4"
                             >
-                                <span className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-display font-black text-[10px] tracking-[0.4em] uppercase">SYSTEM Protocol {step.id}</span>
+                                <span className="px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-display font-black text-[9px] md:text-[10px] tracking-[0.4em] uppercase">SYSTEM Protocol {step.id}</span>
                             </motion.div>
                             
-                            <h2 className="enhanced-title text-6xl md:text-8xl lg:text-9xl font-display font-black text-white uppercase tracking-tighter leading-[0.8]">
+                            <h2 className="enhanced-title text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-black text-white uppercase tracking-tighter leading-tight md:leading-[0.8]">
                                 {step.title}
                             </h2>
-                            <p className="text-xl md:text-2xl font-body font-light text-foreground/40 leading-relaxed max-w-lg">
+                            <p className="text-lg md:text-2xl font-body font-light text-foreground/40 leading-relaxed max-w-lg">
                                 {step.description}
                             </p>
                         </div>
 
                         {/* Tactical Metrics Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                             {step.metrics.map((metric, i) => (
                                 <div key={i} className="flex flex-col space-y-2">
                                     <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                         <ExternalLink size={12} />
                                     </div>
-                                    <div className="text-[10px] font-display font-black text-white/20 uppercase tracking-widest">{metric}</div>
+                                    <div className="text-[9px] md:text-[10px] font-display font-black text-white/20 uppercase tracking-widest leading-tight">{metric}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Right: Immersive Visual Core */}
-                    <div className="relative h-[400px] lg:h-auto bg-white/[0.02] border-l border-white/5 flex items-center justify-center overflow-hidden">
+                    {/* Right: Immersive Visual Core - Watermark on Mobile */}
+                    <div className="absolute inset-0 lg:relative lg:h-auto bg-white/[0.02] border-white/5 flex items-center justify-center overflow-hidden pointer-events-none lg:pointer-events-auto opacity-30 lg:opacity-100 transition-opacity duration-700">
                         {/* 3D-Like Floating Elements based on Mouse */}
                         <div 
-                            className="relative transition-transform duration-300 ease-out"
+                            className="relative transition-transform duration-300 ease-out lg:translate-x-0"
                             style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
                         >
                             {/* Visual Center */}
-                            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center">
+                            <div className="relative w-72 h-72 md:w-64 md:h-64 rounded-full flex items-center justify-center scale-75 lg:scale-100">
                                 <div className="absolute inset-0 rounded-full border-2 border-primary/20 animate-spin-slow" />
                                 <div className="absolute inset-8 rounded-full border border-primary/10 mix-blend-plus-lighter" />
                                 
@@ -254,8 +253,8 @@ export default function HowWeBuiltSection() {
                         </div>
 
                         {/* Tagline Vertical */}
-                        <div className="absolute right-12 bottom-12 rotate-[-90deg] origin-bottom-right">
-                             <span className="text-[10px] font-display font-black text-white/10 uppercase tracking-[1em] whitespace-nowrap">
+                        <div className="absolute right-6 md:right-12 bottom-6 md:bottom-12 rotate-[-90deg] origin-bottom-right hidden sm:block">
+                             <span className="text-[9px] md:text-[10px] font-display font-black text-white/10 uppercase tracking-[1em] whitespace-nowrap">
                                 {step.tagline}
                              </span>
                         </div>

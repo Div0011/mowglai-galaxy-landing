@@ -2,7 +2,7 @@
 
 const JungleBackground = () => {
     return (
-        <div className="fixed inset-0 w-full h-full -z-[100] overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 w-full h-full -z-[100] overflow-hidden pointer-events-none">
 
             {/* 1. Base Gradient Layer - Spans entire page height (Unified, no mask) */}
             <div className="absolute inset-0 w-full h-full bg-gradient-to-b transition-colors duration-1000 
@@ -13,13 +13,16 @@ const JungleBackground = () => {
             />
 
             {/* 2. Fixed Atmosphere Layer - Overlays that stay with the viewport */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none">
+            <div className="fixed inset-0 w-full h-full pointer-events-none">
+                {/* Global Noise Overlay for texture consistency */}
+                <div className="absolute inset-0 noise-overlay opacity-20 pointer-events-none" />
+
                 {/* Dappled light effects - Subtle pulses */}
-                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/10 dark:bg-green-900/10 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/5 dark:bg-emerald-900/10 rounded-full blur-[150px] animate-bounce-slow" />
+                <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-white/5 dark:bg-green-900/10 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] bg-[#D4AF37]/5 dark:bg-emerald-900/5 rounded-full blur-[150px] animate-bounce-slow" />
 
                 {/* Vignette for depth - Stronger in dark mode */}
-                <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle,transparent_50%,rgba(0,0,0,0.1)_100%)] dark:bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
+                <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle,transparent_50%,rgba(0,0,0,0.05)_100%)] dark:bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.3)_100%)] pointer-events-none" />
             </div>
 
             {/* 3. Floating Yellow Fireflies */}
