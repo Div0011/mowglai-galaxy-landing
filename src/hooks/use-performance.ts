@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 // Performance monitoring hook for Core Web Vitals
 export function usePerformanceMonitor() {
     const observerRef = useRef<PerformanceObserver | null>(null);
+    const clsObserverRef = useRef<PerformanceObserver | null>(null);
 
     useEffect(() => {
         // Only run in production and if supported
@@ -30,7 +31,7 @@ export function usePerformanceMonitor() {
         // Log CLS (Cumulative Layout Shift)
         try {
             let clsValue = 0;
-            const clsObserver = new PerformanceObserver((list) => {
+            clsObserverRef.current = new PerformanceObserver((list) => {
                 for (const entry of list.getEntries()) {
                     if (!(entry as unknown as { hadRecentInput: boolean }).hadRecentInput) {
                         clsValue += (entry as unknown as { value: number }).value;
@@ -40,7 +41,7 @@ export function usePerformanceMonitor() {
                     console.log("CLS:", clsValue);
                 }
             });
-            clsObserver.observe({ entryTypes: ["layout-shift"] });
+            clsObserverRef.current.observe({ entryTypes: ["layout-shift"] });
         } catch {
             // CLS not supported
         }
@@ -48,6 +49,10 @@ export function usePerformanceMonitor() {
         return () => {
             if (observerRef.current) {
                 observerRef.current.disconnect();
+            }
+
+            if (clsObserverRef.current) {
+                clsObserverRef.current.disconnect();
             }
         };
     }, []);

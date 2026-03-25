@@ -15,7 +15,6 @@ import { usePathname } from "next/navigation";
 
 const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
 const JungleBackground = dynamic(() => import("@/components/JungleBackground"), { ssr: false });
-const GalaxyBackground = dynamic(() => import("@/components/GalaxyBackground"), { ssr: false });
 const BackToTopButton = dynamic(() => import("@/components/BackToTopButton"), { ssr: false });
 
 interface PageLayoutProps {
@@ -24,6 +23,13 @@ interface PageLayoutProps {
 
 const OriginalLayout = ({ children }: PageLayoutProps) => {
     const pathname = usePathname();
+    const [enableEnhancedCursor, setEnableEnhancedCursor] = useState(false);
+
+    useEffect(() => {
+        const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        setEnableEnhancedCursor(supportsFinePointer && !prefersReducedMotion);
+    }, []);
 
     // AOS is now initialized globally in AOSInit component linked in RootLayout
 
@@ -34,7 +40,7 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
             <SmoothScroll />
             <ScrollToTop />
             <BackToTopButton />
-            <CustomCursor />
+            {enableEnhancedCursor ? <CustomCursor /> : null}
             <SettingsToggle />
             <ContactToggle />
 

@@ -13,12 +13,13 @@ const HeroSection = () => {
 
     useEffect(() => {
         let animationFrameId: number;
+        const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        if (!isDesktop) {
+            return;
+        }
 
         const handleMouseMove = (e: MouseEvent) => {
-            // Apply only on devices with proper cursor (desktops/laptops)
-            const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-            if (!isDesktop) return;
-
             cancelAnimationFrame(animationFrameId);
             animationFrameId = requestAnimationFrame(() => {
                 if (tiltRef.current) {

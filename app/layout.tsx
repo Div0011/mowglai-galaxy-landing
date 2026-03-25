@@ -129,13 +129,6 @@ export default function RootLayout({
         <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`} suppressHydrationWarning>
             <body className="antialiased">
                 <LanguageProvider>
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `
-                                document.documentElement.classList.add('js-enabled');
-                            `
-                        }}
-                    />
                     <noscript>
                         <div style={{
                             position: 'fixed',
@@ -169,19 +162,10 @@ export default function RootLayout({
                             </p>
                         </div>
                     </noscript>
-                    <div id="main-content" style={{ display: 'none' }} suppressHydrationWarning>
-                        <Providers>
-                            <AOSInit />
-                            {children}
-                        </Providers>
-                    </div>
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `
-                                document.getElementById('main-content').style.display = 'block';
-                            `
-                        }}
-                    />
+                    <Providers>
+                        <AOSInit />
+                        {children}
+                    </Providers>
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{

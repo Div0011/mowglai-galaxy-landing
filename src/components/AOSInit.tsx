@@ -1,32 +1,61 @@
 "use client";
 
 import { useEffect } from "react";
-import AOS from "aos";
 import "aos/dist/aos.css";
 
 export const AOSInit = () => {
     useEffect(() => {
         // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        
-        if (prefersReducedMotion) {
+        const hasAnimatedElements = document.querySelector("[data-aos]") !== null;
+        let isCancelled = false;
+        let timer: ReturnType<typeof setTimeout> | undefined;
+        let idleId: number | undefined;
+
+        if (prefersReducedMotion || !hasAnimatedElements) {
             // Disable animations for users who prefer reduced motion
             return;
         }
 
-        // Initialize AOS with a slight delay to avoid hydration mismatches
-        const timer = setTimeout(() => {
-            AOS.init({
-                duration: 600, // Faster animations
-                easing: 'ease-out-cubic',
-                once: true, // Only animate once - improves performance
-                mirror: false, // Disable mirror mode - reduces calculations
-                offset: 50, // Smaller offset
-                disableMutationObserver: false, // Keep enabled for SPA navigation
-            });
-        }, 100);
+        const initAOS = async () => {
+            const module = await import("aos");
+            if (isCancelled) {
+                return;
+            }
 
-        return () => clearTimeout(timer);
+            module.default.init({
+                duration: 600,
+                easing: 'ease-out-cubic',
+                once: true,
+                mirror: false,
+                offset: 50,
+                disableMutationObserver: false,
+            });
+        };
+
+        const scheduleInit = () => {
+            timer = setTimeout(() => {
+                void initAOS();
+            }, 150);
+        };
+
+        if ("requestIdleCallback" in window) {
+            idleId = window.requestIdleCallback(scheduleInit, { timeout: 1000 });
+        } else {
+            scheduleInit();
+        }
+
+        return () => {
+            isCancelled = true;
+
+            if (timer) {
+                clearTimeout(timer);
+            }
+
+            if (idleId !== undefined && "cancelIdleCallback" in window) {
+                window.cancelIdleCallback(idleId);
+            }
+        };
     }, []);
 
     return null;
