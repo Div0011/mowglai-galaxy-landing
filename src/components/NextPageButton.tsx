@@ -62,8 +62,8 @@ const NextPageButton = ({ label, href, tagline }: NextPageButtonProps) => {
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                         className={cn(
-                            "relative z-10 flex px-6 sm:px-12 py-4 sm:py-6 rounded-full border-2 border-primary/20 bg-background/40 transition-all duration-500 overflow-hidden backdrop-blur-xl scale-100 sm:scale-110 md:scale-125",
-                            isHovered ? "bg-primary text-primary-foreground" : "text-foreground"
+                            "relative z-10 flex px-6 sm:px-12 py-4 sm:py-6 rounded-full border-2 border-primary/20 bg-white/5 transition-all duration-500 overflow-hidden backdrop-blur-xl scale-100 sm:scale-110 md:scale-125",
+                            isHovered ? "bg-primary text-primary-foreground shadow-[0_0_50px_rgba(var(--primary-rgb),0.5)]" : "text-foreground hover:bg-white/10"
                         )}
                     >
                         <div className="flex items-center gap-3 sm:gap-4 text-xl sm:text-4xl md:text-5xl font-display font-medium tracking-tight uppercase leading-none z-10 w-full h-full">

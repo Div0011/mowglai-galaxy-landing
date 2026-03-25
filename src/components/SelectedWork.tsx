@@ -107,7 +107,7 @@ export default function SelectedWork() {
     };
 
     return (
-        <div className="relative h-full overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-gradient-to-b from-background via-background/85 to-background/95 p-4 sm:p-5">
+        <div className="relative h-full overflow-hidden rounded-[1.6rem] p-4 sm:p-5 group/card transition-all duration-700 hover:border-primary/30">
             <div className="pointer-events-none absolute -left-16 -top-24 h-52 w-52 rounded-full bg-primary/10 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -right-8 h-44 w-44 rounded-full bg-orange-400/10 blur-3xl" />
 
@@ -186,7 +186,7 @@ export default function SelectedWork() {
                             prevSlide();
                             resetAutoplay();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
                         aria-label="Previous project"
                     >
                         <ArrowLeft size={16} />
@@ -197,7 +197,7 @@ export default function SelectedWork() {
                             nextSlide();
                             resetAutoplay();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background/70 text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
                         aria-label="Next project"
                     >
                         <ArrowRight size={16} />

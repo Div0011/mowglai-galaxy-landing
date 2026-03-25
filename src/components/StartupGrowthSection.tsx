@@ -44,24 +44,24 @@ const StartupGrowthSection = () => {
     const cards = [
         {
             title: "SaaS MVP Development",
-            description: "Validate ideas fast with production-grade MVPs built for scale.",
+            description: "Validate your vision with production-grade SaaS MVPs built for rapid scale.",
             icon: <Rocket className="w-6 h-6 text-primary" />,
             href: "/saas-mvp-development",
-            color: "from-blue-500/20 to-purple-500/20",
+            color: "from-amber-500/20 to-orange-500/20",
         },
         {
-            title: "Next.js Development",
-            description: "High-performance web apps with clean architecture and SEO.",
+            title: "Node.js & Next.js",
+            description: "High-performance backend logic and frontend excellence with Next.js.",
             icon: <Code2 className="w-6 h-6 text-emerald-500" />,
             href: "/nextjs-development-agency",
             color: "from-emerald-500/20 to-teal-500/20",
         },
         {
-            title: "Web Development India",
-            description: "Expert full-stack teams for startups and enterprises.",
-            icon: <Globe className="w-6 h-6 text-orange-500" />,
+            title: "Web Development",
+            description: "Deep-tech full-stack solutions for the next generation of digital pioneers.",
+            icon: <Globe className="w-6 h-6 text-blue-500" />,
             href: "/web-development-agency-india",
-            color: "from-orange-500/20 to-red-500/20",
+            color: "from-blue-500/20 to-indigo-500/20",
         },
     ];
 
