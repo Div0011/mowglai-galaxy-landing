@@ -107,9 +107,9 @@ export default function SelectedWork() {
     };
 
     return (
-        <div className="relative h-full overflow-hidden rounded-[1.6rem] p-4 sm:p-5 group/card transition-all duration-700 hover:border-primary/30">
-            <div className="pointer-events-none absolute -left-16 -top-24 h-52 w-52 rounded-full bg-primary/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -right-8 h-44 w-44 rounded-full bg-orange-400/10 blur-3xl" />
+        <div className="relative h-full overflow-hidden rounded-[2rem] p-6 sm:p-8 bg-card border border-white/10 group/card transition-all duration-700 hover:border-primary/40">
+            <div className="pointer-events-none absolute -left-16 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-[100px]" />
+            <div className="pointer-events-none absolute -bottom-20 -right-8 h-64 w-64 rounded-full bg-emerald-500/10 blur-[100px]" />
 
             <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="space-y-1">
@@ -186,10 +186,11 @@ export default function SelectedWork() {
                             prevSlide();
                             resetAutoplay();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Previous project"
                     >
-                        <ArrowLeft size={16} />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <ArrowLeft size={16} className="relative z-10" />
                     </button>
                     <button
                         onClick={(e) => {
@@ -197,10 +198,11 @@ export default function SelectedWork() {
                             nextSlide();
                             resetAutoplay();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Next project"
                     >
-                        <ArrowRight size={16} />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <ArrowRight size={16} className="relative z-10" />
                     </button>
 
                     <div className="ml-1 flex items-center gap-1.5">
@@ -224,7 +226,7 @@ export default function SelectedWork() {
                     href={projects[currentIndex].link}
                     target={projects[currentIndex].link === '#' ? '_self' : '_blank'}
                     rel="noopener noreferrer"
-                    className="group/btn inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                    className="group/btn relative inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary overflow-hidden transition-all hover:text-primary-foreground"
                     onClick={(e) => {
                         if (projects[currentIndex].link === '#') {
                             e.preventDefault();
@@ -235,8 +237,9 @@ export default function SelectedWork() {
                         }
                     }}
                 >
-                    View Case
-                    <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+                    <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/btn:w-full" />
+                    <span className="relative z-10">View Case</span>
+                    <ExternalLink className="relative z-10 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                 </a>
             </div>
         </div>

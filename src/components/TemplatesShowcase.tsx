@@ -64,12 +64,12 @@ export default function TemplatesShowcase() {
 
     return (
         <div
-            className="relative h-full overflow-hidden rounded-[1.6rem] p-4 sm:p-5 group/card transition-all duration-700"
+            className="relative h-full overflow-hidden rounded-[2rem] p-6 sm:p-8 bg-card border border-white/10 group/card transition-all duration-700 hover:border-primary/40"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-10 h-44 w-44 rounded-full bg-cyan-400/10 blur-3xl" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/20 blur-[90px]" />
+            <div className="pointer-events-none absolute -bottom-24 -left-12 h-72 w-72 rounded-full bg-emerald-500/10 blur-[90px]" />
 
             <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="space-y-1">
@@ -146,20 +146,22 @@ export default function TemplatesShowcase() {
                             e.preventDefault();
                             prevSlide();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Previous blueprint"
                     >
-                        <ArrowLeft size={16} />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <ArrowLeft size={16} className="relative z-10" />
                     </button>
                     <button
                         onClick={(e) => {
                             e.preventDefault();
                             nextSlide();
                         }}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 backdrop-blur-md text-foreground/70 transition-all hover:border-primary/40 hover:text-primary active:scale-95"
+                        className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Next blueprint"
                     >
-                        <ArrowRight size={16} />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <ArrowRight size={16} className="relative z-10" />
                     </button>
 
                     <div className="ml-1 flex items-center gap-1.5">
@@ -182,10 +184,11 @@ export default function TemplatesShowcase() {
 
                 <Link
                     href={`/explore/${activeItem.template.id}`}
-                    className="group/btn inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                    className="group/btn relative inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary overflow-hidden transition-all hover:text-primary-foreground"
                 >
-                    View Demo
-                    <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+                    <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/btn:w-full" />
+                    <span className="relative z-10">View Demo</span>
+                    <ChevronRight className="relative z-10 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                 </Link>
             </div>
         </div>
