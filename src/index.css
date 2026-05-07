@@ -196,10 +196,12 @@
 
   html,
   body {
+    background-color: hsl(var(--background));
     scrollbar-width: none;
     -ms-overflow-style: none;
     overflow-x: clip;
     width: 100%;
+    min-height: 100dvh;
   }
 
   ::-webkit-scrollbar {
@@ -207,9 +209,9 @@
   }
 
   body {
-    @apply bg-transparent text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased;
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   ::selection {

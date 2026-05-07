@@ -127,7 +127,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`} suppressHydrationWarning>
-            <body className="antialiased">
+            <body className="bg-background text-foreground antialiased min-h-dvh">
                 <LanguageProvider>
                     <noscript>
                         <div style={{
