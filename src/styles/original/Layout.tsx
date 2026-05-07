@@ -36,7 +36,7 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
 
 
     return (
-        <div className="min-h-screen relative text-foreground transition-colors duration-500">
+        <div className="min-h-dvh relative text-foreground transition-colors duration-500">
             <SmoothScroll />
             <ScrollToTop />
             <BackToTopButton />
@@ -52,7 +52,7 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
             <FullScreenNav onOpenChat={() => {}} />
             <MobileNav />
 
-            <main className="relative z-10 w-full overflow-hidden">
+            <main className="relative z-10 w-full overflow-hidden min-h-dvh">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={pathname}
