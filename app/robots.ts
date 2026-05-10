@@ -27,7 +27,7 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             },
         ],
-        sitemap: 'https://mowglai.in/sitemap.xml',
-        host: 'https://mowglai.in',
+        sitemap: 'https://mowglai.com/sitemap.xml',
+        host: 'https://mowglai.com',
     }
 }

@@ -17,15 +17,15 @@ export const metadata: Metadata = {
         "best web agency India"
     ],
     alternates: {
-        canonical: "https://mowglai.in/about",
+        canonical: "https://mowglai.com/about",
     },
     openGraph: {
         title: "About Mowglai | Leading Web Development Company in India",
         description: "Discover India's premier web development agency. Learn about our mission, expert team, and commitment to digital excellence.",
-        url: "https://mowglai.in/about",
+        url: "https://mowglai.com/about",
         images: [
             {
-                url: "https://mowglai.in/mowglai-logo-new.jpg",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "About Mowglai Digital Agency"
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "About Mowglai | Leading Web Development Company in India",
         description: "Discover India's premier web development agency. Learn about our mission and expert team.",
-        images: ["https://mowglai.in/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 
@@ -49,13 +49,13 @@ const jsonLdBreadcrumb = {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://mowglai.in"
+            "item": "https://mowglai.com"
         },
         {
             "@type": "ListItem",
             "position": 2,
             "name": "About Us",
-            "item": "https://mowglai.in/about"
+            "item": "https://mowglai.com/about"
         }
     ]
 };
@@ -65,12 +65,12 @@ const jsonLdAboutPage = {
     "@type": "AboutPage",
     "name": "About Mowglai - Web Development Company",
     "description": "Learn about Mowglai, India's premier web development and digital agency.",
-    "url": "https://mowglai.in/about",
+    "url": "https://mowglai.com/about",
     "mainEntity": {
         "@type": "Organization",
         "name": "Mowglai Digital Agency",
         "description": "Premium web development and digital agency based in Noida, India",
-        "url": "https://mowglai.in",
+        "url": "https://mowglai.com",
         "foundingDate": "2024",
         "areaServed": "Worldwide"
     }

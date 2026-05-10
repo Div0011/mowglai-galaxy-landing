@@ -24,7 +24,7 @@ export default function PrivacyPage() {
                         <div className="mb-8">
                             <p className="font-display font-bold text-primary text-xl mb-3">1. Introduction and Scope</p>
                             <p>
-                                This Privacy Policy governs the manner in which Mowglai (mowglai.in) collects, uses, maintains,
+                                This Privacy Policy governs the manner in which Mowglai (mowglai.com) collects, uses, maintains,
                                 and discloses information collected from users and clients. We are committed to protecting your
                                 privacy and ensuring that your personal and business data is handled with the highest level of
                                 security. This policy applies to all services offered by Mowglai, including custom website

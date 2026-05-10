@@ -74,7 +74,7 @@ export default async function TemplateDetailsPage({
         },
         "offers": {
             "@type": "Offer",
-            "url": `https://mowglai.in/explore/${template.id}`,
+            "url": `https://mowglai.com/explore/${template.id}`,
             "priceCurrency": "USD",
             "price": "0", // Handled via enquiry
             "availability": "https://schema.org/InStock"

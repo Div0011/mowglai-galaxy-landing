@@ -10,7 +10,7 @@ const { default: Home, metadata } = await import('./page');
 describe('Home page', () => {
     it('exports SEO metadata', () => {
         expect(metadata.title).toContain('Mowglai');
-        expect(metadata.openGraph?.url).toBe('https://mowglai.in/');
+        expect(metadata.openGraph?.url).toBe('https://mowglai.com/');
     });
 
     it('renders schema scripts and page content', () => {

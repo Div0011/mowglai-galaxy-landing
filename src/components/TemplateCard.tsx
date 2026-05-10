@@ -103,7 +103,7 @@ export default function TemplateCard({ template }: { template: Template }) {
                         className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-bold rounded-full shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 group/btn"
                         onClick={(e) => {
                             e.preventDefault();
-                            window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${template.id}`;
+                            window.location.href = `mailto:info@mowglai.com?subject=Enquiry for Template: ${template.id}`;
                         }}
                     >
                         <ShoppingCart className="w-4 h-4" />

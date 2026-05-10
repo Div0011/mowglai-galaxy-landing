@@ -486,7 +486,7 @@ function TemplateCard({ template, viewProjectText, pagesText }: { template: Temp
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${template.id}`;
+                            window.location.href = `mailto:info@mowglai.com?subject=Enquiry for Template: ${template.id}`;
                         }}
                         className="px-4 py-2 bg-primary text-background text-[10px] font-bold uppercase tracking-widest rounded-md shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
                     >

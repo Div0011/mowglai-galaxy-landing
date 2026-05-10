@@ -17,15 +17,15 @@ export const metadata: Metadata = {
         "web agency contact"
     ],
     alternates: {
-        canonical: "https://mowglai.in/contact",
+        canonical: "https://mowglai.com/contact",
     },
     openGraph: {
         title: "Contact Mowglai | Web Development Agency India",
         description: "Get in touch with India's leading web development agency. Contact us for custom website design and development projects.",
-        url: "https://mowglai.in/contact",
+        url: "https://mowglai.com/contact",
         images: [
             {
-                url: "https://mowglai.in/mowglai-logo-new.jpg",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "Contact Mowglai Digital Agency"
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Contact Mowglai | Web Development Agency India",
         description: "Get in touch with India's leading web development agency for custom website design and development.",
-        images: ["https://mowglai.in/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 
@@ -49,13 +49,13 @@ const jsonLdBreadcrumb = {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://mowglai.in"
+            "item": "https://mowglai.com"
         },
         {
             "@type": "ListItem",
             "position": 2,
             "name": "Contact",
-            "item": "https://mowglai.in/contact"
+            "item": "https://mowglai.com/contact"
         }
     ]
 };
@@ -65,12 +65,12 @@ const jsonLdContactPage = {
     "@type": "ContactPage",
     "name": "Contact Mowglai - Web Development Agency",
     "description": "Contact India's leading web development agency for custom website design and development projects.",
-    "url": "https://mowglai.in/contact",
+    "url": "https://mowglai.com/contact",
     "mainEntity": {
         "@type": "Organization",
         "name": "Mowglai Digital Agency",
         "telephone": "+91-9452476331",
-        "email": "hello@mowglai.in",
+        "email": "info@mowglai.com",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Noida",

@@ -221,7 +221,7 @@ export const BrochurePDF: FC<BrochurePDFProps> = ({
         pdf.rect(margin, 130, width - 2 * margin, 60, 'S');
         pdf.setTextColor(...colors.gold);
         pdf.text("MOWGLAI", margin + 10, 150);
-        pdf.text("info@mowglai.in", margin + 10, 165);
+        pdf.text("info@mowglai.com", margin + 10, 165);
 
         pdf.save(clientName ? `Proposal_${clientName.replace(/\s+/g, '_')}_${planName}.pdf` : `Mowglai_Proposal_${planName}.pdf`);
     };

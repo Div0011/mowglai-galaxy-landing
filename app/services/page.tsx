@@ -24,15 +24,15 @@ export const metadata: Metadata = {
         "website maintenance"
     ],
     alternates: {
-        canonical: "https://mowglai.in/services",
+        canonical: "https://mowglai.com/services",
     },
     openGraph: {
         title: "Web Development Services | Mowglai Digital Agency",
         description: "Premium web development services for startups and enterprises: SaaS, MVPs, MVC architecture, custom websites, React & Next.js, 3D experiences, e-commerce, SEO, and digital strategy.",
-        url: "https://mowglai.in/services",
+        url: "https://mowglai.com/services",
         images: [
             {
-                url: "https://mowglai.in/mowglai-logo-new.jpg",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "Mowglai Web Development Services"
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Web Development Services | Mowglai Digital Agency",
         description: "Premium web development services: SaaS, MVPs, MVC architecture, custom websites, React & Next.js, 3D experiences, e-commerce, SEO.",
-        images: ["https://mowglai.in/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 
@@ -56,13 +56,13 @@ const jsonLdBreadcrumb = {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://mowglai.in"
+            "item": "https://mowglai.com"
         },
         {
             "@type": "ListItem",
             "position": 2,
             "name": "Services",
-            "item": "https://mowglai.in/services"
+            "item": "https://mowglai.com/services"
         }
     ]
 };
@@ -139,13 +139,13 @@ const jsonLdService = {
 export default function ServicesPage() {
     return (
         <>
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
             />
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
             />
             <OriginalServices />
         </>

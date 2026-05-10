@@ -18,7 +18,7 @@ if (empty($_POST['email'])) {
     exit();
 }
 
-$to_admin = "info@mowglai.in";
+$to_admin = "info@mowglai.com";
 $subject = $_POST['subject'] ?? "New Contact Request from Website";
 $user_email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 $name = $_POST['name'] ?? "Website Visitor";
@@ -33,10 +33,10 @@ if (!$user_email) {
 $boundary = md5(time());
 
 // Headers
-$headers = "From: Mowglai Website <no-reply@mowglai.in>\r\n";
+$headers = "From: Mowglai Website <no-reply@mowglai.com>\r\n";
 $headers .= "Reply-To: {$user_email}\r\n";
-$headers .= "Sender: no-reply@mowglai.in\r\n"; // Helps with Spam filters
-$headers .= "Return-Path: no-reply@mowglai.in\r\n"; // Bounced emails go here
+$headers .= "Sender: no-reply@mowglai.com\r\n"; // Helps with Spam filters
+$headers .= "Return-Path: no-reply@mowglai.com\r\n"; // Bounced emails go here
 $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: multipart/alternative; boundary=\"$boundary\"\r\n";
@@ -48,7 +48,7 @@ foreach ($_POST as $key => $value) {
     $label = ucwords(str_replace(['_', '-'], ' ', $key));
     $text_body .= "{$label}: {$value}\n";
 }
-$text_body .= "\n----------------------------------------\nSent from mowglai.in";
+$text_body .= "\n----------------------------------------\nSent from mowglai.com";
 
 // HTML Body
 $html_body = "<html><body><h2>New Contact Submission</h2>";
@@ -59,7 +59,7 @@ foreach ($_POST as $key => $value) {
     $safe_value = htmlspecialchars($value);
     $html_body .= "<tr><td><strong>{$label}</strong></td><td>{$safe_value}</td></tr>";
 }
-$html_body .= "</table><br><p>Sent from mowglai.in</p></body></html>";
+$html_body .= "</table><br><p>Sent from mowglai.com</p></body></html>";
 
 // Full Message
 $message = "--$boundary\r\n";
@@ -73,13 +73,13 @@ $message .= $html_body . "\r\n";
 $message .= "--$boundary--";
 
 // Send to Admin
-$mail_sent = mail($to_admin, $subject, $message, $headers, "-f no-reply@mowglai.in");
+$mail_sent = mail($to_admin, $subject, $message, $headers, "-f no-reply@mowglai.com");
 
 
 // --- 2. Send Confirmation Email to User (Multipart) ---
 if ($mail_sent) {
     $user_subject = "Welcome to Mowglai - We've received your message";
-    
+
     // Read HTML Template
     $template_path = __DIR__ . '/email_mowglai.html';
     $html_content_user = "";
@@ -92,15 +92,15 @@ if ($mail_sent) {
     // Plain Text Fallback
     $text_content_user = "Welcome to Mowglai!\n\n";
     $text_content_user .= "Thank you for reaching out. We have received your message and will get back to you shortly.\n\n";
-    $text_content_user .= "Best regards,\nThe Mowglai Team\nhttps://mowglai.in";
+    $text_content_user .= "Best regards,\nThe Mowglai Team\nhttps://mowglai.com";
 
     $boundary_user = md5(time() . "user");
 
     // Headers
-    $headers_user = "From: Mowglai <no-reply@mowglai.in>\r\n";
-    $headers_user .= "Reply-To: info@mowglai.in\r\n";
-    $headers_user .= "Sender: no-reply@mowglai.in\r\n";
-    $headers_user .= "Return-Path: info@mowglai.in\r\n";
+    $headers_user = "From: Mowglai <no-reply@mowglai.com>\r\n";
+    $headers_user .= "Reply-To: info@mowglai.com\r\n";
+    $headers_user .= "Sender: no-reply@mowglai.com\r\n";
+    $headers_user .= "Return-Path: info@mowglai.com\r\n";
     $headers_user .= "X-Mailer: PHP/" . phpversion() . "\r\n";
     $headers_user .= "MIME-Version: 1.0\r\n";
     $headers_user .= "Content-Type: multipart/alternative; boundary=\"$boundary_user\"\r\n";
@@ -117,7 +117,7 @@ if ($mail_sent) {
     $message_user .= "--$boundary_user--";
 
     // Send to User
-    mail($user_email, $user_subject, $message_user, $headers_user, "-f no-reply@mowglai.in");
+    mail($user_email, $user_subject, $message_user, $headers_user, "-f no-reply@mowglai.com");
 
     echo json_encode(["status" => "success", "message" => "Email sent successfully"]);
 } else {

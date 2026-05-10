@@ -17,15 +17,15 @@ export const metadata: Metadata = {
         "agency culture"
     ],
     alternates: {
-        canonical: "https://mowglai.in/our-dna",
+        canonical: "https://mowglai.com/our-dna",
     },
     openGraph: {
         title: "Our DNA & Process | How Mowglai Creates Digital Excellence",
         description: "Discover Mowglai's unique approach to web development. Learn about our process, methodology, and principles.",
-        url: "https://mowglai.in/our-dna",
+        url: "https://mowglai.com/our-dna",
         images: [
             {
-                url: "https://mowglai.in/mowglai-logo-new.jpg",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "Mowglai DNA and Process"
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Our DNA & Process | How Mowglai Creates Digital Excellence",
         description: "Discover Mowglai's unique approach to web development and digital design.",
-        images: ["https://mowglai.in/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 
@@ -49,13 +49,13 @@ const jsonLdBreadcrumb = {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://mowglai.in"
+            "item": "https://mowglai.com"
         },
         {
             "@type": "ListItem",
             "position": 2,
             "name": "Our DNA",
-            "item": "https://mowglai.in/our-dna"
+            "item": "https://mowglai.com/our-dna"
         }
     ]
 };
@@ -63,9 +63,9 @@ const jsonLdBreadcrumb = {
 export default function DnaPage() {
     return (
         <>
-            <script 
-                type="application/ld+json" 
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
             />
             <OriginalDNA />
         </>

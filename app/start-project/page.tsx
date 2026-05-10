@@ -6,12 +6,12 @@ export const metadata = {
     title: "Start Project | Mowglai",
     description: "Begin your journey with Mowglai. Select your plan and tell us about your vision. We are ready to build.",
     alternates: {
-        canonical: "https://mowglai.in/start-project",
+        canonical: "https://mowglai.com/start-project",
     },
     openGraph: {
         title: "Start Project | Mowglai",
         description: "Begin your journey with Mowglai. Select your plan and tell us about your vision. We are ready to build.",
-        url: "https://mowglai.in/start-project",
+        url: "https://mowglai.com/start-project",
         type: "website",
     },
 };

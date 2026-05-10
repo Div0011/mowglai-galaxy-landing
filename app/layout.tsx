@@ -23,7 +23,7 @@ const josefinSans = localFont({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://mowglai.in"),
+    metadataBase: new URL("https://mowglai.com"),
     title: {
         default: "Mowglai - Premium Web Development & Digital Agency India",
         template: "%s | Mowglai - Web Development Agency"
@@ -60,12 +60,12 @@ export const metadata: Metadata = {
     },
     openGraph: {
         type: "website",
-        url: "https://mowglai.in/",
+        url: "https://mowglai.com/",
         title: "Mowglai - Premium Web Development & Digital Agency India",
         description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps using React, Next.js, and modern technologies.",
         siteName: "Mowglai - Web Development Agency",
         images: [{
-            url: "https://mowglai.in/mowglai-logo-new.jpg",
+            url: "https://mowglai.com/mowglai-logo-new.jpg",
             width: 1200,
             height: 1200,
             alt: "Mowglai - Premium Digital Agency & Web Development"
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Mowglai - Premium Web Development & Digital Agency India",
         description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps.",
-        images: ["https://mowglai.in/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
         creator: "@mowglai_in",
     },
     icons: {
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     },
     manifest: "/site.webmanifest",
     alternates: {
-        canonical: "https://mowglai.in",
+        canonical: "https://mowglai.com",
     },
     verification: {
         google: "Evz63X8emo75NARUTxWl7zuik4hstQOoYls6MKipByA",
@@ -174,29 +174,29 @@ export default function RootLayout({
                                 "@graph": [
                                     {
                                         "@type": "WebSite",
-                                        "@id": "https://mowglai.in/#website",
-                                        "url": "https://mowglai.in",
+                                        "@id": "https://mowglai.com/#website",
+                                        "url": "https://mowglai.com",
                                         "name": "Mowglai Digital Agency",
                                         "description": "Premium digital agency specializing in high-performance web development, 3D experiences, and digital transformation.",
                                         "publisher": {
-                                            "@id": "https://mowglai.in/#organization"
+                                            "@id": "https://mowglai.com/#organization"
                                         },
                                         "potentialAction": {
                                             "@type": "SearchAction",
                                             "target": {
                                                 "@type": "EntryPoint",
-                                                "urlTemplate": "https://mowglai.in/search?q={search_term_string}"
+                                                "urlTemplate": "https://mowglai.com/search?q={search_term_string}"
                                             },
                                             "query-input": "required name=search_term_string"
                                         }
                                     },
                                     {
                                         "@type": "ProfessionalService",
-                                        "@id": "https://mowglai.in/#organization",
+                                        "@id": "https://mowglai.com/#organization",
                                         "name": "Mowglai Digital Agency",
-                                        "url": "https://mowglai.in",
-                                        "logo": "https://mowglai.in/logo1.png",
-                                        "image": "https://mowglai.in/logo1.png",
+                                        "url": "https://mowglai.com",
+                                        "logo": "https://mowglai.com/logo1.png",
+                                        "image": "https://mowglai.com/logo1.png",
                                         "priceRange": "$$-$$$",
                                         "description": "Premium digital agency providing web development, 3D design, and digital transformation services.",
                                         "address": {

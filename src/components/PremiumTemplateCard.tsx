@@ -129,7 +129,7 @@ export default function PremiumTemplateCard({ template }: { template: Template }
                             className="px-6 py-2.5 bg-primary text-background font-bold text-sm rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2"
                             onClick={(e) => {
                                 e.preventDefault();
-                                window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${template.id}`;
+                                window.location.href = `mailto:info@mowglai.com?subject=Enquiry for Template: ${template.id}`;
                             }}
                         >
                             <ShoppingCart className="w-4 h-4" />

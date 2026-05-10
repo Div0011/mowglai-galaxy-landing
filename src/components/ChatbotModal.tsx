@@ -118,7 +118,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
             simulateTyping(() => {
                 const mailSubject = `New Project Request: ${draftData.service}`;
                 const mailBody = `Service Requested: ${draftData.service}\n\nProject Details:\n${text}`;
-                const mailToLink = `mailto:info@mowglai.in?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+                const mailToLink = `mailto:info@mowglai.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
 
                 addMessage("I have compiled your request dossier. You can now transmit this directly to our command center.", 'bot');
                 addMessage(`Summary:\nService: ${draftData.service}\nDetails: ${text}`, 'bot', [
@@ -247,7 +247,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
             } else if (matchType === 'contact') {
                 addMessage("Communication is the first step to evolution. You can reach our command center directly via email or through our social channels.", 'bot', [
                     { label: "Go to Contact Page", action: () => { onClose(); router.push('/contact'); } },
-                    { label: "Email: info@mowglai.in", action: () => { window.location.href = "mailto:info@mowglai.in"; } }
+                    { label: "Email: info@mowglai.com", action: () => { window.location.href = "mailto:info@mowglai.com"; } }
                 ]);
             } else if (matchType === 'social') {
                 addMessage("Join our tribe in the digital wild. Follow us for updates, insights, and success stories.", 'bot', [

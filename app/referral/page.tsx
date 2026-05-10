@@ -35,7 +35,7 @@ export default function ReferralPage() {
         // DRAFTING THE MESSAGE (Mock logic for the agent's task)
         const referralCode = `MOW10-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
         const draftMessage = `
-            From: info@mowglai.in
+            From: info@mowglai.com
             To: ${friendData.email}
             Subject: ${userData.name} has a gift for you!
 
@@ -48,7 +48,7 @@ export default function ReferralPage() {
             Cheers,
             The Mowglai Team
         `;
-        console.log("Referral Sent from info@mowglai.in:", draftMessage);
+        console.log("Referral Sent from info@mowglai.com:", draftMessage);
 
         // Simulate sending
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -104,7 +104,7 @@ export default function ReferralPage() {
                                         </li>
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">2</div>
-                                            <span className="text-foreground/70 leading-relaxed">Our system sends an exclusive invite from <span className="text-primary font-mono italic">info@mowglai.in</span> with our official branding.</span>
+                                            <span className="text-foreground/70 leading-relaxed">Our system sends an exclusive invite from <span className="text-primary font-mono italic">info@mowglai.com</span> with our official branding.</span>
                                         </li>
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">3</div>

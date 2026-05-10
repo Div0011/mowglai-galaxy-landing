@@ -15,7 +15,7 @@ export default function TemplateActions({ templateId, price, isMobileBar }: Temp
                 {/* Enquire Button - Replaced Price block */}
                 <div className="flex items-center gap-2">
                     <button
-                        onClick={() => window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${templateId}`}
+                        onClick={() => window.location.href = `mailto:info@mowglai.com?subject=Enquiry for Template: ${templateId}`}
                         className="group h-10 px-4 bg-primary text-primary-foreground font-bold rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-primary/25 whitespace-nowrap"
                     >
                         <ShoppingCart className="w-4 h-4" />
@@ -42,7 +42,7 @@ export default function TemplateActions({ templateId, price, isMobileBar }: Temp
         <div className="flex flex-col gap-3 pt-4">
             {/* Primary Action - Enquire */}
             <button
-                onClick={() => window.location.href = `mailto:hello@mowglai.in?subject=Enquiry for Template: ${templateId}`}
+                onClick={() => window.location.href = `mailto:info@mowglai.com?subject=Enquiry for Template: ${templateId}`}
                 className="w-full py-5 px-8 bg-primary text-primary-foreground font-black text-lg uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_20px_40px_-10px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_25px_50px_-12px_rgba(var(--primary-rgb),0.4)] whitespace-nowrap group"
             >
                 <ShoppingCart className="w-6 h-6 group-hover:rotate-12 transition-transform" />

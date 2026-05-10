@@ -92,8 +92,8 @@ const Footer = () => {
               <h4 className="font-display font-bold text-lg text-white tracking-wide uppercase">Say Hello</h4>
               <ul className="space-y-4 text-sm">
                 <li>
-                  <a href="mailto:info@mowglai.in" className="text-white/50 hover:text-primary transition-colors flex items-center gap-2 group">
-                    info@mowglai.in
+                  <a href="mailto:info@mowglai.com" className="text-white/50 hover:text-primary transition-colors flex items-center gap-2 group">
+                    info@mowglai.com
                     <ArrowUpRight size={14} className="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
                   </a>
                 </li>

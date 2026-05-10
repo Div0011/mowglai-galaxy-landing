@@ -4,7 +4,7 @@ This is the Mowglai Galaxy Landing page project, built with **Next.js 16 (App Ro
 
 ## Project Info
 
-**URL**: [https://mowglai.in](https://mowglai.in)
+**URL**: [https://mowglai.com](https://mowglai.com)
 
 ## Optimization Features
 
@@ -147,7 +147,7 @@ The repository includes GitHub Actions workflows for automated Docker builds and
 
 - **Development**: Uses `docker-compose.yml` with volume mounts for hot reload
 - **Production**: Multi-stage build with Nginx serving static files
-- **Environment Variables**: 
+- **Environment Variables**:
   - `CHOKIDAR_USEPOLLING=true` - Enables file watching in Docker
   - `WATCHPACK_POLLING=true` - Webpack polling for hot reload
 

@@ -8,7 +8,7 @@ import StarryBackground from "./StarryBackground";
 import CustomCursor from "./CustomCursor";
 import XLogo from "@/components/icons/XLogo";
 
-const CONTACT_EMAIL = "info@mowglai.in";
+const CONTACT_EMAIL = "info@mowglai.com";
 const WHATSAPP_NUMBER = "919452476331";
 const PHONE_NUMBER = "+91 94524 76331";
 

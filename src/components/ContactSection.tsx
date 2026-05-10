@@ -19,7 +19,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { cn as clsx } from "@/lib/utils";
 
 
-const CONTACT_EMAIL = "info@mowglai.in";
+const CONTACT_EMAIL = "info@mowglai.com";
 const COUNTRY_CODE = "91";
 const LOCAL_PHONE_NUMBER = "9452476331";
 const FULL_PHONE_NUMBER = `${COUNTRY_CODE}${LOCAL_PHONE_NUMBER}`;

@@ -243,7 +243,7 @@ export const generateQuotationPDF = async (plan: Plan) => {
                 A 50% upfront deposit is required to initiate the project. The remaining 50% is due upon completion of the UAT (User Acceptance Testing) phase. Prices are exclusive of domain and hosting fees unless specified.
             </div>
             <div style="margin-top: 30px; text-align: center; border-top: 1px solid #ccc; padding-top: 20px;">
-                <p>mowglai.in | Support: info@mowglai.in</p>
+                <p>mowglai.com | Support: info@mowglai.com</p>
             </div>
         </div>
     </div>

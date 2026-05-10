@@ -84,7 +84,7 @@ Project Description:
 ${formData.projectDescription}
             `;
 
-            window.location.href = `mailto:divyanshawasthi@mowglai.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = `mailto:divyanshawasthi@mowglai.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             toast({
                 title: "Opening Email Client",

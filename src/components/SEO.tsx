@@ -13,7 +13,7 @@ export const SEO = ({
     description,
     keywords = "web development, digital agency, software solutions, mobile apps, websites", // Default keywords
     image = "/mowglai-og-image.png", // We should make sure this image exists or use the logo
-    url = "https://mowglai.in"
+    url = "https://mowglai.com"
 }: SEOProps) => {
     const siteTitle = `${title} | Mowglai`;
 

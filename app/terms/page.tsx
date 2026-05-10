@@ -29,7 +29,7 @@ export default function TermsPage() {
                         <div className="mb-8">
                             <p className="font-display font-bold text-primary text-xl mb-3">1. Engagement of Services</p>
                             <p>
-                                By accessing mowglai.in or entering into a service agreement with Mowglai, you agree to be
+                                By accessing mowglai.com or entering into a service agreement with Mowglai, you agree to be
                                 bound by these Terms and Conditions. Our services encompass the end-to-end lifecycle of web
                                 development, from initial scratch-builds to complex project upgrades and SEO strategy
                                 implementation. Each project is defined by a specific scope of work, and any deviations or

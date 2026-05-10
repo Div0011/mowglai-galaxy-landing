@@ -4,7 +4,7 @@ import { allTemplates } from '@/data/templates'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://mowglai.in'
+    const baseUrl = 'https://mowglai.com'
 
     // Static routes with priorities
     const staticRoutes: MetadataRoute.Sitemap = [
