@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
 // ═══════════════════════════════════════════════════════════════
 // THE ANCIENT TREE — A massive, old, gnarled banyan/fig tree
@@ -9,7 +9,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 // ═══════════════════════════════════════════════════════════════
 
 // ── Layer 1: Deep Roots (far background, slowest parallax) ──
-function RootsLayer({ scrollYProgress }: { scrollYProgress: any }) {
+function RootsLayer({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
     const y = useTransform(scrollYProgress, [0, 1], ["5%", "-15%"]);
 
     return (
@@ -34,7 +34,7 @@ function RootsLayer({ scrollYProgress }: { scrollYProgress: any }) {
 }
 
 // ── Layer 2: The Main Trunk (old, gnarled, textured bark) ──
-function TrunkLayer({ scrollYProgress }: { scrollYProgress: any }) {
+function TrunkLayer({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
 
     return (
@@ -79,7 +79,7 @@ function TrunkLayer({ scrollYProgress }: { scrollYProgress: any }) {
 }
 
 // ── Layer 3: Hanging Vines & Creepers (foreground, fast parallax) ──
-function VinesLayer({ scrollYProgress }: { scrollYProgress: any }) {
+function VinesLayer({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]);
 
     return (
@@ -108,7 +108,7 @@ function VinesLayer({ scrollYProgress }: { scrollYProgress: any }) {
 }
 
 // ── Layer 4: Right-side canopy foliage (depth balance) ──
-function CanopyRight({ scrollYProgress }: { scrollYProgress: any }) {
+function CanopyRight({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
 
     return (

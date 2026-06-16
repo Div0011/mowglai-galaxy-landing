@@ -3,13 +3,14 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type Lenis from "@studio-freight/lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const SmoothScroll = () => {
     useEffect(() => {
         let cancelled = false;
-        let lenisInstance: any = null;
+        let lenisInstance: Lenis | null = null;
         let tickerFn: ((time: number) => void) | null = null;
 
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -25,8 +26,8 @@ const SmoothScroll = () => {
                 return;
             }
 
-            const Lenis = module.default;
-            lenisInstance = new Lenis({
+            const LenisClass = module.default;
+            lenisInstance = new LenisClass({
                 lerp: 0.1,
                 orientation: 'vertical',
                 gestureOrientation: 'vertical',
