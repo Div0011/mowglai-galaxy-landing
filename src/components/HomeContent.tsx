@@ -8,77 +8,77 @@ import SelectedWork from "@/components/SelectedWork";
 import NextPageButton from "@/components/NextPageButton";
 import TemplatesShowcase from "@/components/TemplatesShowcase";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import HowWeBuiltSection from "@/components/HowWeBuiltSection";
+import StartupGrowthSection from "@/components/StartupGrowthSection";
+import InteractiveAnimals from "@/components/InteractiveAnimals";
+import GiantJungleTree from "@/components/GiantJungleTree";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HowWeBuiltSection = dynamic(() => import("@/components/HowWeBuiltSection"), { ssr: false });
-const StartupGrowthSection = dynamic(() => import("@/components/StartupGrowthSection"), { ssr: false });
-
-// Mouse follower glow effect - subtle premium feel
+// ═══════════════════════════════════════════════════════════════
+// MouseGlow — ZERO re-renders via useRef + GSAP quickTo
+// Previously: useState for mouse pos → re-rendered entire tree
+// Now: pure DOM manipulation via GSAP, React never re-renders
+// ═══════════════════════════════════════════════════════════════
 function MouseGlow() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!glowRef.current) return;
+    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!isDesktop) return;
+
+    const xTo = gsap.quickTo(glowRef.current, "x", { duration: 0.6, ease: "power3.out" });
+    const yTo = gsap.quickTo(glowRef.current, "y", { duration: 0.6, ease: "power3.out" });
+
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      xTo(e.clientX - 150);
+      yTo(e.clientY - 150);
     };
-    window.addEventListener("mousemove", handleMouseMove);
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
-    <motion.div
+    <div
+      ref={glowRef}
       className="fixed pointer-events-none z-[100]"
-      animate={{
-        x: mousePosition.x - 150,
-        y: mousePosition.y - 150,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 150,
-        damping: 15,
-        mass: 0.1,
-      }}
       style={{
         width: 300,
         height: 300,
-        background: "radial-gradient(circle, rgba(230, 185, 61, 0.08) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(74, 222, 128, 0.08) 0%, transparent 70%)",
         borderRadius: "50%",
+        willChange: "transform",
+        transform: "translate3d(-300px, -300px, 0)", // Start offscreen
       }}
     />
   );
 }
 
-// Floating ambient particles
+// ═══════════════════════════════════════════════════════════════
+// AmbientParticles — Pure CSS animations (offloaded from JS)
+// Previously: 8 Framer Motion elements with infinite animate
+// Now: CSS keyframes via .animate-ambient-float — GPU composited
+// ═══════════════════════════════════════════════════════════════
 function AmbientParticles() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {[...Array(8)].map((_, i) => (
-        <motion.div
+        <div
           key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
+          className="absolute w-1 h-1 rounded-full bg-[#4ade80]/40 shadow-[0_0_8px_rgba(74,222,128,0.5)] animate-ambient-float"
           style={{
             left: `${10 + i * 12}%`,
             top: `${20 + (i % 3) * 25}%`,
-          }}
-          animate={{
-            y: [0, -40, 0],
-            x: [0, 20, 0],
-            opacity: [0.2, 0.6, 0.2],
-            scale: [0.8, 1.2, 0.8],
-          }}
-          transition={{
-            duration: 4 + i * 0.5,
-            repeat: Infinity,
-            delay: i * 0.3,
-            ease: "easeInOut",
-          }}
+            '--float-duration': `${4 + i * 0.5}s`,
+            '--float-delay': `${i * 0.3}s`,
+          } as React.CSSProperties}
         />
       ))}
     </div>
@@ -90,14 +90,14 @@ function SectionDivider({ className = "" }: { className?: string }) {
   return (
     <div className={cn("relative h-24 overflow-hidden", className)}>
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-[1.5px] h-full bg-gradient-to-b from-transparent via-primary/40 to-transparent"
+        className="absolute left-1/2 -translate-x-1/2 w-[1.5px] h-full bg-gradient-to-b from-transparent via-[#4ade80]/40 to-transparent"
         initial={{ scaleY: 0 }}
         whileInView={{ scaleY: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/40"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#14532d]/40 backdrop-blur-sm border border-[#4ade80]/40"
         initial={{ scale: 0, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true }}
@@ -196,13 +196,13 @@ function InteractiveButton({
           href={href}
           className={`group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-sm md:text-base font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 ${
             isPrimary
-              ? "bg-primary text-primary-foreground hover:shadow-[0_0_50px_rgba(230,185,61,0.4)]"
-              : "bg-background/5 backdrop-blur-2xl border border-foreground/15 text-foreground hover:border-primary/50"
+              ? "bg-card/40 backdrop-blur-md border border-[#F5D061]/20 text-[#F5D061] hover:shadow-[0_0_40px_rgba(245,208,97,0.3)]"
+              : "bg-background/10 backdrop-blur-xl border border-primary/10 text-primary hover:border-primary/50"
           }`}
         >
           {/* Animated background */}
           <motion.span
-            className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-green-500"
+            className="absolute inset-0 bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061]"
             initial={{ x: "-100%", opacity: 0 }}
             whileHover={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -296,46 +296,13 @@ function AnimatedPath({ id = "pathGradient" }: { id?: string }) {
         />
         <defs>
           <linearGradient id={id} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(230, 185, 61, 0)" />
-            <stop offset="50%" stopColor="rgba(230, 185, 61, 0.6)" />
-            <stop offset="100%" stopColor="rgba(230, 185, 61, 0)" />
+            <stop offset="0%" stopColor="rgba(74, 222, 128, 0)" />
+            <stop offset="50%" stopColor="rgba(74, 222, 128, 0.6)" />
+            <stop offset="100%" stopColor="rgba(74, 222, 128, 0)" />
           </linearGradient>
         </defs>
       </svg>
     </div>
-  );
-}
-
-// Magnetic container for interactive elements
-function MagneticContainer({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const distanceX = (e.clientX - centerX) * 0.1;
-    const distanceY = (e.clientY - centerY) * 0.1;
-    setPosition({ x: distanceX, y: distanceY });
-  };
-
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15 }}
-    >
-      {children}
-    </motion.div>
   );
 }
 
@@ -370,6 +337,8 @@ export default function HomeContent() {
       {/* Ambient effects */}
       <MouseGlow />
       <AmbientParticles />
+      <GiantJungleTree />
+      <InteractiveAnimals />
 
       {/* 1. How We Build Section - Tucked under hero */}
       <div className="relative -mt-10 lg:-mt-20">
@@ -379,14 +348,14 @@ export default function HomeContent() {
       <SectionDivider className="-mt-10" />
 
       {/* 1.5. Services / Startup Growth Section */}
-      <div id="services-section">
+      <div id="services-section" className="content-lazy">
         <StartupGrowthSection />
       </div>
 
       <AnimatedPath id="path1" />
 
       {/* 2. Dual Showcase Frame */}
-      <section className="relative w-full py-20 overflow-hidden">
+      <section className="relative w-full py-20 overflow-hidden content-lazy">
         <div className="container mx-auto px-6">
           {/* Section header */}
           <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 max-w-6xl mx-auto">
@@ -396,7 +365,7 @@ export default function HomeContent() {
                 Showcase
               </div>
               <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter text-foreground uppercase leading-[1.2]">
-                Our <span className="text-primary italic">Works</span> & <br className="mb-2" /> High-End <span className="text-primary italic">Templates</span>
+                Our <span className="text-jungle-emerald italic">Works</span> & <br className="mb-2" /> High-End <span className="text-jungle-gold italic">Templates</span>
               </h2>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={0.2}>

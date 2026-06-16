@@ -22,17 +22,13 @@ const Magnetic = ({ children, amount = 0.3, className = "" }: MagneticProps) => 
         const xTo = gsap.quickTo(element, "x", { duration: 1, ease: "elastic.out(1, 0.3)" });
         const yTo = gsap.quickTo(element, "y", { duration: 1, ease: "elastic.out(1, 0.3)" });
 
-        // Animation loop for smooth 60fps updates
+        // Only run rAF loop while hovering — saves CPU when idle
         const animate = () => {
-            if (isHoveringRef.current) {
-                const { x, y } = mousePosRef.current;
-                xTo(x * amount);
-                yTo(y * amount);
-            }
+            const { x, y } = mousePosRef.current;
+            xTo(x * amount);
+            yTo(y * amount);
             rafRef.current = requestAnimationFrame(animate);
         };
-
-        rafRef.current = requestAnimationFrame(animate);
 
         const handleMouseMove = (e: MouseEvent) => {
             const { clientX, clientY } = e;
@@ -45,10 +41,19 @@ const Magnetic = ({ children, amount = 0.3, className = "" }: MagneticProps) => 
 
         const handleMouseEnter = () => {
             isHoveringRef.current = true;
+            // Start rAF loop only on hover
+            if (!rafRef.current) {
+                rafRef.current = requestAnimationFrame(animate);
+            }
         };
 
         const handleMouseLeave = () => {
             isHoveringRef.current = false;
+            // Stop rAF loop
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current);
+                rafRef.current = null;
+            }
             xTo(0);
             yTo(0);
         };
@@ -60,6 +65,7 @@ const Magnetic = ({ children, amount = 0.3, className = "" }: MagneticProps) => 
         return () => {
             if (rafRef.current) {
                 cancelAnimationFrame(rafRef.current);
+                rafRef.current = null;
             }
             element.removeEventListener("mousemove", handleMouseMove);
             element.removeEventListener("mouseenter", handleMouseEnter);

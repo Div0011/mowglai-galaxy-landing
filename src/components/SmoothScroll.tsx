@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 
 const SmoothScroll = () => {
     useEffect(() => {
-        let rafId: number;
         let cancelled = false;
-        let lenisInstance: { raf: (time: number) => void; destroy: () => void } | null = null;
+        let lenisInstance: any = null;
+        let tickerFn: ((time: number) => void) | null = null;
 
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
@@ -24,7 +27,7 @@ const SmoothScroll = () => {
 
             const Lenis = module.default;
             lenisInstance = new Lenis({
-                lerp: 0.08,
+                lerp: 0.1,
                 orientation: 'vertical',
                 gestureOrientation: 'vertical',
                 smoothWheel: true,
@@ -33,24 +36,33 @@ const SmoothScroll = () => {
                 infinite: false,
             });
 
-            const raf = (time: number) => {
-                if (!lenisInstance) {
-                    return;
-                }
+            // ═══ CRITICAL: Bridge Lenis → GSAP ScrollTrigger ═══
+            // Without this, ScrollTrigger reads native scroll position
+            // while Lenis interpolates it, causing animation desync.
+            lenisInstance.on('scroll', () => {
+                ScrollTrigger.update();
+            });
 
-                lenisInstance.raf(time);
-                rafId = requestAnimationFrame(raf);
+            // Sync GSAP ticker with Lenis for perfect frame alignment
+            tickerFn = (time: number) => {
+                lenisInstance?.raf(time * 1000);
             };
+            gsap.ticker.add(tickerFn);
 
-            rafId = requestAnimationFrame(raf);
+            // Disable Lenis's own rAF loop since GSAP ticker drives it now
+            gsap.ticker.lagSmoothing(0);
         };
 
         void bootLenis();
 
         return () => {
             cancelled = true;
-            cancelAnimationFrame(rafId);
-            lenisInstance?.destroy();
+            if (tickerFn) {
+                gsap.ticker.remove(tickerFn);
+            }
+            if (lenisInstance) {
+                lenisInstance.destroy();
+            }
         };
     }, []);
 
