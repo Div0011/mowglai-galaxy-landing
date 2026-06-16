@@ -45,23 +45,23 @@ const StartupGrowthSection = () => {
         {
             title: "SaaS MVP Development",
             description: "Validate your vision with production-grade SaaS MVPs built for rapid scale.",
-            icon: <Rocket className="w-6 h-6 text-primary" />,
+            icon: <Rocket className="w-6 h-6 text-[#22c55e]" />,
             href: "/saas-mvp-development",
-            color: "from-yellow-400/20 to-green-600/20",
+            color: "from-[#22c55e]/20 to-[#F5D061]/10",
         },
         {
             title: "Node.js & Next.js",
             description: "High-performance backend logic and frontend excellence with Next.js.",
-            icon: <Code2 className="w-6 h-6 text-emerald-500" />,
+            icon: <Code2 className="w-6 h-6 text-[#4ade80]" />,
             href: "/nextjs-development-agency",
-            color: "from-yellow-400/20 to-green-600/20",
+            color: "from-[#4ade80]/20 to-[#14532d]/10",
         },
         {
             title: "Web Development",
             description: "Deep-tech full-stack solutions for the next generation of digital pioneers.",
-            icon: <Globe className="w-6 h-6 text-blue-500" />,
+            icon: <Globe className="w-6 h-6 text-[#F5D061]" />,
             href: "/web-development-agency-india",
-            color: "from-yellow-400/20 to-green-600/20",
+            color: "from-[#F5D061]/20 to-[#22c55e]/10",
         },
     ];
 
@@ -80,7 +80,7 @@ const StartupGrowthSection = () => {
         >
             {/* Background Magnetic Spotlight */}
             <motion.div
-                className="absolute w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"
+                className="absolute w-[600px] h-[600px] bg-[#22c55e]/15 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"
                 style={{ x: smoothX, y: smoothY, left: 0, top: 0 }}
             />
 
@@ -90,10 +90,10 @@ const StartupGrowthSection = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#22c55e]/10 border border-[#22c55e]/20 backdrop-blur-sm"
                     >
-                        <Sparkles className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-medium text-primary uppercase tracking-wider">
+                        <Sparkles className="w-4 h-4 text-[#22c55e]" />
+                        <span className="text-sm font-medium text-[#22c55e] uppercase tracking-wider">
                             Startup Growth
                         </span>
                     </motion.div>
@@ -103,10 +103,10 @@ const StartupGrowthSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-display font-black tracking-tight leading-[1.1] mb-4"
+                        className="text-4xl md:text-6xl font-display font-black tracking-tight leading-[1.1] mb-4 text-white"
                     >
                         Launch Faster <br className="hidden md:block" /> with{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-500 bg-[length:200%_auto] animate-gradient">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5D061] via-[#22c55e] to-[#14532d] bg-[length:200%_auto] animate-gradient drop-shadow-[0_0_10px_rgba(34,197,94,0.3)]">
                             Mowglai
                         </span>
                     </motion.h2>
@@ -134,26 +134,26 @@ const StartupGrowthSection = () => {
                         <motion.div key={index} variants={itemVariants} className="h-full">
                             <Link
                                 href={card.href}
-                                className="group relative block h-full p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 overflow-hidden"
+                                className="group relative block h-full p-6 rounded-[2.5rem] border border-[#22c55e]/20 bg-[#05110a]/80 backdrop-blur-3xl hover:bg-[#0a1a0f]/90 transition-all duration-500 overflow-hidden"
                             >
                                 <div
                                     className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                                 />
 
                                 <div className="relative z-10 flex flex-col h-full bg-transparent">
-                                    <div className="mb-4 p-3 rounded-2xl bg-white/5 w-fit border border-white/10 group-hover:scale-110 transition-transform duration-500">
+                                    <div className="mb-4 p-3 rounded-2xl bg-[#22c55e]/10 w-fit border border-[#22c55e]/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
                                         {card.icon}
                                     </div>
 
-                                    <h3 className="text-xl font-display font-bold mb-2 group-hover:text-white transition-colors">
+                                    <h3 className="text-xl font-display font-bold mb-2 group-hover:text-[#F5D061] transition-colors text-white">
                                         {card.title}
                                     </h3>
 
-                                    <p className="text-muted-foreground mb-6 text-sm leading-relaxed group-hover:text-white/80 transition-colors line-clamp-3">
+                                    <p className="text-white/50 mb-6 text-sm leading-relaxed group-hover:text-white/80 transition-colors line-clamp-3">
                                         {card.description}
                                     </p>
 
-                                    <div className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary group-hover:text-white transition-colors">
+                                    <div className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#22c55e] group-hover:text-[#F5D061] transition-colors">
                                         Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </div>

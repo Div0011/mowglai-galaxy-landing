@@ -26,9 +26,9 @@ const steps = [
             "Our investigative protocols dive deep into your brand's digital DNA, unearthing the strategic leverage points that define elite performance.",
         icon: Fingerprint,
         metrics: ["Market DNA", "User Psychology", "Tactical Audit"],
-        accent: "rgb(230, 185, 61)",
-        glow: "rgba(230, 185, 61, 0.2)",
-        gradient: "from-yellow-500/20 via-amber-500/10 to-transparent",
+        accent: "#F5D061",
+        glow: "rgba(245, 208, 97, 0.2)",
+        gradient: "from-[#F5D061]/20 via-[#22c55e]/10 to-transparent",
     },
     {
         id: "02",
@@ -38,9 +38,9 @@ const steps = [
             "Where nature meets high-tech precision. We engineer immersive 3D interfaces and glassmorphic systems that don't just look premium—they feel alive.",
         icon: Activity,
         metrics: ["Bio-UI/UX", "3D Architecture", "Neural Motion"],
-        accent: "rgb(121, 152, 81)",
-        glow: "rgba(121, 152, 81, 0.2)",
-        gradient: "from-green-500/20 via-emerald-500/10 to-transparent",
+        accent: "#22c55e",
+        glow: "rgba(34, 197, 94, 0.2)",
+        gradient: "from-[#22c55e]/20 via-[#14532d]/10 to-transparent",
     },
     {
         id: "03",
@@ -50,9 +50,9 @@ const steps = [
             "Atomic-speed performance powered by Next.js and custom-tuned GSAP sequences. We build indestructible architectures for the modern web.",
         icon: Terminal,
         metrics: ["Core Mastery", "SEO Synthesis", "Elastic Scale"],
-        accent: "rgb(71, 98, 42)",
-        glow: "rgba(71, 98, 42, 0.2)",
-        gradient: "from-emerald-600/20 via-green-700/10 to-transparent",
+        accent: "#4ade80",
+        glow: "rgba(74, 222, 128, 0.2)",
+        gradient: "from-[#4ade80]/20 via-[#22c55e]/10 to-transparent",
     },
     {
         id: "04",
@@ -62,9 +62,9 @@ const steps = [
             "The moment of impact. We launch your project with tactical precision, then provide ongoing evolution and monitoring for global dominance.",
         icon: Rocket,
         metrics: ["World Launch", "Protocol Monitor", "Growth Scale"],
-        accent: "rgb(55, 68, 38)",
-        glow: "rgba(55, 68, 38, 0.2)",
-        gradient: "from-green-800/20 via-teal-900/10 to-transparent",
+        accent: "#14532d",
+        glow: "rgba(20, 83, 45, 0.2)",
+        gradient: "from-[#14532d]/20 via-green-900/10 to-transparent",
     },
 ];
 
@@ -209,13 +209,13 @@ export default function HowWeBuiltSection() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                             >
-                                <div className="w-12 h-[2px] bg-primary" />
-                                <span className="text-primary font-display font-bold text-xs tracking-[0.3em] uppercase">
+                                <div className="w-12 h-[2px] bg-[#22c55e]" />
+                                <span className="text-[#22c55e] font-display font-bold text-xs tracking-[0.3em] uppercase">
                                     Our Process
                                 </span>
                             </motion.div>
                             <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black text-white uppercase tracking-tight whitespace-nowrap">
-                                From <span className="text-primary italic">Vision</span> To Reality
+                                From <span className="text-jungle-gold italic drop-shadow-[0_0_10px_rgba(245,208,97,0.3)]">Vision</span> To Reality
                             </h2>
                         </div>
                         <p className="text-foreground/50 text-sm md:text-base font-light max-w-md leading-relaxed">
@@ -244,7 +244,7 @@ export default function HowWeBuiltSection() {
                             >
                                 {/* Card Container */}
                                 <motion.div
-                                    className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 backdrop-blur-xl bg-black/20 transition-all duration-500"
+                                    className="relative overflow-hidden rounded-[2.5rem] border border-[#22c55e]/10 backdrop-blur-3xl bg-[#020804]/60 transition-all duration-500"
                                     style={{
                                         boxShadow:
                                             activeIndex === index

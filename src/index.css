@@ -43,38 +43,39 @@
 
 @layer base {
   :root {
-    /* Original Theme Variables */
-    --background: 150 60% 15%;
-    --foreground: 50 100% 95%;
-    --primary: 43 100% 70%;
-    --primary-foreground: 150 60% 5%;
-    --secondary: 150 60% 20%;
-    --secondary-foreground: 43 100% 90%;
-    --card: 150 60% 12%;
-    --card-foreground: 50 100% 95%;
-    --accent: 79 45% 45%;
-    --accent-foreground: 43 100% 90%;
-    --border: 43 100% 70% / 0.2;
-    --ring: 43 100% 70%;
+    /* Premium Jungle Theme - Dark (Default) */
+    --background: 145 60% 8%; /* Deepest Forest Green */
+    --foreground: 60 30% 96%; /* Warm Ivory */
+    --primary: 45 100% 55%; /* Vibrant Gold/Yellow */
+    --primary-foreground: 145 60% 8%;
+    --secondary: 145 40% 16%; /* Moss Green */
+    --secondary-foreground: 60 30% 96%;
+    --card: 145 40% 12%; /* Dark Emerald */
+    --card-foreground: 60 30% 96%;
+    --accent: 120 40% 40%; /* Vibrant Leaf Green */
+    --accent-foreground: 60 30% 96%;
+    --border: 45 100% 55% / 0.15;
+    --ring: 45 100% 55%;
 
-    --glass-bg: 0 0% 100%;
-    --glass-border: 255 255 255;
-    --gradient-candy: linear-gradient(135deg, hsl(320 100% 60%), hsl(45 100% 60%), hsl(190 100% 50%));
+    --glass-bg: 145 60% 15%;
+    --glass-border: 45 100% 55%;
+    --gradient-candy: linear-gradient(135deg, hsl(45 100% 55%), hsl(120 50% 50%), hsl(150 100% 30%));
   }
 
   .light {
-    --background: 34 100% 98%;
-    --foreground: 150 60% 15%;
-    --primary: 43 100% 45%;
-    --primary-foreground: 150 60% 15%;
-    --secondary: 34 100% 92%;
-    --secondary-foreground: 150 60% 15%;
-    --card: 34 100% 96%;
-    --card-foreground: 150 60% 15%;
-    --accent: 43 100% 45%;
-    --accent-foreground: 34 100% 98%;
-    --border: 43 100% 45% / 0.2;
-    --ring: 43 100% 45%;
+    /* Premium Jungle Theme - Light */
+    --background: 45 30% 96%; /* Soft Sand/Ivory */
+    --foreground: 145 60% 12%; /* Deep Forest Green */
+    --primary: 145 60% 30%; /* Rich Emerald */
+    --primary-foreground: 45 30% 96%;
+    --secondary: 45 20% 90%; /* Light Sand */
+    --secondary-foreground: 145 60% 12%;
+    --card: 45 20% 94%;
+    --card-foreground: 145 60% 12%;
+    --accent: 45 100% 45%; /* Deep Gold */
+    --accent-foreground: 145 60% 12%;
+    --border: 145 60% 30% / 0.15;
+    --ring: 145 60% 30%;
   }
 
   /* Minimal Style Core */
@@ -161,6 +162,14 @@
 
   /* Global Setup */
   @layer utilities {
+    .text-jungle-gold {
+      @apply bg-clip-text text-transparent bg-gradient-to-br from-[#F5D061] via-[#D4AF37] to-[#A67C00];
+    }
+    
+    .text-jungle-emerald {
+      @apply bg-clip-text text-transparent bg-gradient-to-br from-[#4ade80] via-[#22c55e] to-[#14532d];
+    }
+
     .animate-spin-slow {
       animation: spin 8s linear infinite;
     }
@@ -187,12 +196,7 @@
     @apply border-border;
   }
 
-  /* Apply custom cursor only on desktop devices */
-  @media (pointer: fine) {
-    * {
-      cursor: none;
-    }
-  }
+  /* Custom cursor hiding is removed to keep default cursor visible */
 
   html,
   body {
@@ -358,5 +362,51 @@
 
   .animate-refraction {
     animation: refraction 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  /* ── Ambient particle float (offloaded from JS) ── */
+  @keyframes ambient-float {
+    0%   { transform: translate3d(0, 0, 0); opacity: 0.2; }
+    25%  { transform: translate3d(12px, -24px, 0); opacity: 0.5; }
+    50%  { transform: translate3d(20px, -40px, 0); opacity: 0.6; }
+    75%  { transform: translate3d(8px, -20px, 0); opacity: 0.35; }
+    100% { transform: translate3d(0, 0, 0); opacity: 0.2; }
+  }
+
+  .animate-ambient-float {
+    animation: ambient-float var(--float-duration, 5s) ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s);
+    will-change: transform, opacity;
+  }
+
+  /* ── Firefly glow (offloaded from Framer Motion) ── */
+  @keyframes firefly-drift {
+    0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+    15%  { opacity: 0.9; }
+    30%  { transform: translate3d(10px, -20px, 0); opacity: 0.3; }
+    60%  { transform: translate3d(-8px, -15px, 0); opacity: 0.8; }
+    100% { transform: translate3d(5px, 0, 0); opacity: 0; }
+  }
+
+  .animate-firefly {
+    animation: firefly-drift var(--firefly-duration, 4s) ease-in-out infinite;
+    animation-delay: var(--firefly-delay, 0s);
+    will-change: transform, opacity;
+  }
+
+  /* ── Fade-in for CTA buttons ── */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  /* ── Content visibility for below-fold sections ── */
+  .content-lazy {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
   }
 }
