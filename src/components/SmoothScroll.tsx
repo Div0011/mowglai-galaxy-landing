@@ -10,6 +10,7 @@ const SmoothScroll = () => {
     useEffect(() => {
         let cancelled = false;
         let lenisInstance: any = null;
+        let tickerFn: ((time: number) => void) | null = null;
 
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
@@ -43,9 +44,10 @@ const SmoothScroll = () => {
             });
 
             // Sync GSAP ticker with Lenis for perfect frame alignment
-            gsap.ticker.add((time: number) => {
+            tickerFn = (time: number) => {
                 lenisInstance?.raf(time * 1000);
-            });
+            };
+            gsap.ticker.add(tickerFn);
 
             // Disable Lenis's own rAF loop since GSAP ticker drives it now
             gsap.ticker.lagSmoothing(0);
@@ -55,8 +57,10 @@ const SmoothScroll = () => {
 
         return () => {
             cancelled = true;
+            if (tickerFn) {
+                gsap.ticker.remove(tickerFn);
+            }
             if (lenisInstance) {
-                gsap.ticker.remove(lenisInstance.raf);
                 lenisInstance.destroy();
             }
         };
