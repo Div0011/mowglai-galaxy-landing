@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence, MotionValue } from "framer-motion";
 import gsap from "gsap";
 
 // ═══════════════════════════════════════════════════════════════
@@ -170,7 +170,7 @@ const FlyingParrot = ({ startY, color, direction }: { startY: number; color: str
 };
 
 // ─── 11–14. MONKEYS ON BRANCHES (jump when scrolled past) ───
-const BranchMonkey = ({ yPercent, xPercent, scrollYProgress, triggerAt }: { yPercent: number; xPercent: number; scrollYProgress: any; triggerAt: number }) => {
+const BranchMonkey = ({ yPercent, xPercent, scrollYProgress, triggerAt }: { yPercent: number; xPercent: number; scrollYProgress: MotionValue<number>; triggerAt: number }) => {
     const jumpY = useTransform(scrollYProgress, [triggerAt - 0.05, triggerAt, triggerAt + 0.05], [0, -60, 0]);
     const jumpX = useTransform(scrollYProgress, [triggerAt - 0.05, triggerAt, triggerAt + 0.05], [0, 30, 0]);
     const rot = useTransform(scrollYProgress, [triggerAt - 0.05, triggerAt, triggerAt + 0.05], [0, -20, 0]);
@@ -202,7 +202,7 @@ const BranchMonkey = ({ yPercent, xPercent, scrollYProgress, triggerAt }: { yPer
 };
 
 // ─── 19–21. TOUCANS (perched, head tilts on scroll) ───
-const Toucan = ({ yPercent, xPercent, scrollYProgress, triggerAt }: { yPercent: number; xPercent: number; scrollYProgress: any; triggerAt: number }) => {
+const Toucan = ({ yPercent, xPercent, scrollYProgress, triggerAt }: { yPercent: number; xPercent: number; scrollYProgress: MotionValue<number>; triggerAt: number }) => {
     const headTilt = useTransform(scrollYProgress, [triggerAt - 0.1, triggerAt, triggerAt + 0.1], [0, 15, 0]);
 
     return (
