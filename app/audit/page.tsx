@@ -127,8 +127,9 @@ export default function AuditPage() {
                     className="group"
                     aria-label="Back to Home"
                 >
-                    <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 opacity-100 blur-0">
-                        <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                    <div className="flex items-center gap-3 transition-all duration-300 opacity-100 blur-0">
+                        <MowglaiLogo size="md" variant="icon" className="w-12 h-12 md:w-14 md:h-14 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                        <span className="font-display font-black text-xl md:text-2xl tracking-tight text-primary drop-shadow-[0_0_10px_rgba(var(--primary-rgb),0.3)]">MOWGLAI</span>
                     </div>
                 </button>
             </div>

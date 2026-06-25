@@ -60,6 +60,9 @@
     --glass-bg: 145 60% 15%;
     --glass-border: 45 100% 55%;
     --gradient-candy: linear-gradient(135deg, hsl(45 100% 55%), hsl(120 50% 50%), hsl(150 100% 30%));
+    
+    /* Smooth global rounded feel */
+    --radius: 2rem;
   }
 
   .light {
@@ -76,6 +79,9 @@
     --accent-foreground: 145 60% 12%;
     --border: 145 60% 30% / 0.15;
     --ring: 145 60% 30%;
+    
+    /* Smooth global rounded feel */
+    --radius: 2rem;
   }
 
   /* Minimal Style Core */

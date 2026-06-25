@@ -42,8 +42,7 @@ const Footer = () => {
           <div className="md:col-span-5 space-y-8">
             <Link href="/" className="inline-block">
               <div className="flex items-center gap-3">
-                <MowglaiLogo size="sm" />
-                <span className="font-display font-black text-2xl tracking-tight text-jungle-gold drop-shadow-[0_0_10px_rgba(245,208,97,0.3)]">MOWGLAI</span>
+                <MowglaiLogo size="lg" variant="wordmark" className="h-10 w-auto" />
               </div>
             </Link>
             <p className="text-white/60 text-lg max-w-sm leading-relaxed">
