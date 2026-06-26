@@ -5,7 +5,7 @@ import { Providers } from "@/components/Providers";
 import { AOSInit } from "@/components/AOSInit";
 import { LanguageProvider } from "@/context/LanguageContext";
 import SplashScreen from "@/components/SplashScreen";
-
+import ClientCompanion from "@/components/guardian/ClientCompanion";
 
 // Preload critical fonts for better performance
 const boldonse = localFont({
@@ -167,6 +167,7 @@ export default function RootLayout({
                     </noscript>
                     <Providers>
                         <AOSInit />
+                        <ClientCompanion />
                         {children}
                     </Providers>
                     <script

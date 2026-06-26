@@ -8,7 +8,7 @@ import { useTheme } from "next-themes";
 import XLogo from "@/components/icons/XLogo";
 
 interface NavItem {
-    icon: React.ElementType;
+    icon: any;
     label: string;
     href: string;
 }

@@ -39,7 +39,7 @@ const ScanAnimation = () => (
 /* ── Feature card ─────────────────────────────────────────── */
 const FeatureCard = ({
     icon: Icon, title, desc, delay, accent
-}: { icon: React.ElementType; title: string; desc: string; delay: number; accent?: string }) => (
+}: { icon: any; title: string; desc: string; delay: number; accent?: string }) => (
     <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

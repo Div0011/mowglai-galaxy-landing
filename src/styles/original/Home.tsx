@@ -1,14 +1,14 @@
 "use client";
 
 import OriginalLayout from "@/styles/original/Layout";
-import HeroSection from "@/components/HeroSection";
+import Hero from "@/components/hero/Hero";
 import HomeContent from "@/components/HomeContent";
 
 export default function OriginalHome() {
     return (
         <OriginalLayout>
             <div className="relative w-full">
-                <HeroSection />
+                <Hero />
             </div>
             <HomeContent />
         </OriginalLayout>

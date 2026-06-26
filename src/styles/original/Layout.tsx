@@ -7,7 +7,7 @@ import MobileNav from "@/components/MobileNav";
 import SettingsToggle from "@/components/SettingsToggle";
 import ContactToggle from "@/components/ContactToggle";
 
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/NewFooter";
 import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
 import { motion, AnimatePresence } from "framer-motion";
