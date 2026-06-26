@@ -215,7 +215,7 @@ export default function HowWeBuiltSection() {
                                 </span>
                             </motion.div>
                             <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black text-white uppercase tracking-tight whitespace-nowrap">
-                                From <span className="text-jungle-gold italic drop-shadow-[0_0_10px_rgba(245,208,97,0.3)]">Vision</span> To Reality
+                                From <span className="text-jungle-gold italic drop-shadow-[0_0_10px_rgba(245,208,97,0.3)] inline-block pr-[0.15em]">Vision</span> To Reality
                             </h2>
                         </div>
                         <p className="text-foreground/50 text-sm md:text-base font-light max-w-md leading-relaxed">

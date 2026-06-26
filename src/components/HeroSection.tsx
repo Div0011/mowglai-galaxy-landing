@@ -7,6 +7,7 @@ import Magnetic from "./Magnetic";
 import { useLanguage } from "../context/LanguageContext";
 import { ArrowRight, ScanLine } from "lucide-react";
 import { motion } from "framer-motion";
+import MowglaiLogo from "./MowglaiLogo";
 
 // Floating leaves component — stable values to prevent hydration mismatch
 const FloatingLeaves = () => {
@@ -55,6 +56,7 @@ const FloatingLeaves = () => {
 const HeroSection = () => {
     const { t } = useLanguage();
     const tiltRef = useRef<HTMLDivElement>(null);
+    const spotlightRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         let animationFrameId: number;
@@ -83,6 +85,11 @@ const HeroSection = () => {
 
                     tiltRef.current.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 }
+
+                if (spotlightRef.current) {
+                    spotlightRef.current.style.opacity = "1";
+                    spotlightRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(245, 208, 97, 0.08), rgba(74, 222, 128, 0.03) 40%, transparent 80%)`;
+                }
             });
         };
 
@@ -91,6 +98,9 @@ const HeroSection = () => {
             animationFrameId = requestAnimationFrame(() => {
                 if (tiltRef.current) {
                     tiltRef.current.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
+                }
+                if (spotlightRef.current) {
+                    spotlightRef.current.style.opacity = "0";
                 }
             });
         };
@@ -110,6 +120,15 @@ const HeroSection = () => {
             id="home"
             className="relative w-full h-screen z-10 overflow-hidden flex flex-col items-center justify-center border-none"
         >
+            {/* Interactive Spotlight Glow */}
+            <div
+                ref={spotlightRef}
+                className="absolute inset-0 z-0 pointer-events-none opacity-0 transition-opacity duration-1000 hidden md:block"
+                style={{
+                    background: "radial-gradient(600px circle at 50% 50%, rgba(245, 208, 97, 0.05), transparent 80%)",
+                    willChange: "background, opacity"
+                }}
+            />
             <FloatingLeaves />
 
             {/* Main Content Container */}
@@ -125,10 +144,43 @@ const HeroSection = () => {
                     }}
                 >
                     <h1
-                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-jungle-gold tracking-tighter hover:tracking-[0.25em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-80 hover:brightness-125"
-                        data-aos-duration="1000"
+                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-jungle-gold tracking-tighter hover:tracking-[0.05em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:brightness-125 flex gap-1 justify-center items-center"
+                        style={{ filter: "drop-shadow(0 0 25px rgba(245, 208, 97, 0.15))" }}
                     >
-                        MOWGLAI
+                        {"MOWGLAI".split("").map((char, index) => {
+                            if (char === "O") {
+                                return (
+                                    <motion.span
+                                        key={index}
+                                        initial={{ opacity: 0, y: 80, rotateX: -80 }}
+                                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                        transition={{
+                                            duration: 0.8,
+                                            delay: 0.08 * index,
+                                            ease: [0.215, 0.61, 0.355, 1]
+                                        }}
+                                        className="inline-flex transform-gpu hover:scale-[1.08] transition-all duration-300 align-middle justify-center items-center mx-[0.02em] flex-shrink-0"
+                                    >
+                                        <MowglaiLogo size="full" className="w-[0.82em] h-[0.82em] border-none bg-transparent backdrop-blur-none hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)] transition-all duration-500" />
+                                    </motion.span>
+                                );
+                            }
+                            return (
+                                <motion.span
+                                    key={index}
+                                    initial={{ opacity: 0, y: 80, rotateX: -80 }}
+                                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                    transition={{
+                                        duration: 0.8,
+                                        delay: 0.08 * index,
+                                        ease: [0.215, 0.61, 0.355, 1]
+                                    }}
+                                    className="inline-block transform-gpu hover:scale-[1.08] hover:text-white transition-all duration-300"
+                                >
+                                    {char}
+                                </motion.span>
+                            );
+                        })}
                     </h1>
                 </div>
 

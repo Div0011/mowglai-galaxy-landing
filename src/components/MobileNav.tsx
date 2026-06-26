@@ -1,4 +1,4 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart } from "lucide-react";
+import { Home, Users, Mail, Menu, X, Instagram, Linkedin, ShoppingCart, Layers, LayoutTemplate } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -8,12 +8,11 @@ import Magnetic from "@/components/Magnetic";
 import XLogo from "@/components/icons/XLogo";
 
 const navItems = [
-    { icon: Home, label: "START", href: "/" },
-    { icon: Users, label: "STORY", href: "/about" },
-    { icon: Palette, label: "CRAFT", href: "/services" },
-    { icon: LayoutGrid, label: "BLUEPRINT", href: "/explore" },
-    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
-    { icon: Mail, label: "HELLO", href: "/contact" },
+    { icon: Home, label: "HOME", href: "/" },
+    { icon: Users, label: "ABOUT", href: "/about" },
+    { icon: Layers, label: "SERVICES", href: "/services" },
+    { icon: LayoutTemplate, label: "PRODUCTS", href: "/explore" },
+    { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
 const socialItems = [

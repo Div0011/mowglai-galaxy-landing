@@ -171,75 +171,75 @@ const translations: Record<Language, Translations> = {
             weCreate: "WE CREATE",
             the: "THE",
             extraordinary: "EXTRAORDINARY",
-            introText: "In a digital landscape crowded with the mundane, Mowglai Wild stands as a beacon of growth. We don't just build websites; we architect digital ecosystems that breathe life into your brand's vision.",
+            introText: "In a crowded digital world, Mowglai is here to help you grow. We don't just build websites; we create complete digital systems that make your brand stand out.",
             exploreDNA: "Explore Our DNA",
             purchase: "Purchase",
             templates: "Templates",
-            templateText: "Accelerate your launch with our premium, industry-specific website templates. Handcrafted for performance and designed to convert.",
+            templateText: "Get your website online faster with our premium templates. Handcrafted for fast performance and designed to turn visitors into customers.",
             viewTemplates: "VIEW TEMPLATES",
-            readyToBegin: "Ready to Begin the Journey?",
+            readyToBegin: "Ready to Start the Journey?",
             consultFree: "Consult for Free",
             studioStory: "THE STUDIO STORY",
-            knowMore: "Still not sure? Know more"
+            knowMore: "Still not sure? Learn more"
         },
         SelectedWork: {
             selected: "Selected",
             work: "Work",
-            collectionDesc: "A curated collection of our most impactful digital voyages.",
+            collectionDesc: "A showcase of some of our best digital projects.",
             exploreCase: "EXPLORE CASE",
             comingSoonTitle: "Case Study Coming Soon",
             comingSoonDesc: "The case study for this project is currently being finalized. Check back shortly!"
         },
         AestheticShowcase: {
-            aesthetic: { title: "Aesthetic", text: "Stunning Visuals" },
-            global: { title: "Global", text: "Borderless Experiences" },
-            fast: { title: "Fast", text: "Blazing Performance" },
-            deep: { title: "Deep", text: "Simplified Complexity" },
-            mobile: { title: "Mobile", text: "Flawless Everywhere" },
-            adaptation: { title: "Adaptation", text: "Constant Evolution" },
-            survival: { title: "Survival", text: "Resilient Code" }
+            aesthetic: { title: "Design", text: "Stunning Visuals" },
+            global: { title: "Global", text: "Global Standards" },
+            fast: { title: "Fast", text: "Blazing Speed" },
+            deep: { title: "Simple", text: "Easy to Understand" },
+            mobile: { title: "Mobile", text: "Works on All Screens" },
+            adaptation: { title: "Flexible", text: "Constant Growth" },
+            survival: { title: "Reliable", text: "Secure & Stable Code" }
         },
         Services: {
             hero: {
                 subtitle: "Our",
                 title: "Services",
-                description: "Capabilities woven into digital reality."
+                description: "What we can do for your business."
             },
             cards: {
                 webDesign: {
                     category: "Web Design",
-                    title: "Aesthetic Excellence",
-                    description: "Your website is the digital face of your brand. We craft visually stunning, responsive interfaces that merge artistic expression with functional precision.",
+                    title: "Beautiful Web Design",
+                    description: "Your website is your online storefront. We design beautiful, easy-to-use interfaces that look great on all devices and represent your brand perfectly.",
                     details: ["UI/UX Design", "Motion Graphics", "Brand Identity", "Responsive Layouts", "Mobile First"]
                 },
                 development: {
                     category: "Development",
-                    title: "Robust Engineering",
-                    description: "Beneath the beauty lies a beast. Our development team builds scalable, secure, and lightning-fast architectures that drive your business forward.",
+                    title: "Strong Web Development",
+                    description: "We build secure, fast, and reliable websites and applications. Our clean code helps your platforms handle traffic smoothly and grow with your business.",
                     details: ["Full-Stack Dev", "SaaS Platforms", "MVP Builds", "MVC Architecture", "E-Commerce", "CMS Solutions", "API Integration"]
                 },
                 redesign: {
                     category: "Redesign",
-                    title: "Digital Evolution",
-                    description: "Outdated shouldn't mean obsolete. We breathe new life into legacy platforms. Enhance usability, improve speed, and secure your digital future.",
+                    title: "Website Redesign",
+                    description: "We update old websites to make them look and feel like new. We improve their speed, security, and usability to protect your online presence.",
                     details: ["Visual Overhaul", "Performance Optimization", "Security Patching", "UX Strategy"]
                 },
                 database: {
                     category: "Database",
-                    title: "Data Intelligence",
-                    description: "We design sophisticated database solutions that ensure your information is organized, accessible, and impenetrable. We handle the backbone of your application.",
+                    title: "Data Management",
+                    description: "We set up secure and organized databases to store your business information safely, keeping it easy to access when you need it.",
                     details: ["Database Architecture", "Cloud Migration", "Data Security", "Performance Tuning"]
                 },
                 strategy: {
                     category: "Strategy",
-                    title: "Global Reach",
-                    description: "Our strategies are designed to position your brand on the global map, ensuring you resonate with audiences across cultures and borders.",
+                    title: "SEO & Growth",
+                    description: "We help your business get found online by more customers, designing strategies that improve your search engine rankings and grow your audience.",
                     details: ["Market Analysis", "SEO Strategy", "Content Curation", "Growth Hacking"]
                 },
                 ai: {
-                    category: "Artificial Intelligence",
-                    title: "Intelligent Systems",
-                    description: "Empower your platform with next-gen AI. From smart chatbots to predictive analytics, we integrate intelligence into your digital ecosystem.",
+                    category: "AI & Automation",
+                    title: "Smart AI Tools",
+                    description: "Add smart tools to your website like custom chatbots and automation to make tasks easier, faster, and more helpful for your users.",
                     details: ["AI Chatbots", "Machine Learning", "Automation", "Integration"]
                 }
             }
@@ -248,15 +248,15 @@ const translations: Record<Language, Translations> = {
             hero: {
                 digital: "Digital",
                 artisans: "Artisans",
-                description: "\"We are your flexible digital partners. Partnering with ambitious brands worldwide, we craft stylish, professional websites that fit your unique vision.\""
+                description: "\"We are your flexible digital partners. We work with ambitious brands worldwide to design modern, professional websites that fit your unique goals.\""
             },
             features: [
-                { title: "Modern & Stylish", description: "Creating modest yet visually striking designs tailored for any client profile." },
-                { title: "Professional Grade", description: "Robust protocols ensuring your digital presence is secure and reliable." },
-                { title: "Peak Performance", description: "Optimized for speed and smoothness, respecting your user's time." },
-                { title: "International Exp.", description: "Proven track record with leading firms across multiple continents." },
-                { title: "Client Centric", description: "We adapt to your specific needs, regardless of industry or scale." },
-                { title: "Flexible Schedule", description: "Active Mon-Sat across different time zones to match your workflow." }
+                { title: "Modern & Stylish", description: "Clean, visual designs tailored to your brand style." },
+                { title: "Professional Grade", description: "Secure and stable setups to keep your website safe." },
+                { title: "Peak Performance", description: "Optimized for fast speeds and smooth scrolling." },
+                { title: "International Exp.", description: "Proven experience working with clients across the globe." },
+                { title: "Client Centric", description: "We adapt to your specific needs, no matter your industry size." },
+                { title: "Flexible Schedule", description: "We align with your time zone to keep communication easy." }
             ],
             mission: {
                 global: "GLOBAL",
@@ -266,8 +266,8 @@ const translations: Record<Language, Translations> = {
                 theWorld: "THE WORLD",
                 discover: "Discover",
                 ourDna: "Our DNA",
-                quote: "\"Bringing world-class quality to clients worldwide. We create modest, stylish, and professional websites for any industry.\"",
-                description: "We are built for flexibility. Operating Monday to Saturday across multiple time zones, we align perfectly with your schedule. Whether you are a startup or an enterprise, our global team delivers modern digital craftsmanship that speaks a universal language."
+                quote: "\"Bringing top-quality website design to clients worldwide. We create clean, modern, and professional sites for any industry.\"",
+                description: "We work flexibly around your schedule. Operating Monday to Saturday across different time zones, we align with your working hours. Whether you are a startup or an established company, our team delivers modern website development that gets results."
             }
         },
         Navigation: {

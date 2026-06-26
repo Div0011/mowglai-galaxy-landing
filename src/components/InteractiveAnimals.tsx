@@ -345,9 +345,6 @@ export default function InteractiveAnimals() {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[5]">
-            {/* 1. Panther — permanent */}
-            <Panther />
-
             {/* 2–6. Butterflies × 5 — permanent */}
             {[0, 1, 2, 3, 4].map(i => (
                 <Butterfly key={`bf-${i}`} id={i} />

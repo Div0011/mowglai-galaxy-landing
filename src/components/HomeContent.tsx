@@ -364,8 +364,8 @@ export default function HomeContent() {
                 <div className="w-10 h-[1.5px] bg-primary" />
                 Showcase
               </div>
-              <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter text-foreground uppercase leading-[1.2]">
-                Our <span className="text-jungle-emerald italic">Works</span> & <br className="mb-2" /> High-End <span className="text-jungle-gold italic">Templates</span>
+              <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-foreground uppercase leading-[1.2]">
+                Our <span className="text-jungle-emerald italic inline-block pr-[0.15em]">Works</span> & <br className="mb-2" /> High-End <span className="text-jungle-gold italic inline-block pr-[0.15em]">Templates</span>
               </h2>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={0.2}>
