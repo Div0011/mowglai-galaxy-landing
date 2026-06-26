@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: "https://mowglai.com/our-dna",
         images: [
             {
-                url: "https://mowglai.com/mowglai-logo-new.jpg",
+                url: "https://mowglai.com/assets/mowglai_primary.png",
                 width: 1200,
                 height: 1200,
                 alt: "Mowglai DNA and Process"
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Our DNA & Process | How Mowglai Creates Digital Excellence",
         description: "Discover Mowglai's unique approach to web development and digital design.",
-        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/assets/mowglai_primary.png"],
     },
 };
 

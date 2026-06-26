@@ -79,7 +79,7 @@ export const generateQuotationPDF = async (plan: Plan) => {
     const breakdown = getBreakdown(plan.name);
     const justification = getJustification(plan.name, plan.price);
     const upgradeOption = getUpgradeOption(plan.name);
-    const logoBase64 = await getBase64Image("/mowglai-logo-new.jpg");
+    const logoBase64 = await getBase64Image("/assets/mowglai_primary.png");
 
     const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
     const refStr = `MW-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
