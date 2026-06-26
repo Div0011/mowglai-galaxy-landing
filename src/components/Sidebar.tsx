@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
-    icon: React.ElementType;
+    icon: any;
     label: string;
     href: string;
 }
