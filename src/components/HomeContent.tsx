@@ -214,7 +214,12 @@ export default function HomeContent() {
     });
     
     // Smoothly reset on resize
-    window.addEventListener("resize", () => skewSetter(0));
+    const onResize = () => skewSetter(0);
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
   }, { scope: containerRef });
 
   return (
