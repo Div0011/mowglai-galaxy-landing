@@ -102,7 +102,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                         onClick={() => router.push('/')}
                     >
                         <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 flex-shrink-0">
-                            <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                            <MowglaiLogo size="lg" variant="primary" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
                         </div>
                         
                         {/* Emerge Text Container */}

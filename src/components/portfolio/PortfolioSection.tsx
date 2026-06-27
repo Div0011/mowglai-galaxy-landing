@@ -53,6 +53,7 @@ export default function PortfolioSection() {
         trigger: containerRef.current,
         pin: true,
         scrub: 1,
+        start: "center center",
         // snap: 1 / (panels.length - 1), // Optional snapping
         end: () => "+=" + scrollRef.current?.offsetWidth
       }
@@ -110,7 +111,7 @@ export default function PortfolioSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className="portfolio-panel w-full md:w-[80vw] lg:w-[60vw] flex-shrink-0 md:pr-12 group relative overflow-hidden rounded-3xl aspect-[4/3] md:aspect-[16/9] bg-card border border-primary/10"
+            className="portfolio-panel w-full md:w-[55vw] lg:w-[42vw] flex-shrink-0 md:pr-12 group relative overflow-hidden rounded-3xl aspect-[16/9] bg-card border border-primary/10"
           >
             <img 
               src={project.image} 
