@@ -9,6 +9,7 @@ function LionModel() {
   const group = useRef<THREE.Group>(null);
   const { scene, animations } = useGLTF("/assets/lion.glb");
   const { actions } = useAnimations(animations, group);
+  const [modelOffset, setModelOffset] = React.useState<[number, number, number]>([0, 0, 0]);
 
   // Apply rich golden materials and center geometry
   useEffect(() => {
@@ -31,9 +32,7 @@ function LionModel() {
     if (hasMesh) {
       const center = new THREE.Vector3();
       box.getCenter(center);
-      scene.position.x = -center.x;
-      scene.position.y = -center.y;
-      scene.position.z = -center.z;
+      setModelOffset([-center.x, -center.y, -center.z]);
     }
 
     scene.traverse((child: THREE.Object3D) => {
@@ -82,7 +81,7 @@ function LionModel() {
 
   return (
     <group ref={group}>
-      <primitive object={scene} />
+      <primitive object={scene} position={modelOffset} />
       <ContactShadows position={[0, -1.2, 0]} opacity={0.4} scale={8} blur={1.5} far={3} />
     </group>
   );

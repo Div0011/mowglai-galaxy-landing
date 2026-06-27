@@ -1,5 +1,7 @@
+import React from "react";
+
 declare global {
-  namespace JSX {
+  namespace React.JSX {
     interface IntrinsicElements {
       "model-viewer": React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & {
@@ -26,4 +28,4 @@ declare global {
   }
 }
 
-export {}; // Ensure it is treated as a module 
+export {};

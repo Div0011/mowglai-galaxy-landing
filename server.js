@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const express = require('express');
 const multer = require('multer');
 const obj2gltf = require('obj2gltf');
