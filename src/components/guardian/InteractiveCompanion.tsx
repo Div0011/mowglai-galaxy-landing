@@ -20,7 +20,7 @@ const PAGE_CONFIG: Record<string, {
   "/audit":     { message: "🔍 Free audit = free insights – website ki kami jaanein!",   corner: { top: "120px", right: "40px"   }, size: 85  },
   "/portfolio": { message: "🏆 Yeh kaam dekh ke hi samjhein – kyun Mowglai India ka best hai.", corner: { top: "120px", left: "40px" }, size: 85 },
 };
-const DEFAULT_CONFIG = PAGE_CONFIG["/landing"];
+const DEFAULT_CONFIG = PAGE_CONFIG["/"];
 
 /* ── SVG Lion Mascot ──────────────────────────────────────────────────────── */
 function LionSVG({ size, mouseX, mouseY }: { size: number; mouseX: number; mouseY: number }) {
@@ -105,7 +105,10 @@ function ChatBubble({ message, visible, isLeft }: { message: string; visible: bo
 /* ── Main Companion ──────────────────────────────────────────────────────── */
 export default function InteractiveCompanion() {
   const pathname = usePathname();
-  const config = PAGE_CONFIG[pathname] ?? DEFAULT_CONFIG;
+  const normalizedPathname = pathname && pathname.endsWith("/") && pathname !== "/"
+    ? pathname.slice(0, -1)
+    : pathname;
+  const config = PAGE_CONFIG[normalizedPathname] ?? DEFAULT_CONFIG;
   const [mounted, setMounted] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
