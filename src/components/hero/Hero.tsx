@@ -73,7 +73,7 @@ export default function Hero() {
         </div>
 
         {/* Right Side: 3D GLB Model inside its starting right corner box */}
-        <div className="hidden lg:block relative h-[350px] lg:h-[480px] w-full z-0 lg:z-50 pointer-events-none lg:pointer-events-auto">
+        <div className="hidden lg:block relative h-[400px] lg:h-[580px] w-full z-0 lg:z-50 pointer-events-none lg:pointer-events-auto">
           <HeroLionGLB />
         </div>
       </div>
