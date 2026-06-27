@@ -38,7 +38,14 @@ export default function LandingNavbar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Left: Logo */}
         <Link href="/" className="group flex items-center gap-2">
-          <MowglaiLogo size="md" variant="wordmark" className="h-8 w-auto text-white group-hover:scale-105 transition-transform" />
+          <div className="flex flex-col">
+            <span className="text-xl md:text-2xl font-display font-black text-[#F5D061] tracking-[0.15em] leading-none drop-shadow-[0_0_8px_rgba(245,208,97,0.4)] group-hover:scale-105 transition-transform duration-300">
+              MOWGLAI
+            </span>
+            <span className="font-body text-[8px] md:text-[9px] text-[#22c55e] tracking-[0.3em] uppercase font-bold mt-1.5 whitespace-nowrap group-hover:scale-105 transition-transform duration-300">
+              Digital Agency
+            </span>
+          </div>
         </Link>
 
         {/* Center: Navigation Links */}
