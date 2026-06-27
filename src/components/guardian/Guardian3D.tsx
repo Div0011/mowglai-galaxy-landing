@@ -1,7 +1,7 @@
-/// <reference path="../../types/global.d.ts" />
 "use client";
 
 import { useEffect, useState } from "react";
+import "../../types/global.d.ts";
 
 
 
