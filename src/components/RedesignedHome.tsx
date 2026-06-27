@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import PremiumLoader from "./animations/PremiumLoader";
 import JungleBackground from "./animations/JungleBackground";
+import LandingNavbar from "./navigation/LandingNavbar";
 import Hero from "./hero/Hero";
 import ServicesSection from "./services/ServicesSection";
 import PortfolioSection from "./portfolio/PortfolioSection";
@@ -25,22 +26,33 @@ export default function RedesignedHome() {
       {/* Background layer */}
       <JungleBackground />
 
+      {/* Premium Sticky Navigation */}
+      <LandingNavbar />
+
       {/* Content Layers */}
       <div className="relative z-10 flex flex-col">
         {/* Page 1: Hero */}
         <Hero />
         
         {/* Page 2 & 3: Services */}
-        <ServicesSection />
+        <div id="services">
+          <ServicesSection />
+        </div>
         
         {/* Page 4: Portfolio */}
-        <PortfolioSection />
+        <div id="portfolio">
+          <PortfolioSection />
+        </div>
         
         {/* Page 5: Templates */}
-        <TemplatesSection />
+        <div id="templates">
+          <TemplatesSection />
+        </div>
         
         {/* Page 6: Pricing */}
-        <PricingSection />
+        <div id="pricing">
+          <PricingSection />
+        </div>
         
         {/* Page 7: Lead Form */}
         <LeadFormSection />
