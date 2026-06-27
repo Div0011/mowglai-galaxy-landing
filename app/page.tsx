@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "Mowglai",
     images: [
       {
-        url: "https://mowglai.com/mowglai-logo-new.jpg",
+        url: "https://mowglai.com/assets/mowglai_primary.png",
         width: 1200,
         height: 1200,
         alt: "Mowglai - Premium Web Development Agency"
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mowglai - Web Development, SaaS MVP & Digital Agency",
     description: "India's premier web development agency for SaaS, MVPs, MVC architecture, and high-performance websites.",
-    images: ["https://mowglai.com/mowglai-logo-new.jpg"],
+    images: ["https://mowglai.com/assets/mowglai_primary.png"],
     creator: "@mowglai_in",
     site: "@mowglai_in",
   },
@@ -71,17 +71,14 @@ const jsonLdWebPage = {
   "name": "Mowglai - Web Development & Digital Agency",
   "description": "Premium web development and digital agency based in India. Specializing in React, Next.js, 3D websites, and custom web applications.",
   "url": "https://mowglai.com/",
-  "image": "https://mowglai.com/mowglai-logo-new.jpg",
+  "image": "https://mowglai.com/assets/mowglai_primary.png",
   "provider": {
     "@type": "Organization",
     "name": "Mowglai"
   }
 };
 
-import OriginalHome from "@/styles/original/Home";
-
-function mything(){
-}
+import RedesignedHome from "@/components/RedesignedHome";
 
 export default function Home() {
   return (
@@ -94,7 +91,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
       />
-      <OriginalHome />
+      <RedesignedHome />
     </>
   );
 }
