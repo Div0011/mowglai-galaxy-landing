@@ -24,7 +24,7 @@ export default function LandingNavbar() {
     { label: "Works", href: "#portfolio" },
     { label: "Templates", href: "#templates" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Mowglai Portal", href: "/home" },
+    { label: "Mowglai Portal", href: "/home/" },
   ];
 
   return (
@@ -43,16 +43,31 @@ export default function LandingNavbar() {
 
         {/* Center: Navigation Links */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="relative text-sm uppercase tracking-widest text-white/70 hover:text-[#F5D061] transition-colors duration-300 font-display font-bold group"
-            >
-              {link.label}
-              <span className="absolute bottom-[-4px] left-0 w-full h-[1.5px] bg-[#F5D061] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left shadow-[0_0_8px_rgba(245,208,97,0.8)]" />
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isAnchor = link.href.startsWith("#");
+            if (isAnchor) {
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="relative text-sm uppercase tracking-widest text-white/70 hover:text-[#F5D061] transition-colors duration-300 font-display font-bold group"
+                >
+                  {link.label}
+                  <span className="absolute bottom-[-4px] left-0 w-full h-[1.5px] bg-[#F5D061] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left shadow-[0_0_8px_rgba(245,208,97,0.8)]" />
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="relative text-sm uppercase tracking-widest text-white/70 hover:text-[#F5D061] transition-colors duration-300 font-display font-bold group"
+              >
+                {link.label}
+                <span className="absolute bottom-[-4px] left-0 w-full h-[1.5px] bg-[#F5D061] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left shadow-[0_0_8px_rgba(245,208,97,0.8)]" />
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right: CTA Button */}
@@ -84,16 +99,31 @@ export default function LandingNavbar() {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed top-[73px] left-0 w-full bg-[#020804]/95 backdrop-blur-lg border-b border-[#22c55e]/10 py-8 px-6 flex flex-col gap-6 z-40 animate-fade-in">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-lg uppercase tracking-wider text-white/80 hover:text-[#F5D061] font-display font-bold"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isAnchor = link.href.startsWith("#");
+            if (isAnchor) {
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-lg uppercase tracking-wider text-white/80 hover:text-[#F5D061] font-display font-bold"
+                >
+                  {link.label}
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-lg uppercase tracking-wider text-white/80 hover:text-[#F5D061] font-display font-bold"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="/start-project"
             onClick={() => setMobileMenuOpen(false)}
