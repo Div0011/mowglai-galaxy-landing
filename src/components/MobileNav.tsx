@@ -8,7 +8,7 @@ import Magnetic from "@/components/Magnetic";
 import XLogo from "@/components/icons/XLogo";
 
 const navItems = [
-    { icon: Home, label: "HOME", href: "/" },
+    { icon: Home, label: "HOME", href: "/home/" },
     { icon: Users, label: "ABOUT", href: "/about" },
     { icon: Layers, label: "SERVICES", href: "/services" },
     { icon: LayoutTemplate, label: "PRODUCTS", href: "/explore" },
@@ -30,8 +30,11 @@ const MobileNav = () => {
 
     // Sync active item with location
     useEffect(() => {
-        const currentPath = pathname;
-        const active = navItems.find(item => item.href === currentPath);
+        const currentPath = pathname && pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+        const active = navItems.find(item => {
+            const itemNormalized = item.href.endsWith("/") && item.href !== "/" ? item.href.slice(0, -1) : item.href;
+            return itemNormalized === currentPath;
+        });
         if (active) setActiveItem(active.label);
     }, [pathname]);
 
