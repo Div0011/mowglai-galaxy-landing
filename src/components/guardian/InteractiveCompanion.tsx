@@ -138,10 +138,8 @@ export default function InteractiveCompanion() {
 
   if (!mounted) return null;
 
-  // On landing page (/), hide the SVG companion when user is near the top (since GLB 3D Lion is displayed in the hero section)
-  // Show it only when scrolled down past the hero section (scrollY > 500)
-  const isLandingPage = pathname === "/";
-  const shouldHideOnHome = isLandingPage && scrollY < 500;
+  // Mascot is always visible in the configured corner
+  const shouldHideOnHome = false;
 
   const isLeft = !!(config.corner.left);
 
