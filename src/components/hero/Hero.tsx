@@ -59,7 +59,7 @@ export default function Hero() {
             </Magnetic>
             <Magnetic>
               <Link
-                  href="/home"
+                  href="/home/"
                   className="group relative inline-flex items-center justify-center px-8 py-4 bg-background/10 backdrop-blur-xl border border-primary/10 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700 hover:border-primary/40"
               >
                   <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#D4AF37] to-[#14532d] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
