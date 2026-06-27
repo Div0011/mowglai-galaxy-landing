@@ -83,10 +83,11 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            { url: "/logo2.webp", type: "image/webp", sizes: "any" }
+            { url: "/favicon.ico", sizes: "any" },
+            { url: "/mowglai-favicon.png", type: "image/png", sizes: "32x32" }
         ],
         apple: [
-            { url: "/logo2.webp", sizes: "180x180", type: "image/webp" }
+            { url: "/mowglai-favicon.png", sizes: "180x180", type: "image/png" }
         ],
     },
     manifest: "/site.webmanifest",
