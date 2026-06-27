@@ -21,7 +21,7 @@ export default function TemplatesSection() {
     : templates.filter(t => t.category === activeCategory);
 
   return (
-    <section className="relative py-32 z-10 bg-background">
+    <section className="relative py-32 z-10 bg-transparent">
       {/* Smart Companion Waypoint */}
       <div className="absolute right-10 top-1/4 w-[250px] h-[400px] companion-waypoint pointer-events-none" />
 

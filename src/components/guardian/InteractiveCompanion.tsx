@@ -11,6 +11,7 @@ const PAGE_CONFIG: Record<string, {
   size: number;
 }> = {
   "/":          { message: "🌿 Aapki digital duniya yahan se shuru hoti hai – Mowglai!", corner: { bottom: "40px", right: "40px" }, size: 90 },
+  "/landing":   { message: "🐻 Welcome to Mowglai! Explore our services or click 'ENTER MOWGLAI' to see the main experience.", corner: { bottom: "40px", right: "40px" }, size: 90 },
   "/about":     { message: "🦁 Hamare baare mein jaanein – jungle ki tarah strong team!", corner: { top: "120px", right: "40px" }, size: 85  },
   "/services":  { message: "⚡ Har service ek weapon hai – apna chunein!",                corner: { bottom: "80px",  left: "40px"  }, size: 90  },
   "/explore":   { message: "🎨 300+ templates – apna sapna chunein, hum banayenge.",      corner: { bottom: "80px",  right: "40px" }, size: 90  },
@@ -19,7 +20,7 @@ const PAGE_CONFIG: Record<string, {
   "/audit":     { message: "🔍 Free audit = free insights – website ki kami jaanein!",   corner: { top: "120px", right: "40px"   }, size: 85  },
   "/portfolio": { message: "🏆 Yeh kaam dekh ke hi samjhein – kyun Mowglai India ka best hai.", corner: { top: "120px", left: "40px" }, size: 85 },
 };
-const DEFAULT_CONFIG = PAGE_CONFIG["/about"];
+const DEFAULT_CONFIG = PAGE_CONFIG["/landing"];
 
 /* ── SVG Lion Mascot ──────────────────────────────────────────────────────── */
 function LionSVG({ size, mouseX, mouseY }: { size: number; mouseX: number; mouseY: number }) {
@@ -137,10 +138,10 @@ export default function InteractiveCompanion() {
 
   if (!mounted) return null;
 
-  // On homepage (/), hide the SVG companion when user is near the top (since GLB 3D Lion is displayed in the hero section)
+  // On landing page (/landing), hide the SVG companion when user is near the top (since GLB 3D Lion is displayed in the hero section)
   // Show it only when scrolled down past the hero section (scrollY > 500)
-  const isHomepage = pathname === "/";
-  const shouldHideOnHome = isHomepage && scrollY < 500;
+  const isLandingPage = pathname === "/landing";
+  const shouldHideOnHome = isLandingPage && scrollY < 500;
 
   const isLeft = !!(config.corner.left);
 

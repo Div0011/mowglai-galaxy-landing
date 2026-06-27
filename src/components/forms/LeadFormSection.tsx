@@ -19,7 +19,7 @@ export default function LeadFormSection() {
   };
 
   return (
-    <section className="relative py-32 z-10 bg-background">
+    <section className="relative py-32 z-10 bg-transparent">
       <div className="container mx-auto px-6 max-w-5xl">
         
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -89,8 +89,8 @@ export default function LeadFormSection() {
                     <input type="url" className="w-full bg-card/50 border border-primary/20 rounded-xl px-5 py-4 text-foreground focus:outline-none focus:border-primary focus:bg-card transition-all font-body" placeholder="https://..." />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold tracking-wider uppercase text-foreground/80">Budget</label>
-                    <select className="w-full bg-card/50 border border-primary/20 rounded-xl px-5 py-4 text-foreground focus:outline-none focus:border-primary focus:bg-card transition-all font-body appearance-none">
+                    <label htmlFor="budget-select" className="text-sm font-bold tracking-wider uppercase text-foreground/80">Budget</label>
+                    <select id="budget-select" className="w-full bg-card/50 border border-primary/20 rounded-xl px-5 py-4 text-foreground focus:outline-none focus:border-primary focus:bg-card transition-all font-body appearance-none">
                       <option className="bg-card text-foreground" value="small">&lt; $5,000</option>
                       <option className="bg-card text-foreground" value="medium">$5,000 - $10,000</option>
                       <option className="bg-card text-foreground" value="large">$10,000+</option>

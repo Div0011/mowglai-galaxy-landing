@@ -60,7 +60,7 @@ export default function PortfolioSection() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative py-32 z-10 bg-background/95 overflow-hidden">
+    <section ref={containerRef} className="relative py-32 z-10 bg-transparent overflow-hidden">
       {/* Smart Companion Waypoint */}
       <div className="absolute left-10 top-1/4 w-[300px] h-[400px] companion-waypoint pointer-events-none" />
 
@@ -126,7 +126,7 @@ export default function PortfolioSection() {
                   <button className="flex-1 py-3 bg-primary text-primary-foreground font-bold rounded-xl flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-[0_0_20px_rgba(245,208,97,0.3)]">
                     <ExternalLink size={18} /> Live Website
                   </button>
-                  <button className="w-12 h-12 glass-card text-foreground flex items-center justify-center hover:bg-white/10 transition-colors">
+                  <button aria-label="Maximize Project" className="w-12 h-12 glass-card text-foreground flex items-center justify-center hover:bg-white/10 transition-colors">
                     <Maximize2 size={18} />
                   </button>
                 </div>

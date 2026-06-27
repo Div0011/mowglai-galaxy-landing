@@ -34,7 +34,7 @@ const futureServices = [
 
 export default function ServicesSection() {
   return (
-    <section className="relative py-32 z-10 bg-background">
+    <section className="relative py-32 z-10 bg-transparent">
       {/* Smart Companion Waypoint (Empty space for the 3D animal) */}
       <div className="absolute right-10 top-32 w-[300px] h-[400px] companion-waypoint pointer-events-none" />
       

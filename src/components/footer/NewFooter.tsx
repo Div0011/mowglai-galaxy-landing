@@ -5,7 +5,7 @@ import MowglaiLogo from "../MowglaiLogo";
 
 export default function NewFooter() {
   return (
-    <footer className="relative border-t border-primary/10 bg-background pt-20 pb-10 z-10">
+    <footer className="relative border-t border-primary/10 bg-transparent pt-20 pb-10 z-10">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2 flex flex-col items-start">
@@ -31,16 +31,16 @@ export default function NewFooter() {
           <div>
             <h4 className="text-foreground font-bold mb-6 uppercase tracking-widest text-sm font-display">Connect</h4>
             <div className="flex gap-4">
-              <a href="#" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
+              <a href="#" aria-label="Twitter" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
+              <a href="#" aria-label="Instagram" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
+              <a href="#" aria-label="LinkedIn" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
+              <a href="#" aria-label="GitHub" className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                 <Github size={20} />
               </a>
             </div>

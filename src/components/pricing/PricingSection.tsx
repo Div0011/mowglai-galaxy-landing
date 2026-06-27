@@ -30,7 +30,7 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="relative py-32 z-10 bg-background/95">
+    <section className="relative py-32 z-10 bg-transparent">
       <div className="container mx-auto px-6">
         
         <div className="text-center mb-16">
