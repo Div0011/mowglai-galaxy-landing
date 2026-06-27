@@ -97,23 +97,16 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                         className={cn(
                             "cursor-pointer group/logo flex items-center transition-all duration-700",
                             // Logo is active if: Menu is open OR page not scrolled OR logo is specifically hovered
-                            (isLogoActive || hoveredItem === "LOGO") ? "opacity-100 blur-0" : "opacity-30 blur-[4px]"
+                            (isLogoActive || hoveredItem === "LOGO") ? "opacity-100 blur-0" : "opacity-35 blur-[2px]"
                         )}
                         onClick={() => router.push('/')}
                     >
-                        <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 flex-shrink-0">
-                            <MowglaiLogo size="lg" variant="primary" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
-                        </div>
-                        
-                        {/* Emerge Text Container */}
-                        <div
-                            className={cn(
-                                "overflow-hidden transition-all duration-500 ease-out flex items-center whitespace-nowrap",
-                                hoveredItem === "LOGO" ? "w-[130px] md:w-[155px] opacity-100 ml-3" : "w-0 opacity-0 ml-0"
-                            )}
-                        >
-                            <span className="text-lg md:text-xl font-display font-black text-jungle-gold tracking-widest select-none">
+                        <div className="flex flex-col">
+                            <span className="text-xl md:text-2xl font-display font-black text-[#F5D061] tracking-[0.15em] leading-none drop-shadow-[0_0_8px_rgba(245,208,97,0.4)]">
                                 MOWGLAI
+                            </span>
+                            <span className="font-body text-[8px] md:text-[9px] text-[#22c55e] tracking-[0.3em] uppercase font-bold mt-1.5 whitespace-nowrap">
+                                Digital Agency
                             </span>
                         </div>
                     </div>
