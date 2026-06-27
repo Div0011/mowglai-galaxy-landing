@@ -17,7 +17,7 @@ function LionModel() {
     // Center the model geometry based only on actual meshes
     const box = new THREE.Box3();
     let hasMesh = false;
-    scene.traverse((child) => {
+    scene.traverse((child: THREE.Object3D) => {
       if ((child as THREE.Mesh).isMesh) {
         if (!hasMesh) {
           box.setFromObject(child);
@@ -36,7 +36,7 @@ function LionModel() {
       scene.position.z = -center.z;
     }
 
-    scene.traverse((child) => {
+    scene.traverse((child: THREE.Object3D) => {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         if (!mesh.material || Array.isArray(mesh.material)) return;

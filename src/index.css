@@ -416,3 +416,86 @@
     contain-intrinsic-size: auto 500px;
   }
 }
+
+@layer utilities {
+  /* ── Golden Glow Menu Options ── */
+  @keyframes menu-gold-glow-sweep {
+    0% {
+      background-position: 0% -200%;
+    }
+    50% {
+      background-position: 0% 100%;
+    }
+    100% {
+      background-position: 0% 200%;
+    }
+  }
+
+  .gold-glow-text {
+    background: linear-gradient(
+      to bottom,
+      rgba(34, 197, 94, 0.25) 0%,
+      rgba(34, 197, 94, 0.25) 30%,
+      #FFE600 50%,
+      rgba(34, 197, 94, 0.25) 70%,
+      rgba(34, 197, 94, 0.25) 100%
+    );
+    background-size: 100% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: menu-gold-glow-sweep 6s linear infinite;
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.1);
+  }
+
+  .gold-glow-text-hover {
+    background: linear-gradient(
+      to bottom,
+      #14532d 0%,
+      #22c55e 25%,
+      #FFE600 50%,
+      #22c55e 75%,
+      #14532d 100%
+    );
+    background-size: 100% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: menu-gold-glow-sweep 2.5s linear infinite;
+    filter: drop-shadow(0 0 15px rgba(253, 224, 71, 0.65));
+  }
+}
+
+/* ── High-End Footer Reveal Watermark & Effects ── */
+.footer-watermark-text {
+  font-family: var(--font-display), serif;
+  font-weight: 900;
+  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.12);
+  color: transparent;
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-watermark-text:hover {
+  -webkit-text-stroke: 1.5px transparent;
+  color: transparent;
+  background: linear-gradient(135deg, #FFE600 0%, #22c55e 50%, #052e16 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 35px rgba(34, 197, 94, 0.5));
+}
+
+.footer-option-link {
+  font-family: var(--font-display), serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  color: transparent;
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-option-link:hover {
+  -webkit-text-stroke: 1px transparent;
+  color: #FFE600;
+  filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.6));
+}
+

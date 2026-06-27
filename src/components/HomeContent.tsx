@@ -4,9 +4,12 @@ import Magnetic from "@/components/Magnetic";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import FlashText from "@/components/FlashText";
+import SelectedWork from "@/components/SelectedWork";
 import NextPageButton from "@/components/NextPageButton";
+import TemplatesShowcase from "@/components/TemplatesShowcase";
 import { cn } from "@/lib/utils";
-import MistakeSection from "@/components/MistakeSection";
+import HowWeBuiltSection from "@/components/HowWeBuiltSection";
+import StartupGrowthSection from "@/components/StartupGrowthSection";
 import InteractiveAnimals from "@/components/InteractiveAnimals";
 import GiantJungleTree from "@/components/GiantJungleTree";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -14,16 +17,14 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ScrollTransition } from "@/components/ScrollTransition";
-
-import ServicesSection from "@/components/services/ServicesSection";
-import PortfolioSection from "@/components/portfolio/PortfolioSection";
-import TemplatesSection from "@/components/templates/TemplatesSection";
-import PricingSection from "@/components/pricing/PricingSection";
-import LeadFormSection from "@/components/forms/LeadFormSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ═══════════════════════════════════════════════════════════════
+// MouseGlow — ZERO re-renders via useRef + GSAP quickTo
+// Previously: useState for mouse pos → re-rendered entire tree
+// Now: pure DOM manipulation via GSAP, React never re-renders
+// ═══════════════════════════════════════════════════════════════
 function MouseGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
 
@@ -54,18 +55,20 @@ function MouseGlow() {
         background: "radial-gradient(circle, rgba(74, 222, 128, 0.08) 0%, transparent 70%)",
         borderRadius: "50%",
         willChange: "transform",
-        transform: "translate3d(-300px, -300px, 0)",
+        transform: "translate3d(-300px, -300px, 0)", // Start offscreen
       }}
     />
   );
 }
 
+// ═══════════════════════════════════════════════════════════════
+// AmbientParticles — Pure CSS animations (offloaded from JS)
+// Previously: 8 Framer Motion elements with infinite animate
+// Now: CSS keyframes via .animate-ambient-float — GPU composited
+// ═══════════════════════════════════════════════════════════════
 function AmbientParticles() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -400]);
-
   return (
-    <motion.div style={{ y }} className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {[...Array(8)].map((_, i) => (
         <div
           key={i}
@@ -78,10 +81,11 @@ function AmbientParticles() {
           } as React.CSSProperties}
         />
       ))}
-    </motion.div>
+    </div>
   );
 }
 
+// Section divider with animated line
 function SectionDivider({ className = "" }: { className?: string }) {
   return (
     <div className={cn("relative h-24 overflow-hidden", className)}>
@@ -103,6 +107,9 @@ function SectionDivider({ className = "" }: { className?: string }) {
   );
 }
 
+
+
+// Scroll reveal wrapper
 function ScrollReveal({
   children,
   delay = 0,
@@ -138,6 +145,117 @@ function ScrollReveal({
   );
 }
 
+// Parallax container
+function ParallaxSection({
+  children,
+  speed = 0.5,
+  className = ""
+}: {
+  children: React.ReactNode;
+  speed?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100 * speed, -100 * speed]);
+
+  return (
+    <section ref={ref} className={className}>
+      <motion.div style={{ y }}>
+        {children}
+      </motion.div>
+    </section>
+  );
+}
+
+// Interactive button with multiple effects
+function InteractiveButton({
+  href,
+  children,
+  variant = "primary",
+  icon: Icon = ArrowRight
+}: {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+  icon?: React.ComponentType<{ className?: string }>;
+}) {
+  const isPrimary = variant === "primary";
+
+  return (
+    <Magnetic>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <Link
+          href={href}
+          className={`group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-sm md:text-base font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 ${
+            isPrimary
+              ? "bg-card/40 backdrop-blur-md border border-[#F5D061]/20 text-[#F5D061] hover:shadow-[0_0_40px_rgba(245,208,97,0.3)]"
+              : "bg-background/10 backdrop-blur-xl border border-primary/10 text-primary hover:border-primary/50"
+          }`}
+        >
+          {/* Animated background */}
+          <motion.span
+            className="absolute inset-0 bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061]"
+            initial={{ x: "-100%", opacity: 0 }}
+            whileHover={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          {/* Ripple effect on hover */}
+          <motion.span
+            className="absolute inset-0 rounded-full"
+            initial={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 2, opacity: 0.1 }}
+            transition={{ duration: 0.6 }}
+            style={{ background: "radial-gradient(circle, white 0%, transparent 70%)" }}
+          />
+
+          <span className="relative z-10 flex items-center gap-3">
+            {children}
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Icon className="w-5 h-5" />
+            </motion.span>
+          </span>
+        </Link>
+      </motion.div>
+    </Magnetic>
+  );
+}
+
+// Animated text with character reveal
+function AnimatedText({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <motion.span className={className}>
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.4,
+            delay: i * 0.03,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
+// SVG path animation between sections
 function AnimatedPath({ id = "pathGradient" }: { id?: string }) {
   const pathRef = useRef<SVGPathElement>(null);
 
@@ -192,87 +310,149 @@ export default function HomeContent() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // Scroll Velocity Skew Effect
-    let proxy = { skew: 0 },
-      skewSetter = gsap.quickSetter(".skew-container", "skewY", "deg"),
-      clamp = gsap.utils.clamp(-5, 5); // Limit the maximum skew to 5 degrees
-
-    ScrollTrigger.create({
-      onUpdate: (self) => {
-        let skew = clamp(self.getVelocity() / -300);
-        if (Math.abs(skew) > Math.abs(proxy.skew)) {
-          proxy.skew = skew;
-          gsap.to(proxy, {
-            skew: 0,
-            duration: 0.8,
-            ease: "power3",
-            overwrite: true,
-            onUpdate: () => skewSetter(proxy.skew),
-          });
+    // Reveal animations for cards
+    const cards = gsap.utils.toArray(".reveal-card") as HTMLElement[];
+    cards.forEach((card) => {
+      gsap.fromTo(
+        card,
+        { y: 80, opacity: 0, rotateX: 15 },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
         }
-      },
+      );
     });
-    
-    // Smoothly reset on resize
-    const onResize = () => skewSetter(0);
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, { scope: containerRef });
+  }, []);
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden skew-container">
-      {/* Ambient effects - PRESERVED */}
+    <div ref={containerRef} className="relative">
+      {/* Ambient effects */}
       <MouseGlow />
       <AmbientParticles />
       <GiantJungleTree />
       <InteractiveAnimals />
 
-      {/* 1. Mistake Section - PAGE 2 wireframe - REPLACED UI */}
-      <ScrollTransition effect="depth-pull">
-        <div className="relative -mt-10 lg:-mt-20">
-          <MistakeSection />
-        </div>
-      </ScrollTransition>
+      {/* 1. How We Build Section - Tucked under hero */}
+      <div className="relative -mt-10 lg:-mt-20">
+        <HowWeBuiltSection />
+      </div>
 
       <SectionDivider className="-mt-10" />
 
-      {/* 2. Services Section - REPLACED UI */}
+      {/* 1.5. Services / Startup Growth Section */}
       <div id="services-section" className="content-lazy">
-        <ServicesSection />
+        <StartupGrowthSection />
       </div>
 
       <AnimatedPath id="path1" />
 
-      {/* 3. Portfolio & Templates - REPLACED UI */}
-      <section className="relative w-full overflow-hidden content-lazy">
-        <PortfolioSection />
-        <TemplatesSection />
+      {/* 2. Dual Showcase Frame */}
+      <section className="relative w-full py-20 overflow-hidden content-lazy">
+        <div className="container mx-auto px-6">
+          {/* Section header */}
+          <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 max-w-6xl mx-auto">
+            <ScrollReveal direction="left" className="space-y-4">
+              <div className="flex items-center gap-3 text-primary font-display font-bold text-xs tracking-[0.4em] uppercase">
+                <div className="w-10 h-[1.5px] bg-primary" />
+                Showcase
+              </div>
+              <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight text-foreground uppercase leading-[1.2]">
+                Our <span className="text-jungle-emerald italic inline-block pr-[0.15em]">Works</span> & <br className="mb-2" /> High-End <span className="text-jungle-gold italic inline-block pr-[0.15em]">Templates</span>
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={0.2}>
+              <p className="text-foreground/50 text-base font-light max-w-sm leading-relaxed border-l border-primary/20 pl-6">
+                A dual perspective on digital excellence: bespoke client projects and production-ready systems.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* Interactive showcase grid */}
+          <div className="relative max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+              {/* Left Panel: Selected Work */}
+              <ScrollReveal direction="up" className="h-full">
+                <div className="relative h-full transition-all duration-500 hover:translate-y-[-10px]">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <SelectedWork />
+                </div>
+              </ScrollReveal>
+
+              {/* Right Panel: Templates Showcase */}
+              <ScrollReveal direction="up" delay={0.2} className="h-full">
+                <div className="relative h-full transition-all duration-500 hover:translate-y-[-10px]">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-transparent to-primary/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <TemplatesShowcase />
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </div>
       </section>
 
       <SectionDivider className="my-10" />
 
-      {/* 4. Blueprint Button - PRESERVED */}
+      {/* 3. Blueprint Button */}
       <ScrollReveal className="w-full relative z-20 mb-12">
         <NextPageButton label="EXPLORE TEMPLATES" href="/explore" />
       </ScrollReveal>
 
       <AnimatedPath id="path2" />
 
-      {/* 5. Pricing & Lead Form - REPLACED UI */}
-      <ScrollTransition effect="zoom-in">
-        <PricingSection />
-      </ScrollTransition>
-      <ScrollTransition effect="fade-slide">
-        <LeadFormSection />
-      </ScrollTransition>
+      {/* 4. Consult + Story Side by Side */}
+      <section className="relative w-full py-16 z-20">
+        <div className="container mx-auto px-6">
+          {/* Ready to Build label */}
+          <ScrollReveal className="text-center mb-12">
+            <motion.span
+              className="inline-block text-primary font-bold text-lg md:text-xl font-display tracking-widest uppercase"
+              animate={{
+                textShadow: [
+                  "0 0 0px rgba(230, 185, 61, 0)",
+                  "0 0 20px rgba(230, 185, 61, 0.5)",
+                  "0 0 0px rgba(230, 185, 61, 0)",
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <AnimatedText text="Ready to build?" />
+            </motion.span>
+            <motion.p
+              className="text-sm md:text-base text-muted-foreground/60 mt-3"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              Transform your vision into reality with Mowglai
+            </motion.p>
+          </ScrollReveal>
+
+          {/* Two buttons with enhanced interactions */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <InteractiveButton href="/custom-request" variant="primary" icon={ArrowRight}>
+              Start a project
+            </InteractiveButton>
+
+            <InteractiveButton href="/about" variant="secondary" icon={ArrowUpRight}>
+              Our story
+            </InteractiveButton>
+          </div>
+        </div>
+      </section>
 
       {/* Final section divider */}
       <SectionDivider />
 
-      {/* 6. Refer and Earn - PRESERVED */}
+      {/* 5. Refer and Earn */}
       <ScrollReveal className="mt-6 md:mt-10">
         <FlashText />
       </ScrollReveal>

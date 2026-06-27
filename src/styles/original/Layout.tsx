@@ -7,7 +7,9 @@ import MobileNav from "@/components/MobileNav";
 import SettingsToggle from "@/components/SettingsToggle";
 import ContactToggle from "@/components/ContactToggle";
 
-import Footer from "@/components/footer/NewFooter";
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
+
+import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,6 +34,7 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
 
     return (
         <div className="min-h-dvh relative text-foreground transition-colors duration-500">
+            <CustomCursor />
             <SmoothScroll />
             <ScrollToTop />
             <BackToTopButton />
@@ -57,7 +60,9 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
                         className="gpu-accelerate"
                     >
                         <Suspense fallback={<div className="w-full h-screen flex items-center justify-center text-primary font-display animate-pulse">Loading Content...</div>}>
-                            {children}
+                            <div className="relative z-10 bg-[#020804] shadow-[0_10px_50px_rgba(0,0,0,0.8)] w-full">
+                                {children}
+                            </div>
                             <Footer />
                         </Suspense>
                     </motion.div>

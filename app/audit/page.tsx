@@ -213,13 +213,13 @@ export default function AuditPage() {
                                     <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-foreground/30">100% Free · No Sign-up Required</span>
                                     <Sparkles className="w-5 h-5 text-primary/50" />
                                 </div>
-                                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.1]">
+                                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.2]">
                                     Decode your{' '}
                                     <motion.span
                                         animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                                         transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
                                         className="inline-block bg-gradient-to-r from-primary via-foreground to-primary
-                                                   bg-[length:200%_auto] bg-clip-text text-transparent italic"
+                                                   bg-[length:200%_auto] bg-clip-text text-transparent italic pr-[0.15em]"
                                     >
                                         digital DNA
                                     </motion.span>

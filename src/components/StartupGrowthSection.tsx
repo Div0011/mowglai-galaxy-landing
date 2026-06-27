@@ -103,7 +103,7 @@ const StartupGrowthSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-display font-black tracking-tight leading-[1.1] mb-4 text-white"
+                        className="text-4xl md:text-6xl font-display font-black tracking-tight leading-[1.2] mb-4 text-white"
                     >
                         Launch Faster <br className="hidden md:block" /> with{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5D061] via-[#22c55e] to-[#14532d] bg-[length:200%_auto] animate-gradient drop-shadow-[0_0_10px_rgba(34,197,94,0.3)]">
