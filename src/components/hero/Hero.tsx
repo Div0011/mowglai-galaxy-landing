@@ -8,7 +8,7 @@ import HeroLionGLB from "./HeroLionGLB";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-24 bg-background">
+    <section className="relative min-h-screen flex items-center pt-24 bg-transparent">
       <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side: Typography */}
         <div className="flex flex-col space-y-8 max-w-2xl pt-10 lg:pt-0">
@@ -59,13 +59,13 @@ export default function Hero() {
             </Magnetic>
             <Magnetic>
               <Link
-                  href="/portfolio"
+                  href="/"
                   className="group relative inline-flex items-center justify-center px-8 py-4 bg-background/10 backdrop-blur-xl border border-primary/10 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700 hover:border-primary/40"
               >
                   <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#D4AF37] to-[#14532d] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
                   <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
-                      View Work
-                      <Eye className="w-5 h-5 transition-all duration-500 group-hover:scale-110" />
+                      ENTER MOWGLAI
+                      <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
                   </span>
               </Link>
             </Magnetic>
@@ -73,7 +73,7 @@ export default function Hero() {
         </div>
 
         {/* Right Side: 3D GLB Model inside its starting right corner box */}
-        <div className="hidden lg:block relative h-[400px] lg:h-[600px] w-full z-0 lg:z-50 pointer-events-none lg:pointer-events-auto">
+        <div className="hidden lg:block relative h-[350px] lg:h-[480px] w-full z-0 lg:z-50 pointer-events-none lg:pointer-events-auto">
           <HeroLionGLB />
         </div>
       </div>

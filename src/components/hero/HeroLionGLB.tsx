@@ -111,7 +111,7 @@ export default function HeroLionGLB() {
         <pointLight position={[-5, 2, 5]} intensity={1.0} color="#F5D061" />
         
         <React.Suspense fallback={null}>
-          <group scale={0.06}>
+          <group scale={0.045}>
             <LionModel />
           </group>
           <Environment preset="sunset" />
