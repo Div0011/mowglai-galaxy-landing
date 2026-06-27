@@ -78,7 +78,7 @@ const jsonLdWebPage = {
   }
 };
 
-import RedesignedHome from "@/components/RedesignedHome";
+import OriginalHome from "@/styles/original/Home";
 
 export default function Home() {
   return (
@@ -91,7 +91,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
       />
-      <RedesignedHome />
+      <OriginalHome />
     </>
   );
 }
