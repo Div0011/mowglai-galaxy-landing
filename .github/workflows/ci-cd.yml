@@ -10,7 +10,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.repository == 'Div0011/mowglai'
     permissions:
       contents: read
 
@@ -52,8 +51,8 @@ jobs:
       # CD (Continuous Deployment) Pipeline
       # ==========================================
       - name: Sync files to Hostinger via SSH
-        # Only deploy on push to main
-        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        # Only deploy on push to main and if we are in the original repository
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.repository_owner == 'Div0011'
         uses: burnett01/rsync-deployments@8.0.4
         with:
           switches: "-avzr --exclude '.next' --exclude 'node_modules' --exclude '.git'"
