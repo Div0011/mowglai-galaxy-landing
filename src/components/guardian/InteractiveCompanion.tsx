@@ -10,8 +10,7 @@ const PAGE_CONFIG: Record<string, {
   corner: { bottom?: string; top?: string; left?: string; right?: string };
   size: number;
 }> = {
-  "/":          { message: "🐻 Welcome to Mowglai! Explore our services or click 'ENTER MOWGLAI' to see the main experience.", corner: { bottom: "40px", right: "40px" }, size: 90 },
-  "/home":      { message: "🌿 Aapki digital duniya yahan se shuru hoti hai – Mowglai!", corner: { bottom: "40px", right: "40px" }, size: 90 },
+  "/":          { message: "🌿 Aapki digital duniya yahan se shuru hoti hai – Mowglai!", corner: { bottom: "40px", right: "40px" }, size: 90 },
   "/about":     { message: "🦁 Hamare baare mein jaanein – jungle ki tarah strong team!", corner: { top: "120px", right: "40px" }, size: 85  },
   "/services":  { message: "⚡ Har service ek weapon hai – apna chunein!",                corner: { bottom: "80px",  left: "40px"  }, size: 90  },
   "/explore":   { message: "🎨 300+ templates – apna sapna chunein, hum banayenge.",      corner: { bottom: "80px",  right: "40px" }, size: 90  },

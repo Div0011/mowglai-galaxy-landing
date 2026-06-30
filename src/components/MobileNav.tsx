@@ -8,7 +8,7 @@ import Magnetic from "@/components/Magnetic";
 import XLogo from "@/components/icons/XLogo";
 
 const navItems = [
-    { icon: Home, label: "HOME", href: "/home/" },
+    { icon: Home, label: "HOME", href: "/" },
     { icon: Users, label: "ABOUT", href: "/about" },
     { icon: Layers, label: "SERVICES", href: "/services" },
     { icon: LayoutTemplate, label: "PRODUCTS", href: "/explore" },
