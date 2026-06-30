@@ -24,7 +24,7 @@ export default function LandingNavbar() {
     { label: "Works", href: "#portfolio" },
     { label: "Templates", href: "#templates" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Mowglai Portal", href: "/home/" },
+    { label: "Mowglai Portal", href: "/" },
   ];
 
   return (

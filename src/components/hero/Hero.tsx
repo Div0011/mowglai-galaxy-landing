@@ -59,12 +59,12 @@ export default function Hero() {
             </Magnetic>
             <Magnetic>
               <Link
-                  href="/home/"
+                  href="#services"
                   className="group relative inline-flex items-center justify-center px-8 py-4 bg-background/10 backdrop-blur-xl border border-primary/10 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700 hover:border-primary/40"
               >
                   <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#D4AF37] to-[#14532d] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
                   <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
-                      ENTER MOWGLAI
+                      EXPLORE
                       <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
                   </span>
               </Link>
