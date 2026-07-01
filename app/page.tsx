@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "UI UX design services"
   ],
   alternates: {
-    canonical: "https://mowglai.com/",
+    canonical: "https://mowglai.in/",
   },
   openGraph: {
     title: "Mowglai - Web Development, SaaS MVP & Digital Agency",
@@ -78,11 +78,22 @@ const jsonLdWebPage = {
   }
 };
 
-import OriginalHome from "@/styles/original/Home";
+
+import LandingNavbar from "@/components/navigation/LandingNavbar";
+import Hero from "@/components/hero/Hero";
+import ServicesSection from "@/components/services/ServicesSection";
+import PortfolioSection from "@/components/portfolio/PortfolioSection";
+import TemplatesSection from "@/components/templates/TemplatesSection";
+import PricingSection from "@/components/pricing/PricingSection";
+import LeadFormSection from "@/components/forms/LeadFormSection";
+import NewFooter from "@/components/footer/NewFooter";
+
+import PremiumLoader from "@/components/animations/PremiumLoader";
+import JungleBackground from "@/components/animations/JungleBackground";
 
 export default function Home() {
   return (
-    <>
+    <main className="relative bg-background min-h-screen text-foreground overflow-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
@@ -91,7 +102,34 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
       />
-      <OriginalHome />
-    </>
+      
+      <PremiumLoader />
+      <JungleBackground />
+      
+      <LandingNavbar />
+
+      <div className="relative z-10 flex flex-col">
+        <Hero />
+        
+        <div id="services">
+          <ServicesSection />
+        </div>
+        
+        <div id="portfolio">
+          <PortfolioSection />
+        </div>
+        
+        <div id="templates">
+          <TemplatesSection />
+        </div>
+        
+        <div id="pricing">
+          <PricingSection />
+        </div>
+        
+        <LeadFormSection />
+        <NewFooter />
+      </div>
+    </main>
   );
 }
