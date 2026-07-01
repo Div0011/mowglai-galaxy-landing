@@ -633,7 +633,7 @@ export default function InvestmentPage() {
                 {/* Next Chapter CTA - Final Narrative */}
                 <div className="mt-32 relative z-10">
                     <NextPageButton
-                        label="HELLO"
+                        label="CONTACT"
                         href="/contact"
                         tagline="Initiate Dialogue"
                     />

@@ -5,7 +5,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", ".next", "out", "node_modules", "antigravity-awesome-skills", "antigravity-skills", "mowglai", "Fonts"] },
+  { ignores: ["dist", ".next", "out", "node_modules", "antigravity-awesome-skills", "antigravity-skills", "mowglai", "Fonts", "public"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

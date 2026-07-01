@@ -194,6 +194,7 @@ export default function ExplorePage() {
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
+                                    aria-label="Sort templates"
                                     className="appearance-none bg-transparent text-xs font-bold uppercase tracking-wider pl-3 pr-8 py-2 cursor-pointer hover:text-primary transition-colors focus:outline-none"
                                 >
                                     {sortOptions.map(opt => <option key={opt.value} value={opt.value} className="text-foreground bg-background">{opt.label}</option>)}
@@ -267,7 +268,7 @@ export default function ExplorePage() {
                                         <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
                                             <Filter className="w-5 h-5 text-primary" /> REFINEMENT
                                         </h2>
-                                        <button onClick={() => setIsFilterDrawerOpen(false)} className="p-2 hover:bg-secondary rounded-full transition-colors">
+                                        <button onClick={() => setIsFilterDrawerOpen(false)} aria-label="Close filter drawer" className="p-2 hover:bg-secondary rounded-full transition-colors">
                                             <X className="w-5 h-5" />
                                         </button>
                                     </div>
@@ -352,7 +353,6 @@ export default function ExplorePage() {
 
             </div>
             <NextPageButton label="PRICING" href="/investment" />
-            <NextPageButton label="MOWGLAI ACQUIRE" href="/investment" />
 
             <style jsx global>{`
                 .mask-linear-fade {

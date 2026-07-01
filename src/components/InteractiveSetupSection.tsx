@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import { ArrowRight, Users, Rocket, Zap } from "lucide-react";
 import ConsultationForm from "@/components/ConsultationForm";
 import NextPageButton from "@/components/NextPageButton";
@@ -28,213 +29,452 @@ const steps = [
     },
 ];
 
-const Step1Visual = () => (
-    <div className="relative w-full aspect-[16/10] max-h-[280px] flex items-center justify-center bg-[#040905]/40 border border-white/5 rounded-2xl overflow-hidden group p-4 backdrop-blur-md">
-        {/* Glowing aura */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.04),transparent_65%)] pointer-events-none" />
-        
-        <svg viewBox="0 0 400 250" className="w-full h-full max-w-[360px] z-10">
-            {/* Concentric Radar Grid */}
-            <circle cx="200" cy="125" r="90" fill="none" stroke="rgba(16,185,129,0.12)" strokeWidth="1" strokeDasharray="3,3" />
-            <circle cx="200" cy="125" r="60" fill="none" stroke="rgba(230,185,61,0.08)" strokeWidth="1" />
-            <circle cx="200" cy="125" r="30" fill="none" stroke="rgba(16,185,129,0.15)" strokeWidth="1" />
+function pseudo(seed: number): number {
+    const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+    return x - Math.floor(x);
+}
+
+// ── Step 1 Pixelated Radar Canvas ────────────────────────────────────────────
+const Step1Visual = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+        const canvas = canvasRef.current;
+        const container = containerRef.current;
+        if (!canvas || !container) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const BLOCK = 4;
+        let W = 0, H = 0;
+
+        const resize = () => {
+            W = container.offsetWidth || 360;
+            H = container.offsetHeight || 220;
+            canvas.width = W;
+            canvas.height = H;
+        };
+        resize();
+
+        let tick = 0;
+        let frameId: number;
+
+        const isDark = resolvedTheme === "dark";
+        const goldColor = isDark ? "rgba(230, 185, 61, 0.7)" : "rgba(212, 175, 55, 0.85)";
+        const greenColor = isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(71, 98, 42, 0.85)";
+        const gridColor = isDark ? "rgba(230, 185, 61, 0.08)" : "rgba(71, 98, 42, 0.12)";
+
+        const drawScene = () => {
+            tick++;
+            ctx.clearRect(0, 0, W, H);
+
+            const cols = Math.ceil(W / BLOCK);
+            const rows = Math.ceil(H / BLOCK);
+            const cx = Math.round(cols / 2);
+            const cy = Math.round(rows / 2);
+
+            // 1. Concentric Radar Rings (Dotted Grid)
+            ctx.fillStyle = gridColor;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const dx = c - cx;
+                    const dy = r - cy;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+                    if (Math.abs(d - 10) < 0.4 || Math.abs(d - 22) < 0.4 || Math.abs(d - 34) < 0.4) {
+                        if ((c + r) % 2 === 0) {
+                            ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+                        }
+                    }
+                    if (c === cx || r === cy) {
+                        if ((c + r) % 4 === 0) {
+                            ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+                        }
+                    }
+                }
+            }
+
+            // 2. Sweeping Radar Line
+            const angle = tick * 0.02;
+            const sweepLen = Math.round(cols * 0.45);
+            ctx.fillStyle = isDark ? "rgba(16, 185, 129, 0.15)" : "rgba(71, 98, 42, 0.22)";
+            for (let step = 0; step < sweepLen; step++) {
+                const sc = Math.round(cx + Math.cos(angle) * step);
+                const sr = Math.round(cy + Math.sin(angle) * step);
+                if (sc >= 0 && sc < cols && sr >= 0 && sr < rows) {
+                    ctx.fillRect(sc * BLOCK, sr * BLOCK, BLOCK, BLOCK);
+                }
+            }
+
+            // 3. Central Core Node
+            const isPulse = Math.floor(tick * 0.1) % 2 === 0;
+            ctx.fillStyle = goldColor;
+            ctx.fillRect(cx * BLOCK, cy * BLOCK, BLOCK, BLOCK);
+            if (isPulse) {
+                ctx.fillStyle = isDark ? "rgba(230, 185, 61, 0.3)" : "rgba(212, 175, 55, 0.4)";
+                ctx.fillRect((cx - 1) * BLOCK, cy * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect((cx + 1) * BLOCK, cy * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect(cx * BLOCK, (cy - 1) * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect(cx * BLOCK, (cy + 1) * BLOCK, BLOCK, BLOCK);
+            }
+
+            // 4. Connection Lines & Outer Nodes
+            const nodes = [
+                { dc: -14, dr: -9, color: goldColor, active: Math.sin(tick * 0.05 + 1) > 0 },
+                { dc: 18, dr: -5, color: greenColor, active: Math.sin(tick * 0.05 + 2) > 0 },
+                { dc: -10, dr: 14, color: greenColor, active: Math.sin(tick * 0.05 + 3) > 0 },
+                { dc: 15, dr: 11, color: goldColor, active: Math.sin(tick * 0.05 + 4) > 0 },
+            ];
+
+            nodes.forEach((n) => {
+                const nc = cx + n.dc;
+                const nr = cy + n.dr;
+                
+                ctx.fillStyle = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.12)";
+                const stepsCount = Math.max(Math.abs(n.dc), Math.abs(n.dr));
+                for (let s = 0; s <= stepsCount; s += 2) {
+                    const lc = Math.round(cx + (n.dc * s) / stepsCount);
+                    const lr = Math.round(cy + (n.dr * s) / stepsCount);
+                    if (lc >= 0 && lc < cols && lr >= 0 && lr < rows) {
+                        ctx.fillRect(lc * BLOCK, lr * BLOCK, BLOCK, BLOCK);
+                    }
+                }
+
+                ctx.fillStyle = n.active ? n.color : (isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.25)");
+                ctx.fillRect(nc * BLOCK, nr * BLOCK, BLOCK, BLOCK);
+            });
+
+            frameId = requestAnimationFrame(drawScene);
+        };
+
+        drawScene();
+
+        const handleResize = () => { resize(); };
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            cancelAnimationFrame(frameId);
+        };
+    }, [mounted, resolvedTheme]);
+
+    return (
+        <div ref={containerRef} className="relative w-full aspect-[16/10] max-h-[280px] flex items-center justify-center bg-[#040905]/40 border border-white/5 rounded-2xl overflow-hidden group p-4 backdrop-blur-md">
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ imageRendering: "pixelated" }} />
+            <div className="absolute top-4 left-4 bg-black/60 border border-white/5 rounded-lg px-2.5 py-1.5 font-mono text-[8px] space-y-1 backdrop-blur-md z-10">
+                <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                    <span className="text-white/60">SCANNER: ACTIVE</span>
+                </div>
+                <div className="text-primary">KEYWORDS AUDITED: 1,420</div>
+            </div>
+            <div className="absolute bottom-4 right-4 bg-black/60 border border-white/5 rounded-lg px-2.5 py-1.5 font-mono text-[8px] space-y-1 backdrop-blur-md z-10">
+                <div className="text-emerald-400">SEMANTIC SCORE: 98.4%</div>
+            </div>
+        </div>
+    );
+};
+
+// ── Step 2 Pixelated Workspace Monitor Canvas ────────────────────────────────
+const Step2Visual = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+        const canvas = canvasRef.current;
+        const container = containerRef.current;
+        if (!canvas || !container) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const BLOCK = 4;
+        let W = 0, H = 0;
+
+        const resize = () => {
+            W = container.offsetWidth || 360;
+            H = container.offsetHeight || 220;
+            canvas.width = W;
+            canvas.height = H;
+        };
+        resize();
+
+        let tick = 0;
+        let frameId: number;
+
+        const isDark = resolvedTheme === "dark";
+        const goldColor = isDark ? "rgba(230, 185, 61, 0.7)" : "rgba(212, 175, 55, 0.85)";
+        const greenColor = isDark ? "rgba(16, 185, 129, 0.7)" : "rgba(71, 98, 42, 0.85)";
+        const monitorColor = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.15)";
+        const screenColor = isDark ? "rgba(16, 185, 129, 0.03)" : "rgba(71, 98, 42, 0.04)";
+
+        const drawScene = () => {
+            tick++;
+            ctx.clearRect(0, 0, W, H);
+
+            const cols = Math.ceil(W / BLOCK);
+            const rows = Math.ceil(H / BLOCK);
+
+            // Bezel boundaries
+            const bLeft = 5;
+            const bRight = cols - 5;
+            const bTop = 5;
+            const bBottom = rows - 8;
             
-            {/* Axis Lines */}
-            <line x1="200" y1="25" x2="200" y2="225" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-            <line x1="100" y1="125" x2="300" y2="125" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
+            // 1. Draw Monitor Bezel
+            ctx.strokeStyle = monitorColor;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(bLeft * BLOCK, bTop * BLOCK, (bRight - bLeft) * BLOCK, (bBottom - bTop) * BLOCK);
+
+            // Screen Fill
+            ctx.fillStyle = screenColor;
+            ctx.fillRect((bLeft + 2) * BLOCK, (bTop + 2) * BLOCK, (bRight - bLeft - 4) * BLOCK, (bBottom - bTop - 4) * BLOCK);
+
+            // Screen Scanlines
+            ctx.fillStyle = isDark ? "rgba(255,255,255,0.015)" : "rgba(0,0,0,0.02)";
+            for (let r = bTop + 2; r < bBottom - 2; r++) {
+                if (r % 2 === 0) {
+                    ctx.fillRect((bLeft + 2) * BLOCK, r * BLOCK, (bRight - bLeft - 4) * BLOCK, BLOCK);
+                }
+            }
+
+            // Monitor stand
+            ctx.fillStyle = monitorColor;
+            const standC = Math.round(cols / 2);
+            ctx.fillRect((standC - 4) * BLOCK, bBottom * BLOCK, BLOCK * 8, BLOCK * 4);
+            ctx.fillRect((standC - 8) * BLOCK, (bBottom + 4) * BLOCK, BLOCK * 16, BLOCK * 2);
+
+            // 2. Left side: Code Lines
+            const lineCount = 8;
+            const scrollOffset = Math.floor(tick * 0.1) % 8;
+            for (let i = 0; i < lineCount; i++) {
+                const r = bTop + 4 + i * 3 - scrollOffset;
+                if (r > bTop + 2 && r < bBottom - 3) {
+                    const lineSeed = pseudo(Math.floor((tick * 0.1) / 8) + i * 17);
+                    const lineLen = 8 + Math.floor(lineSeed * 15);
+                    const isGold = lineSeed > 0.6;
+                    ctx.fillStyle = isGold ? goldColor : greenColor;
+                    
+                    const indent = lineSeed > 0.4 ? 4 : 8;
+                    ctx.fillRect((bLeft + indent) * BLOCK, Math.round(r) * BLOCK, lineLen * BLOCK, BLOCK);
+                }
+            }
+
+            // 3. Right side: Spinning Wireframe Sphere
+            const sc = Math.round(cols * 0.72);
+            const sy = Math.round(rows * 0.42);
+            const sr = 10;
             
-            {/* Sweeping radar line */}
-            <line x1="200" y1="125" x2="263" y2="62" stroke="#10b981" strokeWidth="1.5" strokeOpacity="0.8" className="origin-[200px_125px] animate-[spin_6s_linear_infinite]" />
-            
-            {/* Nodes (Keywords / Entities) */}
-            <g>
-                {/* Node 1: Main Entity */}
-                <circle cx="200" cy="125" r="6" fill="#10b981" className="animate-ping" />
-                <circle cx="200" cy="125" r="5" fill="#E6B93D" stroke="#040905" strokeWidth="1" />
-                <text x="200" y="112" textAnchor="middle" fill="#fff" fontSize="8" fontWeight="bold" className="font-mono tracking-wider">MOWGLAI</text>
-                
-                {/* Connection lines to child nodes */}
-                <line x1="200" y1="125" x2="140" y2="80" stroke="rgba(230,185,61,0.3)" strokeWidth="1" strokeDasharray="2,2" />
-                <line x1="200" y1="125" x2="270" y2="90" stroke="rgba(16,185,129,0.3)" strokeWidth="1" />
-                <line x1="200" y1="125" x2="160" y2="180" stroke="rgba(16,185,129,0.3)" strokeWidth="1" />
-                <line x1="200" y1="125" x2="250" y2="175" stroke="rgba(230,185,61,0.3)" strokeWidth="3" strokeDasharray="3,3" />
+            ctx.fillStyle = goldColor;
+            ctx.fillRect(sc * BLOCK, sy * BLOCK, BLOCK, BLOCK);
 
-                {/* Node 2 */}
-                <circle cx="140" cy="80" r="4" fill="#E6B93D" />
-                <text x="140" y="70" textAnchor="middle" fill="rgba(255,255,255,0.6)" fontSize="7" className="font-mono">intent: commercial</text>
-                
-                {/* Node 3 */}
-                <circle cx="270" cy="90" r="4" fill="#10b981" />
-                <text x="270" y="82" textAnchor="middle" fill="rgba(255,255,255,0.6)" fontSize="7" className="font-mono">vol: 45.2k</text>
+            const orbitSpeed = tick * 0.04;
+            const pointCount = 10;
+            ctx.fillStyle = greenColor;
+            for (let i = 0; i < pointCount; i++) {
+                const angle1 = orbitSpeed + (i * Math.PI * 2) / pointCount;
+                const pc1 = Math.round(sc + Math.cos(angle1) * sr);
+                const pr1 = Math.round(sy + Math.sin(angle1) * sr * 0.3);
+                if (pc1 >= bLeft + 2 && pc1 < bRight - 2 && pr1 >= bTop + 2 && pr1 < bBottom - 2) {
+                    ctx.fillRect(pc1 * BLOCK, pr1 * BLOCK, BLOCK, BLOCK);
+                }
 
-                {/* Node 4 */}
-                <circle cx="160" cy="180" r="4" fill="#10b981" />
-                <text x="160" y="192" textAnchor="middle" fill="rgba(255,255,255,0.6)" fontSize="7" className="font-mono">diff: low</text>
+                const angle2 = -orbitSpeed * 0.8 + (i * Math.PI * 2) / pointCount;
+                const pc2 = Math.round(sc + Math.cos(angle2) * sr * 0.7);
+                const pr2 = Math.round(sy + Math.sin(angle2) * sr * 0.7);
+                if (pc2 >= bLeft + 2 && pc2 < bRight - 2 && pr2 >= bTop + 2 && pr2 < bBottom - 2) {
+                    ctx.fillRect(pc2 * BLOCK, pr2 * BLOCK, BLOCK, BLOCK);
+                }
+            }
 
-                {/* Node 5 */}
-                <circle cx="250" cy="175" r="4" fill="#E6B93D" />
-                <text x="250" y="187" textAnchor="middle" fill="rgba(255,255,255,0.6)" fontSize="7" className="font-mono">GEO_rank: #1</text>
-            </g>
-        </svg>
+            frameId = requestAnimationFrame(drawScene);
+        };
 
-        {/* Readout overlay */}
-        <div className="absolute top-4 left-4 bg-black/60 border border-white/5 rounded-lg px-2.5 py-1.5 font-mono text-[8px] space-y-1 backdrop-blur-md">
-            <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                <span className="text-white/60">SCANNER: ACTIVE</span>
-            </div>
-            <div className="text-primary">KEYWORDS AUDITED: 1,420</div>
-        </div>
+        drawScene();
 
-        <div className="absolute bottom-4 right-4 bg-black/60 border border-white/5 rounded-lg px-2.5 py-1.5 font-mono text-[8px] space-y-1 backdrop-blur-md">
-            <div className="text-emerald-400">SEMANTIC SCORE: 98.4%</div>
-        </div>
-    </div>
-);
+        const handleResize = () => { resize(); };
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            cancelAnimationFrame(frameId);
+        };
+    }, [mounted, resolvedTheme]);
 
-const Step2Visual = () => (
-    <div className="relative w-full aspect-[16/10] max-h-[280px] flex items-center justify-center bg-[#040905]/40 border border-white/5 rounded-2xl overflow-hidden group p-4 backdrop-blur-md">
-        {/* Soft grid background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(230,185,61,0.03),transparent_65%)] pointer-events-none" />
-        
-        {/* Split screen: Left code editor, Right 3D wireframe */}
-        <div className="w-full h-full grid grid-cols-12 gap-3 z-10 items-center">
-            {/* Code Panel */}
-            <div className="col-span-7 h-full bg-[#030604] border border-white/5 rounded-xl p-3 flex flex-col font-mono text-[8px] leading-relaxed overflow-hidden">
-                {/* Editor Header */}
-                <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5 text-white/40">
-                    <span className="text-[7px]">page.tsx</span>
-                    <div className="flex gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E6B93D]" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
-                    </div>
-                </div>
-                {/* Editor Code Lines */}
-                <div className="flex-1 text-white/70 space-y-0.5">
-                    <div><span className="text-primary">import</span> &#123; <span className="text-emerald-400">Canvas</span> &#125; <span className="text-primary">from</span> <span className="text-[#E6B93D]">"3d-core"</span>;</div>
-                    <div><span className="text-primary">const</span> <span className="text-[#E6B93D]">MowglaiSite</span> = () =&gt; &#123;</div>
-                    <div className="pl-3"><span className="text-primary">return</span> (</div>
-                    <div className="pl-6 text-emerald-400">&lt;<span className="text-[#E6B93D]">section</span> className=<span className="text-[#E6B93D]">"relative"</span>&gt;</div>
-                    <div className="pl-9 text-white/50">&lt;<span className="text-emerald-400">WebGLRenderer</span> quality=<span className="text-[#E6B93D]">"ultra"</span> /&gt;</div>
-                    <div className="pl-9 text-white/50">&lt;<span className="text-primary">InteractiveLayout</span> &gt;</div>
-                    <div className="pl-12 text-primary">&lt;<span className="text-emerald-400">HeroTitle</span> text=<span className="text-[#E6B93D]">"Future"</span> /&gt;</div>
-                    <div className="pl-9 text-white/50">&lt;/<span className="text-primary">InteractiveLayout</span>&gt;</div>
-                    <div className="pl-6 text-emerald-400">&lt;/<span className="text-[#E6B93D]">section</span>&gt;</div>
-                    <div className="pl-3">);</div>
-                    <div>&#125;;</div>
-                </div>
-            </div>
-
-            {/* 3D Wireframe/Visualizer Panel */}
-            <div className="col-span-5 h-full bg-[#030604] border border-white/5 rounded-xl p-2.5 flex flex-col items-center justify-center relative overflow-hidden">
-                {/* Rotating 3D Sphere SVG */}
-                <svg viewBox="0 0 100 100" className="w-[70px] h-[70px] animate-[spin_10s_linear_infinite] text-primary" stroke="currentColor" fill="none" strokeWidth="0.5">
-                    {/* Outer rings */}
-                    <circle cx="50" cy="50" r="40" stroke="rgba(230,185,61,0.2)" />
-                    <ellipse cx="50" cy="50" rx="40" ry="12" stroke="rgba(16,185,129,0.3)" />
-                    <ellipse cx="50" cy="50" rx="12" ry="40" stroke="rgba(16,185,129,0.3)" />
-                    {/* Diagonal orbits */}
-                    <g transform="rotate(45 50 50)">
-                        <ellipse cx="50" cy="50" rx="40" ry="8" stroke="rgba(230,185,61,0.25)" />
-                    </g>
-                    <g transform="rotate(-45 50 50)">
-                        <ellipse cx="50" cy="50" rx="40" ry="8" stroke="rgba(230,185,61,0.25)" />
-                    </g>
-                    {/* Node points */}
-                    <circle cx="50" cy="10" r="1.5" fill="#10b981" />
-                    <circle cx="50" cy="90" r="1.5" fill="#10b981" />
-                    <circle cx="10" cy="50" r="1.5" fill="#E6B93D" />
-                    <circle cx="90" cy="50" r="1.5" fill="#E6B93D" />
-                    <circle cx="50" cy="50" r="3" fill="#10b981" className="animate-pulse" />
-                </svg>
-
-                {/* Score indicators */}
-                <div className="absolute bottom-2 flex justify-between w-full px-2 font-mono text-[7px]">
-                    <span className="text-emerald-400">LCP: 0.8s</span>
-                    <span className="text-[#E6B93D]">FID: 9ms</span>
-                </div>
+    return (
+        <div ref={containerRef} className="relative w-full aspect-[16/10] max-h-[280px] flex items-center justify-center bg-[#040905]/40 border border-white/5 rounded-2xl overflow-hidden group p-4 backdrop-blur-md">
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ imageRendering: "pixelated" }} />
+            <div className="absolute bottom-2 flex justify-between w-[90%] px-4 font-mono text-[7px] z-10 text-white/50">
+                <span className="text-emerald-400">LCP: 0.8s</span>
+                <span className="text-[#E6B93D]">FID: 9ms</span>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
-const Step3Visual = () => (
-    <div className="relative w-full aspect-[16/10] max-h-[280px] flex items-center justify-center bg-[#040905]/40 border border-white/5 rounded-2xl overflow-hidden group p-4 backdrop-blur-md">
-        {/* Soft grid background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.03),transparent_65%)] pointer-events-none" />
-        
-        <div className="w-full h-full grid grid-cols-12 gap-3 z-10 items-center">
-            {/* Global CDN Traffic Map */}
-            <div className="col-span-6 h-full bg-[#030604] border border-white/5 rounded-xl p-2.5 flex flex-col justify-between font-mono text-[7px] relative overflow-hidden">
-                <span className="text-white/40 uppercase tracking-widest text-[6px]">GLOBAL CDN TOPOLOGY</span>
-                
-                {/* Dot-matrix style world hubs and lines */}
-                <svg viewBox="0 0 160 100" className="w-full h-[70px] text-white/10" fill="currentColor">
-                    {/* US West node */}
-                    <circle cx="30" cy="40" r="2" fill="#E6B93D" className="animate-ping" />
-                    <circle cx="30" cy="40" r="1.5" fill="#E6B93D" />
-                    {/* EU Central node */}
-                    <circle cx="80" cy="30" r="2" fill="#10b981" className="animate-ping" />
-                    <circle cx="80" cy="30" r="1.5" fill="#10b981" />
-                    {/* Asia node */}
-                    <circle cx="130" cy="45" r="2" fill="#10b981" className="animate-ping" />
-                    <circle cx="130" cy="45" r="1.5" fill="#10b981" />
+// ── Step 3 Pixelated Rocket Launch Canvas ─────────────────────────────────────
+const Step3Visual = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
-                    {/* Cyber paths connecting to a central server in Noida */}
-                    <path d="M 30,40 Q 65,40 100,50" fill="none" stroke="rgba(230,185,61,0.2)" strokeWidth="0.5" strokeDasharray="3,3" />
-                    <path d="M 80,30 Q 90,40 100,50" fill="none" stroke="rgba(16,185,129,0.2)" strokeWidth="0.5" />
-                    <path d="M 130,45 Q 115,45 100,50" fill="none" stroke="rgba(16,185,129,0.2)" strokeWidth="0.5" strokeDasharray="3,3" />
-                    
-                    {/* India Central Core */}
-                    <circle cx="100" cy="50" r="3.5" fill="#E6B93D" className="animate-pulse" />
-                </svg>
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
-                <div className="flex justify-between text-white/50 text-[6.5px]">
-                    <span>CDN: 99.9%</span>
-                    <span className="text-emerald-400">EDGE CACHE: HIT</span>
-                </div>
-            </div>
+    useEffect(() => {
+        if (!mounted) return;
+        const canvas = canvasRef.current;
+        const container = containerRef.current;
+        if (!canvas || !container) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
 
-            {/* Performance Wave Chart */}
-            <div className="col-span-6 h-full bg-[#030604] border border-white/5 rounded-xl p-3 flex flex-col justify-between relative overflow-hidden font-mono">
-                <div className="flex justify-between items-center text-[7px]">
-                    <span className="text-white/40 uppercase tracking-widest text-[6px]">PERFORMANCE METRICS</span>
-                    <span className="text-emerald-400 font-bold">100/100</span>
-                </div>
-                
-                {/* SVG Line Chart */}
-                <svg viewBox="0 0 160 80" className="w-full h-[55px] mt-1">
-                    <defs>
-                        <linearGradient id="chart-glow" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#10b981" stopOpacity="0.25" />
-                            <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
-                        </linearGradient>
-                    </defs>
-                    {/* Grid lines */}
-                    <line x1="0" y1="20" x2="160" y2="20" stroke="rgba(255,255,255,0.02)" strokeWidth="0.5" />
-                    <line x1="0" y1="40" x2="160" y2="40" stroke="rgba(255,255,255,0.02)" strokeWidth="0.5" />
-                    <line x1="0" y1="60" x2="160" y2="60" stroke="rgba(255,255,255,0.02)" strokeWidth="0.5" />
-                    
-                    {/* Gradient fill */}
-                    <path d="M 10 70 L 40 60 L 70 45 L 100 50 L 130 30 L 150 15 L 150 70 Z" fill="url(#chart-glow)" />
-                    
-                    {/* Chart line */}
-                    <path d="M 10 70 L 40 60 L 70 45 L 100 50 L 130 30 L 150 15" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M 10 70 L 40 60 L 70 45 L 100 50 L 130 30 L 150 15" fill="none" stroke="#E6B93D" strokeWidth="2.5" strokeDasharray="300" className="animate-draw-path" strokeLinecap="round" />
-                    
-                    {/* Peak dot */}
-                    <circle cx="150" cy="15" r="3" fill="#E6B93D" />
-                    <circle cx="150" cy="15" r="5" fill="#E6B93D" className="animate-ping" />
-                </svg>
+        const BLOCK = 4;
+        let W = 0, H = 0;
 
-                <div className="flex justify-between text-white/50 text-[6.5px]">
-                    <span>SPEED INDEX: 0.4s</span>
-                    <span className="text-[#E6B93D]">SEO CORE: 100</span>
-                </div>
+        const resize = () => {
+            W = container.offsetWidth || 360;
+            H = container.offsetHeight || 220;
+            canvas.width = W;
+            canvas.height = H;
+        };
+        resize();
+
+        let tick = 0;
+        let frameId: number;
+
+        const isDark = resolvedTheme === "dark";
+        const pixelColor = isDark ? "rgba(230, 185, 61, 0.22)" : "rgba(71, 98, 42, 0.35)";
+        const rocketColor = isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(71, 98, 42, 0.85)";
+        const flameColor = isDark ? "rgba(230, 185, 61, 0.7)" : "rgba(212, 175, 55, 0.85)";
+
+        // Fixed stars
+        const stars: { col: number; row: number }[] = [];
+        const cols = Math.ceil(W / BLOCK);
+        const rows = Math.ceil(H / BLOCK);
+        for (let i = 0; i < 15; i++) {
+            stars.push({
+                col: Math.floor(pseudo(i * 3.1) * cols),
+                row: Math.floor(pseudo(i * 9.7) * Math.floor(rows * 0.55)),
+            });
+        }
+
+        const drawScene = () => {
+            tick++;
+            ctx.clearRect(0, 0, W, H);
+
+            const cols = Math.ceil(W / BLOCK);
+            const rows = Math.ceil(H / BLOCK);
+
+            // 1. Stars (Dark mode)
+            if (isDark) {
+                stars.forEach((star) => {
+                    const starTick = tick + star.col * 7 + star.row * 13;
+                    if (Math.sin(starTick * 0.05) > 0.2) {
+                        ctx.fillStyle = pixelColor;
+                        ctx.fillRect(star.col * BLOCK, star.row * BLOCK, BLOCK, BLOCK);
+                    }
+                });
+            }
+
+            // 2. Far dithered mountain peaks
+            ctx.fillStyle = pixelColor;
+            for (let c = 0; c < cols; c++) {
+                const my = Math.round(rows * 0.65 + Math.sin(c * 0.07 + 1.2) * 5);
+                for (let r = my; r < rows; r++) {
+                    if ((c + r) % 2 === 0) {
+                        ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+                    }
+                }
+            }
+
+            // 3. Ground / Near Hills (Solid Silhouettes)
+            for (let c = 0; c < cols; c++) {
+                const hy = Math.round(rows * 0.82 + Math.sin(c * 0.12 + 3.4) * 2);
+                for (let r = hy; r <= rows; r++) {
+                    ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+                }
+            }
+
+            // 4. Overlapping pine trees at bottom
+            for (let c = 2; c < cols - 2; c += 8) {
+                const hy = Math.round(rows * 0.82 + Math.sin(c * 0.12 + 3.4) * 2);
+                const treeH = 6 + (c % 4) * 2;
+                for (let th = 0; th < treeH; th++) {
+                    const w = Math.floor((treeH - th) * 0.55);
+                    for (let dw = -w; dw <= w; dw++) {
+                        const tc = c + dw;
+                        const tr = hy - treeH + th;
+                        if (tc >= 0 && tc < cols && tr >= 0 && tr < rows) {
+                            ctx.fillRect(tc * BLOCK, tr * BLOCK, BLOCK, BLOCK);
+                        }
+                    }
+                }
+            }
+
+            // 5. Rocket Launching (Center of screen)
+            const rx = Math.round(cols * 0.5);
+            const ry = Math.round((rows * 0.82) - (tick * 0.22) % (rows * 0.9));
+
+            if (ry > 0 && ry < rows) {
+                // Draw flame exhaust (dithered trailing downwards)
+                ctx.fillStyle = flameColor;
+                for (let dy = 1; dy <= 8; dy++) {
+                    const fr = ry + dy;
+                    const w = Math.floor((8 - dy) * 0.35) + 1;
+                    for (let dw = -w; dw <= w; dw++) {
+                        const fc = rx + dw;
+                        if ((fc + fr + tick) % 2 === 0) {
+                            ctx.fillRect(fc * BLOCK, fr * BLOCK, BLOCK, BLOCK);
+                        }
+                    }
+                }
+
+                // Draw rocket body
+                ctx.fillStyle = rocketColor;
+                ctx.fillRect(rx * BLOCK, (ry - 2) * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect(rx * BLOCK, (ry - 1) * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect(rx * BLOCK, ry * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect((rx - 1) * BLOCK, ry * BLOCK, BLOCK, BLOCK);
+                ctx.fillRect((rx + 1) * BLOCK, ry * BLOCK, BLOCK, BLOCK);
+            }
+
+            frameId = requestAnimationFrame(drawScene);
+        };
+
+        drawScene();
+
+        const handleResize = () => { resize(); };
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            cancelAnimationFrame(frameId);
+        };
+    }, [mounted, resolvedTheme]);
+
+    return (
+        <div ref={containerRef} className="relative w-full aspect-[16/10] max-h-[280px] flex items-center justify-center bg-[#040905]/40 border border-white/5 rounded-2xl overflow-hidden group p-4 backdrop-blur-md">
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ imageRendering: "pixelated" }} />
+            <div className="absolute bottom-2 flex justify-between w-[90%] px-4 font-mono text-[7px] z-10 text-white/50">
+                <span>SPEED INDEX: 0.4s</span>
+                <span className="text-[#E6B93D]">SEO CORE: 100</span>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default function InteractiveSetupSection() {
     const [activeStep, setActiveStep] = useState(0);
