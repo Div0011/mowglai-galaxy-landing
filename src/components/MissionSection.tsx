@@ -8,7 +8,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { useLanguage } from "@/context/LanguageContext";
-import KozmoSpirit from "@/components/interactive/KozmoSpirit";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,14 +58,14 @@ const MissionSection = () => {
             <div className="container mx-auto px-6">
 
                 {/* 1. Huge Heading - Balanced Styling */}
-                <div ref={textRef} className="mb-16 relative" data-aos="fade-up">
-                    <h2 className="text-5xl sm:text-8xl md:text-[14vw] font-display font-black tracking-normal text-foreground flex flex-col items-center">
+                <div ref={textRef} className="mb-10 relative" data-aos="fade-up">
+                    <h2 className="text-5xl sm:text-7xl md:text-8xl font-display font-black tracking-normal text-foreground flex flex-col items-center">
                         <span className="leading-[1.0] opacity-10 uppercase">{t.About.mission.global}</span>
                         <span className="text-primary leading-[1.0] uppercase">{t.About.mission.vision}</span>
                     </h2>
 
                     {/* Decorative Background Text */}
-                    <div className="absolute -top-6 md:-top-10 left-0 w-full text-center opacity-[0.03] select-none pointer-events-none font-display font-black text-[12vw] md:text-[25vw] leading-none whitespace-nowrap">
+                    <div className="absolute -top-6 md:-top-10 left-0 w-full text-center opacity-[0.03] select-none pointer-events-none font-display font-black text-[12vw] md:text-[16vw] leading-none whitespace-nowrap">
                         VISION
                     </div>
                 </div>
@@ -124,10 +123,6 @@ const MissionSection = () => {
                         <p className="text-2xl text-muted-foreground leading-relaxed max-w-xl">
                             {t.About.mission.description}
                         </p>
-
-                        <div className="flex justify-center md:justify-start pt-2">
-                            <KozmoSpirit />
-                        </div>
                     </div>
                 </div>
             </div>
