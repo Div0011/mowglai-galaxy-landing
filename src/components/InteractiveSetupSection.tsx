@@ -361,14 +361,14 @@ const Step3Visual = () => {
         const rocketColor = isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(71, 98, 42, 0.85)";
         const flameColor = isDark ? "rgba(230, 185, 61, 0.7)" : "rgba(212, 175, 55, 0.85)";
 
-        // Fixed stars
+        // Fixed stars populated safely for a large grid
+        const maxCols = 500;
+        const maxRows = 150;
         const stars: { col: number; row: number }[] = [];
-        const cols = Math.ceil(W / BLOCK);
-        const rows = Math.ceil(H / BLOCK);
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 25; i++) {
             stars.push({
-                col: Math.floor(pseudo(i * 3.1) * cols),
-                row: Math.floor(pseudo(i * 9.7) * Math.floor(rows * 0.55)),
+                col: Math.floor(pseudo(i * 3.1) * maxCols),
+                row: Math.floor(pseudo(i * 9.7) * Math.floor(maxRows * 0.55)),
             });
         }
 
@@ -382,10 +382,12 @@ const Step3Visual = () => {
             // 1. Stars (Dark mode)
             if (isDark) {
                 stars.forEach((star) => {
-                    const starTick = tick + star.col * 7 + star.row * 13;
-                    if (Math.sin(starTick * 0.05) > 0.2) {
-                        ctx.fillStyle = pixelColor;
-                        ctx.fillRect(star.col * BLOCK, star.row * BLOCK, BLOCK, BLOCK);
+                    if (star.col < cols && star.row < rows) {
+                        const starTick = tick + star.col * 7 + star.row * 13;
+                        if (Math.sin(starTick * 0.05) > 0.2) {
+                            ctx.fillStyle = pixelColor;
+                            ctx.fillRect(star.col * BLOCK, star.row * BLOCK, BLOCK, BLOCK);
+                        }
                     }
                 });
             }

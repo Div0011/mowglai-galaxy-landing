@@ -69,39 +69,42 @@ export default function ImmersiveFooter() {
         const cols = Math.ceil(W / BLOCK);
         const rows = Math.ceil(H / BLOCK);
 
-        // Precompute Mountains
+        // Precompute Mountains and Stars for a large grid to handle resize safely
+        const maxCols = 2000;
+        const maxRows = 500;
+
         const farMtn: number[] = [];
         const midMtn: number[] = [];
         const nearHill: number[] = [];
 
         // Far peaks
         let farY = Math.round(rows * 0.58);
-        for (let c = 0; c < cols; c++) {
+        for (let c = 0; c < maxCols; c++) {
             farY += Math.sin(c * 0.05) * 0.5 + (pseudo(c * 2.3) - 0.5) * 0.4;
             farMtn.push(Math.round(farY));
         }
 
         // Mid peaks
         let midY = Math.round(rows * 0.68);
-        for (let c = 0; c < cols; c++) {
+        for (let c = 0; c < maxCols; c++) {
             midY += Math.sin(c * 0.08 + 2.0) * 0.6 + (pseudo(c * 4.7) - 0.5) * 0.6;
             midMtn.push(Math.round(midY));
         }
 
         // Near hills
         let nearY = Math.round(rows * 0.80);
-        for (let c = 0; c < cols; c++) {
+        for (let c = 0; c < maxCols; c++) {
             nearY += Math.cos(c * 0.06 + 4.0) * 0.4 + (pseudo(c * 1.9) - 0.5) * 0.2;
             nearHill.push(Math.round(nearY));
         }
 
         // Sky Stars
-        const starCount = 35;
+        const starCount = 60;
         const starPositions: { c: number; r: number }[] = [];
         for (let i = 0; i < starCount; i++) {
             starPositions.push({
-                c: Math.floor(pseudo(i * 3.7) * cols),
-                r: Math.floor(pseudo(i * 7.1) * Math.floor(rows * 0.5)),
+                c: Math.floor(pseudo(i * 3.7) * maxCols),
+                r: Math.floor(pseudo(i * 7.1) * Math.floor(maxRows * 0.55)),
             });
         }
 
@@ -116,9 +119,11 @@ export default function ImmersiveFooter() {
             if (isDark) {
                 ctx.fillStyle = pixelColor;
                 starPositions.forEach((star) => {
-                    const starTick = tick + star.c * 7 + star.r * 13;
-                    if (Math.sin(starTick * 0.05) > 0.3) {
-                        ctx.fillRect(star.c * BLOCK, star.r * BLOCK, BLOCK, BLOCK);
+                    if (star.c < cols && star.r < rows) {
+                        const starTick = tick + star.c * 7 + star.r * 13;
+                        if (Math.sin(starTick * 0.05) > 0.3) {
+                            ctx.fillRect(star.c * BLOCK, star.r * BLOCK, BLOCK, BLOCK);
+                        }
                     }
                 });
             }
