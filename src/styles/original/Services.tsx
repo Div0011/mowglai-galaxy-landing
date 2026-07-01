@@ -227,10 +227,12 @@ export default function OriginalServices() {
 
                             <Link
                                 href="/explore"
-                                className="group relative inline-flex items-center justify-center px-10 py-5 bg-primary text-primary-foreground text-sm md:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.03]"
+                                className="relative z-10 px-6 sm:px-14 py-4 sm:py-6 rounded-full bg-primary text-primary-foreground font-display font-black uppercase tracking-[0.2em] hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_0_40px_rgba(var(--primary-rgb),0.4)] text-sm sm:text-base md:text-xl group"
+                                data-aos="fade-up"
+                                data-aos-delay="100"
                             >
-                                <span className="relative z-10 flex items-center gap-2">
-                                    Browse Templates <ArrowRight className="group-hover:translate-x-2 transition-transform h-6 w-6" />
+                                <span className="flex items-center gap-3">
+                                    Browse Blueprints <ArrowRight className="group-hover:translate-x-2 transition-transform h-6 w-6" />
                                 </span>
                             </Link>
                         </div>
@@ -240,7 +242,7 @@ export default function OriginalServices() {
                     {/* Investment Option */}
                     <div className="w-full">
                         <NextPageButton
-                            label="PRICING"
+                            label="INVESTMENT"
                             href="/investment"
                             tagline="Ready to Scale?"
                         />

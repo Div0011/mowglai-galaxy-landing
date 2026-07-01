@@ -64,16 +64,16 @@ export default function TemplatesShowcase() {
 
     return (
         <div
-            className="relative h-full overflow-hidden rounded-[2rem] p-6 sm:p-8 bg-card border border-white/10 group/card transition-all duration-700 hover:border-primary/40"
+            className="relative h-full overflow-hidden rounded-[3rem] p-6 sm:p-8 bg-[#05110a]/80 backdrop-blur-2xl border border-green-900/40 group/card transition-all duration-700 hover:border-[#F5D061]/40 hover:shadow-[0_0_50px_rgba(34,197,94,0.15)]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/20 blur-[90px]" />
-            <div className="pointer-events-none absolute -bottom-24 -left-12 h-72 w-72 rounded-full bg-emerald-500/10 blur-[90px]" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#F5D061]/15 blur-[90px]" />
+            <div className="pointer-events-none absolute -bottom-24 -left-12 h-72 w-72 rounded-full bg-[#22c55e]/15 blur-[90px]" />
 
             <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="space-y-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/80">Premium Blueprints</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-jungle-gold">Premium Blueprints</p>
                     <p className="text-sm text-foreground/75">Launch-ready website systems curated for specific industries.</p>
                 </div>
                 <div className="rounded-full border border-foreground/10 bg-background/60 px-3 py-1 text-[11px] font-medium text-foreground/70">
@@ -81,7 +81,7 @@ export default function TemplatesShowcase() {
                 </div>
             </div>
 
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+            <div className="relative aspect-[16/10] sm:aspect-[5/4] overflow-hidden rounded-[2rem] border border-[#22c55e]/20 bg-[#020804]/60 shadow-[0_24px_60px_rgba(0,0,0,0.6)] group-hover/card:border-[#F5D061]/30 transition-colors duration-700">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={currentIndex}
@@ -107,7 +107,7 @@ export default function TemplatesShowcase() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
 
                             <div className="absolute left-4 top-4">
-                                <span className="inline-flex rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
+                                <span className="inline-flex rounded-full border border-[#F5D061]/30 bg-[#05110a]/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F5D061] backdrop-blur-md">
                                     {activeItem.sector.label}
                                 </span>
                             </div>
@@ -149,7 +149,7 @@ export default function TemplatesShowcase() {
                         className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Previous blueprint"
                     >
-                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full group-hover/btn:w-full" />
                         <ArrowLeft size={16} className="relative z-10" />
                     </button>
                     <button
@@ -160,7 +160,7 @@ export default function TemplatesShowcase() {
                         className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Next blueprint"
                     >
-                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full group-hover/btn:w-full" />
                         <ArrowRight size={16} className="relative z-10" />
                     </button>
 

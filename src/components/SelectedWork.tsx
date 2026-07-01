@@ -107,13 +107,13 @@ export default function SelectedWork() {
     };
 
     return (
-        <div className="relative h-full overflow-hidden rounded-[2rem] p-6 sm:p-8 bg-card border border-white/10 group/card transition-all duration-700 hover:border-primary/40">
-            <div className="pointer-events-none absolute -left-16 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-[100px]" />
-            <div className="pointer-events-none absolute -bottom-20 -right-8 h-64 w-64 rounded-full bg-emerald-500/10 blur-[100px]" />
+        <div className="relative h-full overflow-hidden rounded-[3rem] p-6 sm:p-8 bg-[#05110a]/80 backdrop-blur-2xl border border-green-900/40 group/card transition-all duration-700 hover:border-[#F5D061]/40 hover:shadow-[0_0_50px_rgba(34,197,94,0.15)]">
+            <div className="pointer-events-none absolute -left-16 -top-24 h-64 w-64 rounded-full bg-[#22c55e]/15 blur-[100px]" />
+            <div className="pointer-events-none absolute -bottom-20 -right-8 h-64 w-64 rounded-full bg-[#F5D061]/10 blur-[100px]" />
 
             <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="space-y-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/80">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-jungle-gold">
                         {t.SelectedWork.selected} {t.SelectedWork.work}
                     </p>
                     <p className="text-sm text-foreground/75">Proven launches crafted for measurable growth.</p>
@@ -124,7 +124,7 @@ export default function SelectedWork() {
             </div>
 
             <div
-                className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
+                className="relative aspect-[16/10] sm:aspect-[5/4] overflow-hidden rounded-[2rem] border border-[#22c55e]/20 bg-[#020804]/60 shadow-[0_24px_60px_rgba(0,0,0,0.6)] group-hover/card:border-[#F5D061]/30 transition-colors duration-700"
                 onMouseEnter={() => {
                     if (autoplayRef.current) clearInterval(autoplayRef.current);
                 }}
@@ -159,7 +159,7 @@ export default function SelectedWork() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" />
 
                             <div className="absolute left-4 top-4">
-                                <span className="inline-flex rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm">
+                                <span className="inline-flex rounded-full border border-[#22c55e]/30 bg-[#05110a]/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#22c55e] backdrop-blur-md">
                                     Live Project
                                 </span>
                             </div>
@@ -189,7 +189,7 @@ export default function SelectedWork() {
                         className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Previous project"
                     >
-                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full group-hover/btn:w-full" />
                         <ArrowLeft size={16} className="relative z-10" />
                     </button>
                     <button
@@ -201,7 +201,7 @@ export default function SelectedWork() {
                         className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-white/5 overflow-hidden text-foreground/70 transition-all hover:border-primary/40 hover:text-primary-foreground active:scale-95"
                         aria-label="Next project"
                     >
-                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full" />
+                        <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full group-hover/btn:w-full" />
                         <ArrowRight size={16} className="relative z-10" />
                     </button>
 

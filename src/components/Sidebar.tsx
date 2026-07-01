@@ -12,11 +12,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Users, label: "About", href: "/about" },
-    { icon: Palette, label: "Services", href: "/services" },
-    { icon: LayoutGrid, label: "Templates", href: "/explore" },
-    { icon: DollarSign, label: "Pricing", href: "/investment" },
-    { icon: Mail, label: "Contact", href: "/contact" },
+    { icon: Users, label: "Story", href: "/about" },
+    { icon: Palette, label: "Craft", href: "/services" },
+    { icon: LayoutGrid, label: "Blueprint", href: "/explore" },
+    { icon: DollarSign, label: "Value", href: "/investment" },
+    { icon: Mail, label: "Hello", href: "/contact" },
 ];
 
 interface SidebarProps {

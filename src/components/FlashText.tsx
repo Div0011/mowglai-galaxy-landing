@@ -20,39 +20,8 @@ const FlashText = () => {
     return (
         <div
             onMouseMove={handleMouseMove}
-            className="w-screen ml-[calc(50%-50vw)] min-h-[350px] md:min-h-[480px] flex flex-col items-center justify-center overflow-hidden relative py-16 md:py-24 gap-8 group bg-black/20 border-y border-white/5"
+            className="w-screen ml-[calc(50%-50vw)] min-h-[300px] md:min-h-[440px] flex flex-col items-center justify-center overflow-hidden relative py-12 md:py-20 gap-8 group"
         >
-            <style dangerouslySetInnerHTML={{ __html: `
-                @keyframes grid-move-1 {
-                    0% { background-position: 0px 0px; }
-                    100% { background-position: 300px 300px; }
-                }
-                @keyframes grid-move-2 {
-                    0% { background-position: 0px 0px; }
-                    100% { background-position: -300px 300px; }
-                }
-            `}} />
-
-            {/* Criss-Cross Moving Grids */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.15] group-hover:opacity-[0.25] transition-opacity duration-700">
-                {/* Grid Layer 1 - Moving Top-Left to Bottom-Right */}
-                <div 
-                    className="absolute inset-[-200px] bg-[linear-gradient(to_right,rgba(230,185,61,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(230,185,61,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" 
-                    style={{
-                        transform: "rotate(15deg)",
-                        animation: "grid-move-1 25s linear infinite"
-                    }}
-                />
-                {/* Grid Layer 2 - Moving Top-Right to Bottom-Left */}
-                <div 
-                    className="absolute inset-[-200px] bg-[linear-gradient(to_right,rgba(230,185,61,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(230,185,61,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" 
-                    style={{
-                        transform: "rotate(-15deg)",
-                        animation: "grid-move-2 25s linear infinite"
-                    }}
-                />
-            </div>
-
             {/* Dynamic Interactive Spotlight */}
             <motion.div
                 className="pointer-events-none absolute -inset-px z-0 opacity-0 transition duration-500 group-hover:opacity-100"
@@ -60,7 +29,7 @@ const FlashText = () => {
                     background: useMotionTemplate`
                     radial-gradient(
                         600px circle at ${smoothX}px ${smoothY}px,
-                        rgba(var(--primary-rgb), 0.25),
+                        rgba(var(--primary-rgb), 0.15),
                         transparent 80%
                     )
                     `
@@ -68,10 +37,10 @@ const FlashText = () => {
             />
 
             {/* Continuous Trail Above Button */}
-            <div className="w-full overflow-hidden absolute top-8 md:top-12 left-0 flex items-center pointer-events-none opacity-30 group-hover:opacity-50 transition-opacity duration-700">
+            <div className="w-full overflow-hidden absolute top-12 md:top-20 left-0 flex items-center pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-700">
                 <div className="flex animate-marquee whitespace-nowrap items-center">
                     {[...Array(4)].map((_, i) => (
-                        <span key={i} className="px-10 font-display font-black text-4xl sm:text-5xl md:text-7xl uppercase italic tracking-tighter text-primary/60">
+                        <span key={i} className="px-10 font-display font-black text-4xl sm:text-5xl md:text-7xl uppercase italic tracking-tighter text-primary">
                             REFER AND EARN 10% COMMISSION •
                         </span>
                     ))}
@@ -83,7 +52,7 @@ const FlashText = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
-                className="relative z-10 mt-16 md:mt-24 flex flex-col items-center"
+                className="relative z-10 mt-20 md:mt-28"
             >
                 <Magnetic>
                     <Link
@@ -94,7 +63,7 @@ const FlashText = () => {
                         <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
                     </Link>
                 </Magnetic>
-                <p className="text-[10px] md:text-xs text-center mt-4 md:mt-5 uppercase tracking-widest opacity-60 font-display font-bold text-primary">
+                <p className="text-[10px] md:text-xs text-center mt-3 md:mt-4 uppercase tracking-widest opacity-60">
                     Get 10% commission for you & a friend
                 </p>
             </motion.div>

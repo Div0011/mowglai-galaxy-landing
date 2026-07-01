@@ -186,7 +186,7 @@ export default function OriginalDNA() {
                     </div>
                 </div>
             </section>
-            <NextPageButton label="SERVICES" href="/services" />
+            <NextPageButton label="OUR EXPERTISE" href="/services" />
         </PageLayout>
     );
 }
