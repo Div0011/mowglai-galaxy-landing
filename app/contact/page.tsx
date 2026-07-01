@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: "https://mowglai.com/contact",
         images: [
             {
-                url: "https://mowglai.com/assets/mowglai_primary.png",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "Contact Mowglai Digital Agency"
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Contact Mowglai | Web Development Agency India",
         description: "Get in touch with India's leading web development agency for custom website design and development.",
-        images: ["https://mowglai.com/assets/mowglai_primary.png"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 

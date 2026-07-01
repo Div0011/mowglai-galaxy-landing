@@ -298,7 +298,7 @@ export default function InvestmentPage() {
                     subscription_id: data.subscription_id,
                     name: "Mowglai Care Plans",
                     description: plan.name,
-                    image: "/assets/mowglai_primary.png",
+                    image: "/mowglai-logo-light.png",
                     notes: {
                         plan: plan.name,
                         category: "care",
@@ -633,7 +633,7 @@ export default function InvestmentPage() {
                 {/* Next Chapter CTA - Final Narrative */}
                 <div className="mt-32 relative z-10">
                     <NextPageButton
-                        label="HELLO"
+                        label="CONTACT"
                         href="/contact"
                         tagline="Initiate Dialogue"
                     />

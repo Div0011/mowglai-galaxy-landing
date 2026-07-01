@@ -129,11 +129,7 @@ ${formData.message}
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start relative">
-          
-          {/* Smart Companion Waypoint */}
-          <div className="absolute left-1/4 top-0 w-[200px] h-[400px] companion-waypoint pointer-events-none hidden lg:block" />
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Contact Info - Minimal & Large */}
           <div className="space-y-12 lg:pt-10">
             <p className="text-3xl font-light text-foreground/80 max-w-lg leading-snug">

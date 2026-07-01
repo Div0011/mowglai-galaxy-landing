@@ -5,18 +5,18 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
-    icon: React.ComponentType<{ className?: string }>;
+    icon: React.ElementType;
     label: string;
     href: string;
 }
 
 const navItems: NavItem[] = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Users, label: "Story", href: "/about" },
-    { icon: Palette, label: "Craft", href: "/services" },
-    { icon: LayoutGrid, label: "Blueprint", href: "/explore" },
-    { icon: DollarSign, label: "Value", href: "/investment" },
-    { icon: Mail, label: "Hello", href: "/contact" },
+    { icon: Users, label: "About", href: "/about" },
+    { icon: Palette, label: "Services", href: "/services" },
+    { icon: LayoutGrid, label: "Templates", href: "/explore" },
+    { icon: DollarSign, label: "Pricing", href: "/investment" },
+    { icon: Mail, label: "Contact", href: "/contact" },
 ];
 
 interface SidebarProps {

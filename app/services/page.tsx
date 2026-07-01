@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         url: "https://mowglai.com/services",
         images: [
             {
-                url: "https://mowglai.com/assets/mowglai_primary.png",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "Mowglai Web Development Services"
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Web Development Services | Mowglai Digital Agency",
         description: "Premium web development services: SaaS, MVPs, MVC architecture, custom websites, React & Next.js, 3D experiences, e-commerce, SEO.",
-        images: ["https://mowglai.com/assets/mowglai_primary.png"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 

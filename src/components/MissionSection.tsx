@@ -58,15 +58,15 @@ const MissionSection = () => {
             <div className="container mx-auto px-6">
 
                 {/* 1. Huge Heading - Balanced Styling */}
-                <div ref={textRef} className="mb-16 relative" data-aos="fade-up">
-                    <h2 className="text-5xl sm:text-8xl md:text-[15vw] font-display font-black tracking-tighter text-foreground flex flex-col items-center">
-                        <span className="leading-[0.8] opacity-10">{t.About.mission.global}</span>
-                        <span className="text-primary leading-[0.8] -mt-2 md:-mt-0">{t.About.mission.vision}</span>
+                <div ref={textRef} className="mb-10 relative" data-aos="fade-up">
+                    <h2 className="text-5xl sm:text-7xl md:text-8xl font-display font-black tracking-normal text-foreground flex flex-col items-center">
+                        <span className="leading-[1.0] opacity-10 uppercase">{t.About.mission.global}</span>
+                        <span className="text-primary leading-[1.0] uppercase">{t.About.mission.vision}</span>
                     </h2>
 
                     {/* Decorative Background Text */}
-                    <div className="absolute -top-6 md:-top-10 left-0 w-full text-center opacity-[0.03] select-none pointer-events-none font-display font-black text-[12vw] md:text-[25vw] leading-none whitespace-nowrap">
-                        LOUD
+                    <div className="absolute -top-6 md:-top-10 left-0 w-full text-center opacity-[0.03] select-none pointer-events-none font-display font-black text-[12vw] md:text-[16vw] leading-none whitespace-nowrap">
+                        VISION
                     </div>
                 </div>
 
@@ -123,9 +123,6 @@ const MissionSection = () => {
                         <p className="text-2xl text-muted-foreground leading-relaxed max-w-xl">
                             {t.About.mission.description}
                         </p>
-
-                        {/* Interactive Stats Button */}
-                        {/* Interactive Stats Button - Removed from here */}
                     </div>
                 </div>
             </div>

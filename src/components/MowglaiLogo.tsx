@@ -7,10 +7,9 @@ import { useEffect, useState } from "react";
 interface MowglaiLogoProps {
   className?: string;
   size?: "sm" | "md" | "lg" | "xl" | "full";
-  variant?: "icon" | "primary" | "wordmark";
 }
 
-const MowglaiLogo = ({ className, size = "md", variant = "icon" }: MowglaiLogoProps) => {
+const MowglaiLogo = ({ className, size = "md" }: MowglaiLogoProps) => {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -34,34 +33,29 @@ const MowglaiLogo = ({ className, size = "md", variant = "icon" }: MowglaiLogoPr
     full: 500,
   };
 
-  const srcMap = {
-    icon: "/logo2.webp",
-    primary: "/assets/mowglai_primary.png",
-    wordmark: "/assets/mowglai_wordmark.png",
-  };
-
-  const logoSrc = srcMap[variant];
+  // Default to logo1-light (Dark Green/General) if not mounted or if dark theme
+  // Use logo2 (Golden) only if mounted and theme is explicitly light
+  const logoSrc = mounted && resolvedTheme === "light"
+    ? "/logo2.webp"
+    : "/logo1-light.webp";
 
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center overflow-hidden shrink-0",
-        variant === "icon" ? "rounded-full aspect-square bg-background/5 border border-primary/20 backdrop-blur-sm" : "aspect-auto",
+        "relative flex items-center justify-center overflow-hidden rounded-full aspect-square shrink-0",
+        "bg-background/5 border border-primary/20 backdrop-blur-sm",
         "transition-transform duration-500 hover:scale-105",
         sizeClasses[size],
         className
       )}
     >
-      <div className="relative w-full h-full flex items-center justify-center">
+      <div className="relative w-full h-full">
         <Image
           src={logoSrc}
-          alt={`Mowglai ${variant}`}
+          alt="Mowglai"
           width={dimensions[size]}
           height={dimensions[size]}
-          className={cn(
-            "object-contain",
-            variant === "icon" ? "w-full h-full rounded-full object-cover" : "w-full h-auto max-h-full"
-          )}
+          className="w-full h-full object-cover rounded-full"
           priority={size === "lg" || size === "xl"}
         />
       </div>

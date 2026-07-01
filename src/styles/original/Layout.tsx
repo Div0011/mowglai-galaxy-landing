@@ -7,16 +7,15 @@ import MobileNav from "@/components/MobileNav";
 import SettingsToggle from "@/components/SettingsToggle";
 import ContactToggle from "@/components/ContactToggle";
 
-const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
-
-import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-import JungleBackground from "@/components/JungleBackground";
-import BackToTopButton from "@/components/BackToTopButton";
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
+const JungleBackground = dynamic(() => import("@/components/JungleBackground"), { ssr: false });
+const BackToTopButton = dynamic(() => import("@/components/BackToTopButton"), { ssr: false });
+const ImmersiveFooter = dynamic(() => import("@/components/ImmersiveFooter"), { ssr: false });
 
 interface PageLayoutProps {
     children: React.ReactNode;
@@ -24,8 +23,12 @@ interface PageLayoutProps {
 
 const OriginalLayout = ({ children }: PageLayoutProps) => {
     const pathname = usePathname();
+    const [enableEnhancedCursor, setEnableEnhancedCursor] = useState(false);
+
     useEffect(() => {
-        // Removed custom cursor detection as per user request to always keep default cursor
+        const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        setEnableEnhancedCursor(supportsFinePointer && !prefersReducedMotion);
     }, []);
 
     // AOS is now initialized globally in AOSInit component linked in RootLayout
@@ -34,10 +37,10 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
 
     return (
         <div className="min-h-dvh relative text-foreground transition-colors duration-500">
-            <CustomCursor />
             <SmoothScroll />
             <ScrollToTop />
             <BackToTopButton />
+            {enableEnhancedCursor ? <CustomCursor /> : null}
             <SettingsToggle />
             <ContactToggle />
 
@@ -60,10 +63,8 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
                         className="gpu-accelerate"
                     >
                         <Suspense fallback={<div className="w-full h-screen flex items-center justify-center text-primary font-display animate-pulse">Loading Content...</div>}>
-                            <div className="relative z-10 bg-[#020804] shadow-[0_10px_50px_rgba(0,0,0,0.8)] w-full">
-                                {children}
-                            </div>
-                            <Footer />
+                            {children}
+                            <ImmersiveFooter />
                         </Suspense>
                     </motion.div>
                 </AnimatePresence>

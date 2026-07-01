@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: "https://mowglai.com/investment",
         images: [
             {
-                url: "https://mowglai.com/assets/mowglai_primary.png",
+                url: "https://mowglai.com/mowglai-logo-new.jpg",
                 width: 1200,
                 height: 1200,
                 alt: "Mowglai Pricing and Investment"
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Pricing & Investment | Mowglai Web Development Services",
         description: "Transparent pricing for web development services. From $499 basic websites to enterprise solutions.",
-        images: ["https://mowglai.com/assets/mowglai_primary.png"],
+        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
     },
 };
 

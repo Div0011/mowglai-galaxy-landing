@@ -2,7 +2,9 @@
 
 import OriginalLayout from "@/styles/original/Layout";
 import HeroSection from "@/components/HeroSection";
-import HomeContent from "@/components/HomeContent";
+import dynamic from "next/dynamic";
+
+const HomeContent = dynamic(() => import("@/components/HomeContent"), { ssr: false });
 
 export default function OriginalHome() {
     return (

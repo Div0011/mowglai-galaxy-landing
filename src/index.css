@@ -43,45 +43,38 @@
 
 @layer base {
   :root {
-    /* Premium Jungle Theme - Dark (Default) */
-    --background: 145 60% 8%; /* Deepest Forest Green */
-    --foreground: 60 30% 96%; /* Warm Ivory */
-    --primary: 45 100% 55%; /* Vibrant Gold/Yellow */
-    --primary-foreground: 145 60% 8%;
-    --secondary: 145 40% 16%; /* Moss Green */
-    --secondary-foreground: 60 30% 96%;
-    --card: 145 40% 12%; /* Dark Emerald */
-    --card-foreground: 60 30% 96%;
-    --accent: 120 40% 40%; /* Vibrant Leaf Green */
-    --accent-foreground: 60 30% 96%;
-    --border: 45 100% 55% / 0.15;
-    --ring: 45 100% 55%;
+    /* Original Theme Variables */
+    --background: 150 60% 15%;
+    --foreground: 50 100% 95%;
+    --primary: 43 100% 70%;
+    --primary-foreground: 150 60% 5%;
+    --secondary: 150 60% 20%;
+    --secondary-foreground: 43 100% 90%;
+    --card: 150 60% 12%;
+    --card-foreground: 50 100% 95%;
+    --accent: 79 45% 45%;
+    --accent-foreground: 43 100% 90%;
+    --border: 43 100% 70% / 0.2;
+    --ring: 43 100% 70%;
 
-    --glass-bg: 145 60% 15%;
-    --glass-border: 45 100% 55%;
-    --gradient-candy: linear-gradient(135deg, hsl(45 100% 55%), hsl(120 50% 50%), hsl(150 100% 30%));
-    
-    /* Smooth global rounded feel */
-    --radius: 2rem;
+    --glass-bg: 0 0% 100%;
+    --glass-border: 255 255 255;
+    --gradient-candy: linear-gradient(135deg, hsl(320 100% 60%), hsl(45 100% 60%), hsl(190 100% 50%));
   }
 
   .light {
-    /* Premium Jungle Theme - Light */
-    --background: 45 30% 96%; /* Soft Sand/Ivory */
-    --foreground: 145 60% 12%; /* Deep Forest Green */
-    --primary: 145 60% 30%; /* Rich Emerald */
-    --primary-foreground: 45 30% 96%;
-    --secondary: 45 20% 90%; /* Light Sand */
-    --secondary-foreground: 145 60% 12%;
-    --card: 45 20% 94%;
-    --card-foreground: 145 60% 12%;
-    --accent: 45 100% 45%; /* Deep Gold */
-    --accent-foreground: 145 60% 12%;
-    --border: 145 60% 30% / 0.15;
-    --ring: 145 60% 30%;
-    
-    /* Smooth global rounded feel */
-    --radius: 2rem;
+    --background: 34 100% 98%;
+    --foreground: 150 60% 15%;
+    --primary: 43 100% 45%;
+    --primary-foreground: 150 60% 15%;
+    --secondary: 34 100% 92%;
+    --secondary-foreground: 150 60% 15%;
+    --card: 34 100% 96%;
+    --card-foreground: 150 60% 15%;
+    --accent: 43 100% 45%;
+    --accent-foreground: 34 100% 98%;
+    --border: 43 100% 45% / 0.2;
+    --ring: 43 100% 45%;
   }
 
   /* Minimal Style Core */
@@ -168,14 +161,6 @@
 
   /* Global Setup */
   @layer utilities {
-    .text-jungle-gold {
-      @apply bg-clip-text text-transparent bg-gradient-to-br from-[#F5D061] via-[#D4AF37] to-[#A67C00];
-    }
-    
-    .text-jungle-emerald {
-      @apply bg-clip-text text-transparent bg-gradient-to-br from-[#4ade80] via-[#22c55e] to-[#14532d];
-    }
-
     .animate-spin-slow {
       animation: spin 8s linear infinite;
     }
@@ -202,7 +187,12 @@
     @apply border-border;
   }
 
-  /* Custom cursor hiding is removed to keep default cursor visible */
+  /* Apply custom cursor only on desktop devices */
+  @media (pointer: fine) {
+    * {
+      cursor: none;
+    }
+  }
 
   html,
   body {
@@ -369,133 +359,4 @@
   .animate-refraction {
     animation: refraction 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
-
-  /* ── Ambient particle float (offloaded from JS) ── */
-  @keyframes ambient-float {
-    0%   { transform: translate3d(0, 0, 0); opacity: 0.2; }
-    25%  { transform: translate3d(12px, -24px, 0); opacity: 0.5; }
-    50%  { transform: translate3d(20px, -40px, 0); opacity: 0.6; }
-    75%  { transform: translate3d(8px, -20px, 0); opacity: 0.35; }
-    100% { transform: translate3d(0, 0, 0); opacity: 0.2; }
-  }
-
-  .animate-ambient-float {
-    animation: ambient-float var(--float-duration, 5s) ease-in-out infinite;
-    animation-delay: var(--float-delay, 0s);
-    will-change: transform, opacity;
-  }
-
-  /* ── Firefly glow (offloaded from Framer Motion) ── */
-  @keyframes firefly-drift {
-    0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-    15%  { opacity: 0.9; }
-    30%  { transform: translate3d(10px, -20px, 0); opacity: 0.3; }
-    60%  { transform: translate3d(-8px, -15px, 0); opacity: 0.8; }
-    100% { transform: translate3d(5px, 0, 0); opacity: 0; }
-  }
-
-  .animate-firefly {
-    animation: firefly-drift var(--firefly-duration, 4s) ease-in-out infinite;
-    animation-delay: var(--firefly-delay, 0s);
-    will-change: transform, opacity;
-  }
-
-  /* ── Fade-in for CTA buttons ── */
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
-  }
-
-  /* ── Content visibility for below-fold sections ── */
-  .content-lazy {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
-  }
 }
-
-@layer utilities {
-  /* ── Golden Glow Menu Options ── */
-  @keyframes menu-gold-glow-sweep {
-    0% {
-      background-position: 0% -200%;
-    }
-    50% {
-      background-position: 0% 100%;
-    }
-    100% {
-      background-position: 0% 200%;
-    }
-  }
-
-  .gold-glow-text {
-    background: linear-gradient(
-      to bottom,
-      rgba(34, 197, 94, 0.25) 0%,
-      rgba(34, 197, 94, 0.25) 30%,
-      #FFE600 50%,
-      rgba(34, 197, 94, 0.25) 70%,
-      rgba(34, 197, 94, 0.25) 100%
-    );
-    background-size: 100% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: menu-gold-glow-sweep 6s linear infinite;
-    text-shadow: 0 0 12px rgba(251, 191, 36, 0.1);
-  }
-
-  .gold-glow-text-hover {
-    background: linear-gradient(
-      to bottom,
-      #14532d 0%,
-      #22c55e 25%,
-      #FFE600 50%,
-      #22c55e 75%,
-      #14532d 100%
-    );
-    background-size: 100% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: menu-gold-glow-sweep 2.5s linear infinite;
-    filter: drop-shadow(0 0 15px rgba(253, 224, 71, 0.65));
-  }
-}
-
-/* ── High-End Footer Reveal Watermark & Effects ── */
-.footer-watermark-text {
-  font-family: var(--font-display), serif;
-  font-weight: 900;
-  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.12);
-  color: transparent;
-  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.footer-watermark-text:hover {
-  -webkit-text-stroke: 1.5px transparent;
-  color: transparent;
-  background: linear-gradient(135deg, #FFE600 0%, #22c55e 50%, #052e16 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(0 0 35px rgba(34, 197, 94, 0.5));
-}
-
-.footer-option-link {
-  font-family: var(--font-display), serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-  color: transparent;
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.footer-option-link:hover {
-  -webkit-text-stroke: 1px transparent;
-  color: #FFE600;
-  filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.6));
-}
-

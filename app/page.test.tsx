@@ -1,7 +1,7 @@
 import { describe, expect, it, mock } from 'bun:test';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-mock.module('@/components/RedesignedHome', () => ({
+mock.module('@/styles/original/Home', () => ({
     default: () => <div>Mocked Home</div>,
 }));
 

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Instagram, Linkedin, Mail } from "lucide-react";
+import { Instagram, Linkedin } from "lucide-react";
 import MowglaiLogo from "@/components/MowglaiLogo";
 import XLogo from "@/components/icons/XLogo";
 
@@ -42,87 +42,71 @@ export default function ImmersiveFooter() {
         const canvas = canvasRef.current;
         const container = containerRef.current;
         if (!canvas || !container) return;
+
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        const BLOCK = 8; // Canvas pixels per "scene block" (8 is perfect for full screen)
-        const STAR_COUNT = 45;
-
-        let W = 0, H = 0;
-        let farMtn: number[] = [];
-        let midMtn: number[] = [];
-        let nearHill: number[] = [];
-        const stars: { col: number; row: number }[] = [];
-
-        const buildMountains = (cols: number, rows: number) => {
-            const make = (baseline: number, amp: number, seed: number) =>
-                Array.from({ length: cols }, (_, c) => {
-                    const t = c / cols;
-                    return Math.round(
-                        baseline
-                        + Math.sin(t * Math.PI * 2.5 + seed) * amp * 0.55
-                        + Math.sin(t * Math.PI * 6.5 + seed * 2) * amp * 0.3
-                        + Math.sin(t * Math.PI * 12 + seed * 3.5) * amp * 0.15
-                    );
-                });
-
-            // Mountains occupy bottom part of full-screen view
-            const fBase = Math.round(rows * 0.65);
-            const mBase = Math.round(rows * 0.76);
-            const nBase = Math.round(rows * 0.85);
-
-            farMtn   = make(fBase - Math.round(rows * 0.14), rows * 0.11, 1.2);
-            midMtn   = make(mBase - Math.round(rows * 0.10), rows * 0.08, 3.6);
-            nearHill = make(nBase - Math.round(rows * 0.05), rows * 0.04, 7.8);
-        };
+        const BLOCK = 4;
+        let W = 0;
+        let H = 0;
 
         const resize = () => {
-            W = container.offsetWidth  || window.innerWidth;
-            H = container.offsetHeight || window.innerHeight;
-            canvas.width  = W;
+            W = container.offsetWidth || window.innerWidth;
+            H = container.offsetHeight || 700;
+            canvas.width = W;
             canvas.height = H;
-            const cols = Math.ceil(W / BLOCK);
-            const rows = Math.ceil(H / BLOCK);
-            buildMountains(cols, rows);
-
-            stars.length = 0;
-            for (let i = 0; i < STAR_COUNT; i++) {
-                stars.push({
-                    col: Math.floor(pseudo(i * 4.3) * cols),
-                    row: Math.floor(pseudo(i * 8.9) * Math.floor(rows * 0.60)),
-                });
-            }
         };
-
         resize();
 
         let tick = 0;
         let frameId: number;
 
+        // Colors
         const isDark = resolvedTheme === "dark";
         const pixelColor = isDark ? "rgba(230, 185, 61, 0.22)" : "rgba(71, 98, 42, 0.35)";
 
-        const drawCloud = (cols: number, rows: number, cx: number, cy: number) => {
-            const cloudRows = [
-                { dy: -2, w: 5 },
-                { dy: -1, w: 8 },
-                { dy: 0, w: 10 },
-                { dy: 1, w: 9 },
-                { dy: 2, w: 6 },
-            ];
-            ctx.fillStyle = pixelColor;
-            cloudRows.forEach(({ dy, w }) => {
-                const r = cy + dy;
-                for (let dc = -w; dc <= w; dc++) {
-                    const c = cx + dc;
-                    if (c >= 0 && c < cols && r >= 0 && r < rows) {
-                        if ((c + r) % 2 === 0) {
-                            ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
-                        }
-                    }
-                }
+        // Generation vectors
+        const cols = Math.ceil(W / BLOCK);
+        const rows = Math.ceil(H / BLOCK);
+
+        // Precompute Mountains and Stars for a large grid to handle resize safely
+        const maxCols = 2000;
+        const maxRows = 500;
+
+        const farMtn: number[] = [];
+        const midMtn: number[] = [];
+        const nearHill: number[] = [];
+
+        // Far peaks
+        let farY = Math.round(rows * 0.58);
+        for (let c = 0; c < maxCols; c++) {
+            farY += Math.sin(c * 0.05) * 0.5 + (pseudo(c * 2.3) - 0.5) * 0.4;
+            farMtn.push(Math.round(farY));
+        }
+
+        // Mid peaks
+        let midY = Math.round(rows * 0.68);
+        for (let c = 0; c < maxCols; c++) {
+            midY += Math.sin(c * 0.08 + 2.0) * 0.6 + (pseudo(c * 4.7) - 0.5) * 0.6;
+            midMtn.push(Math.round(midY));
+        }
+
+        // Near hills
+        let nearY = Math.round(rows * 0.80);
+        for (let c = 0; c < maxCols; c++) {
+            nearY += Math.cos(c * 0.06 + 4.0) * 0.4 + (pseudo(c * 1.9) - 0.5) * 0.2;
+            nearHill.push(Math.round(nearY));
+        }
+
+        // Sky Stars
+        const starCount = 60;
+        const starPositions: { c: number; r: number }[] = [];
+        for (let i = 0; i < starCount; i++) {
+            starPositions.push({
+                c: Math.floor(pseudo(i * 3.7) * maxCols),
+                r: Math.floor(pseudo(i * 7.1) * Math.floor(maxRows * 0.55)),
             });
-        };
+        }
 
         const drawScene = () => {
             tick++;
@@ -130,43 +114,41 @@ export default function ImmersiveFooter() {
 
             const cols = Math.ceil(W / BLOCK);
             const rows = Math.ceil(H / BLOCK);
-            const skyR = Math.round(rows * 0.65);
 
-            // ── Stars (Dark Mode Only) ───────────────────────────────────────
+            // ── Twinkling Stars (Dark Mode Only) ──────────────────────────────
             if (isDark) {
-                for (const star of stars) {
-                    if (star.row >= skyR) continue;
-                    const starTick = tick + star.col * 7 + star.row * 13;
-                    if (Math.sin(starTick * 0.05) > 0.15) {
-                        ctx.fillStyle = pixelColor;
-                        ctx.fillRect(star.col * BLOCK, star.row * BLOCK, BLOCK, BLOCK);
+                ctx.fillStyle = pixelColor;
+                starPositions.forEach((star) => {
+                    if (star.c < cols && star.r < rows) {
+                        const starTick = tick + star.c * 7 + star.r * 13;
+                        if (Math.sin(starTick * 0.05) > 0.3) {
+                            ctx.fillRect(star.c * BLOCK, star.r * BLOCK, BLOCK, BLOCK);
+                        }
                     }
-                }
+                });
             }
 
-            // ── Pixel Clouds ─────────────────────────────────────────────────
-            const cloud1X = Math.floor((tick * 0.06) % (cols + 40)) - 20;
-            const cloud1Y = Math.floor(rows * 0.18);
-            drawCloud(cols, rows, cloud1X, cloud1Y);
+            // ── Sliced Sun/Moon (Upper Right Side) ───────────────────────────
+            const sunC = Math.round(cols * 0.82);
+            const sunR = Math.round(rows * 0.32);
+            const sunRad = 11;
 
-            const cloud2X = Math.floor(((tick * 0.04) + cols * 0.55) % (cols + 40)) - 20;
-            const cloud2Y = Math.floor(rows * 0.28);
-            drawCloud(cols, rows, cloud2X, cloud2Y);
-
-            // ── Pixel Sun (Right Aligned) ────────────────────────────────────
-            const sunX = Math.round(cols * 0.82);
-            const sunY = Math.round(rows * 0.38);
-            const sunR = 12;
-            for (let dr = -sunR; dr <= sunR; dr++) {
-                for (let dc = -sunR; dc <= sunR; dc++) {
-                    const dist = Math.sqrt(dr * dr + dc * dc);
-                    if (dist <= sunR) {
-                        const r = sunY + dr;
-                        const c = sunX + dc;
-                        if (c >= 0 && c < cols && r >= 0 && r < rows) {
-                            if (dr > 0 && dr % 2 !== 0) continue;
-                            ctx.fillStyle = pixelColor;
-                            ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+            ctx.fillStyle = pixelColor;
+            for (let r = sunR - sunRad; r <= sunR + sunRad; r++) {
+                for (let c = sunC - sunRad; c <= sunC + sunRad; c++) {
+                    if (c >= 0 && c < cols && r >= 0 && r < rows) {
+                        const dc = c - sunC;
+                        const dr = r - sunR;
+                        const dist = Math.sqrt(dc * dc + dr * dr);
+                        if (dist <= sunRad) {
+                            // Slice the lower half of the sun
+                            if (r > sunR) {
+                                if ((r - sunR) % 2 === 0) {
+                                    ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+                                }
+                            } else {
+                                ctx.fillRect(c * BLOCK, r * BLOCK, BLOCK, BLOCK);
+                            }
                         }
                     }
                 }
@@ -197,6 +179,7 @@ export default function ImmersiveFooter() {
             drawBird(bird2X, bird2Y);
 
             // ── Far Mountains (50% Dither) ───────────────────────────────────
+            const skyR = Math.round(rows * 0.70);
             for (let c = 0; c < cols && c < farMtn.length; c++) {
                 const top = farMtn[c];
                 for (let r = top; r < skyR; r++) {
@@ -267,7 +250,7 @@ export default function ImmersiveFooter() {
         <footer
             ref={containerRef}
             id="footer"
-            className="relative w-full h-screen min-h-[700px] overflow-hidden bg-transparent select-none flex flex-col justify-between"
+            className="relative w-full h-screen min-h-[700px] overflow-hidden bg-transparent select-none flex flex-col justify-between text-foreground/80"
         >
             {/* Pixel Art Canvas */}
             <canvas
@@ -281,7 +264,7 @@ export default function ImmersiveFooter() {
                 className="absolute inset-0 pointer-events-none z-[1]"
                 style={{
                     backgroundImage:
-                        "repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0px, rgba(0,0,0,0.025) 1px, transparent 1px, transparent 3px)",
+                        "repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px)",
                     backgroundSize: "100% 3px",
                 }}
                 aria-hidden="true"

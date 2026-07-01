@@ -1,62 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import TextReveal from "./TextReveal";
 import Magnetic from "./Magnetic";
 import { useLanguage } from "../context/LanguageContext";
 import { ArrowRight, ScanLine } from "lucide-react";
-import { motion } from "framer-motion";
-import MowglaiLogo from "./MowglaiLogo";
-
-// Floating leaves component — stable values to prevent hydration mismatch
-const FloatingLeaves = () => {
-    // Stable leaf parameters computed once on mount (not during SSR render)
-    const leaves = useMemo(() => [
-        { left: 15, xDrift: 80, dur: 12, delay: 0, dir: 1 },
-        { left: 35, xDrift: -60, dur: 14, delay: 1, dir: -1 },
-        { left: 55, xDrift: 90, dur: 16, delay: 2, dir: 1 },
-        { left: 72, xDrift: -70, dur: 11, delay: 3, dir: -1 },
-        { left: 88, xDrift: 50, dur: 18, delay: 1.5, dir: 1 },
-        { left: 25, xDrift: -40, dur: 15, delay: 4, dir: -1 },
-    ], []);
-
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            {leaves.map((leaf, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute w-8 h-8 opacity-20 dark:opacity-30 mix-blend-screen"
-                    style={{
-                        left: `${leaf.left}%`,
-                        top: `-10%`,
-                        background: 'linear-gradient(135deg, #4ade80 0%, #14532d 100%)',
-                        borderRadius: '0 50% 0 50%',
-                        boxShadow: '0 0 20px rgba(74, 222, 128, 0.2)',
-                        willChange: 'transform',
-                    }}
-                    animate={{
-                        y: ['0vh', '120vh'],
-                        x: [0, leaf.xDrift, leaf.xDrift * 0.5],
-                        rotate: [0, 360 * leaf.dir],
-                        scale: [0.5, 1.2, 0.5]
-                    }}
-                    transition={{
-                        duration: leaf.dur,
-                        repeat: Infinity,
-                        delay: leaf.delay,
-                        ease: "linear"
-                    }}
-                />
-            ))}
-        </div>
-    );
-};
 
 const HeroSection = () => {
     const { t } = useLanguage();
     const tiltRef = useRef<HTMLDivElement>(null);
-    const spotlightRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         let animationFrameId: number;
@@ -85,11 +38,6 @@ const HeroSection = () => {
 
                     tiltRef.current.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 }
-
-                if (spotlightRef.current) {
-                    spotlightRef.current.style.opacity = "1";
-                    spotlightRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(245, 208, 97, 0.08), rgba(74, 222, 128, 0.03) 40%, transparent 80%)`;
-                }
             });
         };
 
@@ -98,9 +46,6 @@ const HeroSection = () => {
             animationFrameId = requestAnimationFrame(() => {
                 if (tiltRef.current) {
                     tiltRef.current.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
-                }
-                if (spotlightRef.current) {
-                    spotlightRef.current.style.opacity = "0";
                 }
             });
         };
@@ -120,16 +65,6 @@ const HeroSection = () => {
             id="home"
             className="relative w-full h-screen z-10 overflow-hidden flex flex-col items-center justify-center border-none"
         >
-            {/* Interactive Spotlight Glow */}
-            <div
-                ref={spotlightRef}
-                className="absolute inset-0 z-0 pointer-events-none opacity-0 transition-opacity duration-1000 hidden md:block"
-                style={{
-                    background: "radial-gradient(600px circle at 50% 50%, rgba(245, 208, 97, 0.05), transparent 80%)",
-                    willChange: "background, opacity"
-                }}
-            />
-            <FloatingLeaves />
 
             {/* Main Content Container */}
             <div className="container mx-auto px-6 relative z-20 flex flex-col items-center text-center border-none">
@@ -144,43 +79,10 @@ const HeroSection = () => {
                     }}
                 >
                     <h1
-                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-jungle-gold tracking-tighter hover:tracking-[0.05em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:brightness-125 flex gap-1 justify-center items-center"
-                        style={{ filter: "drop-shadow(0 0 25px rgba(245, 208, 97, 0.15))" }}
+                        className="text-5xl sm:text-7xl md:text-8xl lg:text-[13vw] font-display font-black text-foreground tracking-tighter hover:tracking-[0.25em] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-default select-none transform-gpu hover:scale-80 hover:text-primary"
+                        data-aos-duration="1000"
                     >
-                        {"MOWGLAI".split("").map((char, index) => {
-                            if (char === "O") {
-                                return (
-                                    <motion.span
-                                        key={index}
-                                        initial={{ opacity: 0, y: 80, rotateX: -80 }}
-                                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                                        transition={{
-                                            duration: 0.8,
-                                            delay: 0.08 * index,
-                                            ease: [0.215, 0.61, 0.355, 1]
-                                        }}
-                                        className="inline-flex transform-gpu hover:scale-[1.08] transition-all duration-300 align-middle justify-center items-center mx-[0.02em] flex-shrink-0"
-                                    >
-                                        <MowglaiLogo size="full" className="w-[0.82em] h-[0.82em] border-none bg-transparent backdrop-blur-none hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.5)] transition-all duration-500" />
-                                    </motion.span>
-                                );
-                            }
-                            return (
-                                <motion.span
-                                    key={index}
-                                    initial={{ opacity: 0, y: 80, rotateX: -80 }}
-                                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                                    transition={{
-                                        duration: 0.8,
-                                        delay: 0.08 * index,
-                                        ease: [0.215, 0.61, 0.355, 1]
-                                    }}
-                                    className="inline-block transform-gpu hover:scale-[1.08] hover:text-white transition-all duration-300"
-                                >
-                                    {char}
-                                </motion.span>
-                            );
-                        })}
+                        MOWGLAI
                     </h1>
                 </div>
 
@@ -199,10 +101,10 @@ const HeroSection = () => {
                     <Magnetic>
                         <Link
                             href="/investment"
-                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-card/40 backdrop-blur-md border border-[#F5D061]/20 text-[#F5D061] text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(245,208,97,0.3)] hover:border-[#F5D061]/50"
+                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(var(--primary-rgb),0.5)]"
                         >
                             {/* Theme-Aware Gradient Liquid Fill */}
-                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#14532d] via-[#22c55e] to-[#F5D061] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                             {/* Floating Highlight */}
                             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></span>
@@ -217,10 +119,10 @@ const HeroSection = () => {
                     <Magnetic>
                         <Link
                             href="/audit"
-                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/10 backdrop-blur-xl border border-primary/10 text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700 hover:border-primary/40"
+                            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 bg-background/5 backdrop-blur-3xl text-primary text-sm sm:text-lg font-bold uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-700"
                         >
                             {/* Theme-Aware Gradient Liquid Fill for Audit */}
-                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-[#D4AF37] to-[#14532d] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
+                            <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-full"></span>
 
                             <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-primary-foreground">
                                 GET FREE AUDIT

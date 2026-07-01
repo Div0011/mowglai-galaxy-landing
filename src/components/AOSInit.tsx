@@ -5,14 +5,12 @@ import "aos/dist/aos.css";
 
 export const AOSInit = () => {
     useEffect(() => {
-        // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const hasAnimatedElements = document.querySelector("[data-aos]") !== null;
         let isCancelled = false;
         let timer: ReturnType<typeof setTimeout> | undefined;
         let idleId: number | undefined;
 
-        if (prefersReducedMotion || !hasAnimatedElements) {
+        if (prefersReducedMotion) {
             // Disable animations for users who prefer reduced motion
             return;
         }

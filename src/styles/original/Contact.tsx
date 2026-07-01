@@ -62,7 +62,7 @@ export default function OriginalContact() {
                 </div>
             </section>
 
-            <NextPageButton label={t.Common.agency} href="/" />
+            <NextPageButton label="HOME" href="/" />
         </PageLayout>
     );
 }
