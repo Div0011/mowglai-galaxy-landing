@@ -81,7 +81,7 @@ export default function TemplatesShowcase() {
                 </div>
             </div>
 
-            <div className="relative aspect-[16/10] sm:aspect-[5/4] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={currentIndex}

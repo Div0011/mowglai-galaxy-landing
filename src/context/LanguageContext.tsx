@@ -165,98 +165,98 @@ const translations: Record<Language, Translations> = {
             agency: "Agency",
             sayHello: "Say Hello",
             est: "EST.",
-            deliveringElegance: "Delivering digital elegance."
+            deliveringElegance: "Beautiful, modern website design."
         },
         Home: {
             weCreate: "WE CREATE",
             the: "THE",
             extraordinary: "EXTRAORDINARY",
-            introText: "In a digital landscape crowded with the mundane, Mowglai Wild stands as a beacon of growth. We don't just build websites; we architect digital ecosystems that breathe life into your brand's vision.",
-            exploreDNA: "Explore Our DNA",
-            purchase: "Purchase",
+            introText: "In a crowded digital world, Mowglai helps your business stand out. We don't just build websites; we create beautiful online experiences that bring your brand's vision to life.",
+            exploreDNA: "Learn About Us",
+            purchase: "Explore",
             templates: "Templates",
-            templateText: "Accelerate your launch with our premium, industry-specific website templates. Handcrafted for performance and designed to convert.",
+            templateText: "Launch your website faster with our premium, ready-made templates. Built for high performance and designed to attract clients.",
             viewTemplates: "VIEW TEMPLATES",
-            readyToBegin: "Ready to Begin the Journey?",
-            consultFree: "Consult for Free",
-            studioStory: "THE STUDIO STORY",
-            knowMore: "Still not sure? Know more"
+            readyToBegin: "Ready to Start Your Project?",
+            consultFree: "Talk to an Expert",
+            studioStory: "OUR STORY",
+            knowMore: "Want to learn more? Read our story"
         },
         SelectedWork: {
             selected: "Selected",
-            work: "Work",
-            collectionDesc: "A curated collection of our most impactful digital voyages.",
+            work: "Projects",
+            collectionDesc: "A showcase of our best web design and development projects.",
             exploreCase: "EXPLORE CASE",
-            comingSoonTitle: "Case Study Coming Soon",
-            comingSoonDesc: "The case study for this project is currently being finalized. Check back shortly!"
+            comingSoonTitle: "Project Details Coming Soon",
+            comingSoonDesc: "The case study for this project is currently being prepared. Check back soon!"
         },
         AestheticShowcase: {
-            aesthetic: { title: "Aesthetic", text: "Stunning Visuals" },
-            global: { title: "Global", text: "Borderless Experiences" },
-            fast: { title: "Fast", text: "Blazing Performance" },
-            deep: { title: "Deep", text: "Simplified Complexity" },
-            mobile: { title: "Mobile", text: "Flawless Everywhere" },
-            adaptation: { title: "Adaptation", text: "Constant Evolution" },
-            survival: { title: "Survival", text: "Resilient Code" }
+            aesthetic: { title: "Aesthetic", text: "Beautiful Visuals" },
+            global: { title: "Global", text: "Global Reach" },
+            fast: { title: "Fast", text: "Super Fast Speed" },
+            deep: { title: "Deep", text: "Easy to Use" },
+            mobile: { title: "Mobile", text: "Mobile Friendly" },
+            adaptation: { title: "Adaptation", text: "Always Updated" },
+            survival: { title: "Survival", text: "Secure & Reliable" }
         },
         Services: {
             hero: {
                 subtitle: "Our",
                 title: "Services",
-                description: "Capabilities woven into digital reality."
+                description: "Professional services to help your business grow online."
             },
             cards: {
                 webDesign: {
                     category: "Web Design",
-                    title: "Aesthetic Excellence",
-                    description: "Your website is the digital face of your brand. We craft visually stunning, responsive interfaces that merge artistic expression with functional precision.",
-                    details: ["UI/UX Design", "Motion Graphics", "Brand Identity", "Responsive Layouts", "Mobile First"]
+                    title: "Stunning Web Design",
+                    description: "Your website is the face of your business. We design beautiful, modern websites that look great on any screen and engage your visitors.",
+                    details: ["UI/UX Design", "Layout Design", "Brand Identity", "Responsive Layouts", "Mobile First"]
                 },
                 development: {
                     category: "Development",
-                    title: "Robust Engineering",
-                    description: "Beneath the beauty lies a beast. Our development team builds scalable, secure, and lightning-fast architectures that drive your business forward.",
-                    details: ["Full-Stack Dev", "SaaS Platforms", "MVP Builds", "MVC Architecture", "E-Commerce", "CMS Solutions", "API Integration"]
+                    title: "Reliable Development",
+                    description: "We write fast, secure, and clean code to build websites and web applications that grow with your business.",
+                    details: ["Frontend Dev", "Backend Dev", "SaaS Development", "E-Commerce", "API Integration", "CMS Solutions"]
                 },
                 redesign: {
                     category: "Redesign",
-                    title: "Digital Evolution",
-                    description: "Outdated shouldn't mean obsolete. We breathe new life into legacy platforms. Enhance usability, improve speed, and secure your digital future.",
-                    details: ["Visual Overhaul", "Performance Optimization", "Security Patching", "UX Strategy"]
+                    title: "Website Redesign",
+                    description: "We update your older website to make it look modern, load faster, and stay secure.",
+                    details: ["Visual Redesign", "Speed Optimization", "Security Updates", "UX Improvements"]
                 },
                 database: {
                     category: "Database",
-                    title: "Data Intelligence",
-                    description: "We design sophisticated database solutions that ensure your information is organized, accessible, and impenetrable. We handle the backbone of your application.",
-                    details: ["Database Architecture", "Cloud Migration", "Data Security", "Performance Tuning"]
+                    title: "Database Solutions",
+                    description: "We set up secure database structures to keep your business data organized, safe, and accessible.",
+                    details: ["Database Setup", "Cloud Migration", "Data Security", "Performance Tuning"]
                 },
                 strategy: {
                     category: "Strategy",
-                    title: "Global Reach",
-                    description: "Our strategies are designed to position your brand on the global map, ensuring you resonate with audiences across cultures and borders.",
-                    details: ["Market Analysis", "SEO Strategy", "Content Curation", "Growth Hacking"]
+                    title: "Strategic Marketing",
+                    description: "We plan custom strategies to help your business reach new audiences and grow its customer base.",
+                    details: ["Market Analysis", "SEO Strategy", "Content Strategy", "Growth Planning"]
                 },
                 ai: {
                     category: "Artificial Intelligence",
-                    title: "Intelligent Systems",
-                    description: "Empower your platform with next-gen AI. From smart chatbots to predictive analytics, we integrate intelligence into your digital ecosystem.",
-                    details: ["AI Chatbots", "Machine Learning", "Automation", "Integration"]
+                    title: "Smart Features & AI",
+                    description: "We add smart features like automated chatbots to make your website more helpful and efficient.",
+                    details: ["AI Chatbots", "Smart Automation", "Feature Integration"]
                 }
             }
         },
         About: {
             hero: {
                 digital: "Digital",
-                artisans: "Artisans",
+                artisans: "Partners",
                 description: "\"We are your flexible digital partners. Partnering with ambitious brands worldwide, we craft stylish, professional websites that fit your unique vision.\""
             },
             features: [
-                { title: "Modern & Stylish", description: "Creating modest yet visually striking designs tailored for any client profile." },
-                { title: "Professional Grade", description: "Robust protocols ensuring your digital presence is secure and reliable." },
-                { title: "Peak Performance", description: "Optimized for speed and smoothness, respecting your user's time." },
-                { title: "International Exp.", description: "Proven track record with leading firms across multiple continents." },
-                { title: "Client Centric", description: "We adapt to your specific needs, regardless of industry or scale." },
-                { title: "Flexible Schedule", description: "Active Mon-Sat across different time zones to match your workflow." }
+                { title: "Modern & Stylish", description: "Creating clean, modern, and beautiful designs tailored to your business." },
+                { title: "Professional Grade", description: "Using high-security standards to keep your website safe and online." },
+                { title: "Peak Performance", description: "Optimized for fast loading speeds to give your users a smooth experience." },
+                { title: "International Exp.", description: "Experience working with top companies around the world." },
+                { title: "Client Centric", description: "We tailor our solutions to your needs, whatever your industry." },
+                { title: "Flexible Schedule", description: "Flexible hours to match your schedule, working Monday to Saturday." }
             ],
             mission: {
                 global: "GLOBAL",
@@ -266,27 +266,27 @@ const translations: Record<Language, Translations> = {
                 theWorld: "THE WORLD",
                 discover: "Discover",
                 ourDna: "Our DNA",
-                quote: "\"Bringing world-class quality to clients worldwide. We create modest, stylish, and professional websites for any industry.\"",
-                description: "We are built for flexibility. Operating Monday to Saturday across multiple time zones, we align perfectly with your schedule. Whether you are a startup or an enterprise, our global team delivers modern digital craftsmanship that speaks a universal language."
+                quote: "\"Bringing world-class quality to clients worldwide. We create clean, stylish, and professional websites for any industry.\"",
+                description: "We operate across multiple time zones, working Monday to Saturday to fit your schedule. Our team delivers clean, professional web design that helps startups and businesses grow globally."
             }
         },
         Navigation: {
             value: "Next Chapter"
         },
         Investment: {
-            hero: { titleMain: "THE", titleSub: "PURCHASE" },
+            hero: { titleMain: "THE", titleSub: "PLANS" },
             tabs: { standard: "STANDARD", premium: "PREMIUM" },
-            apex: { title: "Apex Solutions", description: "Our premium tier offers bespoke digital architecture, dedicated 24/7 survival support, and unmatched growth for industry leaders.", button: "Inquire for Apex" },
-            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our wild strategies and success stories.", button: "Download Brochure" },
-            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us your goal and we'll generate a personalized strategy for your market habitat.", button: "Download Quotation" }
+            apex: { title: "Apex Solutions", description: "Our top-tier plan offers fully custom designs, dedicated 24/7 priority support, and advanced features for growing brands.", button: "Get in Touch for Apex" },
+            brochure: { title: "OUR BROCHURE", description: "Get a detailed breakdown of our services, plans, and success stories.", button: "Download Brochure" },
+            customQuote: { title: "CUSTOM QUOTATION", description: "Tell us about your project and we'll create a custom plan and quote for your business.", button: "Request Quote" }
         },
         Pricing: {
-            subtitle: "Value Beyond Measurement",
+            subtitle: "Fair and Transparent Pricing",
             download: "Download Proposal",
             plans: {
-                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "START ASCENT" },
-                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "START ASCENT" },
-                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "START DIALOGUE" }
+                basic: { name: "BASIC", description: "Perfect for small businesses getting started online", features: ["Single page website", "Mobile responsive design", "Basic SEO optimization", "Contact form integration", "1 month support"], button: "GET STARTED" },
+                advanced: { name: "ADVANCED", description: "Ideal for growing businesses needing more features", features: ["Multi-page website (up to 5)", "Custom animations", "Advanced SEO & Analytics", "CMS integration", "E-commerce ready", "3 months support"], button: "GET STARTED" },
+                epic: { name: "EPIC", description: "Full-scale solutions for large organizations", features: ["Unlimited pages", "Custom web applications", "API development", "Database integration", "Priority 24/7 support", "Dedicated team"], button: "GET STARTED" }
             }
         },
         Contact: {
@@ -314,8 +314,8 @@ const translations: Record<Language, Translations> = {
             customQuote: { title: "NEED", titleSub: "A CUSTOMIZED QUOTATION?", description: "Every project is unique. Let us provide a detailed, tailored breakdown of costs and timelines for your specific requirements.", buttonMain: "REQUEST CUSTOM", buttonSub: "QUOTATION" }
         },
         ProjectRequest: {
-            hero: { titleSuffix: "ASCENT", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed PDF roadmap for the plan to see exactly what we will build for you.", downloadButton: "Download Proposal" },
-            form: { title: "Tell Us More", subtitle: "To initialize the protocol, we need to know who you are and what you want to achieve.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Vision / Work Plan" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your goals, requirements, or what you want to achieve..." }, button: "Send Project Details" },
+            hero: { titleSuffix: "START", includedFeatures: "Included Features", beforeCommit: "Before you commit", downloadText: "Download the detailed proposal to see exactly what features we will build for you.", downloadButton: "Download Proposal" },
+            form: { title: "Tell Us More", subtitle: "To get started, tell us about yourself and what you want to build.", labels: { company: "Company / Entity Name", contactName: "Contact Name", email: "Email Address", startDate: "Target Start Date", vision: "Project Details" }, placeholders: { company: "e.g. Acme Corp", contactName: "Your Name", email: "you@company.com", startDate: "e.g. Next Month, ASAP", vision: "Describe your business goals and what you want your website to do..." }, button: "Send Project Details" },
             success: { title: "Request Sent!", description: "We've received your project details and will be in touch shortly." }
         },
         CustomRequest: {
@@ -326,10 +326,10 @@ const translations: Record<Language, Translations> = {
             success: { title: "REQUEST SENT!", description: "Thank you for sharing your vision with us. Our team will analyze your requirements and reach out within 24 hours.", checkEmail: "Check your email", button: "Back to Home" }
         },
         Explore: {
-            hero: { title: "FUTURE", subtitle: "DESIGN", description: "Curated interface aesthetics for the next generation of web experiences." },
-            stats: { systems: "Systems Online" },
-            filters: { all: "All Systems", filterBtn: "Filters", reset: "Reset", show: "Show", budget: "Budget Range", complexity: "Complexity", tech: "Tech Stack", aesthetics: "Aesthetics", noSignals: "NO SIGNALS FOUND", broaden: "Try broadening your search parameters.", resetParams: "Reset Parameters" },
-            card: { viewProject: "View Project", pages: "Pages" }
+            hero: { title: "DESIGN", subtitle: "LAYOUTS", description: "Browse our premium website designs built for performance and growth." },
+            stats: { systems: "Templates Available" },
+            filters: { all: "All Templates", filterBtn: "Filters", reset: "Reset", show: "Show", budget: "Budget Range", complexity: "Complexity", tech: "Tech Stack", aesthetics: "Aesthetics", noSignals: "NO MATCHES FOUND", broaden: "Try broadening your search parameters.", resetParams: "Reset Parameters" },
+            card: { viewProject: "View Details", pages: "Pages" }
         }
     },
     hi: {
@@ -983,8 +983,8 @@ const translations: Record<Language, Translations> = {
                 { title: "柔軟なスケジュール", description: "ワークフローに合わせて、さまざまなタイムゾーンで月曜から土曜まで活動しています。" }
             ],
             mission: {
-                global: "ビジョン",
-                vision: "グローバル",
+                global: "グローバル",
+                vision: "ビジョン",
                 internationalStandard: "国際基準",
                 builtFor: "のために構築",
                 theWorld: "世界",

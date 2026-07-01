@@ -124,7 +124,7 @@ export default function SelectedWork() {
             </div>
 
             <div
-                className="relative aspect-[16/10] sm:aspect-[5/4] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
+                className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.35)]"
                 onMouseEnter={() => {
                     if (autoplayRef.current) clearInterval(autoplayRef.current);
                 }}

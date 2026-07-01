@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/LanguageContext";
+import GrombleGuardian from "@/components/interactive/GrombleGuardian";
 
 export default function OriginalContact() {
     const { resolvedTheme } = useTheme();
@@ -26,6 +27,9 @@ export default function OriginalContact() {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -mr-32 -mt-32 transition-all group-hover:bg-primary/10" />
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -ml-32 -mb-32 transition-all group-hover:bg-primary/10" />
 
+                        <div className="flex justify-center mb-4">
+                            <GrombleGuardian />
+                        </div>
                         <Quote className="w-10 h-10 sm:w-16 sm:h-16 text-primary mx-auto mb-6 sm:mb-8 opacity-50" />
                         <h2 className="flex flex-col items-center gap-2 sm:gap-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-black text-foreground mb-12 uppercase leading-[1.1] sm:leading-none px-2 tracking-tight">
                             <span className="block opacity-60">NEED A CUSTOMIZED</span>

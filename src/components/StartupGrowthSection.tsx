@@ -43,22 +43,22 @@ const StartupGrowthSection = () => {
 
     const cards = [
         {
-            title: "SaaS MVP Development",
-            description: "Validate your vision with production-grade SaaS MVPs built for rapid scale.",
+            title: "SaaS & App Development",
+            description: "Turn your business idea into a working software product designed to grow.",
             icon: <Rocket className="w-6 h-6 text-primary" />,
             href: "/saas-mvp-development",
             color: "from-yellow-400/20 to-green-600/20",
         },
         {
-            title: "Node.js & Next.js",
-            description: "High-performance backend logic and frontend excellence with Next.js.",
+            title: "Modern Web Apps",
+            description: "Build fast, secure, and modern websites using the latest web technologies.",
             icon: <Code2 className="w-6 h-6 text-emerald-500" />,
             href: "/nextjs-development-agency",
             color: "from-yellow-400/20 to-green-600/20",
         },
         {
-            title: "Web Development",
-            description: "Deep-tech full-stack solutions for the next generation of digital pioneers.",
+            title: "Custom Solutions",
+            description: "Get tailor-made web solutions designed to fit your unique business needs.",
             icon: <Globe className="w-6 h-6 text-blue-500" />,
             href: "/web-development-agency-india",
             color: "from-yellow-400/20 to-green-600/20",
@@ -103,7 +103,7 @@ const StartupGrowthSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-display font-black tracking-tight leading-[1.1] mb-4"
+                        className="text-4xl md:text-6xl font-display font-black tracking-normal leading-[1.25] mb-4"
                     >
                         Launch Faster <br className="hidden md:block" /> with{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-500 bg-[length:200%_auto] animate-gradient">

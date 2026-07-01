@@ -7,7 +7,6 @@ import MobileNav from "@/components/MobileNav";
 import SettingsToggle from "@/components/SettingsToggle";
 import ContactToggle from "@/components/ContactToggle";
 
-import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,6 +15,7 @@ import { usePathname } from "next/navigation";
 const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
 const JungleBackground = dynamic(() => import("@/components/JungleBackground"), { ssr: false });
 const BackToTopButton = dynamic(() => import("@/components/BackToTopButton"), { ssr: false });
+const ImmersiveFooter = dynamic(() => import("@/components/ImmersiveFooter"), { ssr: false });
 
 interface PageLayoutProps {
     children: React.ReactNode;
@@ -64,7 +64,7 @@ const OriginalLayout = ({ children }: PageLayoutProps) => {
                     >
                         <Suspense fallback={<div className="w-full h-screen flex items-center justify-center text-primary font-display animate-pulse">Loading Content...</div>}>
                             {children}
-                            <Footer />
+                            <ImmersiveFooter />
                         </Suspense>
                     </motion.div>
                 </AnimatePresence>

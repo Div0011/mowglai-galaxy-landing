@@ -8,12 +8,12 @@ import Magnetic from "@/components/Magnetic";
 import XLogo from "@/components/icons/XLogo";
 
 const navItems = [
-    { icon: Home, label: "START", href: "/" },
-    { icon: Users, label: "STORY", href: "/about" },
-    { icon: Palette, label: "CRAFT", href: "/services" },
-    { icon: LayoutGrid, label: "BLUEPRINT", href: "/explore" },
-    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
-    { icon: Mail, label: "HELLO", href: "/contact" },
+    { icon: Home, label: "HOME", href: "/" },
+    { icon: Users, label: "ABOUT", href: "/about" },
+    { icon: Palette, label: "SERVICES", href: "/services" },
+    { icon: LayoutGrid, label: "TEMPLATES", href: "/explore" },
+    { icon: DollarSign, label: "PRICING", href: "/investment" },
+    { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
 const socialItems = [

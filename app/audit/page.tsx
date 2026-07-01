@@ -124,12 +124,15 @@ export default function AuditPage() {
             <div className="fixed top-[calc(1rem+env(safe-area-inset-top))] left-[calc(0.875rem+env(safe-area-inset-left))] md:top-[calc(2rem+env(safe-area-inset-top))] md:left-[calc(2rem+env(safe-area-inset-left))] z-[60]">
                 <button
                     onClick={() => router.push('/')}
-                    className="group"
+                    className="group/logo flex items-center"
                     aria-label="Back to Home"
                 >
-                    <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 opacity-100 blur-0">
-                        <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                    <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 opacity-100 blur-0 shrink-0">
+                        <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover/logo:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
                     </div>
+                    <span className="font-display font-black text-xl md:text-2xl tracking-[0.35em] text-primary uppercase opacity-0 max-w-0 overflow-hidden ml-0 group-hover/logo:opacity-100 group-hover/logo:max-w-[200px] group-hover/logo:ml-4 transition-all duration-500 ease-out select-none whitespace-nowrap">
+                        MOWGLAI
+                    </span>
                 </button>
             </div>
 

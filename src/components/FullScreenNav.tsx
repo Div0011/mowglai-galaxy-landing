@@ -14,12 +14,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { icon: Home, label: "START", href: "/" },
-    { icon: Users, label: "STORY", href: "/about" },
-    { icon: Layers, label: "CRAFT", href: "/services" },
-    { icon: LayoutTemplate, label: "BLUEPRINT", href: "/explore" },
-    { icon: DollarSign, label: "INVESTMENT", href: "/investment" },
-    { icon: Mail, label: "HELLO", href: "/contact" },
+    { icon: Home, label: "HOME", href: "/" },
+    { icon: Users, label: "ABOUT", href: "/about" },
+    { icon: Layers, label: "SERVICES", href: "/services" },
+    { icon: LayoutTemplate, label: "TEMPLATES", href: "/explore" },
+    { icon: DollarSign, label: "PRICING", href: "/investment" },
+    { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
 interface FullScreenNavProps {
@@ -97,15 +97,18 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                 <Magnetic amount={0.4}>
                     <div
                         className={cn(
-                            "cursor-pointer group/logo transition-all duration-700",
+                            "cursor-pointer group/logo transition-all duration-700 flex items-center",
                             // Logo is active if: Menu is open OR page not scrolled OR logo is specifically hovered
                             (isLogoActive || hoveredItem === "LOGO") ? "opacity-100 blur-0" : "opacity-30 blur-[4px]"
                         )}
                         onClick={() => router.push('/')}
                     >
-                        <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300">
+                        <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 shrink-0">
                             <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
                         </div>
+                        <span className="font-display font-black text-xl md:text-2xl tracking-[0.35em] text-primary uppercase opacity-0 max-w-0 overflow-hidden ml-0 group-hover/logo:opacity-100 group-hover/logo:max-w-[200px] group-hover/logo:ml-4 transition-all duration-500 ease-out select-none whitespace-nowrap">
+                            MOWGLAI
+                        </span>
                     </div>
                 </Magnetic>
             </div>
