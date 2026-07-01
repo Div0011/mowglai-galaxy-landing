@@ -8,7 +8,7 @@ import { useTheme } from "next-themes";
 import XLogo from "@/components/icons/XLogo";
 
 interface NavItem {
-    icon: React.ElementType;
+    icon: React.ComponentType<{ className?: string }>;
     label: string;
     href: string;
 }
@@ -17,8 +17,7 @@ const navItems: NavItem[] = [
     { icon: Home, label: "HOME", href: "/" },
     { icon: Users, label: "ABOUT", href: "/about" },
     { icon: Layers, label: "SERVICES", href: "/services" },
-    { icon: LayoutTemplate, label: "TEMPLATES", href: "/explore" },
-    { icon: DollarSign, label: "PRICING", href: "/investment" },
+    { icon: LayoutTemplate, label: "PRODUCTS", href: "/explore" },
     { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
@@ -69,10 +68,10 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                     <button
                         onClick={toggleMenu}
                         className={cn(
-                            "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group backdrop-blur-sm",
+                            "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group backdrop-blur-md border",
                             resolvedTheme === "light"
-                                ? "bg-primary/20 text-primary-foreground hover:bg-primary-foreground/20 hover:text-primary"
-                                : "bg-background/5 text-primary hover:bg-primary/10 hover:border-primary/20"
+                                ? "bg-primary/20 text-primary-foreground border-primary/20 hover:bg-primary-foreground/20"
+                                : "bg-[#05110a]/80 border-[#22c55e]/30 text-[#F5D061] hover:bg-[#22c55e]/20"
                         )}
                         aria-label="Toggle Menu"
                     >
@@ -88,7 +87,6 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
 
 
             {/* Logo - Fixed Top Left - Visible Always but Reactive */}
-            {/* Logo - Fixed Top Left - Visible Always but Reactive */}
             <div
                 className="fixed top-[calc(1rem+env(safe-area-inset-top))] left-[calc(0.875rem+env(safe-area-inset-left))] md:top-[calc(2rem+env(safe-area-inset-top))] md:left-[calc(2rem+env(safe-area-inset-left))] z-[60]"
                 onMouseEnter={() => setHoveredItem("LOGO")}
@@ -97,18 +95,20 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                 <Magnetic amount={0.4}>
                     <div
                         className={cn(
-                            "cursor-pointer group/logo transition-all duration-700 flex items-center",
+                            "cursor-pointer group/logo flex items-center transition-all duration-700",
                             // Logo is active if: Menu is open OR page not scrolled OR logo is specifically hovered
-                            (isLogoActive || hoveredItem === "LOGO") ? "opacity-100 blur-0" : "opacity-30 blur-[4px]"
+                            (isLogoActive || hoveredItem === "LOGO") ? "opacity-100 blur-0" : "opacity-35 blur-[2px]"
                         )}
                         onClick={() => router.push('/')}
                     >
-                        <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 shrink-0">
-                            <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                        <div className="flex flex-col">
+                            <span className="text-xl md:text-2xl font-display font-black text-[#F5D061] tracking-[0.15em] leading-none drop-shadow-[0_0_8px_rgba(245,208,97,0.4)]">
+                                MOWGLAI
+                            </span>
+                            <span className="font-body text-[8px] md:text-[9px] text-[#22c55e] tracking-[0.3em] uppercase font-bold mt-1.5 whitespace-nowrap">
+                                Digital Agency
+                            </span>
                         </div>
-                        <span className="font-display font-black text-xl md:text-2xl tracking-[0.35em] text-primary uppercase opacity-0 max-w-0 overflow-hidden ml-0 group-hover/logo:opacity-100 group-hover/logo:max-w-[200px] group-hover/logo:ml-4 transition-all duration-500 ease-out select-none whitespace-nowrap">
-                            MOWGLAI
-                        </span>
                     </div>
                 </Magnetic>
             </div>
@@ -116,12 +116,12 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
             {/* Full Screen Menu Overlay */}
             <div
                 className={cn(
-                    "fixed inset-0 z-[55] bg-background backdrop-blur-3xl transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    "fixed inset-0 z-[55] bg-[#020804]/95 backdrop-blur-3xl transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]",
                     isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-50 pointer-events-none"
                 )}
             >
-                {/* Background Gradient - Warm subtle overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 pointer-events-none" />
+                {/* Background Gradient - Canopy overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#14532d]/40 via-transparent to-[#F5D061]/10 pointer-events-none" />
 
                 {/* Main Layout Flex Container */}
                 <div className="absolute inset-0 flex w-full h-full">
@@ -136,7 +136,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                                     key={item.label}
                                     className={cn(
                                         "h-full relative group/col transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col items-center justify-center p-4",
-                                        isHovered ? "flex-[1.5] bg-primary/5" : "flex-1 hover:bg-primary/5"
+                                        isHovered ? "flex-[1.5] bg-[#22c55e]/5" : "flex-1 hover:bg-[#22c55e]/5"
                                     )}
                                     onMouseEnter={() => setHoveredItem(item.label)}
                                     onMouseLeave={() => setHoveredItem(null)}
@@ -144,8 +144,8 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                                     {/* Light Saber Divider (Right side of each column) */}
                                     <div className={cn(
                                         "absolute top-0 right-0 w-[1px] h-full transition-all duration-500",
-                                        "bg-gradient-to-b from-transparent via-primary/20 to-transparent", // Default state
-                                        isHovered ? "w-[2px] bg-primary shadow-[0_0_15px_rgba(34,197,94,0.4)]" : "" // Active/Glow state
+                                        "bg-gradient-to-b from-transparent via-[#22c55e]/20 to-transparent", // Default state
+                                        isHovered ? "w-[2px] bg-[#F5D061] shadow-[0_0_20px_rgba(245,208,97,0.6)]" : "" // Active/Glow state
                                     )} />
 
 
@@ -159,19 +159,15 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                                         <item.icon className={cn(
                                             "w-10 h-10 mb-6 transition-all duration-500 transform -translate-y-4 group-hover/col:translate-y-0 opacity-0 group-hover/col:opacity-100",
                                             isHovered
-                                                ? (resolvedTheme === 'light' ? "text-primary-foreground drop-shadow-[0_0_8px_rgba(20,83,45,0.4)]" : "text-primary drop-shadow-[0_0_8px_rgba(34,197,94,0.6)]")
-                                                : "text-primary/40"
+                                                ? (resolvedTheme === 'light' ? "text-[#14532d] drop-shadow-[0_0_8px_rgba(20,83,45,0.4)]" : "text-[#F5D061] drop-shadow-[0_0_15px_rgba(245,208,97,0.6)]")
+                                                : "text-[#22c55e]/40"
                                         )} />
 
                                         <Magnetic amount={0.3}>
                                             <span className={cn(
-                                                item.label === "TESTIMONIALS"
-                                                    ? "text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-                                                    : "text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
+                                                "text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
                                                 "font-display font-bold uppercase break-words max-w-full [writing-mode:vertical-rl] rotate-180 inline-block leading-loose py-4 px-4",
-                                                isHovered
-                                                    ? (resolvedTheme === 'light' ? "text-primary-foreground drop-shadow-[0_0_10px_rgba(20,83,45,0.3)]" : "text-transparent bg-clip-text bg-gradient-to-b from-primary via-accent to-primary drop-shadow-[0_0_10px_rgba(34,197,94,0.3)]")
-                                                    : "text-primary/30"
+                                                isHovered ? "gold-glow-text-hover" : "gold-glow-text"
                                             )}>
                                                 {item.label}
                                             </span>

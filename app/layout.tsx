@@ -4,6 +4,8 @@ import "../src/index.css";
 import { Providers } from "@/components/Providers";
 import { AOSInit } from "@/components/AOSInit";
 import { LanguageProvider } from "@/context/LanguageContext";
+import SplashScreen from "@/components/SplashScreen";
+import ClientCompanion from "@/components/guardian/ClientCompanion";
 
 // Preload critical fonts for better performance
 const boldonse = localFont({
@@ -65,7 +67,7 @@ export const metadata: Metadata = {
         description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps using React, Next.js, and modern technologies.",
         siteName: "Mowglai - Web Development Agency",
         images: [{
-            url: "https://mowglai.com/mowglai-logo-new.jpg",
+            url: "https://mowglai.com/assets/mowglai_primary.png",
             width: 1200,
             height: 1200,
             alt: "Mowglai - Premium Digital Agency & Web Development"
@@ -76,15 +78,16 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Mowglai - Premium Web Development & Digital Agency India",
         description: "Web development and digital agency. We create stunning websites, 3D experiences, and high-performance web apps.",
-        images: ["https://mowglai.com/mowglai-logo-new.jpg"],
+        images: ["https://mowglai.com/assets/mowglai_primary.png"],
         creator: "@mowglai_in",
     },
     icons: {
         icon: [
-            { url: "/mowglai-logo-new.jpg", type: "image/jpeg", sizes: "any" }
+            { url: "/favicon.ico", sizes: "any" },
+            { url: "/mowglai-favicon.png", type: "image/png", sizes: "32x32" }
         ],
         apple: [
-            { url: "/mowglai-logo-new.jpg", sizes: "180x180", type: "image/jpeg" }
+            { url: "/mowglai-favicon.png", sizes: "180x180", type: "image/png" }
         ],
     },
     manifest: "/site.webmanifest",
@@ -128,6 +131,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`} suppressHydrationWarning>
             <body className="bg-background text-foreground antialiased min-h-dvh">
+                <SplashScreen />
                 <LanguageProvider>
                     <noscript>
                         <div style={{
@@ -164,6 +168,7 @@ export default function RootLayout({
                     </noscript>
                     <Providers>
                         <AOSInit />
+                        <ClientCompanion />
                         {children}
                     </Providers>
                     <script
@@ -195,8 +200,8 @@ export default function RootLayout({
                                         "@id": "https://mowglai.com/#organization",
                                         "name": "Mowglai Digital Agency",
                                         "url": "https://mowglai.com",
-                                        "logo": "https://mowglai.com/logo1.png",
-                                        "image": "https://mowglai.com/logo1.png",
+                                        "logo": "https://mowglai.com/assets/mowglai_primary.png",
+                                        "image": "https://mowglai.com/assets/mowglai_primary.png",
                                         "priceRange": "$$-$$$",
                                         "description": "Premium digital agency providing web development, 3D design, and digital transformation services.",
                                         "address": {

@@ -298,7 +298,7 @@ export default function InvestmentPage() {
                     subscription_id: data.subscription_id,
                     name: "Mowglai Care Plans",
                     description: plan.name,
-                    image: "/mowglai-logo-light.png",
+                    image: "/assets/mowglai_primary.png",
                     notes: {
                         plan: plan.name,
                         category: "care",

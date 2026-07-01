@@ -1,4 +1,4 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart } from "lucide-react";
+import { Home, Users, Mail, Menu, X, Instagram, Linkedin, ShoppingCart, Layers, LayoutTemplate } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -10,9 +10,8 @@ import XLogo from "@/components/icons/XLogo";
 const navItems = [
     { icon: Home, label: "HOME", href: "/" },
     { icon: Users, label: "ABOUT", href: "/about" },
-    { icon: Palette, label: "SERVICES", href: "/services" },
-    { icon: LayoutGrid, label: "TEMPLATES", href: "/explore" },
-    { icon: DollarSign, label: "PRICING", href: "/investment" },
+    { icon: Layers, label: "SERVICES", href: "/services" },
+    { icon: LayoutTemplate, label: "PRODUCTS", href: "/explore" },
     { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
@@ -31,8 +30,11 @@ const MobileNav = () => {
 
     // Sync active item with location
     useEffect(() => {
-        const currentPath = pathname;
-        const active = navItems.find(item => item.href === currentPath);
+        const currentPath = pathname && pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+        const active = navItems.find(item => {
+            const itemNormalized = item.href.endsWith("/") && item.href !== "/" ? item.href.slice(0, -1) : item.href;
+            return itemNormalized === currentPath;
+        });
         if (active) setActiveItem(active.label);
     }, [pathname]);
 
@@ -126,12 +128,12 @@ const MobileNav = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: "-100%" }}
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed inset-0 z-[55] bg-background/95 backdrop-blur-2xl flex flex-col items-center justify-center"
+                        className="fixed inset-0 z-[55] bg-[#020804]/95 backdrop-blur-3xl flex flex-col items-center justify-center"
                     >
                         {/* Background Decoration */}
                         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                            <div className="absolute top-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-primary/10 rounded-full blur-[100px]" />
-                            <div className="absolute bottom-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-primary/5 rounded-full blur-[100px]" />
+                            <div className="absolute top-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[#22c55e]/15 rounded-full blur-[100px]" />
+                            <div className="absolute bottom-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[#F5D061]/10 rounded-full blur-[100px]" />
                         </div>
 
                         {/* Navigation Links */}
@@ -156,13 +158,13 @@ const MobileNav = () => {
                                         >
                                             <div className={cn(
                                                 "p-3 rounded-full transition-all duration-300",
-                                                isActive ? "bg-primary text-primary-foreground" : "bg-primary/5 text-primary/40 group-hover:bg-primary/10 group-hover:text-primary"
+                                                isActive ? "bg-[#22c55e] text-[#05110a]" : "bg-[#22c55e]/10 text-[#22c55e]/60 group-hover:bg-[#22c55e]/20 group-hover:text-[#F5D061]"
                                             )}>
                                                 <item.icon className="w-6 h-6" />
                                             </div>
                                             <span className={cn(
                                                 "text-3xl font-display font-bold uppercase transition-all duration-300 leading-relaxed py-1",
-                                                isActive ? "translate-x-2" : "group-hover:translate-x-2 group-hover:text-primary"
+                                                isActive ? "translate-x-2 text-[#F5D061]" : "group-hover:translate-x-2 group-hover:text-[#F5D061]"
                                             )}>
                                                 {item.label}
                                             </span>

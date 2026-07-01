@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "Mowglai",
     images: [
       {
-        url: "https://mowglai.com/mowglai-logo-new.jpg",
+        url: "https://mowglai.com/assets/mowglai_primary.png",
         width: 1200,
         height: 1200,
         alt: "Mowglai - Premium Web Development Agency"
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mowglai - Web Development, SaaS MVP & Digital Agency",
     description: "India's premier web development agency for SaaS, MVPs, MVC architecture, and high-performance websites.",
-    images: ["https://mowglai.com/mowglai-logo-new.jpg"],
+    images: ["https://mowglai.com/assets/mowglai_primary.png"],
     creator: "@mowglai_in",
     site: "@mowglai_in",
   },
@@ -71,21 +71,29 @@ const jsonLdWebPage = {
   "name": "Mowglai - Web Development & Digital Agency",
   "description": "Premium web development and digital agency based in India. Specializing in React, Next.js, 3D websites, and custom web applications.",
   "url": "https://mowglai.com/",
-  "image": "https://mowglai.com/mowglai-logo-new.jpg",
+  "image": "https://mowglai.com/assets/mowglai_primary.png",
   "provider": {
     "@type": "Organization",
     "name": "Mowglai"
   }
 };
 
-import OriginalHome from "@/styles/original/Home";
 
-function mything(){
-}
+import LandingNavbar from "@/components/navigation/LandingNavbar";
+import Hero from "@/components/hero/Hero";
+import ServicesSection from "@/components/services/ServicesSection";
+import PortfolioSection from "@/components/portfolio/PortfolioSection";
+import TemplatesSection from "@/components/templates/TemplatesSection";
+import PricingSection from "@/components/pricing/PricingSection";
+import LeadFormSection from "@/components/forms/LeadFormSection";
+import NewFooter from "@/components/footer/NewFooter";
+
+import PremiumLoader from "@/components/animations/PremiumLoader";
+import JungleBackground from "@/components/animations/JungleBackground";
 
 export default function Home() {
   return (
-    <>
+    <main className="relative bg-background min-h-screen text-foreground overflow-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
@@ -94,7 +102,34 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
       />
-      <OriginalHome />
-    </>
+      
+      <PremiumLoader />
+      <JungleBackground />
+      
+      <LandingNavbar />
+
+      <div className="relative z-10 flex flex-col">
+        <Hero />
+        
+        <div id="services">
+          <ServicesSection />
+        </div>
+        
+        <div id="portfolio">
+          <PortfolioSection />
+        </div>
+        
+        <div id="templates">
+          <TemplatesSection />
+        </div>
+        
+        <div id="pricing">
+          <PricingSection />
+        </div>
+        
+        <LeadFormSection />
+        <NewFooter />
+      </div>
+    </main>
   );
 }

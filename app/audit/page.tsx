@@ -39,7 +39,7 @@ const ScanAnimation = () => (
 /* ── Feature card ─────────────────────────────────────────── */
 const FeatureCard = ({
     icon: Icon, title, desc, delay, accent
-}: { icon: React.ElementType; title: string; desc: string; delay: number; accent?: string }) => (
+}: { icon: React.ComponentType<{ className?: string }>; title: string; desc: string; delay: number; accent?: string }) => (
     <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -124,15 +124,13 @@ export default function AuditPage() {
             <div className="fixed top-[calc(1rem+env(safe-area-inset-top))] left-[calc(0.875rem+env(safe-area-inset-left))] md:top-[calc(2rem+env(safe-area-inset-top))] md:left-[calc(2rem+env(safe-area-inset-left))] z-[60]">
                 <button
                     onClick={() => router.push('/')}
-                    className="group/logo flex items-center"
+                    className="group"
                     aria-label="Back to Home"
                 >
-                    <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 opacity-100 blur-0 shrink-0">
-                        <MowglaiLogo size="lg" className="w-14 h-14 md:w-16 md:h-16 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover/logo:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                    <div className="flex items-center gap-3 transition-all duration-300 opacity-100 blur-0">
+                        <MowglaiLogo size="md" variant="icon" className="w-12 h-12 md:w-14 md:h-14 shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] group-hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)] transition-all duration-500" />
+                        <span className="font-display font-black text-xl md:text-2xl tracking-tight text-primary drop-shadow-[0_0_10px_rgba(var(--primary-rgb),0.3)]">MOWGLAI</span>
                     </div>
-                    <span className="font-display font-black text-xl md:text-2xl tracking-[0.35em] text-primary uppercase opacity-0 max-w-0 overflow-hidden ml-0 group-hover/logo:opacity-100 group-hover/logo:max-w-[200px] group-hover/logo:ml-4 transition-all duration-500 ease-out select-none whitespace-nowrap">
-                        MOWGLAI
-                    </span>
                 </button>
             </div>
 
@@ -215,13 +213,13 @@ export default function AuditPage() {
                                     <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-foreground/30">100% Free · No Sign-up Required</span>
                                     <Sparkles className="w-5 h-5 text-primary/50" />
                                 </div>
-                                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.1]">
+                                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.2]">
                                     Decode your{' '}
                                     <motion.span
                                         animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                                         transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
                                         className="inline-block bg-gradient-to-r from-primary via-foreground to-primary
-                                                   bg-[length:200%_auto] bg-clip-text text-transparent italic"
+                                                   bg-[length:200%_auto] bg-clip-text text-transparent italic pr-[0.15em]"
                                     >
                                         digital DNA
                                     </motion.span>
