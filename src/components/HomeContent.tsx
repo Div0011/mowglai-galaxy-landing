@@ -308,7 +308,7 @@ export default function HomeContent() {
             <AmbientParticles />
             <FloatingTemplatesButton />
 
-            <section id="our-services-section" className="relative w-full py-16 md:py-24 z-20 overflow-hidden">
+            <section id="our-services-section" className="relative w-full py-16 md:py-24 z-20 overflow-hidden content-visibility-auto gpu-accelerate">
                 <div className="container mx-auto px-6 max-w-7xl relative z-10 flex flex-col gap-8 md:gap-12">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <ScrollReveal direction="left" className="space-y-2">
@@ -319,7 +319,7 @@ export default function HomeContent() {
                             <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-tighter text-foreground uppercase leading-none">
                                 Our <span className="text-primary italic">Services</span>
                             </h2>
-                            <p className="text-foreground/50 text-xs md:text-sm font-light max-w-md leading-relaxed">
+                            <p className="text-foreground/75 text-sm md:text-base font-normal max-w-md leading-relaxed">
                                 Hyper-optimized digital solutions engineered for the next era of organic search and discovery.
                             </p>
                         </ScrollReveal>
@@ -377,7 +377,7 @@ export default function HomeContent() {
                                     </h3>
                                 </div>
 
-                                <p className="relative z-10 text-foreground/50 text-xs md:text-sm font-light leading-relaxed">
+                                <p className="relative z-10 text-foreground/75 text-sm md:text-base font-normal leading-relaxed">
                                     {service.desc}
                                 </p>
                             </ScrollReveal>
@@ -395,11 +395,11 @@ export default function HomeContent() {
                 />
             </div>
 
-            <section id="services-section" className="relative w-full py-16 z-20">
+            <section id="services-section" className="relative w-full py-16 z-20 content-visibility-auto gpu-accelerate">
                 <StartupGrowthSection />
             </section>
 
-            <section id="our-work-section" className="relative w-full pt-12 pb-8 z-20">
+            <section id="our-work-section" className="relative w-full pt-12 pb-8 z-20 content-visibility-auto gpu-accelerate">
                 <div className="container mx-auto px-6 max-w-6xl">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                         <div className="lg:col-span-4 space-y-4">
@@ -411,7 +411,7 @@ export default function HomeContent() {
                                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-normal text-foreground uppercase leading-[1.25] pb-2">
                                     Our <br />Selected{" "}<span className="text-primary italic">Works</span>
                                 </h2>
-                                <p className="text-foreground/50 text-sm font-light leading-relaxed border-l border-primary/20 pl-4 max-w-xs">
+                                <p className="text-foreground/75 text-sm md:text-base font-normal leading-relaxed border-l border-primary/20 pl-4 max-w-xs">
                                     A showcase of digital products and client ecosystems.
                                 </p>
                             </ScrollReveal>
@@ -435,7 +435,7 @@ export default function HomeContent() {
                 />
             </div>
 
-            <section id="templates-showcase-section" className="relative w-full pt-8 pb-12 z-20">
+            <section id="templates-showcase-section" className="relative w-full pt-8 pb-12 z-20 content-visibility-auto gpu-accelerate">
                 <div className="container mx-auto px-6 max-w-6xl">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                         <div className="lg:col-span-8 order-2 lg:order-1">
@@ -454,7 +454,7 @@ export default function HomeContent() {
                                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-normal text-foreground uppercase leading-[1.25] text-left lg:text-right pr-4 lg:pr-6 pb-2">
                                     Selected <br /><span className="text-primary italic">Templates</span>
                                 </h2>
-                                <p className="text-foreground/50 text-sm font-light leading-relaxed border-l lg:border-l-0 lg:border-r border-primary/20 pl-4 lg:pl-0 lg:pr-4 text-left lg:text-right max-w-xs lg:ml-auto">
+                                <p className="text-foreground/75 text-sm md:text-base font-normal leading-relaxed border-l lg:border-l-0 lg:border-r border-primary/20 pl-4 lg:pl-0 lg:pr-4 text-left lg:text-right max-w-xs lg:ml-auto">
                                     Production-ready systems, crafted with world-class aesthetics.
                                 </p>
                             </ScrollReveal>

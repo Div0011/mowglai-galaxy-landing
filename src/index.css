@@ -282,34 +282,45 @@
 
 @keyframes marquee-vertical {
   0% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateY(-50%);
+    transform: translate3d(0, -50%, 0);
   }
 }
 
 .animate-marquee-vertical {
   animation: marquee-vertical 40s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 @keyframes marquee {
   0% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-marquee {
   animation: marquee 12s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .animate-marquee-slow {
   animation: marquee 25s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
 }
 
 @layer components {
