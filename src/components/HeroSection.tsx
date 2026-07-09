@@ -88,7 +88,7 @@ const HeroSection = () => {
 
                 {/* Subtitle / Value Prop */}
                 <div className="mt-1 max-w-3xl" data-aos="fade-up" data-aos-delay="300">
-                    <div className="text-xl md:text-2xl text-foreground font-body font-bold tracking-wide leading-none">
+                    <div className="text-xl md:text-2xl text-foreground font-body font-extrabold tracking-wider uppercase leading-none">
                         <TextReveal text={t.Common.deliveringElegance} />
                     </div>
                 </div>

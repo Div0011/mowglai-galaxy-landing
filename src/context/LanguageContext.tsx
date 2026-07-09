@@ -165,7 +165,7 @@ const translations: Record<Language, Translations> = {
             agency: "Agency",
             sayHello: "Say Hello",
             est: "EST.",
-            deliveringElegance: "Cosmic imagination meets raw code."
+            deliveringElegance: "Your website is your window to the world."
         },
         Home: {
             weCreate: "WE CREATE",
@@ -346,7 +346,7 @@ const translations: Record<Language, Translations> = {
             agency: "एजेंसी",
             sayHello: "नमस्ते कहें",
             est: "स्थापित",
-            deliveringElegance: "ब्रह्मांडीय कल्पना और कोड का मिलन।"
+            deliveringElegance: "आपकी वेबसाइट दुनिया के लिए आपकी खिड़की है।"
         },
         Home: {
             weCreate: "हम बनाते हैं",
@@ -527,7 +527,7 @@ const translations: Record<Language, Translations> = {
             agency: "Agencia",
             sayHello: "Di Hola",
             est: "Est.",
-            deliveringElegance: "La imaginación cósmica encuentra el código."
+            deliveringElegance: "Tu sitio web es tu ventana al mundo."
         },
         Home: {
             weCreate: "CREAMOS",
@@ -708,7 +708,7 @@ const translations: Record<Language, Translations> = {
             agency: "Agence",
             sayHello: "Dites Bonjour",
             est: "Est.",
-            deliveringElegance: "L'imagination cosmique rencontre le code."
+            deliveringElegance: "Votre site web est votre fenêtre sur le monde."
         },
         Home: {
             weCreate: "NOUS CRÉONS",
@@ -889,7 +889,7 @@ const translations: Record<Language, Translations> = {
             agency: "代理店",
             sayHello: "こんにちは",
             est: "設立",
-            deliveringElegance: "宇宙の想像力とコードの融合。"
+            deliveringElegance: "あなたのウェブサイトは、世界への窓です。"
         },
         Home: {
             weCreate: "私たちが創る",
