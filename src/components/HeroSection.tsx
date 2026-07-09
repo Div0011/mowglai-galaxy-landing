@@ -88,7 +88,7 @@ const HeroSection = () => {
 
                 {/* Subtitle / Value Prop */}
                 <div className="mt-1 max-w-3xl" data-aos="fade-up" data-aos-delay="300">
-                    <div className="text-lg md:text-xl text-foreground/70 font-body font-light leading-none">
+                    <div className="text-xl md:text-2xl text-foreground font-body font-bold tracking-wide leading-none">
                         <TextReveal text={t.Common.deliveringElegance} />
                     </div>
                 </div>
@@ -135,10 +135,10 @@ const HeroSection = () => {
             </div>
 
             {/* Bottom Indicators */}
-            <div className="absolute bottom-12 ml-2 left-24 hidden md:block text-xs font-display tracking-widest text-foreground/40 uppercase">
+            <div className="absolute bottom-12 ml-2 left-24 hidden md:block text-sm font-display font-semibold tracking-widest text-foreground/60 uppercase">
                 Global Digital Partnership
             </div>
-            <div className="absolute bottom-12 mr-2 right-24 hidden md:block text-xs font-display tracking-widest text-foreground/40 uppercase border-none">
+            <div className="absolute bottom-12 mr-2 right-24 hidden md:block text-sm font-display font-semibold tracking-widest text-foreground/60 uppercase border-none">
                 Scroll to Explore
             </div>
 

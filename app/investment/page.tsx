@@ -399,7 +399,7 @@ export default function InvestmentPage() {
                     </button>
                 ) : (
                     <Link
-                        href={type === "systems" ? "/contact?subject=Systems Waitlist Request" : `/project-request?plan=${plan.name.toLowerCase()}`}
+                        href={type === "systems" ? "/contact?subject=Systems Waitlist Request" : `/start-project/?plan=${plan.name.toLowerCase()}`}
                         className={cn(
                             "relative z-10 w-full py-4 px-8 bg-primary text-primary-foreground text-sm sm:text-lg font-bold uppercase tracking-widest hover:bg-primary-foreground hover:text-primary transition-colors duration-300 rounded-full text-center mt-auto",
                             plan.price === "COMING SOON" && "opacity-80 hover:opacity-100"
@@ -432,11 +432,18 @@ export default function InvestmentPage() {
                             </h1>
                         </div>
 
-                        <Link href="?modal=purchases" scroll={false} className="mb-4 md:mb-8 hidden md:block">
-                            <div className="p-4 md:p-6 rounded-full bg-primary/10 border border-primary/20 text-primary hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg group">
-                                <ShoppingCart className="w-6 h-6 md:w-8 md:h-8" />
-                            </div>
-                        </Link>
+                        <div className="flex items-center gap-4 mb-4 md:mb-8">
+                            <Link href="/payment" className="inline-flex items-center gap-2 px-6 py-4 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground text-sm font-bold uppercase tracking-widest rounded-full transition-all duration-300">
+                                Custom Payment
+                                <ArrowRight className="w-4 h-4 animate-pulse" />
+                            </Link>
+
+                            <Link href="?modal=purchases" scroll={false} className="hidden md:block">
+                                <div className="p-5 rounded-full bg-primary/10 border border-primary/20 text-primary hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg group">
+                                    <ShoppingCart className="w-6 h-6" />
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </motion.div>
 

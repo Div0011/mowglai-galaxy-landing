@@ -68,7 +68,7 @@ const EffectRenderer = ({
 
     if (effect === "zoom-in") {
         return (
-            <motion.div style={{ scale: zoomScale, opacity: zoomOpacity, filter: zoomFilter }} className="origin-center will-change-transform">
+            <motion.div style={{ scale: zoomScale, opacity: zoomOpacity, filter: zoomFilter, willChange: "transform, opacity" }} className="origin-center">
                 {children}
             </motion.div>
         );
@@ -76,7 +76,7 @@ const EffectRenderer = ({
 
     if (effect === "depth-pull") {
         return (
-            <motion.div style={{ scale: depthScale, opacity: depthOpacity, y: depthY }} className="origin-center will-change-transform">
+            <motion.div style={{ scale: depthScale, opacity: depthOpacity, y: depthY, willChange: "transform, opacity" }} className="origin-center">
                 {children}
             </motion.div>
         );
@@ -84,7 +84,7 @@ const EffectRenderer = ({
 
     if (effect === "fade-slide") {
         return (
-            <motion.div style={{ y: slideY, opacity: slideOpacity }} className="will-change-transform">
+            <motion.div style={{ y: slideY, opacity: slideOpacity, willChange: "transform, opacity" }} className="">
                 {children}
             </motion.div>
         );

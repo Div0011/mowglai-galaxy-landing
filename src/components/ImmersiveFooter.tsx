@@ -154,6 +154,69 @@ export default function ImmersiveFooter() {
                 }
             }
 
+            // ── Animated Pixel Clouds ─────────────────────────────────────────
+            const drawCloud = (cx: number, cy: number, offsets: { dx: number; dy: number }[]) => {
+                ctx.fillStyle = pixelColor;
+                offsets.forEach((offset) => {
+                    const px = cx + offset.dx;
+                    const py = cy + offset.dy;
+                    if (px >= 0 && px < cols && py >= 0 && py < rows) {
+                        ctx.fillRect(px * BLOCK, py * BLOCK, BLOCK, BLOCK);
+                    }
+                });
+            };
+
+            // Cloud 1: Slow, large
+            const cloud1X = Math.floor((tick * 0.04) % (cols + 50)) - 25;
+            const cloud1Y = Math.floor(rows * 0.28);
+            const cloud1Offsets = [
+                // row -5
+                { dx: 4, dy: -5 }, { dx: 5, dy: -5 }, { dx: 6, dy: -5 }, { dx: 7, dy: -5 }, { dx: 8, dy: -5 }, { dx: 9, dy: -5 }, { dx: 10, dy: -5 },
+                // row -4
+                { dx: 3, dy: -4 }, { dx: 4, dy: -4 }, { dx: 5, dy: -4 }, { dx: 6, dy: -4 }, { dx: 7, dy: -4 }, { dx: 8, dy: -4 }, { dx: 9, dy: -4 }, { dx: 10, dy: -4 }, { dx: 11, dy: -4 }, { dx: 12, dy: -4 },
+                // row -3
+                { dx: 2, dy: -3 }, { dx: 3, dy: -3 }, { dx: 4, dy: -3 }, { dx: 5, dy: -3 }, { dx: 6, dy: -3 }, { dx: 7, dy: -3 }, { dx: 8, dy: -3 }, { dx: 9, dy: -3 }, { dx: 10, dy: -3 }, { dx: 11, dy: -3 }, { dx: 12, dy: -3 }, { dx: 13, dy: -3 }, { dx: 14, dy: -3 },
+                // row -2
+                { dx: 1, dy: -2 }, { dx: 2, dy: -2 }, { dx: 3, dy: -2 }, { dx: 4, dy: -2 }, { dx: 5, dy: -2 }, { dx: 6, dy: -2 }, { dx: 7, dy: -2 }, { dx: 8, dy: -2 }, { dx: 9, dy: -2 }, { dx: 10, dy: -2 }, { dx: 11, dy: -2 }, { dx: 12, dy: -2 }, { dx: 13, dy: -2 }, { dx: 14, dy: -2 }, { dx: 15, dy: -2 },
+                // row -1
+                { dx: 0, dy: -1 }, { dx: 1, dy: -1 }, { dx: 2, dy: -1 }, { dx: 3, dy: -1 }, { dx: 4, dy: -1 }, { dx: 5, dy: -1 }, { dx: 6, dy: -1 }, { dx: 7, dy: -1 }, { dx: 8, dy: -1 }, { dx: 9, dy: -1 }, { dx: 10, dy: -1 }, { dx: 11, dy: -1 }, { dx: 12, dy: -1 }, { dx: 13, dy: -1 }, { dx: 14, dy: -1 }, { dx: 15, dy: -1 }, { dx: 16, dy: -1 },
+                // row 0
+                { dx: -3, dy: 0 }, { dx: -2, dy: 0 }, { dx: -1, dy: 0 }, { dx: 0, dy: 0 }, { dx: 1, dy: 0 }, { dx: 2, dy: 0 }, { dx: 3, dy: 0 }, { dx: 4, dy: 0 }, { dx: 5, dy: 0 }, { dx: 6, dy: 0 }, { dx: 7, dy: 0 }, { dx: 8, dy: 0 }, { dx: 9, dy: 0 }, { dx: 10, dy: 0 }, { dx: 11, dy: 0 }, { dx: 12, dy: 0 }, { dx: 13, dy: 0 }, { dx: 14, dy: 0 }, { dx: 15, dy: 0 }, { dx: 16, dy: 0 }, { dx: 17, dy: 0 }
+            ];
+            drawCloud(cloud1X, cloud1Y, cloud1Offsets);
+
+            // Cloud 2: Medium, higher up
+            const cloud2X = Math.floor(((tick * 0.025) + cols * 0.45) % (cols + 40)) - 20;
+            const cloud2Y = Math.floor(rows * 0.15);
+            const cloud2Offsets = [
+                // row -4
+                { dx: 3, dy: -4 }, { dx: 4, dy: -4 }, { dx: 5, dy: -4 }, { dx: 6, dy: -4 }, { dx: 7, dy: -4 }, { dx: 8, dy: -4 }, { dx: 9, dy: -4 },
+                // row -3
+                { dx: 2, dy: -3 }, { dx: 3, dy: -3 }, { dx: 4, dy: -3 }, { dx: 5, dy: -3 }, { dx: 6, dy: -3 }, { dx: 7, dy: -3 }, { dx: 8, dy: -3 }, { dx: 9, dy: -3 }, { dx: 10, dy: -3 }, { dx: 11, dy: -3 },
+                // row -2
+                { dx: 1, dy: -2 }, { dx: 2, dy: -2 }, { dx: 3, dy: -2 }, { dx: 4, dy: -2 }, { dx: 5, dy: -2 }, { dx: 6, dy: -2 }, { dx: 7, dy: -2 }, { dx: 8, dy: -2 }, { dx: 9, dy: -2 }, { dx: 10, dy: -2 }, { dx: 11, dy: -2 }, { dx: 12, dy: -2 },
+                // row -1
+                { dx: 0, dy: -1 }, { dx: 1, dy: -1 }, { dx: 2, dy: -1 }, { dx: 3, dy: -1 }, { dx: 4, dy: -1 }, { dx: 5, dy: -1 }, { dx: 6, dy: -1 }, { dx: 7, dy: -1 }, { dx: 8, dy: -1 }, { dx: 9, dy: -1 }, { dx: 10, dy: -1 }, { dx: 11, dy: -1 }, { dx: 12, dy: -1 }, { dx: 13, dy: -1 },
+                // row 0
+                { dx: -1, dy: 0 }, { dx: 0, dy: 0 }, { dx: 1, dy: 0 }, { dx: 2, dy: 0 }, { dx: 3, dy: 0 }, { dx: 4, dy: 0 }, { dx: 5, dy: 0 }, { dx: 6, dy: 0 }, { dx: 7, dy: 0 }, { dx: 8, dy: 0 }, { dx: 9, dy: 0 }, { dx: 10, dy: 0 }, { dx: 11, dy: 0 }, { dx: 12, dy: 0 }, { dx: 13, dy: 0 }, { dx: 14, dy: 0 }
+            ];
+            drawCloud(cloud2X, cloud2Y, cloud2Offsets);
+
+            // Cloud 3: Small, slightly faster, lower
+            const cloud3X = Math.floor(((tick * 0.06) + cols * 0.75) % (cols + 30)) - 15;
+            const cloud3Y = Math.floor(rows * 0.38);
+            const cloud3Offsets = [
+                // row -3
+                { dx: 2, dy: -3 }, { dx: 3, dy: -3 }, { dx: 4, dy: -3 }, { dx: 5, dy: -3 }, { dx: 6, dy: -3 },
+                // row -2
+                { dx: 1, dy: -2 }, { dx: 2, dy: -2 }, { dx: 3, dy: -2 }, { dx: 4, dy: -2 }, { dx: 5, dy: -2 }, { dx: 6, dy: -2 }, { dx: 7, dy: -2 }, { dx: 8, dy: -2 },
+                // row -1
+                { dx: 0, dy: -1 }, { dx: 1, dy: -1 }, { dx: 2, dy: -1 }, { dx: 3, dy: -1 }, { dx: 4, dy: -1 }, { dx: 5, dy: -1 }, { dx: 6, dy: -1 }, { dx: 7, dy: -1 }, { dx: 8, dy: -1 }, { dx: 9, dy: -1 },
+                // row 0
+                { dx: -1, dy: 0 }, { dx: 0, dy: 0 }, { dx: 1, dy: 0 }, { dx: 2, dy: 0 }, { dx: 3, dy: 0 }, { dx: 4, dy: 0 }, { dx: 5, dy: 0 }, { dx: 6, dy: 0 }, { dx: 7, dy: 0 }, { dx: 8, dy: 0 }, { dx: 9, dy: 0 }, { dx: 10, dy: 0 }
+            ];
+            drawCloud(cloud3X, cloud3Y, cloud3Offsets);
+
             // ── Animated V-Birds ─────────────────────────────────────────────
             const bird1X = Math.floor((tick * 0.22) % (cols + 20)) - 10;
             const bird1Y = Math.floor(rows * 0.23 + Math.sin(tick * 0.05) * 2);
@@ -300,7 +363,7 @@ export default function ImmersiveFooter() {
             {/* Lower Side: Options & Metadata */}
             <div className="relative z-10 w-full max-w-6xl mx-auto px-6 mt-auto pb-12 md:pb-16 flex flex-col items-center text-center">
                 {/* Navigation Links Row */}
-                <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs md:text-sm tracking-[0.25em] font-mono text-foreground/75 uppercase">
+                <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-sm md:text-base tracking-[0.2em] font-mono font-bold text-foreground uppercase">
                     {navLinks.map((link, idx) => (
                         <Link key={idx} href={link.href} className="hover:text-primary transition-colors duration-150">
                             {link.label}
@@ -312,7 +375,7 @@ export default function ImmersiveFooter() {
                 <div className="w-20 h-[1px] bg-foreground/15 my-4" />
 
                 {/* Metadata Row */}
-                <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 text-[10px] md:text-[11px] tracking-[0.2em] font-mono text-foreground/35 uppercase">
+                <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 text-xs md:text-sm tracking-[0.2em] font-mono font-bold text-foreground/60 uppercase">
                     <span>&copy; {new Date().getFullYear()} MOWGLAI</span>
                     <span>·</span>
                     <a href="https://mowglai.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-150">
@@ -325,7 +388,7 @@ export default function ImmersiveFooter() {
                 </div>
 
                 {/* Legal Links */}
-                <div className="mt-2.5 flex items-center gap-5 text-[10px] md:text-[11px] font-mono text-foreground/25 uppercase tracking-widest">
+                <div className="mt-2.5 flex items-center gap-5 text-xs md:text-sm font-mono font-bold text-foreground/50 uppercase tracking-widest">
                     <Link href="/privacy" className="hover:text-primary transition-colors duration-150">Privacy</Link>
                     <span>|</span>
                     <Link href="/terms" className="hover:text-primary transition-colors duration-150">Terms</Link>

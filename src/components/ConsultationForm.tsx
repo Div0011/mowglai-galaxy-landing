@@ -17,6 +17,7 @@ export default function ConsultationForm({ className }: ConsultationFormProps) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        contactNumber: "",
         message: ""
     });
     const [submitted, setSubmitted] = useState(false);
@@ -33,7 +34,7 @@ export default function ConsultationForm({ className }: ConsultationFormProps) {
             setIsSubmitting(false);
             setSubmitted(true);
             setTimeout(() => setSubmitted(false), 3000);
-            setFormData({ name: "", email: "", message: "" });
+            setFormData({ name: "", email: "", contactNumber: "", message: "" });
         }, 1000);
     };
 
@@ -84,6 +85,18 @@ export default function ConsultationForm({ className }: ConsultationFormProps) {
                                     className="bg-background/50 border-primary/30 focus:border-primary h-12 text-base"
                                 />
                             </div>
+                        </div>
+
+                        <div>
+                            <Input
+                                name="contactNumber"
+                                type="tel"
+                                placeholder="Contact Number (with country code)"
+                                value={formData.contactNumber}
+                                onChange={handleInputChange}
+                                required
+                                className="bg-background/50 border-primary/30 focus:border-primary h-12 text-base"
+                            />
                         </div>
 
                         <div>
