@@ -165,6 +165,22 @@
       animation: spin 8s linear infinite;
     }
 
+    @keyframes trespass {
+      0%,
+      100% {
+        transform: translateX(-7px);
+      }
+
+      50% {
+        transform: translateX(7px);
+      }
+    }
+
+    .animate-trespass {
+      animation: trespass 6s ease-in-out infinite;
+      will-change: transform;
+    }
+
     .gpu-accelerate {
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;

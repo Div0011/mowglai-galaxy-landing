@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downwards Revolving Typography Demo</title>
+    <style>
+        /* Base Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0c1a10;
+            background-image: radial-gradient(circle at center, #142a1a 0%, #08100a 100%);
+            color: #f2efe9;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Hero Text Container */
+        .hero-container {
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 3D Revolving Row viewport */
+        .revolve-row {
+            perspective: 1000px;
+            height: 100px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Revolving Word element styling */
+        .revolve-word {
+            position: absolute;
+            display: inline-block;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 1;
+            transform-origin: center;
+            white-space: nowrap;
+            backface-visibility: hidden;
+            transition: color 0.3s ease;
+        }
+
+        /* Font Style Classes */
+        .style-sans-bold {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .style-serif-italic {
+            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            color: #bcf0cc;
+        }
+
+        .style-mono {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #8af8ac;
+        }
+
+        .style-slab-bold {
+            font-family: "Rockwell", "Playfair Display", "Times New Roman", serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: #e2e8f0;
+        }
+
+        /* 3D Downward Revolving Keyframes */
+        @keyframes roll-down-enter {
+            0% {
+                transform: translateY(-80%) rotateX(-75deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0%) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes roll-down-exit {
+            0% {
+                transform: translateY(0%) rotateX(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(80%) rotateX(75deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animation classes */
+        .roll-enter {
+            animation: roll-down-enter 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .roll-exit {
+            animation: roll-down-exit 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        /* Info Badge */
+        .info-badge {
+            margin-top: 40px;
+            font-family: system-ui, sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(242, 239, 233, 0.4);
+            border: 1px solid rgba(242, 239, 233, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        <!-- Row 1 Revolve Viewport -->
+        <div id="row-1" class="revolve-row">
+            <span class="revolve-word style-sans-bold roll-enter">YOUR WEBSITE</span>
+        </div>
+        <!-- Row 2 Revolve Viewport -->
+        <div id="row-2" class="revolve-row">
+            <span class="revolve-word style-sans-bold roll-enter">IS YOUR WINDOW</span>
+        </div>
+        <!-- Row 3 Revolve Viewport -->
+        <div id="row-3" class="revolve-row">
+            <span class="revolve-word style-sans-bold roll-enter">TO THE WORLD.</span>
+        </div>
+    </div>
+
+    <div class="info-badge">
+        Staggered 1s Font & Alternate Rotation
+    </div>
+
+    <script>
+        // Array of font styles to cycle through
+        const fontStyles = [
+            "style-sans-bold",
+            "style-serif-italic",
+            "style-mono",
+            "style-slab-bold"
+        ];
+
+        // Alternative wording configurations for each row
+        const alternates = {
+            1: ["YOUR WEBSITE", "YOUR PLATFORM", "YOUR IDENTITY", "YOUR PORTFOLIO"],
+            2: ["IS YOUR WINDOW", "DEFINES YOUR VIEW", "BRIDGES IDEAS", "CONNECTS YOU"],
+            3: ["TO THE WORLD.", "TO THE FUTURE.", "TO GROWTH.", "TO EMPIRE."]
+        };
+
+        let tick = 0;
+
+        // Tracks current updates count per row
+        const rowStates = {
+            1: { updateCount: 0 },
+            2: { updateCount: 0 },
+            3: { updateCount: 0 }
+        };
+
+        // Performs revolving transition for a specific row
+        function revolveRow(rowNum) {
+            const container = document.getElementById(`row-${rowNum}`);
+            const oldWordNode = container.querySelector(".revolve-word");
+            
+            // Increment updates
+            rowStates[rowNum].updateCount++;
+            const count = rowStates[rowNum].updateCount;
+            
+            // Resolve alternate word and font style index
+            const wordList = alternates[rowNum];
+            const nextWord = wordList[count % wordList.length];
+            const nextFontClass = fontStyles[count % fontStyles.length];
+
+            // Create new word span element
+            const newWordNode = document.createElement("span");
+            newWordNode.className = `revolve-word ${nextFontClass} roll-enter`;
+            newWordNode.innerText = nextWord;
+
+            // Apply exit animation to old word span
+            if (oldWordNode) {
+                oldWordNode.classList.remove("roll-enter");
+                oldWordNode.classList.add("roll-exit");
+                
+                // Remove old word node after animation completes
+                setTimeout(() => {
+                    oldWordNode.remove();
+                }, 500);
+            }
+
+            // Append new word span
+            container.appendChild(newWordNode);
+        }
+
+        // Timer ticking every 1 second (1000ms)
+        setInterval(() => {
+            tick++;
+            
+            // Staggered trigger:
+            // Row 1 rotates on tick 1, 4, 7...
+            // Row 2 rotates on tick 2, 5, 8...
+            // Row 3 rotates on tick 3, 6, 9...
+            const activeRow = (tick % 3) + 1;
+            
+            revolveRow(activeRow);
+        }, 1000);
+    </script>
+</body>
+</html>
