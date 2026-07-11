@@ -124,7 +124,7 @@ const HeroSection = () => {
                 <div className="w-full flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 select-none my-auto max-w-5xl text-white">
                     
                     {/* Row 1: YOUR WEBSITE [Laptop Slideshow Box] */}
-                    <div className="flex items-center justify-between w-full pl-[4%] pr-[6%]">
+                    <div className="flex items-center justify-between w-full pl-[2%] pr-[3%] md:pl-[4%] md:pr-[6%]">
                         {/* Text wrapper with absolute anchoring to lock slideshow position */}
                         <div className="relative h-[1.4em] flex items-center flex-1 justify-start z-20 mix-blend-difference">
                             <AnimatePresence initial={false}>
@@ -134,8 +134,8 @@ const HeroSection = () => {
                                     animate={{ opacity: 1, y: "0%" }}
                                     exit={{ opacity: 0, y: "30%" }}
                                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    className={`absolute left-0 flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference ${lineState1.fontClass}`}
-                                    style={{ fontSize: "8.2vw", lineHeight: "1", whiteSpace: "nowrap" }}
+                                    className={`flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference text-[5.8vw] md:text-[8.2vw] ${lineState1.fontClass}`}
+                                    style={{ lineHeight: "1", whiteSpace: "nowrap" }}
                                 >
                                     {lineState1.text.split(" ").map((word, idx) => (
                                         <span key={idx} className="inline-block">{word}</span>
@@ -145,7 +145,7 @@ const HeroSection = () => {
                         </div>
 
                         {/* Laptop slideshow box at z-10 (pointer-events-auto allows slideshow hover scaling) */}
-                        <div className="relative aspect-[4/3] w-[24%] lg:w-[13vw] rounded-xl border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] bg-card hover:scale-105 transition-transform duration-500 ease-out pointer-events-auto z-10">
+                        <div className="relative aspect-[4/3] w-[18%] md:w-[24%] lg:w-[13vw] rounded-xl border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] bg-card hover:scale-105 transition-transform duration-500 ease-out pointer-events-auto z-10">
                             <AnimatePresence initial={false}>
                                 <motion.div
                                     key={box1Images[slideIndex]}
@@ -168,9 +168,9 @@ const HeroSection = () => {
                     </div>
 
                     {/* Row 2: [Wave Slideshow Box] IS YOUR */}
-                    <div className="flex items-center justify-between w-full pl-[6%] pr-[4%] -mt-1 sm:-mt-2">
+                    <div className="flex items-center justify-between w-full pl-[3%] pr-[2%] md:pl-[6%] md:pr-[4%] -mt-1 sm:-mt-2">
                         {/* Wave slideshow box at z-10 */}
-                        <div className="relative aspect-[4/3] w-[24%] lg:w-[13vw] rounded-xl border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] bg-card hover:scale-105 transition-transform duration-500 ease-out pointer-events-auto z-10">
+                        <div className="relative aspect-[4/3] w-[18%] md:w-[24%] lg:w-[13vw] rounded-xl border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] bg-card hover:scale-105 transition-transform duration-500 ease-out pointer-events-auto z-10">
                             <AnimatePresence initial={false}>
                                 <motion.div
                                     key={box2Images[slideIndex]}
@@ -200,8 +200,8 @@ const HeroSection = () => {
                                     animate={{ opacity: 1, y: "0%" }}
                                     exit={{ opacity: 0, y: "30%" }}
                                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    className={`absolute right-0 flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference ${lineState2.fontClass}`}
-                                    style={{ fontSize: "8.2vw", lineHeight: "1", whiteSpace: "nowrap" }}
+                                    className={`flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference text-[7.5vw] md:text-[8.2vw] ${lineState2.fontClass}`}
+                                    style={{ lineHeight: "1", whiteSpace: "nowrap" }}
                                 >
                                     {lineState2.text.split(" ").map((word, idx) => (
                                         <span key={idx} className="inline-block">{word}</span>
@@ -222,8 +222,8 @@ const HeroSection = () => {
                                     animate={{ opacity: 1, y: "0%" }}
                                     exit={{ opacity: 0, y: "30%" }}
                                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference ${lineState3.fontClass}`}
-                                    style={{ fontSize: "8.2vw", lineHeight: "1", whiteSpace: "nowrap" }}
+                                    className={`flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference text-[7.5vw] md:text-[8.2vw] ${lineState3.fontClass}`}
+                                    style={{ lineHeight: "1", whiteSpace: "nowrap" }}
                                 >
                                     {lineState3.text.split(" ").map((word, idx) => (
                                         <span key={idx} className="inline-block">{word}</span>
@@ -234,7 +234,7 @@ const HeroSection = () => {
                     </div>
 
                     {/* Row 4: THE WORLD. [Mobile Slideshow Box] [Down Arrow] */}
-                    <div className="flex items-center justify-between w-full pl-[6%] pr-[4%]">
+                    <div className="flex items-center justify-between w-full pl-[3%] pr-[2%] md:pl-[6%] md:pr-[4%]">
                         {/* Text wrapper with absolute left-0 anchoring */}
                         <div className="relative h-[1.4em] flex items-center flex-1 justify-start z-20 mix-blend-difference">
                             <AnimatePresence initial={false}>
@@ -244,8 +244,8 @@ const HeroSection = () => {
                                     animate={{ opacity: 1, y: "0%" }}
                                     exit={{ opacity: 0, y: "30%" }}
                                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    className={`absolute left-0 flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference ${lineState4.fontClass}`}
-                                    style={{ fontSize: "8.2vw", lineHeight: "1", whiteSpace: "nowrap" }}
+                                    className={`flex items-center gap-[0.3em] origin-center transform-gpu text-white tracking-tighter hover:text-primary transition-colors duration-300 mix-blend-difference text-[6.2vw] md:text-[8.2vw] ${lineState4.fontClass}`}
+                                    style={{ lineHeight: "1", whiteSpace: "nowrap" }}
                                 >
                                     {lineState4.text.split(" ").map((word, idx) => (
                                         <span key={idx} className="inline-block">{word}</span>
@@ -254,9 +254,9 @@ const HeroSection = () => {
                             </AnimatePresence>
                         </div>
 
-                        <div className="flex items-center gap-6 sm:gap-8 z-10">
+                        <div className="flex items-center gap-4 sm:gap-6 md:gap-8 z-10">
                             {/* Mobile slideshow box at z-10 */}
-                            <div className="relative aspect-[3/4] w-[16%] lg:w-[9vw] rounded-xl border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] bg-card hover:scale-105 transition-transform duration-500 ease-out pointer-events-auto">
+                            <div className="relative aspect-[3/4] w-[12%] md:w-[16%] lg:w-[9vw] rounded-xl border border-white/10 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.15)] bg-card hover:scale-105 transition-transform duration-500 ease-out pointer-events-auto">
                                 <AnimatePresence initial={false}>
                                     <motion.div
                                         key={box4Images[slideIndex]}
@@ -278,7 +278,7 @@ const HeroSection = () => {
                             </div>
 
                             {/* Down Arrow indicator */}
-                            <svg className="w-[6vw] h-[6vw] max-w-[80px] max-h-[80px] text-white rotate-0 translate-y-[0.8vw] animate-bounce pointer-events-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-[5vw] h-[5vw] md:w-[6vw] md:h-[6vw] max-w-[80px] max-h-[80px] text-white rotate-0 translate-y-[0.8vw] animate-bounce pointer-events-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                             </svg>
                         </div>
@@ -288,41 +288,41 @@ const HeroSection = () => {
 
             </div>
 
-            {/* Floating Circular CTA Buttons at z-10 (GET FREE AUDIT Left, START PROJECT Right) */}
+            {/* Floating Circular CTA Buttons at z-10 (GET FREE AUDIT Left/Bottom, START PROJECT Right/Bottom) */}
             
-            {/* Left Edge: GET FREE AUDIT Circle */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+            {/* Left/Bottom: GET FREE AUDIT Circle */}
+            <div className="absolute bottom-[5%] left-[8%] md:top-1/2 md:bottom-auto md:left-8 md:-translate-y-1/2 z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
                 <Magnetic>
                     <Link
                         href="/audit"
-                        className="group relative flex flex-col items-center justify-center text-center w-32 h-32 md:w-36 md:h-36 rounded-full transition-all duration-500 hover:scale-110"
+                        className="group relative flex flex-col items-center justify-center text-center w-28 h-28 md:w-36 md:h-36 rounded-full transition-all duration-500 hover:scale-110"
                     >
                         {/* 10x Scaling background mask */}
                         <div className="absolute inset-0 rounded-full bg-background/5 backdrop-blur-3xl border border-primary/20 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)] group-hover:scale-[10] group-hover:bg-white z-10" />
                         
-                        <span className="relative z-20 flex flex-col items-center justify-center gap-1 text-[11px] md:text-xs font-bold uppercase tracking-[0.15em] leading-tight text-white transition-colors duration-500 group-hover:text-black">
+                        <span className="relative z-20 flex flex-col items-center justify-center gap-1 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] leading-tight text-white transition-colors duration-500 group-hover:text-black">
                             <span>GET FREE</span>
                             <span>AUDIT</span>
-                            <ScanLine className="w-4 h-4 mt-1 transition-all duration-500 group-hover:rotate-180 group-hover:text-black group-hover:stroke-black" />
+                            <ScanLine className="w-3.5 h-3.5 mt-1 transition-all duration-500 group-hover:rotate-180 group-hover:text-black group-hover:stroke-black" />
                         </span>
                     </Link>
                 </Magnetic>
             </div>
 
-            {/* Right Edge: START PROJECT Circle */}
-            <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+            {/* Right/Bottom: START PROJECT Circle */}
+            <div className="absolute bottom-[5%] right-[8%] md:top-1/2 md:bottom-auto md:right-8 md:-translate-y-1/2 z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
                 <Magnetic>
                     <Link
                         href="/investment"
-                        className="group relative flex flex-col items-center justify-center text-center w-32 h-32 md:w-36 md:h-36 rounded-full transition-all duration-500 hover:scale-110"
+                        className="group relative flex flex-col items-center justify-center text-center w-28 h-28 md:w-36 md:h-36 rounded-full transition-all duration-500 hover:scale-110"
                     >
                         {/* 10x Scaling background mask */}
                         <div className="absolute inset-0 rounded-full bg-primary transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)] group-hover:scale-[10] group-hover:bg-white z-10" />
                         
-                        <span className="relative z-20 flex flex-col items-center justify-center gap-1 text-[11px] md:text-xs font-bold uppercase tracking-[0.15em] leading-tight text-white transition-colors duration-500 group-hover:text-black">
+                        <span className="relative z-20 flex flex-col items-center justify-center gap-1 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] leading-tight text-white transition-colors duration-500 group-hover:text-black">
                             <span>START</span>
                             <span>PROJECT</span>
-                            <ArrowRight className="w-4 h-4 mt-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-black" />
+                            <ArrowRight className="w-3.5 h-3.5 mt-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-black" />
                         </span>
                     </Link>
                 </Magnetic>
