@@ -4,6 +4,8 @@ import "../src/index.css";
 import { Providers } from "@/components/Providers";
 import { AOSInit } from "@/components/AOSInit";
 import { LanguageProvider } from "@/context/LanguageContext";
+import ReferralBanner from "@/components/ReferralBanner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Preload critical fonts for better performance
 const boldonse = localFont({
@@ -93,6 +95,9 @@ export const metadata: Metadata = {
     },
     verification: {
         google: "Evz63X8emo75NARUTxWl7zuik4hstQOoYls6MKipByA",
+        other: {
+            "razorpay-verification": "YOUR_RAZORPAY_VERIFICATION_KEY",
+        },
     },
     category: "technology",
     classification: "Digital Agency",
@@ -162,10 +167,13 @@ export default function RootLayout({
                             </p>
                         </div>
                     </noscript>
-                    <Providers>
-                        <AOSInit />
-                        {children}
-                    </Providers>
+                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                        <Providers>
+                            <AOSInit />
+                            <ReferralBanner />
+                            {children}
+                        </Providers>
+                    </ThemeProvider>
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{

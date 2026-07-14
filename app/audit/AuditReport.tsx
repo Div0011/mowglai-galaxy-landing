@@ -323,7 +323,7 @@ const AuditReport: React.FC<AuditReportProps> = ({ result }) => {
                     </div>
                     <div className="text-right">
                         <p className="font-bold text-[#c5a059]">MOWGLAI</p>
-                        <p>mowglai.in</p>
+                        <p>mowglai.com</p>
                     </div>
                 </div>
 

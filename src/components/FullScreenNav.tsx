@@ -190,9 +190,9 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                     {/* Mobile Social Icons (Bottom Row) */}
                     <div className="absolute bottom-10 left-0 w-full flex md:hidden justify-center gap-6 z-50">
                         {[
-                            { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
+                            { icon: Instagram, href: "https://www.instagram.com/mowglai", label: "Instagram" },
                             { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
-                            { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/company/mowglai", label: "LinkedIn" },
                         ].map((item, i) => (
                             <Magnetic key={i} amount={0.5}>
                                 <a
@@ -212,9 +212,9 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
                     <div className="hidden md:flex w-[10%] h-full border-l border-primary/10 flex-col justify-center items-center py-10 bg-primary/5">
                         <div className="flex flex-col gap-8 items-center">
                             {[
-                                { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
+                                { icon: Instagram, href: "https://www.instagram.com/mowglai", label: "Instagram" },
                                 { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
-                                { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
+                                { icon: Linkedin, href: "https://www.linkedin.com/company/mowglai", label: "LinkedIn" },
                             ].map((item, i) => (
                                 <Magnetic key={i} amount={0.5}>
                                     <a

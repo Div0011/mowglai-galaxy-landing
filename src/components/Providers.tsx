@@ -5,9 +5,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { useState } from "react";
-import { ThemeProvider } from "next-themes";
 import { StyleProvider } from "@/context/StyleContext";
 import { usePerformanceMonitor } from "@/hooks/use-performance";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 
 // Optimized QueryClient configuration for better performance
 function createQueryClient() {
@@ -35,7 +35,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <CurrencyProvider>
                 <StyleProvider>
                     <TooltipProvider delayDuration={0}>
                         {children}
@@ -43,7 +43,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                         <Sonner />
                     </TooltipProvider>
                 </StyleProvider>
-            </ThemeProvider>
+            </CurrencyProvider>
         </QueryClientProvider>
     );
 }

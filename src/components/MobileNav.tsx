@@ -1,4 +1,4 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart, Globe } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -6,6 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 import XLogo from "@/components/icons/XLogo";
+import { useCurrency, CurrencyType } from "@/context/CurrencyContext";
 
 const navItems = [
     { icon: Home, label: "HOME", href: "/" },
@@ -17,15 +18,17 @@ const navItems = [
 ];
 
 const socialItems = [
-    { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/mowglai", label: "Instagram" },
     { icon: XLogo, href: "https://x.com/Mowglai_in", label: "X" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/mowglai", label: "LinkedIn" },
 ];
 
 const MobileNav = () => {
     const router = useRouter();
     const pathname = usePathname();
     const { resolvedTheme } = useTheme();
+    const { currency, setCurrency } = useCurrency();
+    const [mobileCurrencyOpen, setMobileCurrencyOpen] = useState(false);
     const [activeItem, setActiveItem] = useState("Home");
     const [isOpen, setIsOpen] = useState(false);
 
@@ -97,6 +100,53 @@ const MobileNav = () => {
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </motion.button>
                 </Magnetic>
+
+                {/* Currency Switcher Icon - Only on Investment Page */}
+                {pathname?.includes('/investment') && !isOpen && (
+                    <div className="relative">
+                        <motion.button
+                            onClick={() => setMobileCurrencyOpen(!mobileCurrencyOpen)}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0 }}
+                            className={cn(
+                                "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-md border border-primary/20 shadow-lg font-mono font-bold text-xs text-primary",
+                                resolvedTheme === 'light'
+                                    ? "bg-primary/10 hover:bg-primary/20"
+                                    : "bg-background/40 hover:bg-primary/10"
+                            )}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            {currency}
+                        </motion.button>
+                        <AnimatePresence>
+                            {mobileCurrencyOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10, scale: 0.95 }}
+                                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                                    exit={{ opacity: 0, x: -10, scale: 0.95 }}
+                                    className="absolute right-14 top-0 py-1.5 w-24 bg-background/95 backdrop-blur-md border border-primary/20 rounded-xl shadow-xl z-50 flex flex-col overflow-hidden"
+                                >
+                                    {(["USD", "INR", "EUR", "GBP"] as CurrencyType[]).map((cur) => (
+                                        <button
+                                            key={cur}
+                                            onClick={() => {
+                                                setCurrency(cur);
+                                                setMobileCurrencyOpen(false);
+                                            }}
+                                            className={cn(
+                                                "px-3 py-2 text-[10px] font-bold text-left hover:bg-primary hover:text-primary-foreground transition-colors font-mono uppercase",
+                                                currency === cur ? "text-primary bg-primary/10" : "text-foreground/80"
+                                            )}
+                                        >
+                                            {cur}
+                                        </button>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                )}
 
                 {/* Shopping Cart Icon - Only on Investment Page */}
                 {pathname?.includes('/investment') && !isOpen && (

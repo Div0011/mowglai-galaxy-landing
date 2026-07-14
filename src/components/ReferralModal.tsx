@@ -60,10 +60,11 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
 
                     {/* Modal */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[500px] bg-background border border-primary/20 rounded-2xl shadow-2xl z-[101] overflow-hidden"
+                        initial={{ y: "100%", x: "-50%" }}
+                        animate={{ y: 0, x: "-50%" }}
+                        exit={{ y: "100%", x: "-50%" }}
+                        transition={{ type: "spring", damping: 25, stiffness: 220 }}
+                        className="fixed left-1/2 bottom-0 w-full sm:w-[90vw] max-w-[500px] bg-background border-t border-x border-primary/20 rounded-t-2xl shadow-[0_-10px_25px_rgba(0,0,0,0.3)] z-[101] overflow-y-auto max-h-[90vh] pb-safe"
                     >
                         {/* Header */}
                         <div className="p-6 border-b border-primary/10 bg-primary/5 flex justify-between items-center">

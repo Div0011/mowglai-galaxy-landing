@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "UI UX design services"
   ],
   alternates: {
-    canonical: "https://mowglai.in/",
+    canonical: "https://mowglai.com/",
   },
   openGraph: {
     title: "Mowglai - Web Development, SaaS MVP & Digital Agency",

@@ -21,9 +21,9 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-    { icon: Instagram, href: "https://www.instagram.com/mowglai.in", label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/mowglai", label: "Instagram" },
     { icon: XLogo, href: "https://x.com/mowglai_in", label: "X" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/mowglai", label: "LinkedIn" },
 ];
 
 function drawDotMatrixText(

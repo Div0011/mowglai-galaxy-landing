@@ -3,7 +3,7 @@
 import PageLayout from "@/components/PageLayout";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Download, FileText, Sparkles, Check, ArrowRight, Clock, Rocket, ShoppingCart } from "lucide-react";
+import { Download, FileText, Sparkles, Check, ArrowRight, Clock, Rocket, ShoppingCart, Globe } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import { downloadAsHtml } from "@/utils/pdfDownloader";
 import NextPageButton from "@/components/NextPageButton";
 import { cn } from "@/lib/utils";
 import UserPurchasesSection from "@/components/UserPurchasesSection";
+import { useCurrency, CurrencyType } from "@/context/CurrencyContext";
 
 interface Plan {
     name: string;
@@ -179,6 +180,8 @@ const plans: {
 export default function InvestmentPage() {
     const { t } = useLanguage();
     const router = useRouter();
+    const { currency, setCurrency, formatPrice } = useCurrency();
+    const [currencyOpen, setCurrencyOpen] = useState(false);
     const [planType, setPlanType] = useState<"standard" | "care" | "addons" | "premium" | "systems">("standard");
     const [discountCode, setDiscountCode] = useState("");
     const [isDiscountApplied, setIsDiscountApplied] = useState(false);
@@ -228,7 +231,8 @@ export default function InvestmentPage() {
     }, []);
 
     const handleApplyDiscount = () => {
-        if (discountCode.trim().toUpperCase() === "MOWGLAI10") {
+        const code = discountCode.trim().toUpperCase();
+        if (code === "MOWGLAI10" || code.startsWith("MOW20")) {
             setIsDiscountApplied(true);
             setDiscountError("");
         } else {
@@ -238,12 +242,20 @@ export default function InvestmentPage() {
     };
 
     const getPrice = (originalPrice: string) => {
-        if (!isDiscountApplied || originalPrice === "CUSTOM" || originalPrice.includes("+")) return originalPrice;
+        if (!isDiscountApplied || originalPrice === "CUSTOM" || originalPrice.includes("+")) return formatPrice(originalPrice);
         const numericPart = originalPrice.replace(/[^\d]/g, "");
         const numPrice = parseInt(numericPart, 10);
-        if (isNaN(numPrice)) return originalPrice;
-        const discounted = Math.round(numPrice * 0.9);
-        return `$${discounted}`;
+        if (isNaN(numPrice)) return formatPrice(originalPrice);
+        
+        const discountFactor = discountCode.trim().toUpperCase().startsWith("MOW20") ? 0.8 : 0.9;
+        const discounted = Math.round(numPrice * discountFactor);
+        
+        let suffix = "";
+        if (originalPrice.toLowerCase().includes("/mo")) {
+            suffix = "/mo";
+        }
+        
+        return formatPrice(`$${discounted}${suffix}`);
     };
 
     const handleCareSubscribe = (plan: Plan) => {
@@ -359,7 +371,7 @@ export default function InvestmentPage() {
                                     exit={{ opacity: 0, y: -10 }}
                                     className="flex items-center gap-3"
                                 >
-                                    <span className="line-through text-muted-foreground/30 text-xl sm:text-2xl">{plan.price}</span>
+                                    <span className="line-through text-muted-foreground/30 text-xl sm:text-2xl">{formatPrice(plan.price)}</span>
                                     <span className="text-primary">{getPrice(plan.price)}</span>
                                 </motion.div>
                             ) : (
@@ -370,7 +382,7 @@ export default function InvestmentPage() {
                                     exit={{ opacity: 0 }}
                                     className={cn(plan.price === "COMING SOON" && "text-base sm:text-lg text-primary/70 tracking-[0.2em]")}
                                 >
-                                    {plan.price}
+                                    {formatPrice(plan.price)}
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -437,6 +449,43 @@ export default function InvestmentPage() {
                                 Custom Payment
                                 <ArrowRight className="w-4 h-4 animate-pulse" />
                             </Link>
+
+                            <div className="relative hidden md:block">
+                                <button
+                                    onClick={() => setCurrencyOpen(!currencyOpen)}
+                                    className="p-5 rounded-full bg-primary/10 border border-primary/20 text-primary hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg flex items-center gap-1 font-bold text-sm tracking-widest font-mono group"
+                                    aria-label="Change Currency"
+                                >
+                                    <span>{currency}</span>
+                                    <Globe className="w-4 h-4 transition-transform group-hover:rotate-45" />
+                                </button>
+                                <AnimatePresence>
+                                    {currencyOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            className="absolute right-0 mt-3 py-2 w-32 bg-background/95 backdrop-blur-md border border-primary/20 rounded-2xl shadow-xl z-50 flex flex-col overflow-hidden"
+                                        >
+                                            {(["USD", "INR", "EUR", "GBP"] as CurrencyType[]).map((cur) => (
+                                                <button
+                                                    key={cur}
+                                                    onClick={() => {
+                                                        setCurrency(cur);
+                                                        setCurrencyOpen(false);
+                                                    }}
+                                                    className={cn(
+                                                        "px-4 py-2.5 text-xs font-bold text-left hover:bg-primary hover:text-primary-foreground transition-colors font-mono uppercase tracking-wider",
+                                                        currency === cur ? "text-primary bg-primary/10" : "text-foreground/80"
+                                                    )}
+                                                >
+                                                    {cur}
+                                                </button>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
 
                             <Link href="?modal=purchases" scroll={false} className="hidden md:block">
                                 <div className="p-5 rounded-full bg-primary/10 border border-primary/20 text-primary hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg group">

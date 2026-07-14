@@ -33,7 +33,7 @@ export default function ReferralPage() {
         setStatus("submitting");
 
         // DRAFTING THE MESSAGE (Mock logic for the agent's task)
-        const referralCode = `MOW10-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+        const referralCode = `MOW20-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
         const draftMessage = `
             From: info@mowglai.com
             To: ${friendData.email}
@@ -42,7 +42,7 @@ export default function ReferralPage() {
             Hey ${friendData.name},
             Your friend ${userData.name} thinks you'd love Mowglai!
             We build digital experiences that perform, inspire, and grow.
-            Use this referral code: ${referralCode} to get 10% OFF your first project.
+            Use this referral code: ${referralCode} to get 20% OFF your first project.
             Let's build something extraordinary together.
 
             Cheers,
@@ -89,7 +89,7 @@ export default function ReferralPage() {
                             {/* Left Column - Value Prop */}
                             <div className="space-y-10 md:space-y-12">
                                 <p className="text-2xl md:text-4xl font-light text-foreground/80 max-w-lg leading-tight md:leading-snug">
-                                    Invite your network to the tribe. Getting <span className="text-primary font-bold">10% COMMISSION</span> has never been this elegant.
+                                    Invite your network to the tribe. Getting <span className="text-primary font-bold">20% COMMISSION</span> has never been this elegant.
                                 </p>
 
                                 <div className="space-y-8 md:space-y-10 text-muted-foreground">
@@ -108,7 +108,7 @@ export default function ReferralPage() {
                                         </li>
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">3</div>
-                                            <span className="text-foreground/70 leading-relaxed">Your friend will get 5% off for his purchase and you will get 5% as real cash in their bank account or as gift card(the cash will be transferred after handing over the final product to the client).</span>
+                                            <span className="text-foreground/70 leading-relaxed">Your friend will get 10% off for their purchase and you will get 10% as real cash in your bank account or as gift card (the cash will be transferred after handing over the final product to the client, totaling 20% in campaign value).</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -151,8 +151,8 @@ export default function ReferralPage() {
 
                                                     Your friend {userData.name} has shared a secret from the Mowglai Tribe.
 
-                                                    We've reserved a spot for your next project at **10% OFF**.
-                                                    Your unique access code is: **MOW10-DISCOUNT**
+                                                    We've reserved a spot for your next project at **20% OFF**.
+                                                    Your unique access code is: **MOW20-DISCOUNT**
 
                                                     Let's evolve your brand together.
                                                 </p>
@@ -163,7 +163,7 @@ export default function ReferralPage() {
                                             <Button
                                                 onClick={() => {
                                                     const subject = encodeURIComponent(`${userData.name} has a gift for you!`);
-                                                    const body = encodeURIComponent(`Hey ${friendData.name},\n\nYour friend ${userData.name} thinks you'd love Mowglai! We build digital experiences that perform, inspire, and grow.\n\nUse this referral code: MOW10-DISCOUNT to get 10% OFF your first project.\n\nLet's build something extraordinary together.\n\nCheers,\nThe Mowglai Team`);
+                                                    const body = encodeURIComponent(`Hey ${friendData.name},\n\nYour friend ${userData.name} thinks you'd love Mowglai! We build digital experiences that perform, inspire, and grow.\n\nUse this referral code: MOW20-DISCOUNT to get 20% OFF your first project.\n\nLet's build something extraordinary together.\n\nCheers,\nThe Mowglai Team`);
                                                     window.location.href = `mailto:${encodeURIComponent(friendData.email)}?subject=${subject}&body=${body}`;
                                                 }}
                                                 className="bg-primary text-primary-foreground hover:scale-105 active:scale-95 transition-all font-display font-bold px-10 py-7 rounded-full uppercase tracking-widest text-xs w-full shadow-[0_20px_40px_rgba(var(--primary-rgb),0.3)]"
@@ -268,7 +268,7 @@ export default function ReferralPage() {
                                             ) : (
                                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-1 md:gap-4 leading-[1.2] sm:leading-none py-1">
                                                     <span className="whitespace-nowrap opacity-80 sm:opacity-100">Grant Access to</span>
-                                                    <span className="whitespace-nowrap text-[12px] sm:text-xs md:text-lg">10% COMMISSION</span>
+                                                    <span className="whitespace-nowrap text-[12px] sm:text-xs md:text-lg">20% COMMISSION</span>
                                                     <Send className="hidden sm:block w-3 h-3 md:w-5 md:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                                 </div>
                                             )}

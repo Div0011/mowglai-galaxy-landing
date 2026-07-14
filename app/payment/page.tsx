@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, AlertCircle, CreditCard, QrCode, Copy, Check, Clock, Loader2, ArrowRight } from "lucide-react";
+import { CheckCircle2, AlertCircle, CreditCard, QrCode, Copy, Check, Clock, Loader2, ArrowRight, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useCurrency, CurrencyType } from "@/context/CurrencyContext";
 
 interface PlanPreset {
     name: string;
@@ -29,6 +30,7 @@ interface TransactionDetails {
 }
 
 export default function PaymentPage() {
+    const { currency, formatPrice, convertVal } = useCurrency();
     const [selectedPlan, setSelectedPlan] = useState<PlanPreset>(presets[0]);
     const [customAmount, setCustomAmount] = useState("");
     const [formData, setFormData] = useState({
@@ -100,7 +102,8 @@ export default function PaymentPage() {
     };
 
     const handleCopyUpi = () => {
-        navigator.clipboard.writeText(`${upiId}?amount=${activeAmount}`);
+        const inrAmount = Math.round(parseFloat(activeAmount) * 83);
+        navigator.clipboard.writeText(`${upiId}?amount=${inrAmount}`);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -125,10 +128,17 @@ export default function PaymentPage() {
 
         const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_MowglaiDummyKey";
 
+        const isINR = currency === "INR";
+        const finalAmount = isINR 
+            ? Math.round(parseFloat(activeAmount) * 83 * 100) // 83 INR per USD, in paise
+            : Math.round(parseFloat(activeAmount) * 100); // USD in cents
+        
+        const finalCurrency = isINR ? "INR" : "USD";
+
         const options = {
             key: keyId,
-            amount: parseFloat(activeAmount) * 100, // paise
-            currency: "USD",
+            amount: finalAmount,
+            currency: finalCurrency,
             name: "MOWGLAI DIGITAL",
             description: `${selectedPlan.name} - ${formData.purpose}`,
             image: "/mowglai-logo-light.png",
@@ -139,7 +149,7 @@ export default function PaymentPage() {
                 setTransactionDetails({
                     id: response.razorpay_payment_id,
                     method: "Razorpay Checkout Gateway",
-                    amount: `$${activeAmount}`,
+                    amount: isINR ? `₹${(finalAmount / 100).toLocaleString()}` : `$${activeAmount}`,
                     date: new Date().toLocaleString()
                 });
             },
@@ -271,7 +281,7 @@ export default function PaymentPage() {
                                                         {preset.name}
                                                     </span>
                                                     <span className="text-lg md:text-xl font-display font-black text-foreground mt-2">
-                                                        {preset.amount ? `$${preset.amount}` : "CUSTOM"}
+                                                        {preset.amount ? formatPrice(`$${preset.amount}`) : "CUSTOM"}
                                                     </span>
                                                 </button>
                                             ))}
@@ -293,6 +303,11 @@ export default function PaymentPage() {
                                                         onChange={(e) => setCustomAmount(e.target.value)}
                                                         className="bg-background/50 border-primary/30 focus:border-primary h-12 text-base"
                                                     />
+                                                    {customAmount && parseFloat(customAmount) > 0 && (
+                                                        <span className="text-xs font-mono text-primary mt-2 block">
+                                                            Equivalent to: {formatPrice(customAmount)}
+                                                        </span>
+                                                    )}
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
@@ -391,7 +406,12 @@ export default function PaymentPage() {
                                                         Pay with dynamic support for Cards, Netbanking, UPI, and wallets via Razorpay's secure checkout page.
                                                     </p>
                                                     <div className="mt-8 text-2xl font-display font-black text-primary">
-                                                        ${activeAmount || "0"} <span className="text-xs text-foreground/40 font-mono font-normal">USD</span>
+                                                        {formatPrice(activeAmount || "0")}
+                                                        {currency !== "USD" && (
+                                                            <div className="text-[10px] text-foreground/40 font-mono font-normal mt-1">
+                                                                (Base: ${activeAmount || "0"} USD)
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </motion.div>
                                             ) : (
@@ -426,6 +446,10 @@ export default function PaymentPage() {
                                                             {/* Random Matrix Dots */}
                                                             <path d="M35,10 h5 v5 h-5 z M45,5 h5 v5 h-5 z M55,10 h5 v5 h-5 z M65,5 h5 v5 h-5 z M35,20 h5 v5 h-5 z M50,20 h5 v5 h-5 z M60,25 h5 v5 h-5 z M30,30 h5 v5 h-5 z M40,35 h5 v5 h-5 z M55,30 h5 v5 h-5 z M70,30 h5 v5 h-5 z M10,35 h5 v5 h-5 z M20,40 h5 v5 h-5 z M45,45 h5 v5 h-5 z M60,40 h5 v5 h-5 z M75,45 h5 v5 h-5 z M15,50 h5 v5 h-5 z M30,55 h5 v5 h-5 z M50,55 h5 v5 h-5 z M65,50 h5 v5 h-5 z M85,55 h5 v5 h-5 z M5,60 h5 v5 h-5 z M25,60 h5 v5 h-5 z M40,65 h5 v5 h-5 z M55,60 h5 v5 h-5 z M70,65 h5 v5 h-5 z M35,70 h5 v5 h-5 z M45,75 h5 v5 h-5 z M65,75 h5 v5 h-5 z M80,70 h5 v5 h-5 z M30,85 h5 v5 h-5 z M50,80 h5 v5 h-5 z M60,85 h5 v5 h-5 z M75,80 h5 v5 h-5 z M40,90 h5 v5 h-5 z M55,95 h5 v5 h-5 z M70,90 h5 v5 h-5 z M85,95 h5 v5 h-5 z" fill="currentColor" />
                                                         </svg>
+                                                    </div>
+
+                                                    <div className="mt-4 text-xl font-display font-black text-primary">
+                                                         ₹{Math.round(parseFloat(activeAmount || "0") * 83).toLocaleString()} <span className="text-[10px] text-foreground/40 font-mono font-normal">INR</span>
                                                     </div>
 
                                                     {/* Copy UPI Row */}

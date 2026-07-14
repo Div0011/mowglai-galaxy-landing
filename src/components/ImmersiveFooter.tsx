@@ -17,9 +17,9 @@ const navLinks = [
 ];
 
 const socialLinks = [
-    { icon: Instagram, href: "https://www.instagram.com/mowglai.in",              label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/mowglai",              label: "Instagram" },
     { icon: XLogo,     href: "https://x.com/mowglai_in",                          label: "X" },
-    { icon: Linkedin,  href: "https://www.linkedin.com/in/mowglai-in-47b3103a6/", label: "LinkedIn" },
+    { icon: Linkedin,  href: "https://www.linkedin.com/company/mowglai", label: "LinkedIn" },
 ];
 
 function pseudo(seed: number): number {
@@ -78,21 +78,21 @@ export default function ImmersiveFooter() {
         const nearHill: number[] = [];
 
         // Far peaks
-        let farY = Math.round(rows * 0.58);
+        let farY = Math.round(rows * 0.40);
         for (let c = 0; c < maxCols; c++) {
             farY += Math.sin(c * 0.05) * 0.5 + (pseudo(c * 2.3) - 0.5) * 0.4;
             farMtn.push(Math.round(farY));
         }
 
         // Mid peaks
-        let midY = Math.round(rows * 0.68);
+        let midY = Math.round(rows * 0.52);
         for (let c = 0; c < maxCols; c++) {
             midY += Math.sin(c * 0.08 + 2.0) * 0.6 + (pseudo(c * 4.7) - 0.5) * 0.6;
             midMtn.push(Math.round(midY));
         }
 
         // Near hills
-        let nearY = Math.round(rows * 0.80);
+        let nearY = Math.round(rows * 0.65);
         for (let c = 0; c < maxCols; c++) {
             nearY += Math.cos(c * 0.06 + 4.0) * 0.4 + (pseudo(c * 1.9) - 0.5) * 0.2;
             nearHill.push(Math.round(nearY));
@@ -242,7 +242,7 @@ export default function ImmersiveFooter() {
             drawBird(bird2X, bird2Y);
 
             // ── Far Mountains (50% Dither) ───────────────────────────────────
-            const skyR = Math.round(rows * 0.70);
+            const skyR = Math.round(rows * 0.55);
             for (let c = 0; c < cols && c < farMtn.length; c++) {
                 const top = farMtn[c];
                 for (let r = top; r < skyR; r++) {
@@ -254,7 +254,7 @@ export default function ImmersiveFooter() {
             }
 
             // ── Mid Mountains (75% Dither & Outline) ─────────────────────────
-            const midBase = Math.round(rows * 0.76);
+            const midBase = Math.round(rows * 0.65);
             for (let c = 0; c < cols && c < midMtn.length; c++) {
                 const top = midMtn[c];
                 ctx.fillStyle = pixelColor;
@@ -267,7 +267,7 @@ export default function ImmersiveFooter() {
             }
 
             // ── Near Hills (Solid Silhouettes) ───────────────────────────────
-            const nearBase = Math.round(rows * 0.85);
+            const nearBase = Math.round(rows * 0.75);
             for (let c = 0; c < cols && c < nearHill.length; c++) {
                 const top = nearHill[c];
                 ctx.fillStyle = pixelColor;

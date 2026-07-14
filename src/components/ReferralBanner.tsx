@@ -1,74 +1,57 @@
+"use client";
+
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReferralModal from "./ReferralModal";
 
 const ReferralBanner = () => {
-    const [status, setStatus] = React.useState<"idle" | "banner" | "exiting" | "button">("idle");
+    const [showButton, setShowButton] = React.useState(false);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
-    const hasTriggeredRef = React.useRef(false);
+    const scrollTriggered = React.useRef(false);
 
     React.useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 200 && !hasTriggeredRef.current) {
-                hasTriggeredRef.current = true;
-                setStatus("banner");
+            // Show persistently once scrolled down past the hero section (approx 600px)
+            if (window.scrollY > 600) {
+                if (!scrollTriggered.current) {
+                    scrollTriggered.current = true;
+                    setShowButton(true);
+                }
+            } else {
+                // If they scroll back to the top of the hero section, we can hide it or keep it.
+                // Keeping it once triggered or hiding it if they go back to top.
+                // Usually, letting it hide when scrolling back to the very top (above hero) is cleaner.
+                if (scrollTriggered.current) {
+                    scrollTriggered.current = false;
+                    setShowButton(false);
+                }
             }
         };
 
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
-
-    // Sequence Logic
-    React.useEffect(() => {
-        if (status === "banner") {
-            const timer = setTimeout(() => {
-                setStatus("exiting");
-            }, 2500); // Show for 2.5s
-            return () => clearTimeout(timer);
-        }
-        if (status === "exiting") {
-            const timer = setTimeout(() => {
-                setStatus("button");
-            }, 800); // Animation duration
-            return () => clearTimeout(timer);
-        }
-    }, [status]);
 
     return (
         <>
-            <AnimatePresence mode="wait">
-                {/* Initial Scrolling Banner */}
-                {status === "banner" && (
+            <AnimatePresence>
+                {showButton && (
                     <motion.div
-                        key="banner"
-                        initial={{ opacity: 0, x: "-50%", y: -50 }}
-                        animate={{ opacity: 1, x: "-50%", y: 0 }}
-                        exit={{ opacity: 0, x: "100vw", transition: { duration: 0.8, ease: "easeInOut" } }}
-                        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-                        className="fixed top-6 left-1/2 z-50 pointer-events-none"
-                        style={{ translateX: "-50%" }}
-                    >
-                        <div className="bg-primary/90 text-background px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs md:text-sm shadow-xl backdrop-blur-md border border-primary/20 whitespace-nowrap">
-                            Refer a client & get 10% COMMISSION!
-                        </div>
-                    </motion.div>
-                )}
-
-                {/* Persistent Button (appears after banner leaves) */}
-                {status === "button" && (
-                    <motion.div
-                        key="button"
-                        initial={{ opacity: 0, y: -20, x: "-50%" }}
-                        animate={{ opacity: 1, y: 0, x: "-50%" }}
-                        className="fixed top-6 left-1/2 z-50"
-                        style={{ translateX: "-50%" }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="fixed left-0 top-[40%] z-50 flex items-center justify-center pointer-events-auto"
                     >
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="bg-primary text-primary-foreground px-6 py-2 rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)] hover:scale-105 active:scale-95 transition-all duration-300 border border-primary/20 animate-pulse"
+                            className="[writing-mode:vertical-lr] rotate-180 bg-primary text-primary-foreground px-2 py-4 md:px-2.5 md:py-5 rounded-l-xl font-mono font-bold uppercase tracking-widest text-[9px] md:text-[10px] shadow-[-4px_0_15px_rgba(var(--primary-rgb),0.3)] hover:bg-primary/95 transition-all duration-300 border-y border-l border-primary/20 flex items-center gap-2 whitespace-nowrap cursor-pointer"
                         >
-                            CLICK HERE TO REFER
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground animate-ping shrink-0" />
+                            REFER & EARN 20%
                         </button>
                     </motion.div>
                 )}
