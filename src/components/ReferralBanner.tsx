@@ -48,7 +48,7 @@ const ReferralBanner = () => {
                     >
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="[writing-mode:vertical-lr] rotate-180 bg-primary text-primary-foreground pl-1.5 pr-0.5 py-3 md:px-2.5 md:py-5 rounded-l-xl font-mono font-bold uppercase tracking-widest text-[9px] md:text-[10px] shadow-[-4px_0_15px_rgba(var(--primary-rgb),0.3)] hover:bg-primary/95 transition-all duration-300 border-y border-l border-primary/20 flex items-center gap-1.5 md:gap-2 whitespace-nowrap cursor-pointer"
+                            className="[writing-mode:vertical-lr] rotate-180 bg-primary text-primary-foreground pl-[4px] pr-[1px] py-3 md:px-2.5 md:py-5 rounded-l-xl font-mono font-bold uppercase tracking-widest text-[10px] shadow-[-4px_0_15px_rgba(var(--primary-rgb),0.3)] hover:bg-primary/95 transition-all duration-300 border-y border-l border-primary/20 flex items-center gap-1.5 md:gap-2 whitespace-nowrap cursor-pointer"
                         >
                             <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground animate-ping shrink-0 hidden md:inline-block" />
                             REFER & EARN 20%
