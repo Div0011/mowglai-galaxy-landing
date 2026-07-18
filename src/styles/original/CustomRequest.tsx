@@ -104,24 +104,10 @@ export default function OriginalCustomRequest() {
             });
             router.push("/");
         } else {
-            console.warn("Server sending failed, falling back to mailto");
-            const body = `
-Project Details:
-----------------
-Plan Selected: ${plan.name} (${plan.price})
-Company: ${formData.companyName}
-Contact Name: ${formData.name}
-Email: ${formData.email}
-Target Start Date: ${formData.startDate || "Flexible"}
-
-Vision / Work Plan:
-${formData.workPlan}
-            `;
-            window.location.href = `mailto:info@mowglai.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
             toast({
-                title: "Opening Email Client",
-                description: "Server unreachable. Please send via your email client.",
+                title: "Submission Status",
+                description: result.message || "Failed to submit request. Please try again.",
+                variant: "destructive",
             });
         }
     };

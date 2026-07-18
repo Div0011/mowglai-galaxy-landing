@@ -17,9 +17,9 @@ const JungleBackground = () => {
                 {/* Global Noise Overlay for texture consistency */}
                 <div className="absolute inset-0 noise-overlay opacity-20 pointer-events-none" />
 
-                {/* Dappled light effects - Subtle pulses */}
-                <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-white/5 dark:bg-green-900/10 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] bg-[#D4AF37]/5 dark:bg-emerald-900/5 rounded-full blur-[150px] animate-bounce-slow" />
+                {/* Dappled light effects - Mobile optimized GPU pulses */}
+                <div className="absolute top-0 left-1/4 w-[320px] sm:w-[500px] md:w-[800px] h-[320px] sm:h-[500px] md:h-[800px] bg-white/5 dark:bg-green-900/10 rounded-full blur-2xl md:blur-[120px] animate-pulse transform-gpu" />
+                <div className="absolute bottom-1/4 right-1/4 w-[300px] sm:w-[450px] md:w-[700px] h-[300px] sm:h-[450px] md:h-[700px] bg-[#D4AF37]/5 dark:bg-emerald-900/5 rounded-full blur-3xl md:blur-[150px] animate-bounce-slow transform-gpu" />
 
                 {/* Vignette for depth - Stronger in dark mode */}
                 <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle,transparent_50%,rgba(0,0,0,0.05)_100%)] dark:bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.3)_100%)] pointer-events-none" />

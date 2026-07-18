@@ -96,21 +96,10 @@ const ContactSection = () => {
         preferredContactMethod: "",
       });
     } else {
-      const body = `
-Name: ${formData.name}
-Email: ${formData.email}
-Phone Country Code: ${formData.phoneCountryCode || "Not provided"}
-Phone Number: ${formData.phoneNumber || "Not provided"}
-Social Media: ${formData.socialMedia || "Not provided"}
-Preferred Contact Method: ${formData.preferredContactMethod || "Not provided"}
-
-Message:
-${formData.message}
-        `;
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       toast({
-        title: "Opening Email Client",
-        description: "Server unreachable. Please check your email client.",
+        title: "Submission Status",
+        description: result.message || "Something went wrong. Please try again later.",
+        variant: "destructive",
       });
     }
 

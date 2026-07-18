@@ -12,8 +12,12 @@ import { cn } from "@/lib/utils";
 
 import PageLayout from "@/components/PageLayout";
 
+import { sendEmail } from "@/utils/emailSender";
+import { useToast } from "@/hooks/use-toast";
+
 export default function ReferralPage() {
     const router = useRouter();
+    const { toast } = useToast();
     const { resolvedTheme } = useTheme();
     const isDark = resolvedTheme === "dark";
     const [status, setStatus] = useState<"form" | "submitting" | "success">("form");
@@ -32,28 +36,34 @@ export default function ReferralPage() {
         e.preventDefault();
         setStatus("submitting");
 
-        // DRAFTING THE MESSAGE (Mock logic for the agent's task)
         const referralCode = `MOW20-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-        const draftMessage = `
-            From: info@mowglai.com
-            To: ${friendData.email}
-            Subject: ${userData.name} has a gift for you!
 
-            Hey ${friendData.name},
-            Your friend ${userData.name} thinks you'd love Mowglai!
-            We build digital experiences that perform, inspire, and grow.
-            Use this referral code: ${referralCode} to get 20% OFF your first project.
-            Let's build something extraordinary together.
+        const result = await sendEmail({
+            subject: `New Referral Program Sign-Up from ${userData.name}`,
+            service_type: "Referral Program Sign-Up",
+            sender_name: userData.name,
+            email: userData.email,
+            friend_name: friendData.name,
+            friend_email: friendData.email,
+            friend_phone: friendData.phone,
+            referral_code: referralCode,
+            message: `Referral submitted on mowglai.com/referral.\n\nSender: ${userData.name} (${userData.email})\nFriend Invited: ${friendData.name} (${friendData.email}, WhatsApp: ${friendData.phone})\nIssued Discount Code: ${referralCode}`
+        });
 
-            Cheers,
-            The Mowglai Team
-        `;
-        console.log("Referral Sent from info@mowglai.com:", draftMessage);
-
-        // Simulate sending
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        setStatus("success");
+        if (result.status === "success" || result.message.includes("Local Testing")) {
+            setStatus("success");
+            toast({
+                title: "Referral Saved & Dispatched",
+                description: "Details have been stored and sent to Mowglai.",
+            });
+        } else {
+            setStatus("form");
+            toast({
+                title: "Submission Error",
+                description: result.message || "Failed to process referral. Please try again.",
+                variant: "destructive",
+            });
+        }
     };
 
     return (
@@ -160,15 +170,14 @@ export default function ReferralPage() {
                                         </div>
 
                                         <div className="flex flex-col gap-4 w-full">
-                                            <Button
+                                             <Button
                                                 onClick={() => {
-                                                    const subject = encodeURIComponent(`${userData.name} has a gift for you!`);
-                                                    const body = encodeURIComponent(`Hey ${friendData.name},\n\nYour friend ${userData.name} thinks you'd love Mowglai! We build digital experiences that perform, inspire, and grow.\n\nUse this referral code: MOW20-DISCOUNT to get 20% OFF your first project.\n\nLet's build something extraordinary together.\n\nCheers,\nThe Mowglai Team`);
-                                                    window.location.href = `mailto:${encodeURIComponent(friendData.email)}?subject=${subject}&body=${body}`;
+                                                    setStatus("form");
+                                                    setFriendData({ name: "", email: "", phone: "" });
                                                 }}
                                                 className="bg-primary text-primary-foreground hover:scale-105 active:scale-95 transition-all font-display font-bold px-10 py-7 rounded-full uppercase tracking-widest text-xs w-full shadow-[0_20px_40px_rgba(var(--primary-rgb),0.3)]"
                                             >
-                                                Launch Email Client
+                                                Refer Another Friend
                                             </Button>
 
                                             <Button

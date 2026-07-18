@@ -51,13 +51,22 @@ const HeroSection = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Scroll listener to keep slideshows static during scroll
+    // Scroll listener to keep slideshows static during scroll (throttled with rAF for 60fps mobile performance)
     useEffect(() => {
+        let rAF = 0;
         const handleScroll = () => {
-            setScrollY(window.scrollY);
+            if (!rAF) {
+                rAF = requestAnimationFrame(() => {
+                    setScrollY(window.scrollY);
+                    rAF = 0;
+                });
+            }
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            if (rAF) cancelAnimationFrame(rAF);
+        };
     }, []);
 
     const fontStyles = [

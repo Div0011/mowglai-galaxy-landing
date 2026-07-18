@@ -105,19 +105,17 @@ export default function ServiceRequestForm({
                 });
                 router.push("/");
             } else {
-                throw new Error("API Error");
+                toast({
+                    title: "Submission Status",
+                    description: result.message || "Failed to send request. Please try again.",
+                    variant: "destructive",
+                });
             }
         } catch (error) {
-            console.warn("Server sending failed, falling back to mailto");
-            const body = Object.entries(formData)
-                .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(", ") : value}`)
-                .join("\n");
-
-            window.location.href = `mailto:info@mowglai.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
             toast({
-                title: "Opening Email Client",
-                description: "Server unreachable. Please send via your email client.",
+                title: "Submission Error",
+                description: "An unexpected error occurred. Please try again later.",
+                variant: "destructive",
             });
         } finally {
             setIsSubmitting(false);

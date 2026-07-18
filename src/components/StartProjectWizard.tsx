@@ -6,7 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Send, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { sendEmail } from "@/utils/emailSender";
+import { useToast } from "@/hooks/use-toast";
+
 const StartProjectWizard = () => {
+    const { toast } = useToast();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         idea: "",
@@ -48,10 +52,28 @@ const StartProjectWizard = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const result = await sendEmail({
+            subject: `New Project Blueprint from ${formData.name || formData.company || 'Client'}`,
+            service_type: "Project Blueprint Wizard",
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            timeline: formData.timeline,
+            project_idea: formData.idea,
+        });
+
         setIsSubmitting(false);
-        setIsSuccess(true);
+
+        if (result.status === "success" || result.message.includes("Local Testing")) {
+            setIsSuccess(true);
+        } else {
+            toast({
+                title: "Submission Status",
+                description: result.message || "Failed to submit project blueprint. Please try again.",
+                variant: "destructive",
+            });
+        }
     };
 
     if (isSuccess) {

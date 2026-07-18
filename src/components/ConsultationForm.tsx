@@ -8,11 +8,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Send, Loader2 } from "lucide-react";
 import NextPageButton from "@/components/NextPageButton";
 
+import { sendEmail } from "@/utils/emailSender";
+import { useToast } from "@/hooks/use-toast";
+
 interface ConsultationFormProps {
     className?: string;
 }
 
 export default function ConsultationForm({ className }: ConsultationFormProps) {
+    const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -30,12 +34,28 @@ export default function ConsultationForm({ className }: ConsultationFormProps) {
         e.preventDefault();
         setIsSubmitting(true);
 
-        setTimeout(() => {
-            setIsSubmitting(false);
+        const result = await sendEmail({
+            subject: `New Consultation Request from ${formData.name}`,
+            service_type: "Consultation Request",
+            name: formData.name,
+            email: formData.email,
+            contact_number: formData.contactNumber,
+            message: formData.message,
+        });
+
+        setIsSubmitting(false);
+
+        if (result.status === "success" || result.message.includes("Local Testing")) {
             setSubmitted(true);
-            setTimeout(() => setSubmitted(false), 3000);
+            setTimeout(() => setSubmitted(false), 5000);
             setFormData({ name: "", email: "", contactNumber: "", message: "" });
-        }, 1000);
+        } else {
+            toast({
+                title: "Submission Status",
+                description: result.message || "Failed to submit request. Please try again.",
+                variant: "destructive",
+            });
+        }
     };
 
     return (

@@ -69,26 +69,17 @@ export default function CustomQuotePage() {
                 });
                 router.push("/");
             } else {
-                throw new Error("API Error");
+                toast({
+                    title: "Submission Status",
+                    description: result.message || "Failed to send quote request. Please try again.",
+                    variant: "destructive",
+                });
             }
         } catch (error) {
-            console.warn("Server sending failed, falling back to mailto");
-            const body = `
-Name: ${formData.name}
-Email: ${formData.email}
-Company: ${formData.company}
-Budget: ${formData.budget}
-Timeline: ${formData.timeline}
-
-Project Description:
-${formData.projectDescription}
-            `;
-
-            window.location.href = `mailto:divyanshawasthi@mowglai.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
             toast({
-                title: "Opening Email Client",
-                description: "Server unreachable. Please send via your email client.",
+                title: "Submission Error",
+                description: "An unexpected error occurred. Please try again later.",
+                variant: "destructive",
             });
         } finally {
             setIsSubmitting(false);

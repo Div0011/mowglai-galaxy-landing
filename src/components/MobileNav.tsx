@@ -1,4 +1,4 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart, Globe } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart, Globe, Gift } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -14,6 +14,7 @@ const navItems = [
     { icon: Palette, label: "SERVICES", href: "/services" },
     { icon: LayoutGrid, label: "TEMPLATES", href: "/explore" },
     { icon: DollarSign, label: "PRICING", href: "/investment" },
+    { icon: Gift, label: "REFER & EARN", href: "/referral" },
     { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
