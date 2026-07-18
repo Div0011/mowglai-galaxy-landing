@@ -197,12 +197,13 @@ export async function POST(req: Request) {
             message: "Your details have been submitted and emailed to info@mowglai.com instantly!",
             smtpResponse: smtpResult,
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("API send-email error:", error);
+        const errorMessage = error instanceof Error ? error.message : "Failed to deliver email via Hostinger SMTP.";
         return NextResponse.json(
             {
                 status: "error",
-                message: error.message || "Failed to deliver email via Hostinger SMTP.",
+                message: errorMessage,
             },
             { status: 500 }
         );
