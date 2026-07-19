@@ -62,3 +62,4 @@ jobs:
           remote_user: ${{ secrets.SSH_USERNAME }}
           remote_port: ${{ secrets.SSH_PORT }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rsh: "ssh -p ${{ secrets.SSH_PORT }} -o ConnectTimeout=60 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=no"
