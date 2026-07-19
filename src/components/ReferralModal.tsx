@@ -35,11 +35,12 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
         setError("");
 
         const result = await sendEmail({
-            subject: "New Referral Registration — mowglai.com",
+            subject: "Special 10-20% Discount Request — mowglai.com",
             email: formData.email,
-            name: "Referral Sign-Up",
+            name: "Discount Request Visitor",
             phone_number: formData.phone,
-            message: `Someone registered for the referral programme.\n\nEmail: ${formData.email}\nMobile: ${formData.phone}`,
+            form_type: "discount_claim",
+            message: `User submitted form for 10-20% discount.\n\nEmail: ${formData.email}\nMobile: ${formData.phone}`,
         });
 
         setLoading(false);
@@ -94,10 +95,10 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                 </div>
                                 <div>
                                     <h2 className="font-display text-lg font-bold uppercase tracking-wider text-foreground leading-tight">
-                                        Refer & Earn
+                                        GET 10–20% DISCOUNT
                                     </h2>
                                     <p className="text-xs text-muted-foreground mt-0.5">
-                                        Earn 10% commission on every referral
+                                        Fill in your details to claim discount
                                     </p>
                                 </div>
                             </div>
@@ -127,7 +128,7 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                         className="space-y-5"
                                     >
                                         <p className="text-sm text-muted-foreground">
-                                            Enter your details and we'll get in touch with your referral code.
+                                            Anyone who fills their basic details below gets an exclusive <span className="text-primary font-bold">10-20% discount</span> on their web project.
                                         </p>
 
                                         {/* Email Field */}
@@ -154,7 +155,7 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                         {/* Phone Field */}
                                         <div className="space-y-1.5">
                                             <Label htmlFor="ref-phone" className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                                                Mobile Number
+                                                Mobile / WhatsApp Number
                                             </Label>
                                             <div className="relative">
                                                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
@@ -190,7 +191,7 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                                         Sending...
                                                     </span>
                                                 ) : (
-                                                    "Get My Referral Code"
+                                                    "CLAIM MY 10-20% DISCOUNT"
                                                 )}
                                             </Button>
                                             <button
@@ -216,10 +217,10 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                         </div>
                                         <div className="space-y-1">
                                             <h3 className="text-xl font-bold font-display uppercase tracking-widest text-foreground">
-                                                You&apos;re In!
+                                                Discount Unlocked!
                                             </h3>
                                             <p className="text-sm text-muted-foreground max-w-xs">
-                                                We&apos;ve received your details. Our team will reach out soon with your referral code.
+                                                We&apos;ve received your details. Our team will contact you shortly to apply your 10-20% discount.
                                             </p>
                                         </div>
                                         <div className="pt-2 w-full">

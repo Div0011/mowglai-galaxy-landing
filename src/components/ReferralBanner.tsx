@@ -73,11 +73,11 @@ const ReferralBanner = () => {
                     >
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            aria-label="Open Referral Program"
+                            aria-label="Claim 10-20% Discount"
                             className="[writing-mode:vertical-lr] rotate-180 bg-primary text-primary-foreground pl-[4px] pr-[2px] py-3 md:px-2.5 md:py-5 rounded-l-xl font-mono font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-[-4px_0_20px_rgba(var(--primary-rgb),0.4)] hover:bg-primary/95 transition-all duration-300 border-y border-l border-primary/30 flex items-center gap-1.5 md:gap-2 whitespace-nowrap cursor-pointer"
                         >
                             <span className="w-2 h-2 rounded-full bg-primary-foreground animate-ping shrink-0 inline-block" />
-                            REFER &amp; EARN 20%
+                            GET 10-20% DISCOUNT
                         </button>
                     </motion.div>
                 )}

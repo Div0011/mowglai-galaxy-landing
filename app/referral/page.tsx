@@ -91,7 +91,7 @@ export default function ReferralPage() {
                         {/* Header */}
                         <div className="mb-24 md:mb-24 relative">
                             <h1 className="text-[18vw] md:text-[10vw] font-display font-black text-foreground select-none relative z-10 leading-[1.4] md:leading-[0.85] tracking-tighter">
-                                REFER <br className="md:hidden" /> <span className="text-primary">&</span> EARN
+                                GET <br className="md:hidden" /> <span className="text-primary">10–20%</span> DISCOUNT
                             </h1>
                         </div>
 
@@ -99,7 +99,7 @@ export default function ReferralPage() {
                             {/* Left Column - Value Prop */}
                             <div className="space-y-10 md:space-y-12">
                                 <p className="text-2xl md:text-4xl font-light text-foreground/80 max-w-lg leading-tight md:leading-snug">
-                                    Invite your network to the tribe. Getting <span className="text-primary font-bold">20% COMMISSION</span> has never been this elegant.
+                                    Fill in your basic details to claim an exclusive <span className="text-primary font-bold">10–20% DISCOUNT</span> on your web project.
                                 </p>
 
                                 <div className="space-y-8 md:space-y-10 text-muted-foreground">
@@ -110,15 +110,15 @@ export default function ReferralPage() {
                                     <ul className="space-y-6 md:space-y-8 text-base md:text-lg">
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">1</div>
-                                            <span className="text-foreground/70 leading-relaxed">Share your details and your friend's contact information via the encrypted form.</span>
+                                            <span className="text-foreground/70 leading-relaxed">Enter your name, email, and WhatsApp/mobile number.</span>
                                         </li>
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">2</div>
-                                            <span className="text-foreground/70 leading-relaxed">Our system sends an exclusive invite from <span className="text-primary font-mono italic">info@mowglai.com</span> with our official branding.</span>
+                                            <span className="text-foreground/70 leading-relaxed">Your submission is instantly routed to <span className="text-primary font-mono italic">info@mowglai.com</span>.</span>
                                         </li>
                                         <li className="flex items-start gap-5">
                                             <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xs text-primary font-bold shrink-0 mt-0.5">3</div>
-                                            <span className="text-foreground/70 leading-relaxed">Your friend will get 10% off for their purchase and you will get 10% as real cash in your bank account or as gift card (the cash will be transferred after handing over the final product to the client, totaling 20% in campaign value).</span>
+                                            <span className="text-foreground/70 leading-relaxed">Our team will get in touch and apply a 10–20% discount code directly to your project quote.</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -144,40 +144,22 @@ export default function ReferralPage() {
 
                                         <div className="space-y-4">
                                             <h2 className="text-2xl md:text-3xl font-display font-black uppercase tracking-tight text-foreground">
-                                                Invitation Dispatched
+                                                Discount Unlocked
                                             </h2>
                                             <p className="text-base text-muted-foreground max-w-xs mx-auto leading-relaxed">
-                                                We've sent a premium **Mowglai Digital Evolution** invite to **{friendData.email}**.
+                                                We've received your details. Our team will reach out shortly to apply your 10–20% discount.
                                             </p>
-                                        </div>
-
-                                        <div className="p-6 bg-primary/5 rounded-2xl border border-primary/10 w-full text-left space-y-4">
-                                            <p className="text-[10px] uppercase tracking-widest text-primary font-black">Email Template Preview</p>
-                                            <div className="space-y-2 opacity-80">
-                                                <p className="text-sm font-bold text-foreground">Subject: Your Exclusive Invite to Digital Excellence</p>
-                                                <div className="h-px bg-primary/10 w-full" />
-                                                <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
-                                                    Hey {friendData.name},
-
-                                                    Your friend {userData.name} has shared a secret from the Mowglai Tribe.
-
-                                                    We've reserved a spot for your next project at **20% OFF**.
-                                                    Your unique access code is: **MOW20-DISCOUNT**
-
-                                                    Let's evolve your brand together.
-                                                </p>
-                                            </div>
                                         </div>
 
                                         <div className="flex flex-col gap-4 w-full">
                                              <Button
                                                 onClick={() => {
                                                     setStatus("form");
-                                                    setFriendData({ name: "", email: "", phone: "" });
+                                                    setUserData({ name: "", email: "" });
                                                 }}
                                                 className="bg-primary text-primary-foreground hover:scale-105 active:scale-95 transition-all font-display font-bold px-10 py-7 rounded-full uppercase tracking-widest text-xs w-full shadow-[0_20px_40px_rgba(var(--primary-rgb),0.3)]"
                                             >
-                                                Refer Another Friend
+                                                Submit Another Claim
                                             </Button>
 
                                             <Button
@@ -193,7 +175,7 @@ export default function ReferralPage() {
                                     <form onSubmit={handleSubmit} className="space-y-8 md:space-y-12 relative z-10">
                                         {/* Your Details */}
                                         <div className="space-y-4 md:space-y-6">
-                                            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-black text-primary/50">Sender Profile</p>
+                                            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-black text-primary/50">Your Basic Details</p>
                                             <div className="space-y-6 md:space-y-8">
                                                 <div className="group relative">
                                                     <Input
@@ -218,41 +200,11 @@ export default function ReferralPage() {
                                                     />
                                                     <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-focus-within:w-full" />
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Friend Details */}
-                                        <div className="space-y-4 md:space-y-6">
-                                            <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-black text-primary/50">Target Destination</p>
-                                            <div className="space-y-6 md:space-y-8">
-                                                <div className="group relative">
-                                                    <Input
-                                                        name="name"
-                                                        required
-                                                        placeholder="Friend's Name"
-                                                        value={friendData.name}
-                                                        onChange={handleFriendChange}
-                                                        className="bg-transparent border-0 border-b-2 border-primary/10 rounded-none px-0 py-4 text-sm sm:text-lg md:text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/20 placeholder:text-xs sm:placeholder:text-lg transition-all font-display font-bold"
-                                                    />
-                                                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-focus-within:w-full" />
-                                                </div>
-                                                <div className="group relative">
-                                                    <Input
-                                                        name="email"
-                                                        type="email"
-                                                        required
-                                                        placeholder="Friend's Email Address"
-                                                        value={friendData.email}
-                                                        onChange={handleFriendChange}
-                                                        className="bg-transparent border-0 border-b-2 border-primary/10 rounded-none px-0 py-4 text-sm sm:text-lg md:text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/20 placeholder:text-xs sm:placeholder:text-lg transition-all font-display font-bold"
-                                                    />
-                                                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-focus-within:w-full" />
-                                                </div>
                                                 <div className="group relative">
                                                     <Input
                                                         name="phone"
                                                         required
-                                                        placeholder="Friend's Phone (WhatsApp)"
+                                                        placeholder="Mobile / WhatsApp Number"
                                                         value={friendData.phone}
                                                         onChange={handleFriendChange}
                                                         className="bg-transparent border-0 border-b-2 border-primary/10 rounded-none px-0 py-4 text-sm sm:text-lg md:text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/20 placeholder:text-xs sm:placeholder:text-lg transition-all font-display font-bold"
@@ -272,12 +224,11 @@ export default function ReferralPage() {
                                                     animate={{ opacity: [0.5, 1, 0.5] }}
                                                     transition={{ repeat: Infinity, duration: 1 }}
                                                 >
-                                                    Processing Invitation...
+                                                    Submitting Details...
                                                 </motion.span>
                                             ) : (
-                                                <div className="flex flex-col sm:flex-row items-center justify-center gap-1 md:gap-4 leading-[1.2] sm:leading-none py-1">
-                                                    <span className="whitespace-nowrap opacity-80 sm:opacity-100">Grant Access to</span>
-                                                    <span className="whitespace-nowrap text-[12px] sm:text-xs md:text-lg">20% COMMISSION</span>
+                                                <div className="flex items-center justify-center gap-2 md:gap-4 leading-[1.2] sm:leading-none py-1">
+                                                    <span className="whitespace-nowrap">CLAIM MY 10-20% DISCOUNT</span>
                                                     <Send className="hidden sm:block w-3 h-3 md:w-5 md:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                                 </div>
                                             )}
