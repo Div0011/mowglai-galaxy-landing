@@ -204,7 +204,7 @@ export default function ReferralPage() {
                                                     <Input
                                                         name="phone"
                                                         required
-                                                        placeholder="Mobile / WhatsApp Number"
+                                                        placeholder="Mobile / WhatsApp Number (+0 00000 0000)"
                                                         value={friendData.phone}
                                                         onChange={handleFriendChange}
                                                         className="bg-transparent border-0 border-b-2 border-primary/10 rounded-none px-0 py-4 text-sm sm:text-lg md:text-xl focus:border-primary focus:ring-0 placeholder:text-foreground/20 placeholder:text-xs sm:placeholder:text-lg transition-all font-display font-bold"

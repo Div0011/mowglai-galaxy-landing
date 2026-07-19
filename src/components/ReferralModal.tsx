@@ -163,7 +163,7 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                                     id="ref-phone"
                                                     name="phone"
                                                     type="tel"
-                                                    placeholder="+91 98765 43210"
+                                                    placeholder="+0 00000 0000"
                                                     className="pl-9 bg-primary/5 border-primary/15 focus:border-primary/50 transition-colors"
                                                     required
                                                     value={formData.phone}
