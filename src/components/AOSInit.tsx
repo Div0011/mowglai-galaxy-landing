@@ -21,12 +21,13 @@ export const AOSInit = () => {
                 return;
             }
 
+            const isMobile = window.innerWidth < 768;
             module.default.init({
-                duration: 600,
+                duration: isMobile ? 350 : 600,
                 easing: 'ease-out-cubic',
                 once: true,
                 mirror: false,
-                offset: 50,
+                offset: isMobile ? 15 : 50,
                 disableMutationObserver: false,
             });
         };

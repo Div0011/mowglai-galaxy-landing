@@ -23,14 +23,20 @@ const StartupGrowthSection = dynamic(() => import("@/components/StartupGrowthSec
 
 function MouseGlow() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isTouchDevice, setIsTouchDevice] = useState(true);
 
     useEffect(() => {
+        if (window.matchMedia("(pointer: fine)").matches) {
+            setIsTouchDevice(false);
+        }
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
         };
-        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, []);
+
+    if (isTouchDevice) return null;
 
     return (
         <motion.div
@@ -56,19 +62,27 @@ function MouseGlow() {
 }
 
 function AmbientParticles() {
+    const [particleCount, setParticleCount] = useState(3);
+
+    useEffect(() => {
+        if (window.innerWidth >= 768) {
+            setParticleCount(8);
+        }
+    }, []);
+
     return (
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-            {[...Array(8)].map((_, i) => (
+            {[...Array(particleCount)].map((_, i) => (
                 <motion.div
                     key={i}
-                    className="absolute w-1 h-1 rounded-full bg-primary/30"
+                    className="absolute w-1 h-1 rounded-full bg-primary/30 transform-gpu"
                     style={{
-                        left: `${10 + i * 12}%`,
+                        left: `${10 + i * 25}%`,
                         top: `${20 + (i % 3) * 25}%`,
                     }}
                     animate={{
-                        y: [0, -40, 0],
-                        x: [0, 20, 0],
+                        y: [0, -30, 0],
+                        x: [0, 15, 0],
                         opacity: [0.2, 0.6, 0.2],
                         scale: [0.8, 1.2, 0.8],
                     }}
@@ -95,11 +109,21 @@ function ScrollReveal({
     direction?: "up" | "down" | "left" | "right";
     className?: string;
 }) {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        if (window.innerWidth < 768) {
+            setIsMobile(true);
+        }
+    }, []);
+
+    const offset = isMobile ? 25 : 60;
+
     const directions = {
-        up: { y: 60, x: 0 },
-        down: { y: -60, x: 0 },
-        left: { y: 0, x: 60 },
-        right: { y: 0, x: -60 },
+        up: { y: offset, x: 0 },
+        down: { y: -offset, x: 0 },
+        left: { y: 0, x: offset },
+        right: { y: 0, x: -offset },
     };
 
     return (

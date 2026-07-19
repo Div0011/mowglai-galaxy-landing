@@ -201,6 +201,11 @@
 
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a, button, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
   }
 
   /* Apply custom cursor only on desktop devices */
@@ -218,6 +223,7 @@
     overflow-x: clip;
     width: 100%;
     min-height: 100dvh;
+    -webkit-overflow-scrolling: touch;
   }
 
   ::-webkit-scrollbar {
@@ -228,6 +234,19 @@
     @apply bg-background text-foreground font-body antialiased;
     position: relative;
     min-height: 100dvh;
+  }
+
+  /* Mobile Smoothness & GPU Compositing Optimization */
+  @media (max-width: 768px) {
+    section, article, .glass-card, [data-aos] {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+
+    * {
+      text-rendering: optimizeSpeed;
+    }
   }
 
   ::selection {
