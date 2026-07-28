@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +17,7 @@ interface ConsultationFormProps {
 }
 
 export default function ConsultationForm({ className }: ConsultationFormProps) {
+    const router = useRouter();
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
@@ -46,9 +48,9 @@ export default function ConsultationForm({ className }: ConsultationFormProps) {
         setIsSubmitting(false);
 
         if (result.status === "success" || result.message.includes("Local Testing")) {
-            setSubmitted(true);
-            setTimeout(() => setSubmitted(false), 5000);
+            const clientName = formData.name;
             setFormData({ name: "", email: "", contactNumber: "", message: "" });
+            router.push(`/thank-you?name=${encodeURIComponent(clientName)}&form=Website%20Consultation%20Form`);
         } else {
             toast({
                 title: "Submission Status",

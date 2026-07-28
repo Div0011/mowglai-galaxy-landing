@@ -98,11 +98,7 @@ export default function OriginalCustomRequest() {
         });
 
         if (result.status === 'success') {
-            toast({
-                title: ProjectRequest.success.title,
-                description: ProjectRequest.success.description,
-            });
-            router.push("/");
+            router.push(`/thank-you?name=${encodeURIComponent(formData.name)}&form=${encodeURIComponent(plan.name + " Plan Request")}`);
         } else {
             toast({
                 title: "Submission Status",

@@ -51,11 +51,7 @@ export default function ReferralPage() {
         });
 
         if (result.status === "success" || result.message.includes("Local Testing")) {
-            setStatus("success");
-            toast({
-                title: "Referral Saved & Dispatched",
-                description: "Details have been stored and sent to Mowglai.",
-            });
+            router.push(`/thank-you?name=${encodeURIComponent(userData.name)}&form=Referral%20Discount`);
         } else {
             setStatus("form");
             toast({

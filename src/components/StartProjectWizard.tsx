@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { ArrowLeft, ArrowRight, Check, Send, Sparkles } from "lucide-react";
@@ -10,6 +11,7 @@ import { sendEmail } from "@/utils/emailSender";
 import { useToast } from "@/hooks/use-toast";
 
 const StartProjectWizard = () => {
+    const router = useRouter();
     const { toast } = useToast();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -66,7 +68,7 @@ const StartProjectWizard = () => {
         setIsSubmitting(false);
 
         if (result.status === "success" || result.message.includes("Local Testing")) {
-            setIsSuccess(true);
+            router.push(`/thank-you?name=${encodeURIComponent(formData.name)}&form=Project%20Blueprint`);
         } else {
             toast({
                 title: "Submission Status",
@@ -185,7 +187,7 @@ const StartProjectWizard = () => {
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                         className="w-full bg-background/30 border border-white/10 rounded-xl p-4 text-lg focus:outline-none focus:border-primary/50 transition-all placeholder:text-white/20"
-                                        placeholder="John Doe"
+                                        placeholder="Your Name"
                                     />
                                 </div>
                                 <div className="space-y-2">

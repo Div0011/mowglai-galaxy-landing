@@ -63,11 +63,7 @@ export default function CustomQuotePage() {
             });
 
             if (result.status === 'success') {
-                toast({
-                    title: "Quote Request Sent",
-                    description: "We'll analyze your requirements and send a custom proposal soon.",
-                });
-                router.push("/");
+                router.push(`/thank-you?name=${encodeURIComponent(formData.name)}&form=Custom%20Quote`);
             } else {
                 toast({
                     title: "Submission Status",
@@ -178,7 +174,7 @@ export default function CustomQuotePage() {
                                             <Label className="text-xs uppercase tracking-widest text-primary/70 font-display">Full Name <span className="text-red-500">*</span></Label>
                                             <Input
                                                 required
-                                                placeholder="John Doe"
+                                                placeholder="Your Name"
                                                 className="bg-background/30 border-primary/20 h-12 text-lg"
                                                 value={formData.name}
                                                 onChange={(e) => handleInputChange("name", e.target.value)}
