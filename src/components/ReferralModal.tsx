@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Mail, Phone, Gift, CheckCircle2 } from "lucide-react";
+import { X, Mail, Phone, Gift, CheckCircle2, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,11 +15,13 @@ interface ReferralModalProps {
 }
 
 const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
+    const router = useRouter();
     const [step, setStep] = useState<"form" | "success">("form");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
+        name: "",
         email: "",
         phone: "",
     });
@@ -36,17 +39,19 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
 
         const result = await sendEmail({
             subject: "Special 10-20% Discount Request — mowglai.com",
+            name: formData.name,
             email: formData.email,
-            name: "Discount Request Visitor",
             phone_number: formData.phone,
             form_type: "discount_claim",
-            message: `User submitted form for 10-20% discount.\n\nEmail: ${formData.email}\nMobile: ${formData.phone}`,
+            message: `User submitted popup form for 10-20% discount.\n\nName: ${formData.name}\nEmail: ${formData.email}\nMobile: ${formData.phone}`,
         });
 
         setLoading(false);
 
         if (result.status === "success" || result.message.includes("Local Testing") || result.message.includes("fallback")) {
-            setStep("success");
+            const userName = formData.name;
+            handleClose();
+            router.push(`/thank-you?name=${encodeURIComponent(userName)}&form=Pop-up%20Discount%20Form`);
         } else {
             setError(result.message || "Submission error. Please try again later.");
         }
@@ -58,7 +63,7 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
         // Reset after animation
         setTimeout(() => {
             setStep("form");
-            setFormData({ email: "", phone: "" });
+            setFormData({ name: "", email: "", phone: "" });
             setError("");
         }, 400);
     };
@@ -130,6 +135,27 @@ const ReferralModal = ({ isOpen, onClose }: ReferralModalProps) => {
                                         <p className="text-sm text-muted-foreground">
                                             Anyone who fills their basic details below gets an exclusive <span className="text-primary font-bold">10-20% discount</span> on their web project.
                                         </p>
+
+                                        {/* Name Field */}
+                                        <div className="space-y-1.5">
+                                            <Label htmlFor="ref-name" className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                                                Full Name
+                                            </Label>
+                                            <div className="relative">
+                                                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                                                <Input
+                                                    id="ref-name"
+                                                    name="name"
+                                                    type="text"
+                                                    placeholder="Your Name"
+                                                    className="pl-9 bg-primary/5 border-primary/15 focus:border-primary/50 transition-colors"
+                                                    required
+                                                    value={formData.name}
+                                                    onChange={handleInputChange}
+                                                    autoComplete="name"
+                                                />
+                                            </div>
+                                        </div>
 
                                         {/* Email Field */}
                                         <div className="space-y-1.5">

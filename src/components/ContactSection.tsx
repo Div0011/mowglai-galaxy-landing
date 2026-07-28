@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Phone, MessageCircle } from "lucide-react";
 import TextReveal from "./TextReveal";
 import { Button } from "@/components/ui/button";
@@ -49,6 +50,7 @@ const COUNTRY_CODE_OPTIONS = [
 ];
 
 const ContactSection = () => {
+  const router = useRouter();
   const { toast } = useToast();
   const { t } = useLanguage();
   const { Contact } = t;
@@ -82,10 +84,7 @@ const ContactSection = () => {
     });
 
     if (result.status === 'success') {
-      toast({
-        title: "Message Sent!",
-        description: "We'll get back to you as soon as possible.",
-      });
+      const clientName = formData.name;
       setFormData({
         name: "",
         email: "",
@@ -95,6 +94,7 @@ const ContactSection = () => {
         socialMedia: "",
         preferredContactMethod: "",
       });
+      router.push(`/thank-you?name=${encodeURIComponent(clientName)}&form=Contact%20Form`);
     } else {
       toast({
         title: "Submission Status",

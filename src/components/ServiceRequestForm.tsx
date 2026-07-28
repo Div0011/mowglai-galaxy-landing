@@ -99,11 +99,8 @@ export default function ServiceRequestForm({
             const result = await sendEmail(emailData);
 
             if (result.status === 'success') {
-                toast({
-                    title: "Request Sent Successfully",
-                    description: "We will review your details and get back to you shortly.",
-                });
-                router.push("/");
+                const clientName = (formData.name as string) || (formData.contactName as string) || "";
+                router.push(`/thank-you?name=${encodeURIComponent(clientName)}&form=${encodeURIComponent(serviceName)}`);
             } else {
                 toast({
                     title: "Submission Status",
