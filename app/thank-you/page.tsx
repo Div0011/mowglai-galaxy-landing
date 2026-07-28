@@ -9,6 +9,12 @@ import { Button } from "@/components/ui/button";
 import JungleBackground from "@/components/JungleBackground";
 import MowglaiLogo from "@/components/MowglaiLogo";
 
+interface CustomWindow {
+    gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
+    dataLayer?: Record<string, unknown>[];
+}
+
 function ThankYouContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -31,33 +37,34 @@ function ThankYouContent() {
         // Fire Conversion Tracking Events for GA4, Google Ads, Meta Pixel & GTM
         try {
             if (typeof window !== "undefined") {
+                const win = window as unknown as CustomWindow;
+
                 // Google Analytics / Ads Gtag Conversion Event
-                if (typeof (window as unknown as { gtag?: Function }).gtag === "function") {
-                    (window as unknown as { gtag: Function }).gtag("event", "conversion", {
+                if (typeof win.gtag === "function") {
+                    win.gtag("event", "conversion", {
                         send_to: "AW-CONVERSION_ID/conversion_label",
                         event_category: "Lead Submission",
                         event_label: formName,
                         value: 1.0,
                         currency: "USD",
                     });
-                    (window as unknown as { gtag: Function }).gtag("event", "generate_lead", {
+                    win.gtag("event", "generate_lead", {
                         form_name: formName,
                         user_name: name || "Anonymous",
                     });
                 }
 
                 // Meta / Facebook Pixel Lead Event
-                if (typeof (window as unknown as { fbq?: Function }).fbq === "function") {
-                    (window as unknown as { fbq: Function }).fbq("track", "Lead", {
+                if (typeof win.fbq === "function") {
+                    win.fbq("track", "Lead", {
                         content_name: formName,
                         status: "submitted",
                     });
                 }
 
                 // Google Tag Manager dataLayer push
-                const dataLayer = (window as unknown as { dataLayer?: Record<string, unknown>[] }).dataLayer;
-                if (Array.isArray(dataLayer)) {
-                    dataLayer.push({
+                if (Array.isArray(win.dataLayer)) {
+                    win.dataLayer.push({
                         event: "conversion_thank_you",
                         form_name: formName,
                         user_name: name || "Visitor",
