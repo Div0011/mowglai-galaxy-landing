@@ -1,4 +1,4 @@
-import { Home, Users, Mail, DollarSign, Palette, LayoutGrid, Menu, X, Instagram, Linkedin, ShoppingCart, Globe, Gift } from "lucide-react";
+import { Home, Users, Mail, DollarSign, Layers, LayoutTemplate, Menu, X, Instagram, Linkedin, ShoppingCart } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -11,10 +11,9 @@ import { useCurrency, CurrencyType } from "@/context/CurrencyContext";
 const navItems = [
     { icon: Home, label: "HOME", href: "/" },
     { icon: Users, label: "ABOUT", href: "/about" },
-    { icon: Palette, label: "SERVICES", href: "/services" },
-    { icon: LayoutGrid, label: "TEMPLATES", href: "/explore" },
+    { icon: Layers, label: "SERVICES", href: "/services" },
+    { icon: LayoutTemplate, label: "TEMPLATES", href: "/explore" },
     { icon: DollarSign, label: "PRICING", href: "/investment" },
-    { icon: Gift, label: "GET DISCOUNT", href: "/referral" },
     { icon: Mail, label: "CONTACT", href: "/contact" },
 ];
 
@@ -55,23 +54,24 @@ const MobileNav = () => {
             if (e.key === "Escape" && isOpen) setIsOpen(false);
         };
 
-        const handleClickOutside = (e: MouseEvent) => {
-            // Note: This logic changes slightly with full screen overlay.
-            // But if we have a transparent part or if user clicks the button...
-            // Actually, for full screen, usually the content covers everything.
-            // We'll rely on the close button and link clicks primarily.
-        };
-
         if (isOpen) {
             document.body.style.overflow = "hidden"; // Lock scroll
+            document.body.classList.add("menu-open");
         } else {
             document.body.style.overflow = "";
+            document.body.classList.remove("menu-open");
         }
+
+        const event = new CustomEvent("menuToggle", { detail: { isOpen } });
+        window.dispatchEvent(event);
 
         document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
             document.body.style.overflow = "";
+            document.body.classList.remove("menu-open");
+            const cleanupEvent = new CustomEvent("menuToggle", { detail: { isOpen: false } });
+            window.dispatchEvent(cleanupEvent);
         };
     }, [isOpen]);
 
