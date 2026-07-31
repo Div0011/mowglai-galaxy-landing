@@ -15,8 +15,20 @@ const SIDE_TAB_THRESHOLD = 150;
 const ReferralBanner = () => {
     const [showButton, setShowButton] = React.useState(false);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const modalTriggered = React.useRef(false);
     const scrollTriggered = React.useRef(false);
+
+    React.useEffect(() => {
+        const handleMenuToggle = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            setIsMenuOpen(customEvent?.detail?.isOpen ?? false);
+        };
+        window.addEventListener("menuToggle", handleMenuToggle);
+        return () => {
+            window.removeEventListener("menuToggle", handleMenuToggle);
+        };
+    }, []);
 
     React.useEffect(() => {
         let rAF = 0;
@@ -63,7 +75,7 @@ const ReferralBanner = () => {
     return (
         <>
             <AnimatePresence>
-                {showButton && (
+                {showButton && !isMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}

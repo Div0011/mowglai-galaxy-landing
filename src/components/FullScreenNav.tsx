@@ -37,6 +37,19 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
+        const event = new CustomEvent("menuToggle", { detail: { isOpen } });
+        window.dispatchEvent(event);
+        if (isOpen) {
+            document.body.classList.add("menu-open");
+        } else {
+            document.body.classList.remove("menu-open");
+        }
+        return () => {
+            document.body.classList.remove("menu-open");
+        };
+    }, [isOpen]);
+
+    useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 200);
         };

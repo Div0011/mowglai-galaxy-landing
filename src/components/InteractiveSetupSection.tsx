@@ -654,12 +654,15 @@ export default function InteractiveSetupSection() {
             </div>
 
             {/* Pricing Page Button between slideshow and Refer/Ready cards */}
-            <div className="relative z-20 -mt-8 mb-4">
+            <div className="relative z-20 -mt-8 mb-4 flex flex-col items-center">
                 <NextPageButton
                     href="/investment"
                     label="PRICING"
                     className="h-[120px] md:h-[140px]"
                 />
+                <span className="text-[10px] sm:text-xs md:text-sm font-display tracking-[0.25em] text-[#F5D061] font-black uppercase text-center select-none pointer-events-none mt-2 mb-4">
+                    WEBSITES STARTING AT 99 DOLLARS
+                </span>
             </div>
 
             <div className="container mx-auto px-6 max-w-6xl mt-10">
