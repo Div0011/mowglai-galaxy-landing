@@ -184,7 +184,7 @@ export default function TemplatesShowcase() {
 
                 <Link
                     href={`/explore/${activeItem.template.id}`}
-                    className="group/btn relative inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary overflow-hidden transition-all hover:text-primary-foreground"
+                    className="group/btn relative inline-flex items-center gap-1.5 sm:gap-2 rounded-xl border border-primary/30 bg-primary/10 px-3 py-2 sm:px-4 text-xs font-semibold uppercase tracking-[0.15em] sm:tracking-[0.18em] text-primary overflow-hidden transition-all hover:text-primary-foreground whitespace-nowrap shrink-0"
                 >
                     <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-yellow-400 to-green-600 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/btn:w-full" />
                     <span className="relative z-10">View Demo</span>

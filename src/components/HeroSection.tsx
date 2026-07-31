@@ -474,7 +474,7 @@ const HeroSection = () => {
             {/* Positioned side-by-side at bottom-8 on mobile, and vertically centered on desktop/laptop */}
             
             {/* Left Edge / Bottom Left: GET FREE AUDIT Circle */}
-            <div className="absolute bottom-12 left-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:left-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+            <div className="absolute bottom-8 left-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:left-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
                 <Magnetic>
                     <Link
                         href="/audit"
@@ -493,7 +493,7 @@ const HeroSection = () => {
             </div>
 
             {/* Right Edge / Bottom Right: START PROJECT Circle */}
-            <div className="absolute bottom-12 right-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:right-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000 flex flex-col items-center gap-2 sm:gap-3" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+            <div className="absolute bottom-8 right-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:right-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
                 <Magnetic>
                     <Link
                         href="/investment"
@@ -509,9 +509,6 @@ const HeroSection = () => {
                         </span>
                     </Link>
                 </Magnetic>
-                <span className="text-[7.5px] sm:text-[9px] md:text-[10px] font-mono tracking-widest text-[#F5D061] font-bold uppercase text-center select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    WEBSITES STARTING AT 99 DOLLARS
-                </span>
             </div>
 
         </section>
