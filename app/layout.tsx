@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import localFont from "next/font/local";
 import "../src/index.css";
 import { Providers } from "@/components/Providers";
@@ -132,6 +133,22 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`} suppressHydrationWarning>
+            <head>
+                {/* Google tag (gtag.js) */}
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=AW-17452438899"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-tag-aw-17452438899" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+
+                        gtag('config', 'AW-17452438899');
+                    `}
+                </Script>
+            </head>
             <body className="bg-background text-foreground antialiased min-h-dvh">
                 <LanguageProvider>
                     <noscript>
