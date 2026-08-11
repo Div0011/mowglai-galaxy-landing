@@ -51,13 +51,33 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 200);
+            // consider any scroll away from top as 'scrolled' so strips vanish
+            setScrolled(window.scrollY > 0);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const [isNarrow, setIsNarrow] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsNarrow(window.innerWidth < 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+
     const isLogoActive = isOpen || !scrolled;
+    // show strips when on hero (scrolled === false) or when menu is open
+    const showStrips = isOpen || !scrolled;
+
+    // Mirror strip visibility to a global class so CSS can manage transitions reliably
+    useEffect(() => {
+        const cls = 'mowglai-strips-visible';
+        if (showStrips) document.documentElement.classList.add(cls);
+        else document.documentElement.classList.remove(cls);
+        return () => { document.documentElement.classList.remove(cls); };
+    }, [showStrips]);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -71,6 +91,47 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
 
     return (
         <>
+            {/* Decorative marquee strips behind the top controls (menu & logo) */}
+            <div
+                className="fixed z-[59] pointer-events-none top-[calc(4.5rem+env(safe-area-inset-top))] md:top-[calc(2.3rem+env(safe-area-inset-top))] left-0 right-0 transition-all duration-500 mowglai-strip"
+            >
+                <div className="relative left-0 right-0 w-full h-[20px] md:h-[36px] overflow-hidden">
+                    {/* Darker gold background */}
+                    <div className="absolute inset-0" style={{ backgroundColor: 'rgba(212,175,55,0.8)' }} />
+                    {/* Top marquee: right-to-left continuous */}
+                    <div className="absolute inset-0 flex items-center pointer-events-none">
+                        <div className="min-w-[200%] whitespace-nowrap animate-marquee-hr-continuous flex gap-8">
+                            {Array.from({ length: 12 }).map((_, i) => (
+                                <span key={i} className="text-black font-bold uppercase tracking-wider text-[11px] md:text-sm">
+                                    FREE HOSTING FOR NEW BUSINESSES (CONDITIONS APPLY)
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    {/* Single marquee right-to-left (slower) on top with reduced opacity to avoid overlap */}
+                    <div className="absolute inset-0 flex items-center pointer-events-none opacity-0">
+                        {/* kept for possible layered effect; left hidden by default to avoid text-over-text */}
+                    </div>
+                </div>
+            </div>
+            {/* Bottom decorative strip behind bottom controls (audit CTA and language button) */}
+            <div
+                className="fixed z-[59] pointer-events-none bottom-[calc(4.5rem+env(safe-area-inset-bottom))] md:bottom-[calc(2.2rem+env(safe-area-inset-bottom))] left-0 right-0 transition-all duration-500 mowglai-strip"
+            >
+                <div className="relative left-0 right-0 w-full h-[20px] md:h-[36px] overflow-hidden">
+                    <div className="absolute inset-0" style={{ backgroundColor: 'rgba(180,140,40,0.75)' }} />
+                    <div className="absolute inset-0 flex items-center pointer-events-none">
+                        <div className="min-w-[200%] whitespace-nowrap animate-marquee-hr-continuous-slow flex gap-8">
+                            {Array.from({ length: 12 }).map((_, i) => (
+                                <span key={i} className="text-black font-bold uppercase tracking-wider text-[11px] md:text-sm">
+                                    FREE HOSTING FOR NEW BUSINESSES (CONDITIONS APPLY)
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* Vertical strips removed per request to use horizontal strips only */}
             {/* Hamburger Button - Fixed Top Right */}
             <div className="fixed top-[calc(1rem+env(safe-area-inset-top))] right-[calc(1.1rem+env(safe-area-inset-right))] md:top-[calc(2rem+env(safe-area-inset-top))] md:right-[calc(2rem+env(safe-area-inset-right))] z-[60]">
                 <Magnetic>

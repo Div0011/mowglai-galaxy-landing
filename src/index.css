@@ -353,6 +353,69 @@
   backface-visibility: hidden;
 }
 
+@keyframes marquee-hr {
+  0% { transform: translate3d(100%, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes marquee-hr-slow {
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(100%, 0, 0); }
+}
+
+.animate-marquee-hr {
+  animation: marquee-hr 16s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-hr-slow {
+  animation: marquee-hr-slow 28s linear infinite;
+  will-change: transform;
+}
+
+/* Continuous marquee: translate half the content width so duplicated content fills the gap */
+@keyframes marquee-hr-continuous {
+  0% { transform: translate3d(0%, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marquee-hr-continuous-reverse {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0%, 0, 0); }
+}
+
+.animate-marquee-hr-continuous {
+  animation: marquee-hr-continuous 18s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-hr-continuous-slow {
+  animation: marquee-hr-continuous-reverse 30s linear infinite;
+  will-change: transform;
+}
+
+/* Strips visibility transitions controlled via root class */
+.mowglai-strips-visible .mowglai-strip {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mowglai-strip {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+/* Inner strip height: reduce by 4px from default h-12 (3rem) and h-16 (4rem) */
+.mowglai-strip-inner {
+  height: calc(3rem - 4px);
+}
+
+@media (min-width: 768px) {
+  .mowglai-strip-inner {
+    height: calc(4rem - 4px);
+  }
+}
+
 .content-visibility-auto {
   content-visibility: auto;
   contain-intrinsic-size: 1px 600px;

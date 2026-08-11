@@ -327,7 +327,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* 2. MOBILE ONLY: Structured Editorial Grid */}
-                <div className="flex md:hidden flex-col gap-4 select-none mt-4 mb-[20vh] w-full text-white px-2">
+                <div className="flex md:hidden flex-col gap-4 select-none -mt-[8vh] mb-[8vh] w-full text-white px-2">
                     
                     {/* Row 1: Slideshow 1 (Centered at top) */}
                     <div className="w-full flex justify-center pointer-events-auto">
@@ -474,7 +474,7 @@ const HeroSection = () => {
             {/* Positioned side-by-side at bottom-8 on mobile, and vertically centered on desktop/laptop */}
             
             {/* Left Edge / Bottom Left: GET FREE AUDIT Circle */}
-            <div className="absolute bottom-8 left-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:left-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+            <div className="hidden md:block absolute bottom-8 left-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:left-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
                 <Magnetic>
                     <Link
                         href="/audit"
@@ -493,7 +493,7 @@ const HeroSection = () => {
             </div>
 
             {/* Right Edge / Bottom Right: START PROJECT Circle */}
-            <div className="absolute bottom-8 right-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:right-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
+            <div className="hidden md:block absolute bottom-8 right-[8%] top-auto translate-y-0 md:top-1/2 md:-translate-y-1/2 md:right-8 md:bottom-auto z-10 opacity-0 animate-fade-in animate-duration-1000" style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}>
                 <Magnetic>
                     <Link
                         href="/investment"
@@ -510,7 +510,16 @@ const HeroSection = () => {
                     </Link>
                 </Magnetic>
             </div>
-
+            {/* Mobile stacked CTAs inside hero: placed just below the hero content */}
+            <div className="md:hidden absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-[90%] z-[100000]"
+                 style={{ bottom: '12vh' }}>
+                <Link href="/audit" className="w-[80%] text-center inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-full text-sm font-bold shadow-md">
+                    GET FREE AUDIT
+                </Link>
+                <Link href="/investment" className="w-[80%] text-center inline-flex items-center justify-center gap-2 bg-background border border-primary/20 text-primary px-4 py-3 rounded-full text-sm font-bold shadow-md">
+                    START PROJECT
+                </Link>
+            </div>
         </section>
     );
 };
