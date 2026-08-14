@@ -480,32 +480,17 @@ const Step3Visual = () => {
 
 export default function InteractiveSetupSection() {
     const [activeStep, setActiveStep] = useState(0);
-    const [progress, setProgress] = useState(0);
-    const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     useEffect(() => {
-        const intervalTime = 50; // Progress updates every 50ms
-        const totalDuration = 5000; // 5 seconds per slide
-        const stepIncrement = (intervalTime / totalDuration) * 100;
+        const timer = setInterval(() => {
+            setActiveStep((prev) => (prev + 1) % steps.length);
+        }, 5000);
 
-        timerRef.current = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    setActiveStep((curr) => (curr + 1) % steps.length);
-                    return 0;
-                }
-                return prev + stepIncrement;
-            });
-        }, intervalTime);
-
-        return () => {
-            if (timerRef.current) clearInterval(timerRef.current);
-        };
+        return () => clearInterval(timer);
     }, [activeStep]);
 
     const handleSelectStep = (index: number) => {
         setActiveStep(index);
-        setProgress(0);
     };
 
     return (
@@ -618,13 +603,17 @@ export default function InteractiveSetupSection() {
 
                                             {/* Progress Bar */}
                                             <div className="mt-4 w-full h-0.5 bg-white/5 rounded-full overflow-hidden">
-                                                <div
-                                                    className="h-full bg-primary transition-all ease-linear"
-                                                    style={{
-                                                        width: isActive ? `${progress}%` : "0%",
-                                                        transitionDuration: isActive ? "50ms" : "0ms"
-                                                    }}
-                                                />
+                                                {isActive ? (
+                                                    <motion.div
+                                                        key={activeStep}
+                                                        className="h-full bg-primary"
+                                                        initial={{ width: "0%" }}
+                                                        animate={{ width: "100%" }}
+                                                        transition={{ duration: 5, ease: "linear" }}
+                                                    />
+                                                ) : (
+                                                    <div className="h-full bg-transparent w-0" />
+                                                )}
                                             </div>
                                         </div>
                                     </div>

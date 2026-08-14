@@ -68,8 +68,8 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
     }, []);
 
     const isLogoActive = isOpen || !scrolled;
-    // show strips when on hero (scrolled === false) or when menu is open
-    const showStrips = isOpen || !scrolled;
+    // show strips only when on hero (scrolled === false) and menu is closed
+    const showStrips = !isOpen && !scrolled && pathname === "/";
 
     // Mirror strip visibility to a global class so CSS can manage transitions reliably
     useEffect(() => {
@@ -93,7 +93,10 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
         <>
             {/* Decorative marquee strips behind the top controls (menu & logo) */}
             <div
-                className="fixed z-[59] pointer-events-none top-[calc(4.5rem+env(safe-area-inset-top))] md:top-[calc(2.3rem+env(safe-area-inset-top))] left-0 right-0 transition-all duration-500 mowglai-strip"
+                className={cn(
+                    "fixed z-[50] pointer-events-none bottom-[8vh] md:bottom-auto md:top-[calc(2.3rem+env(safe-area-inset-top))] -left-[20%] md:left-0 w-[140%] md:w-auto md:right-0 -rotate-12 md:rotate-0 origin-center transition-all duration-500 mowglai-strip",
+                    !showStrips && "opacity-0 pointer-events-none !hidden"
+                )}
             >
                 <div className="relative left-0 right-0 w-full h-[20px] md:h-[36px] overflow-hidden">
                     {/* Darker gold background */}
@@ -116,7 +119,10 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
             </div>
             {/* Bottom decorative strip behind bottom controls (audit CTA and language button) */}
             <div
-                className="fixed z-[59] pointer-events-none bottom-[calc(4.5rem+env(safe-area-inset-bottom))] md:bottom-[calc(2.2rem+env(safe-area-inset-bottom))] left-0 right-0 transition-all duration-500 mowglai-strip"
+                className={cn(
+                    "fixed z-[49] pointer-events-none bottom-[8vh] md:bottom-[calc(2.2rem+env(safe-area-inset-bottom))] -left-[20%] md:left-0 w-[140%] md:w-auto md:right-0 rotate-12 md:rotate-0 origin-center transition-all duration-500 mowglai-strip",
+                    !showStrips && "opacity-0 pointer-events-none !hidden"
+                )}
             >
                 <div className="relative left-0 right-0 w-full h-[20px] md:h-[36px] overflow-hidden">
                     <div className="absolute inset-0" style={{ backgroundColor: 'rgba(180,140,40,0.75)' }} />
