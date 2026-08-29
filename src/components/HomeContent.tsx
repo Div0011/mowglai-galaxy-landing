@@ -3,11 +3,7 @@
 import Magnetic from "@/components/Magnetic";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Code2, Search, Bot, Cpu } from "lucide-react";
-import SelectedWork from "@/components/SelectedWork";
-import TemplatesShowcase from "@/components/TemplatesShowcase";
-import ConsultationForm from "@/components/ConsultationForm";
 import NextPageButton from "@/components/NextPageButton";
-import InteractiveSetupSection from "@/components/InteractiveSetupSection";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
@@ -19,6 +15,10 @@ import LuminaSprout from "@/components/interactive/LuminaSprout";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const SelectedWork = dynamic(() => import("@/components/SelectedWork"), { ssr: false });
+const TemplatesShowcase = dynamic(() => import("@/components/TemplatesShowcase"), { ssr: false });
+const ConsultationForm = dynamic(() => import("@/components/ConsultationForm"), { ssr: false });
+const InteractiveSetupSection = dynamic(() => import("@/components/InteractiveSetupSection"), { ssr: false });
 const StartupGrowthSection = dynamic(() => import("@/components/StartupGrowthSection"), { ssr: false });
 
 function MouseGlow() {
@@ -340,7 +340,7 @@ export default function HomeContent() {
                                 <div className="w-10 h-[1.5px] bg-primary" />
                                 Capabilities
                             </div>
-                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-tighter text-foreground uppercase leading-none">
+                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-normal text-foreground uppercase leading-[1.3] md:leading-[1.35]">
                                 Our <span className="text-primary italic">Services</span>
                             </h2>
                             <p className="text-foreground/75 text-sm md:text-base font-normal max-w-md leading-relaxed">

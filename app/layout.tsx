@@ -134,12 +134,16 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${boldonse.variable} ${josefinSans.variable}`} suppressHydrationWarning>
             <head>
-                {/* Google tag (gtag.js) */}
+                {/* Resource hints for rapid network delivery */}
+                <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+                <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+                {/* Google tag (gtag.js) - lazy loaded after critical UX content */}
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=AW-17452438899"
-                    strategy="afterInteractive"
+                    strategy="lazyOnload"
                 />
-                <Script id="google-tag-aw-17452438899" strategy="afterInteractive">
+                <Script id="google-tag-aw-17452438899" strategy="lazyOnload">
                     {`
                         window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}

@@ -25,13 +25,13 @@ const JungleBackground = () => {
                 <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle,transparent_50%,rgba(0,0,0,0.05)_100%)] dark:bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.3)_100%)] pointer-events-none" />
             </div>
 
-            {/* 3. Floating Yellow Fireflies */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none">
-                <div className="absolute w-2 h-2 rounded-full bg-[#E6B93D] blur-[1px] animate-firefly-1" />
-                <div className="absolute w-3 h-3 rounded-full bg-[#F5D061] blur-[2px] animate-firefly-2" />
-                <div className="absolute w-1.5 h-1.5 rounded-full bg-[#FFFFFF] blur-[1px] animate-firefly-3" />
-                <div className="absolute w-2.5 h-2.5 rounded-full bg-[#E6B93D] blur-[2px] animate-firefly-4" />
-                <div className="absolute w-2 h-2 rounded-full bg-[#F5D061] blur-[1px] animate-firefly-5" />
+            {/* 3. Floating Yellow Fireflies - GPU hardware compositor driven */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+                <div className="absolute top-0 left-0 w-2 h-2 rounded-full bg-[#E6B93D] blur-[1px] animate-firefly-1 will-change-transform" />
+                <div className="absolute top-0 left-0 w-3 h-3 rounded-full bg-[#F5D061] blur-[2px] animate-firefly-2 will-change-transform" />
+                <div className="absolute top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#FFFFFF] blur-[1px] animate-firefly-3 will-change-transform" />
+                <div className="absolute top-0 left-0 w-2.5 h-2.5 rounded-full bg-[#E6B93D] blur-[2px] animate-firefly-4 will-change-transform" />
+                <div className="absolute top-0 left-0 w-2 h-2 rounded-full bg-[#F5D061] blur-[1px] animate-firefly-5 will-change-transform" />
             </div>
 
             <style>{`
@@ -44,34 +44,34 @@ const JungleBackground = () => {
                 }
                 
                 @keyframes fly-1 {
-                    0% { top: 10%; left: -10%; transform: scale(1); opacity: 0; }
+                    0% { transform: translate3d(-10vw, 15vh, 0) scale(0.8); opacity: 0; }
                     20% { opacity: 0.8; }
                     80% { opacity: 0.6; }
-                    100% { top: 40%; left: 110%; transform: scale(1.5); opacity: 0; }
+                    100% { transform: translate3d(110vw, 45vh, 0) scale(1.4); opacity: 0; }
                 }
                 @keyframes fly-2 {
-                    0% { top: 80%; left: 110%; transform: scale(1.2); opacity: 0; }
+                    0% { transform: translate3d(110vw, 80vh, 0) scale(1.2); opacity: 0; }
                     20% { opacity: 0.5; }
                     80% { opacity: 0.9; }
-                    100% { top: 20%; left: -10%; transform: scale(0.8); opacity: 0; }
+                    100% { transform: translate3d(-10vw, 20vh, 0) scale(0.8); opacity: 0; }
                 }
                 @keyframes fly-3 {
-                    0% { top: -10%; left: 30%; transform: scale(0.8); opacity: 0; }
+                    0% { transform: translate3d(30vw, -10vh, 0) scale(0.8); opacity: 0; }
                     20% { opacity: 1; }
                     80% { opacity: 0.3; }
-                    100% { top: 110%; left: 70%; transform: scale(1.2); opacity: 0; }
+                    100% { transform: translate3d(70vw, 110vh, 0) scale(1.2); opacity: 0; }
                 }
                 @keyframes fly-4 {
-                    0% { top: 110%; left: 60%; transform: scale(1.5); opacity: 0; }
+                    0% { transform: translate3d(60vw, 110vh, 0) scale(1.3); opacity: 0; }
                     20% { opacity: 0.7; }
                     80% { opacity: 0.4; }
-                    100% { top: -10%; left: 20%; transform: scale(1); opacity: 0; }
+                    100% { transform: translate3d(20vw, -10vh, 0) scale(0.9); opacity: 0; }
                 }
                 @keyframes fly-5 {
-                    0% { top: 50%; left: -10%; transform: scale(1); opacity: 0; }
+                    0% { transform: translate3d(-10vw, 55vh, 0) scale(1); opacity: 0; }
                     20% { opacity: 0.6; }
                     80% { opacity: 0.9; }
-                    100% { top: 80%; left: 110%; transform: scale(1.3); opacity: 0; }
+                    100% { transform: translate3d(110vw, 85vh, 0) scale(1.3); opacity: 0; }
                 }
 
                 .animate-firefly-1 { animation: fly-1 18s ease-in-out infinite; }

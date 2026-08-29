@@ -57,9 +57,15 @@ const MobileNav = () => {
         if (isOpen) {
             document.body.style.overflow = "hidden"; // Lock scroll
             document.body.classList.add("menu-open");
+            if (typeof window !== "undefined" && window.__lenis) {
+                window.__lenis.stop();
+            }
         } else {
             document.body.style.overflow = "";
             document.body.classList.remove("menu-open");
+            if (typeof window !== "undefined" && window.__lenis) {
+                window.__lenis.start();
+            }
         }
 
         const event = new CustomEvent("menuToggle", { detail: { isOpen } });
@@ -70,6 +76,9 @@ const MobileNav = () => {
             document.removeEventListener("keydown", handleKeyDown);
             document.body.style.overflow = "";
             document.body.classList.remove("menu-open");
+            if (typeof window !== "undefined" && window.__lenis) {
+                window.__lenis.start();
+            }
             const cleanupEvent = new CustomEvent("menuToggle", { detail: { isOpen: false } });
             window.dispatchEvent(cleanupEvent);
         };

@@ -27,9 +27,9 @@ export default function OriginalContact() {
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -ml-32 -mb-32 transition-all group-hover:bg-primary/10" />
 
                         <Quote className="w-10 h-10 sm:w-16 sm:h-16 text-primary mx-auto mb-6 sm:mb-8 opacity-50" />
-                        <h2 className="flex flex-col items-center gap-2 sm:gap-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-black text-foreground mb-12 uppercase leading-[1.1] sm:leading-none px-2 tracking-tight">
+                        <h2 className="flex flex-col items-center gap-3 sm:gap-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-black text-foreground mb-12 uppercase leading-[1.3] px-2 tracking-tight">
                             <span className="block opacity-60">NEED A CUSTOMIZED</span>
-                            <span className="block text-primary text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-black italic tracking-tighter">QUOTATION?</span>
+                            <span className="block text-primary text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-black italic tracking-tighter leading-[1.1]">QUOTATION?</span>
                         </h2>
                         <p className="text-sm sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 px-4 leading-relaxed">
                             {Contact.customQuote.description}

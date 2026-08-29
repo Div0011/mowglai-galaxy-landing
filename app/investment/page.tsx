@@ -10,8 +10,11 @@ import { useRouter } from "next/navigation";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
 import NextPageButton from "@/components/NextPageButton";
 import { cn } from "@/lib/utils";
-import UserPurchasesSection from "@/components/UserPurchasesSection";
 import { useCurrency, CurrencyType } from "@/context/CurrencyContext";
+import dynamic from "next/dynamic";
+
+const UserPurchasesSection = dynamic(() => import("@/components/UserPurchasesSection"), { ssr: false });
+const EcommerceServiceSection = dynamic(() => import("@/components/EcommerceServiceSection"), { ssr: false });
 
 interface Plan {
     name: string;
@@ -58,9 +61,10 @@ interface RazorpayInstance {
 const plans: {
     standard: Plan[];
     care: Plan[];
-    premium: Plan[];
     systems: Plan[];
     addons: Plan[];
+    premium: Plan[];
+    store: Plan[];
 } = {
     standard: [
         {
@@ -114,15 +118,6 @@ const plans: {
             razorpayPlanId: "plan_SG1jkJ8tcJTgOS"
         }
     ],
-    premium: [
-        {
-            name: "APEX",
-            price: "$4,999+",
-            description: "Industry-Leading Digital Soul",
-            features: ["Bespoke Digital Architecture", "Survival Ready Support", "Strategic Market Hegemony", "Liquid Motion Graphics", "Neural AI Integration"],
-            cta: "Dominate"
-        }
-    ],
     systems: [
         {
             name: "NATIVE OS",
@@ -174,6 +169,56 @@ const plans: {
             cta: "Evolve",
             type: "addon"
         }
+    ],
+    premium: [
+        {
+            name: "APEX",
+            price: "$4,999+",
+            description: "Industry-Leading Digital Soul",
+            features: ["Bespoke Digital Architecture", "Survival Ready Support", "Strategic Market Hegemony", "Liquid Motion Graphics", "Neural AI Integration"],
+            cta: "Dominate"
+        }
+    ],
+    store: [
+        {
+            name: "STORE ESSENTIAL",
+            price: "$999",
+            description: "High-Converting Online Storefront",
+            features: [
+                "Full Product Catalog & Categories",
+                "Product Details, Images & Variants",
+                "Shopping Cart & Fast Checkout",
+                "Stripe, Razorpay & UPI Payments",
+                "Customer Order Management & Invoicing"
+            ],
+            cta: "Build Store"
+        },
+        {
+            name: "COMMERCE PRO",
+            price: "$1,999",
+            description: "Scale & Growth Marketplace Platform",
+            features: [
+                "Unlimited Products & Complex Variant Matrix",
+                "Real-Time Order Tracking & Automated Alerts",
+                "Inventory & Live Stock Sync Engine",
+                "Admin & Seller Dashboard Intelligence",
+                "Shipping, Courier API & Logistics Hub"
+            ],
+            cta: "Scale Store"
+        },
+        {
+            name: "ENTERPRISE STORE",
+            price: "CUSTOM",
+            description: "Headless Architecture & High-Volume Sales",
+            features: [
+                "Multi-Vendor Marketplace Infrastructure",
+                "Custom ERP & Warehouse Management API",
+                "Automated Global Taxes & Geo-Currencies",
+                "Bespoke Checkout & Conversion Engine",
+                "Dedicated 24/7 Priority Support & SLA"
+            ],
+            cta: "Custom Store"
+        }
     ]
 };
 
@@ -182,7 +227,7 @@ export default function InvestmentPage() {
     const router = useRouter();
     const { currency, setCurrency, formatPrice } = useCurrency();
     const [currencyOpen, setCurrencyOpen] = useState(false);
-    const [planType, setPlanType] = useState<"standard" | "care" | "addons" | "premium" | "systems">("standard");
+    const [planType, setPlanType] = useState<"standard" | "care" | "systems" | "addons" | "premium" | "store">("standard");
     const [discountCode, setDiscountCode] = useState("");
     const [isDiscountApplied, setIsDiscountApplied] = useState(false);
     const [discountError, setDiscountError] = useState("");
@@ -344,8 +389,17 @@ export default function InvestmentPage() {
     };
 
     // Helper to render plans dynamically
-    const renderPlans = (type: "standard" | "care" | "addons" | "systems") => {
-        const currentPlans = type === "standard" ? plans.standard : (type === "care" ? plans.care : (type === "systems" ? plans.systems : plans.addons));
+    const renderPlans = (type: "standard" | "care" | "addons" | "systems" | "store") => {
+        const currentPlans =
+            type === "standard"
+                ? plans.standard
+                : type === "care"
+                ? plans.care
+                : type === "systems"
+                ? plans.systems
+                : type === "store"
+                ? plans.store
+                : plans.addons;
         return currentPlans.map((plan, i) => (
             <div
                 key={i}
@@ -499,12 +553,12 @@ export default function InvestmentPage() {
                 {/* Toggle Section (Moved Here) */}
                 <div className="flex justify-center mb-12 relative z-20">
                     <div className="flex flex-wrap justify-center bg-background/40 backdrop-blur-xl p-1 md:p-1.5 rounded-2xl md:rounded-full border border-primary/20 w-full md:w-auto relative group hover:border-primary/40 transition-colors gap-1 md:gap-0">
-                        {["standard", "care", "systems", "addons", "premium"].map((type) => (
+                        {["standard", "care", "systems", "addons", "premium", "store"].map((type) => (
                             <button
                                 key={type}
-                                onClick={() => setPlanType(type as "standard" | "care" | "addons" | "premium" | "systems")}
+                                onClick={() => setPlanType(type as "standard" | "care" | "systems" | "addons" | "premium" | "store")}
                                 className={cn(
-                                    "relative px-4 sm:px-6 md:px-8 py-2 md:py-3 text-[10px] md:text-sm font-bold uppercase tracking-wider md:tracking-widest transition-colors rounded-xl md:rounded-full z-10 text-center flex-1 md:flex-none min-w-[30%] md:min-w-0",
+                                    "relative px-4 sm:px-6 md:px-7 py-2 md:py-3 text-[10px] md:text-sm font-bold uppercase tracking-wider md:tracking-widest transition-colors rounded-xl md:rounded-full z-10 text-center flex-1 md:flex-none min-w-[28%] md:min-w-0",
                                     planType === type ? "text-primary-foreground" : "text-primary/60 hover:text-primary"
                                 )}
                             >
@@ -582,7 +636,14 @@ export default function InvestmentPage() {
                             transition={{ duration: 0.4 }}
                             className="grid grid-cols-1 md:grid-cols-3 gap-8"
                         >
-                            {planType === "premium" ? (
+                            {planType === "store" ? (
+                                <div className="col-span-full space-y-12">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                        {renderPlans("store")}
+                                    </div>
+                                    <EcommerceServiceSection className="mt-8" />
+                                </div>
+                            ) : planType === "premium" ? (
                                 <div className="col-span-full grid grid-cols-1 md:grid-cols-3 gap-8">
                                     <div className="md:col-span-1 p-8 md:p-14 rounded-[2.5rem] bg-primary/10 border-2 border-primary/30 hover:border-primary transition-all duration-500 flex flex-col group relative overflow-hidden backdrop-blur-xl">
                                         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none" />
@@ -627,7 +688,7 @@ export default function InvestmentPage() {
                                     </div>
                                 </div>
                             ) : (
-                                renderPlans(planType as "standard" | "care" | "addons" | "systems")
+                                renderPlans(planType as "standard" | "care" | "addons" | "systems" | "store")
                             )}
                         </motion.div>
                     </AnimatePresence>

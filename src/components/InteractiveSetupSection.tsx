@@ -547,7 +547,7 @@ export default function InteractiveSetupSection() {
                     <span className="text-primary font-display font-bold text-xs tracking-[0.4em] uppercase">
                         Process
                     </span>
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-tighter text-foreground uppercase leading-none mt-4">
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-normal text-foreground uppercase leading-[1.3] md:leading-[1.35] mt-4">
                         How It <span className="text-primary italic">Works</span>
                     </h2>
                 </motion.div>

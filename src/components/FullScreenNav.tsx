@@ -41,11 +41,20 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
         window.dispatchEvent(event);
         if (isOpen) {
             document.body.classList.add("menu-open");
+            if (typeof window !== "undefined" && window.__lenis) {
+                window.__lenis.stop();
+            }
         } else {
             document.body.classList.remove("menu-open");
+            if (typeof window !== "undefined" && window.__lenis) {
+                window.__lenis.start();
+            }
         }
         return () => {
             document.body.classList.remove("menu-open");
+            if (typeof window !== "undefined" && window.__lenis) {
+                window.__lenis.start();
+            }
         };
     }, [isOpen]);
 
@@ -54,7 +63,7 @@ const FullScreenNav = ({ onOpenChat }: FullScreenNavProps) => {
             // consider any scroll away from top as 'scrolled' so strips vanish
             setScrolled(window.scrollY > 0);
         };
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 

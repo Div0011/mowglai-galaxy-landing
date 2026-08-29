@@ -66,6 +66,7 @@ interface Translations {
             database: { category: string; title: string; description: string; details: string[] };
             strategy: { category: string; title: string; description: string; details: string[] };
             ai: { category: string; title: string; description: string; details: string[] };
+            ecommerce: { category: string; title: string; description: string; details: string[] };
         };
     };
     About: {
@@ -241,6 +242,12 @@ const translations: Record<Language, Translations> = {
                     title: "Smart Features & AI",
                     description: "We add smart features like automated chatbots to make your website more helpful and efficient.",
                     details: ["AI Chatbots", "Smart Automation", "Feature Integration"]
+                },
+                ecommerce: {
+                    category: "E-Commerce",
+                    title: "E-Commerce & Online Store Development",
+                    description: "Launch a complete online store that makes it easy for your customers to discover, purchase, and track products—all in one place. Scalable catalogs, shopping carts, secure checkout, online payments, inventory management, and live order tracking.",
+                    details: ["Product Catalog", "Shopping Cart", "Secure Checkout", "Online Payments", "Order Tracking", "Seller Dashboard", "Inventory Sync", "Mobile Friendly"]
                 }
             }
         },
@@ -422,6 +429,12 @@ const translations: Record<Language, Translations> = {
                     title: "बुद्धिमान सिस्टम",
                     description: "अगली पीढ़ी के एआई के साथ अपने मंच को सशक्त बनाएं। स्मार्ट चैटबॉट से लेकर भविष्य कहनेवाला विश्लेषण तक, हम आपके डिजिटल पारिस्थितिकी तंत्र में बुद्धिमत्ता को एकीकृत करते हैं।",
                     details: ["एआई चैटबॉट", "मशीन लर्निंग", "स्वचालन", "एकीकरण"]
+                },
+                ecommerce: {
+                    category: "ई-कॉमर्स",
+                    title: "ई-कॉमर्स और ऑनलाइन स्टोर विकास",
+                    description: "एक पूर्ण ऑनलाइन स्टोर लॉन्च करें जो आपके ग्राहकों के लिए उत्पादों की खोज, खरीदारी और ट्रैकिंग को एक ही स्थान पर आसान बनाता है।",
+                    details: ["उत्पाद सूची", "शॉपिंग कार्ट", "सुरक्षित चेकआउट", "ऑनलाइन भुगतान", "ऑर्डर ट्रैकिंग", "विक्रेता डैशबोर्ड"]
                 }
             }
         },
@@ -603,6 +616,12 @@ const translations: Record<Language, Translations> = {
                     title: "Sistemas Inteligentes",
                     description: "Potencia tu plataforma con IA de próxima generación. Desde chatbots inteligentes hasta análisis predictivos, integramos inteligencia en tu ecosistema digital.",
                     details: ["Chatbots IA", "Aprendizaje Automático", "Automatización", "Integraciones"]
+                },
+                ecommerce: {
+                    category: "Comercio Electrónico",
+                    title: "E-Commerce y Desarrollo de Tiendas Online",
+                    description: "Lanza una tienda online completa que facilite a tus clientes descubrir, comprar y rastrear productos, todo en un solo lugar.",
+                    details: ["Catálogo de Productos", "Carrito de Compras", "Pago Seguro", "Pagos Online", "Rastreo de Pedidos", "Panel de Control"]
                 }
             }
         },
@@ -784,6 +803,12 @@ const translations: Record<Language, Translations> = {
                     title: "Systèmes Intelligents",
                     description: "Dotez votre plateforme d'une IA de nouvelle génération. Des chatbots intelligents à l'analyse prédictive, nous intégrons l'intelligence partout.",
                     details: ["Chatbots IA", "Machine Learning", "Automatisation", "Intégrations"]
+                },
+                ecommerce: {
+                    category: "E-Commerce",
+                    title: "E-Commerce et Développement de Boutiques",
+                    description: "Lancez une boutique en ligne complète permettant à vos clients de découvrir, d'acheter et de suivre des produits en un seul endroit.",
+                    details: ["Catalogue Produits", "Panier d'Achat", "Paiement Sécurisé", "Passerelle de Paiement", "Suivi des Commandes", "Tableau de Bord"]
                 }
             }
         },
@@ -965,6 +990,12 @@ const translations: Record<Language, Translations> = {
                     title: "インテリジェントシステム",
                     description: "次世代AIでプラットフォームを強化します。スマートチャットボットから予測分析まで、私たちはあなたのデジタルエコシステムに知能を統合します。",
                     details: ["AIチャットボット", "機械学習", "自動化", "統合"]
+                },
+                ecommerce: {
+                    category: "Eコマース",
+                    title: "Eコマース＆オンラインストア開発",
+                    description: "顧客が1か所で商品を見つけ、購入し、追跡できる完全なオンラインストアを立ち上げます。カタログ、カート、決済、追跡機能を完備。",
+                    details: ["商品カタログ", "ショッピングカート", "安全な決済", "オンライン支払い", "注文追跡", "管理者ダッシュボード"]
                 }
             }
         },

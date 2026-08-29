@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 
 interface Ripple {
@@ -17,8 +17,6 @@ const CustomCursor = () => {
 
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
-  const mousePosRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
   const lastUpdateRef = useRef(0);
 
   const [isMobile, setIsMobile] = useState(false);
@@ -46,51 +44,42 @@ const CustomCursor = () => {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
+  const cursorXRef = useRef<((value: number) => void) | null>(null);
+  const cursorYRef = useRef<((value: number) => void) | null>(null);
+  const followerXRef = useRef<((value: number) => void) | null>(null);
+  const followerYRef = useRef<((value: number) => void) | null>(null);
+
   // Initialize GSAP animations
   useEffect(() => {
     if (isMobile || isReducedMotion) return;
 
-    gsap.set([cursorRef.current, followerRef.current], { xPercent: -50, yPercent: -50 });
-
-    const cursorX = gsap.quickTo(cursorRef.current, "x", { duration: 0.1, ease: "power3.out" });
-    const cursorY = gsap.quickTo(cursorRef.current, "y", { duration: 0.1, ease: "power3.out" });
-    const followerX = gsap.quickTo(followerRef.current, "x", { duration: 0.35, ease: "power3.out" });
-    const followerY = gsap.quickTo(followerRef.current, "y", { duration: 0.35, ease: "power3.out" });
-
-    // Animation loop using requestAnimationFrame
-    const animate = () => {
-      const { x, y } = mousePosRef.current;
-      cursorX(x);
-      cursorY(y);
-      followerX(x);
-      followerY(y);
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
+    if (cursorRef.current && followerRef.current) {
+      gsap.set([cursorRef.current, followerRef.current], { xPercent: -50, yPercent: -50 });
+      cursorXRef.current = gsap.quickTo(cursorRef.current, "x", { duration: 0.08, ease: "power3.out" });
+      cursorYRef.current = gsap.quickTo(cursorRef.current, "y", { duration: 0.08, ease: "power3.out" });
+      followerXRef.current = gsap.quickTo(followerRef.current, "x", { duration: 0.28, ease: "power3.out" });
+      followerYRef.current = gsap.quickTo(followerRef.current, "y", { duration: 0.28, ease: "power3.out" });
+    }
   }, [isMobile, isReducedMotion]);
 
-  // Mouse move handler with manual throttling for state updates
+  // Mouse move handler
   useEffect(() => {
     if (isMobile || isReducedMotion) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      mousePosRef.current = { x: e.clientX, y: e.clientY };
+      cursorXRef.current?.(e.clientX);
+      cursorYRef.current?.(e.clientY);
+      followerXRef.current?.(e.clientX);
+      followerYRef.current?.(e.clientY);
       
-      // Throttle state updates to ~30fps (33ms)
       const now = performance.now();
-      if (now - lastUpdateRef.current < 33) return;
+      if (now - lastUpdateRef.current < 40) return;
       lastUpdateRef.current = now;
       
       if (!isVisible) setIsVisible(true);
 
       const target = e.target as HTMLElement;
+      if (!target) return;
 
       const isClickable =
         target.tagName === "A" ||

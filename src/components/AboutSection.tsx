@@ -31,9 +31,9 @@ const AboutSection = () => {
         {/* Left Column: Huge Title & Logo */}
         <div className="space-y-12" data-aos="fade-right">
           {/* Two-line heading with one word faded - Jungle Theme */}
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[11vw] font-display font-black tracking-tighter text-foreground relative z-10 drop-shadow-sm flex flex-col">
-            <span className="leading-[0.8] opacity-10 uppercase">{t.About.hero.digital}</span>
-            <span className="text-primary leading-[0.8] uppercase">{t.About.hero.artisans}</span>
+          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[11vw] font-display font-black tracking-tight text-foreground relative z-10 drop-shadow-sm flex flex-col gap-2 sm:gap-4">
+            <span className="leading-[0.95] opacity-10 uppercase">{t.About.hero.digital}</span>
+            <span className="text-primary leading-[0.95] uppercase">{t.About.hero.artisans}</span>
           </h2>
 
           {/* Integrated Logo Element - Magnetic & Foggy */}

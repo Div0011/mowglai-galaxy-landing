@@ -50,7 +50,7 @@ export default function CommissionSection() {
                         Commission
                         <div className="w-10 h-[1.5px] bg-primary" />
                     </div>
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-tighter text-foreground uppercase leading-none">
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-normal text-foreground uppercase leading-[1.3] md:leading-[1.35]">
                         Create Your <span className="text-primary italic">Vision</span>
                     </h2>
                     <p className="text-foreground/50 text-sm md:text-base max-w-2xl mx-auto mt-4 leading-relaxed">

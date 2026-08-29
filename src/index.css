@@ -215,6 +215,27 @@
     }
   }
 
+  /* Lenis Smooth Scroll System */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
   html,
   body {
     background-color: hsl(var(--background));
@@ -224,6 +245,7 @@
     width: 100%;
     min-height: 100dvh;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
   }
 
   ::-webkit-scrollbar {
@@ -234,16 +256,22 @@
     @apply bg-background text-foreground font-body antialiased;
     position: relative;
     min-height: 100dvh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Mobile Smoothness & GPU Compositing Optimization */
-  @media (max-width: 768px) {
-    section, article, .glass-card, [data-aos] {
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      perspective: 1000px;
-    }
+  /* Universal GPU Compositing & Mobile Smoothness */
+  .gpu-layer,
+  section,
+  .glass-card,
+  [data-aos] {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
 
+  @media (max-width: 768px) {
     * {
       text-rendering: optimizeSpeed;
     }

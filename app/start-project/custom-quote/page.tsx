@@ -108,7 +108,7 @@ export default function CustomQuotePage() {
                         </div>
 
                         <div className="text-center mb-10">
-                            <h1 className="text-3xl md:text-5xl font-display font-black text-foreground mb-4 uppercase leading-tight">
+                            <h1 className="text-3xl md:text-5xl font-display font-black text-foreground mb-4 uppercase leading-[1.3] md:leading-[1.35] tracking-normal">
                                 REQUEST <span className="text-primary">CUSTOM QUOTE</span>
                             </h1>
                             <p className="text-lg text-muted-foreground font-light max-w-lg mx-auto">

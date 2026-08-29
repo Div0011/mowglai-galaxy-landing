@@ -4,10 +4,10 @@ import AboutSection from "@/components/AboutSection";
 import MissionSection from "@/components/MissionSection";
 import NextPageButton from "@/components/NextPageButton";
 import PageLayout from "@/components/PageLayout";
-import FaqSection from "@/components/FaqSection";
 import dynamic from "next/dynamic";
 
 const HowWeBuiltSection = dynamic(() => import("@/components/HowWeBuiltSection"), { ssr: false });
+const FaqSection = dynamic(() => import("@/components/FaqSection"), { ssr: false });
 
 export default function OriginalAbout() {
     return (
@@ -17,7 +17,7 @@ export default function OriginalAbout() {
             <HowWeBuiltSection />
 
             {/* FAQ Section */}
-            <section id="faq" className="relative w-full py-20 z-20">
+            <section id="faq" className="relative w-full py-20 z-20 content-visibility-auto gpu-accelerate">
                 <div className="container mx-auto px-6 max-w-4xl">
                     <div className="space-y-8">
                         <div className="space-y-4">
@@ -25,7 +25,7 @@ export default function OriginalAbout() {
                                 <div className="w-10 h-[1.5px] bg-primary" />
                                 About Us
                             </div>
-                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-tighter text-foreground uppercase leading-none">
+                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-black tracking-normal text-foreground uppercase leading-[1.3] md:leading-[1.35]">
                                 Frequently Asked <span className="text-primary italic">Questions</span>
                             </h2>
                             <p className="text-foreground/50 text-sm md:text-base font-light max-w-2xl leading-relaxed">

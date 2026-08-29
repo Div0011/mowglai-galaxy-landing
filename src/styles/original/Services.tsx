@@ -10,39 +10,45 @@ import NextPageButton from "@/components/NextPageButton";
 const services = [
     {
         id: "01",
+        category: "Intelligence",
+        title: "Intelligent Systems",
+        desc: "Empowering platforms with next-gen AI. From smart chatbots to predictive analytics and automation."
+    },
+    {
+        id: "02",
         category: "Web Design",
         title: "Aesthetic Excellence",
         desc: "Visual narratives that merge artistic expression with functional precision. Crafting stunning, responsive interfaces."
     },
     {
-        id: "02",
+        id: "03",
         category: "Development",
         title: "Robust Engineering",
         desc: "Scalable, secure, and lightning-fast architectures. Building the solid foundations that drive digital growth."
     },
     {
-        id: "03",
+        id: "04",
+        category: "E-Commerce",
+        title: "Online Store Architecture",
+        desc: "High-converting online stores with custom catalogs, shopping carts, secure checkout, payment integrations, and order tracking."
+    },
+    {
+        id: "05",
         category: "Redesign",
         title: "Digital Evolution",
         desc: "Breathing new life into legacy platforms. Enhancing usability, speed, and security for the modern era."
     },
     {
-        id: "04",
+        id: "06",
         category: "Database",
         title: "Data Intelligence",
         desc: "Sophisticated database solutions ensuring information is organized, accessible, and impenetrable."
     },
     {
-        id: "05",
+        id: "07",
         category: "Strategy",
         title: "Global Reach",
         desc: "Positioning your brand on the global map. Ensuring you resonate with audiences across cultures and borders."
-    },
-    {
-        id: "06",
-        category: "Intelligence",
-        title: "Intelligent Systems",
-        desc: "Empowering platforms with next-gen AI. From smart chatbots to predictive analytics and automation."
     }
 ];
 
@@ -50,12 +56,13 @@ export default function OriginalServices() {
     const { t } = useLanguage();
     const { Services: s } = t;
     const servicesData = [
-        { id: "01", ...s.cards.ai }, // AI now first
-        { id: "02", ...s.cards.webDesign },
-        { id: "03", ...s.cards.development },
-        { id: "04", ...s.cards.redesign },
-        { id: "05", ...s.cards.database },
-        { id: "06", ...s.cards.strategy }
+        { id: "01", ...s.cards.ai, ctaText: "Initiate Development", href: "/contact" },
+        { id: "02", ...s.cards.webDesign, ctaText: "Initiate Development", href: "/contact" },
+        { id: "03", ...s.cards.development, ctaText: "Initiate Development", href: "/contact" },
+        { id: "04", ...s.cards.ecommerce, ctaText: "Build Your Online Store", href: "/contact?subject=E-Commerce%20Store%20Development" },
+        { id: "05", ...s.cards.redesign, ctaText: "Initiate Development", href: "/contact" },
+        { id: "06", ...s.cards.database, ctaText: "Initiate Development", href: "/contact" },
+        { id: "07", ...s.cards.strategy, ctaText: "Initiate Development", href: "/contact" }
     ];
 
     return (
@@ -95,7 +102,7 @@ export default function OriginalServices() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-10%" }}
                             transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
-                            className="group relative p-8 md:p-12 rounded-[2.5rem] bg-secondary/10 border border-primary/10 hover:border-primary/40 hover:bg-secondary/20 transition-all duration-700 backdrop-blur-xl overflow-hidden shadow-2xl"
+                            className="group relative p-8 md:p-12 rounded-[2.5rem] bg-secondary/10 border border-primary/10 hover:border-primary/40 hover:bg-secondary/20 transition-all duration-700 backdrop-blur-xl overflow-hidden shadow-2xl content-visibility-auto gpu-accelerate"
                         >
                             <div className="flex flex-col relative z-10 w-full">
                                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
@@ -109,22 +116,22 @@ export default function OriginalServices() {
                                     {/* Middle: Main Content */}
                                     <div className="flex flex-col gap-8 pt-4 lg:pt-8 relative flex-1">
                                         <div>
-                                            <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-primary/80 mb-2 block">
+                                            <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-primary/80 mb-4 sm:mb-6 block">
                                                 {service.category}
                                             </span>
-                                            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black uppercase text-foreground group-hover:text-primary transition-colors duration-500 leading-[1.2] tracking-tight">
+                                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black uppercase text-foreground group-hover:text-primary transition-colors duration-500 leading-[1.35] sm:leading-[1.35] md:leading-[1.4] tracking-normal">
                                                 {service.title}
                                             </h2>
                                         </div>
-                                        <p className="text-lg md:text-xl font-body font-light leading-relaxed text-foreground/80 group-hover:text-foreground transition-colors duration-500">
+                                        <p className="text-lg md:text-xl font-body font-light leading-relaxed text-foreground/80 group-hover:text-foreground transition-colors duration-500 mt-2">
                                             {service.description}
                                         </p>
 
                                         <Link
-                                            href="/contact"
+                                            href={service.href || "/contact"}
                                             className="inline-flex items-center gap-3 text-xs md:text-sm font-black uppercase tracking-[0.3em] text-primary group-hover:gap-5 transition-all w-fit hover:text-foreground mt-4"
                                         >
-                                            Initiate Development <ArrowRight className="w-5 h-5" />
+                                            {service.ctaText || "Initiate Development"} <ArrowRight className="w-5 h-5" />
                                         </Link>
                                     </div>
 
