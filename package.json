@@ -64,7 +64,6 @@
 		"react": "^19.2.6",
 		"react-day-picker": "^9.14.0",
 		"react-dom": "^19.2.6",
-		"react-helmet-async": "^3.0.0",
 		"react-hook-form": "^7.75.0",
 		"react-resizable-panels": "^4.11.0",
 		"recharts": "^3.8.1",
@@ -96,11 +95,5 @@
 		"tailwindcss": "^4.2.4",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.59.2"
-	},
-	"overrides": {
-		"react-helmet-async": {
-			"react": "$react",
-			"react-dom": "$react-dom"
-		}
 	}
 }
