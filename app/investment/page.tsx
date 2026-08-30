@@ -2,11 +2,11 @@
 
 import PageLayout from "@/components/PageLayout";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Download, FileText, Sparkles, Check, ArrowRight, Clock, Rocket, ShoppingCart, Globe } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { useRouter } from "next/navigation";
 import { downloadAsHtml } from "@/utils/pdfDownloader";
 import NextPageButton from "@/components/NextPageButton";
 import { cn } from "@/lib/utils";
@@ -222,9 +222,12 @@ const plans: {
     ]
 };
 
-export default function InvestmentPage() {
+function InvestmentContent() {
     const { t } = useLanguage();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const typeParam = searchParams.get("type") || searchParams.get("plan");
+
     const { currency, setCurrency, formatPrice } = useCurrency();
     const [currencyOpen, setCurrencyOpen] = useState(false);
     const [planType, setPlanType] = useState<"standard" | "care" | "systems" | "addons" | "premium" | "store">("standard");
@@ -236,6 +239,18 @@ export default function InvestmentPage() {
     const [processingPlan, setProcessingPlan] = useState<string | null>(null);
     const razorpayKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ?? "";
     const subscriptionEndpoint = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT ?? "/api/create-subscription.php";
+
+    // Auto switch active tab bar based on URL param
+    useEffect(() => {
+        if (typeParam) {
+            const val = typeParam.toLowerCase();
+            if (["standard", "care", "systems", "addons", "premium", "store"].includes(val)) {
+                setPlanType(val as "standard" | "care" | "systems" | "addons" | "premium" | "store");
+            } else if (val === "system") {
+                setPlanType("systems");
+            }
+        }
+    }, [typeParam]);
 
     useEffect(() => {
         let isMounted = true;
@@ -499,8 +514,8 @@ export default function InvestmentPage() {
                         </div>
 
                         <div className="flex items-center gap-4 mb-4 md:mb-8">
-                            <Link href="/payment" className="inline-flex items-center gap-2 px-6 py-4 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground text-sm font-bold uppercase tracking-widest rounded-full transition-all duration-300">
-                                Custom Payment
+                            <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-4 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground text-sm font-bold uppercase tracking-widest rounded-full transition-all duration-300">
+                                Custom Scope
                                 <ArrowRight className="w-4 h-4 animate-pulse" />
                             </Link>
 
@@ -755,7 +770,21 @@ export default function InvestmentPage() {
                         tagline="Initiate Dialogue"
                     />
                 </div>
-            </div >
-        </PageLayout >
-    )
-};
+            </div>
+        </PageLayout>
+    );
+}
+
+export default function InvestmentPage() {
+    return (
+        <Suspense
+            fallback={
+                <div className="min-h-screen bg-background flex items-center justify-center text-primary font-mono text-xs uppercase tracking-widest animate-pulse">
+                    Loading Investment Protocol...
+                </div>
+            }
+        >
+            <InvestmentContent />
+        </Suspense>
+    );
+}

@@ -56,13 +56,13 @@ export default function OriginalServices() {
     const { t } = useLanguage();
     const { Services: s } = t;
     const servicesData = [
-        { id: "01", ...s.cards.ai, ctaText: "Initiate Development", href: "/contact" },
-        { id: "02", ...s.cards.webDesign, ctaText: "Initiate Development", href: "/contact" },
-        { id: "03", ...s.cards.development, ctaText: "Initiate Development", href: "/contact" },
-        { id: "04", ...s.cards.ecommerce, ctaText: "Build Your Online Store", href: "/contact?subject=E-Commerce%20Store%20Development" },
-        { id: "05", ...s.cards.redesign, ctaText: "Initiate Development", href: "/contact" },
-        { id: "06", ...s.cards.database, ctaText: "Initiate Development", href: "/contact" },
-        { id: "07", ...s.cards.strategy, ctaText: "Initiate Development", href: "/contact" }
+        { id: "01", ...s.cards.ai, ctaText: "Explore AI Solutions", href: "/services/intelligent-systems" },
+        { id: "02", ...s.cards.webDesign, ctaText: "Explore Design Craft", href: "/services/web-design" },
+        { id: "03", ...s.cards.development, ctaText: "Explore Engineering", href: "/services/web-development" },
+        { id: "04", ...s.cards.ecommerce, ctaText: "Explore E-Commerce Store", href: "/services/ecommerce" },
+        { id: "05", ...s.cards.redesign, ctaText: "Explore Redesign & Evolution", href: "/services/website-redesign" },
+        { id: "06", ...s.cards.database, ctaText: "Explore Database Architecture", href: "/services/database-solutions" },
+        { id: "07", ...s.cards.strategy, ctaText: "Explore Global Strategy", href: "/services/digital-strategy" }
     ];
 
     return (

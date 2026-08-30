@@ -21,6 +21,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${baseUrl}/services/intelligent-systems`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${baseUrl}/services/web-design`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${baseUrl}/services/web-development`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${baseUrl}/services/ecommerce`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${baseUrl}/services/website-redesign`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${baseUrl}/services/database-solutions`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
+            url: `${baseUrl}/services/digital-strategy`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        {
             url: `${baseUrl}/explore`,
             lastModified: new Date(),
             changeFrequency: 'daily',

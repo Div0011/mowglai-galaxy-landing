@@ -46,7 +46,7 @@ const FAQ_KNOWLEDGE_BASE = [
     {
         keywords: ['ecommerce', 'shop', 'store', 'selling', 'products', 'shopify', 'woocommerce'],
         response: "Yes, we build high-performance e-commerce platforms. We ensure secure payment gateways, inventory management, and seamless user checkouts.",
-        options: [{ label: "View Services", path: "/services" }]
+        options: [{ label: "View E-Commerce Solutions", path: "/services/ecommerce" }]
     },
     {
         keywords: ['brochure', 'download', 'pdf', 'catalog', 'deck'],
@@ -218,21 +218,21 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
             // 4. Responses based on match
             if (matchType === 'design') {
                 addMessage("Aesthetic excellence is our specialty. We craft visually stunning, responsive interfaces that merge art with precision.", 'bot', [
-                    { label: "See Design Services", action: () => { onClose(); router.push('/services'); } },
+                    { label: "See Design Services", action: () => { onClose(); router.push('/services/web-design'); } },
                     { label: "View Portfolio", action: () => { onClose(); router.push('/work'); } }
                 ]);
             } else if (matchType === 'dev') {
-                addMessage("Robust engineering is in our DNA. Whether it's a complex web app, CMS, or API integration, we build for scale and security.", 'bot', [
-                    { label: "View Dev Solutions", action: () => { onClose(); router.push('/services'); } },
+                addMessage("Robust engineering is in our DNA. Whether it's a complex web app, Next.js platform, or API integration, we build for scale and security.", 'bot', [
+                    { label: "View Dev Solutions", action: () => { onClose(); router.push('/services/web-development'); } },
                     { label: "Start a Project", action: () => { onClose(); router.push('/contact'); } }
                 ]);
             } else if (matchType === 'strat') {
-                addMessage("Growth requires map-making. Our strategy team assists with SEO, Content Curation, and Market Analysis to position your brand globally.", 'bot', [
-                    { label: "Explore Strategy", action: () => { onClose(); router.push('/services'); } }
+                addMessage("Growth requires map-making. Our strategy team assists with International SEO, Content Curation, and Market Analysis to position your brand globally.", 'bot', [
+                    { label: "Explore Strategy", action: () => { onClose(); router.push('/services/digital-strategy'); } }
                 ]);
             } else if (matchType === 'data') {
                 addMessage("Data is the lifeblood of modern business. We design secure, high-performance database architectures and cloud solutions.", 'bot', [
-                    { label: "Data Services", action: () => { onClose(); router.push('/services'); } }
+                    { label: "Data Services", action: () => { onClose(); router.push('/services/database-solutions'); } }
                 ]);
             } else if (matchType === 'price') {
                 addMessage("Financial clarity is key. We offer transparent investment plans: Basic, Advanced, and Epic, tailored to your growth stage.", 'bot', [
